@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <help_text>&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;10&lt;/x&gt;&lt;y&gt;600&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;&amp;lt;&amp;lt;Stereotype&amp;gt;&amp;gt;
+--
+
+--
+
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;100&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;10&lt;/x&gt;&lt;y&gt;600&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;&amp;lt;&amp;lt;Stereotype&amp;gt;&amp;gt;
+--
+
+--
+
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;Space for diagram notes</help_text>
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>464</x>
+      <y>104</y>
+      <w>168</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;entity&gt;&gt;
+/AbstractRoom/
+--
+-name: String
+-roomNumber: String
+-floor: int
+-id: int
+-numDoors: int
+-doorWidth: int
+-numWindows: int
+-wallColor: String
+-tag: Tag
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>224</x>
+      <y>104</y>
+      <w>168</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;shared entity&gt;&gt;
+Building
+--
+-name: String
+-buildingNumber: String
+-numFloors: int
+-id: int
+-hasElevator: bool
+-isBarrierfreeAccessible: bool
+-lat: String
+-lon: String
+-location: CampusLocation
+--
++getRooms():Set&lt;AbstractRoom&gt;
++isBarrierFree(): bool
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>160</y>
+      <w>96</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>328</y>
+      <w>128</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;entity&gt;&gt;
+Restroom
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>424</x>
+      <y>328</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;entity&gt;&gt;
+Office
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>512</x>
+      <y>328</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;entity&gt;&gt;
+Cafeteria
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>328</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;entity&gt;&gt;
+LectureRoom
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>688</x>
+      <y>328</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;entity&gt;&gt;
+SeminarRoom
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>328</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;entity&gt;&gt;
+Laboratory
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>416</y>
+      <w>128</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;entity&gt;&gt;
+RestroomHandicapped
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>776</x>
+      <y>328</y>
+      <w>80</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;entity&gt;&gt;
+Sports
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>232</x>
+      <y>256</y>
+      <w>336</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>400.0;10.0;400.0;60.0;10.0;60.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>456</x>
+      <y>296</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>544</x>
+      <y>288</y>
+      <w>288</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>340.0;50.0;340.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>632</x>
+      <y>296</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>296</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>344</x>
+      <y>368</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>344</x>
+      <y>296</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>544</x>
+      <y>296</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>104</y>
+      <w>168</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+Tag
+--
+LECTURE_ROOM
+RESTROOM
+RESTROOM_HANDICAPPED
+OFFICE
+CAFETERIA
+LABORATORY
+SEMINAR_ROOM
+SPORTS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>104</x>
+      <y>104</y>
+      <w>112</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+CampusLocation
+--
+SOUTH_CAMPUS
+NORTH_CAMPUS
+EAST_CAMPUS
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
