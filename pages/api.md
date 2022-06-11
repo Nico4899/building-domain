@@ -1,2 +1,2 @@
 # API Specification
-- [OpenAPI](/api/openapi.yaml)
+- [OpenAPI](/api/domain_building_api.yaml)
