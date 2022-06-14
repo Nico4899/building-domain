@@ -43,6 +43,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/building'
+    put:
+      tags:
+      - Buildings
+      summary: Change information about a specific building.
+      parameters:
+      - name: bin
+        in: path
+        description: The Building Identification Number (BIN) as unique number of a building.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/bin'
+      requestBody:
+        $ref: '#/components/requestBodies/building'
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/building'
+        "400":
+          description: invalid bin format.
+        "401":
+          description: unauthorized access.
+        "404":
+          description: building not found.
     post:
       tags:
       - Buildings
@@ -81,34 +109,6 @@ paths:
       responses:
         "200":
           description: Successfully deleted.
-    patch:
-      tags:
-      - Buildings
-      summary: Change information about a specific building.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      requestBody:
-        $ref: '#/components/requestBodies/buildingName'
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/building'
-        "400":
-          description: invalid bin format.
-        "401":
-          description: unauthorized access.
-        "404":
-          description: building not found.
   /buildings/{bin}/rooms:
     get:
       tags:
@@ -220,42 +220,6 @@ paths:
       responses:
         "200":
           description: Successfully deleted.
-    patch:
-      tags:
-      - Rooms
-      summary: Change information about a specific room.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      - name: rin
-        in: path
-        description: The Room Identification Number (RIN) as unique number of a room.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/rin'
-      requestBody:
-        $ref: '#/components/requestBodies/roomName'
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/room'
-        "400":
-          description: invalid bin/rin format.
-        "401":
-          description: unauthorized access.
-        "404":
-          description: room not found.
   /buildings/{bin}/components:
     get:
       tags:
@@ -361,42 +325,6 @@ paths:
       responses:
         "200":
           description: Successfully deleted.
-    patch:
-      tags:
-      - Components
-      summary: Change information about a specific building component.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      - name: cin
-        in: path
-        description: The Component Identification Number (CIN) as unique number of a component.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/cin'
-      requestBody:
-        $ref: '#/components/requestBodies/component'
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/component'
-        "400":
-          description: invalid bin format.
-        "401":
-          description: unauthorized access.
-        "404":
-          description: building not found.
   /buildings/{bin}/rooms/{rin}/components/{cin}:
     post:
       tags:
@@ -468,50 +396,6 @@ paths:
       responses:
         "200":
           description: Successfully deleted.
-    patch:
-      tags:
-      - Components
-      summary: Change information about a specific room component.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      - name: rin
-        in: path
-        description: The Room Identification Number (RIN) as unique number of a room.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/rin'
-      - name: cin
-        in: path
-        description: The Component Identification Number (CIN) as unique number of a component.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/cin'
-      requestBody:
-        $ref: '#/components/requestBodies/component'
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/component'
-        "400":
-          description: invalid rin format.
-        "401":
-          description: unauthorized access.
-        "404":
-          description: room not found.
   /buildings/{bin}/notification{nin}:
     get:
       tags:
@@ -595,42 +479,6 @@ paths:
       responses:
         "200":
           description: Successfully deleted.
-    patch:
-      tags:
-      - Notifications
-      summary: Change information about a specific building notification.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      - name: nin
-        in: path
-        description: The Notification Identification Number (NIN) as unique number of a Notification.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/nin'
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/building'
-        "400":
-          description: invalid bin format.
-        "401":
-          description: unauthorized access.
-        "404":
-          description: building not found.
   /buildings/{bin}/components/{cin}/notifications/{nin}:
     delete:
       tags:
@@ -664,50 +512,6 @@ paths:
       responses:
         "200":
           description: Successfully deleted.
-    patch:
-      tags:
-      - Notifications
-      summary: Change information about a specific building component notification.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      - name: cin
-        in: path
-        description: The Component Identification Number (CIN) as unique number of a component.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/cin'
-      - name: nin
-        in: path
-        description: The Notification Identification Number (NIN) as unique number of a Notification.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/nin'
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/component'
-        "400":
-          description: invalid rin format.
-        "401":
-          description: unauthorized access.
-        "404":
-          description: room not found.
   /buildings/{bin}/rooms/{rin}/notifications/{nin}:
     get:
       tags:
@@ -815,50 +619,6 @@ paths:
       responses:
         "200":
           description: Successfully deleted.
-    patch:
-      tags:
-      - Notifications
-      summary: Change information about a specific room notification.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      - name: rin
-        in: path
-        description: The Room Identification Number (RIN) as unique number of a room.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/rin'
-      - name: nin
-        in: path
-        description: The Notification Identification Number (NIN) as unique number of a Notification.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/nin'
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/room'
-        "400":
-          description: invalid rin format.
-        "401":
-          description: unauthorized access.
-        "404":
-          description: room not found.
   /buildings/{bin}/rooms/{rin}/components/{cin}/notifications/{nin}:
     delete:
       tags:
@@ -900,58 +660,6 @@ paths:
       responses:
         "200":
           description: Successfully deleted.
-    patch:
-      tags:
-      - Notifications
-      summary: Change information about a specific room component notification.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      - name: rin
-        in: path
-        description: The Room Identification Number (RIN) as unique number of a room.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/rin'
-      - name: cin
-        in: path
-        description: The Component Identification Number (CIN) as unique number of a component.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/cin'
-      - name: nin
-        in: path
-        description: The Notification Identification Number (NIN) as unique number of a Notification.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/nin'
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/component'
-        "400":
-          description: invalid rin format.
-        "401":
-          description: unauthorized access.
-        "404":
-          description: room not found.
 components:
   schemas:
     bin:
@@ -1192,7 +900,6 @@ components:
             $ref: '#/components/schemas/room/properties/aoNumber'
     component:
       content:
-        text/plain:
+        application/json:
           schema:
-            type: string
-            example: elevator
+            $ref: '#/components/schemas/component'
