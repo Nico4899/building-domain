@@ -1,2 +1,2 @@
 # Bounded Context Entity Relation View
-![Entity Relation View](../figures/building_entity_1.5.png)
+![Entity Relation View](../figures/building_entity_1.6.png)
