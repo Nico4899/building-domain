@@ -1,0 +1,61 @@
+context Building inv:
+self.regular.matches(^[0-9]{2}[.][0-9]{2}?$)
+self.east.matches(^[0-9]{2}[.][0-9]{2}[A-Z]?$)
+self.northOne.matches(^[0-9]{3,4}?$)
+self.northTwo.matches(^[0-9]{4}[.][0-9]{1,2}?$)
+self.northThree.matches(^[0-9]{1}[.][0-9]{3}[.][0-9]{1,2}?$)
+self.northFour.matches(^[0-9]{3}[\/][0-9]{1}?$)
+self.northFive.matches(^[0-9]{3}[a-z]{1}?$)
+self.name -> notEmpty()
+self.aoNumber -> notEmpty() implies self.aoNumber.toString().matches(regular) |
+                self.aoNumber.toString().matches(east) | self.aoNumber.toString().matches(northOne) |
+		self.aoNumber.toString().matches(northTwo) | self.aoNumber.toString().matches(northThree) |
+                self.aoNumber.toString().matches(northFour) | self.aoNumber.toString().matches(northFive)
+self.in
+self.numFloors
+self.Position
+self.campusLocation
+self.rooms
+self.components
+self.notifications
+
+context Building::getComponents(): Set<Component>
+body: self.components
+
+context Building::addComponent(component:Component):
+pre: not self.getComponents()->exists(component)
+post: self.getComponents()->exists(component)
+
+context Building::removeComponent(component:Component):
+pre: self.getComponents()->exists(component)
+post: not self.getComponents()->exists(component)
+
+context Building::addNotification(notification:Notification):
+pre: not self.getNotifications()->exists(notification)
+post: self.getNotifications()->exists(notification)
+
+context Building::deleteNotification(notification:Notification):
+pre: self.getNotifications()->exists(notification)
+post: not self.getNotifications()->exists(notification)
+
+context Building::updateNotifications(newNotification:Notification):
+pre: self.getNotifications() contains oldNotification
+post: self.getNotifications() contains oldNotification == newNotification
+
+context Building::getNotifications():
+body: self.notifications
+
+context Building::getRooms(): Set<Room>
+body: self.rooms
+
+context Building::addRoom(room:Room):
+pre: not self.getRooms()->exists(room)
+post: self.getRooms()->exists(room)
+
+context Building::removeRoom(room:Room):
+pre: self.getRooms()->exists(room)
+post: not self.getRooms()->exists(room)
+
+
+
+

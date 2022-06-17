@@ -1,0 +1,5 @@
+context Notification inv:
+self.title -> notEmpty()
+self.description -> notEmpty()
+self.date -> notEmpty()
+self.in -> notEmpty()

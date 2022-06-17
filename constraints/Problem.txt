@@ -1,0 +1,46 @@
+context Problem inv:
+self.reference->notEmpty()
+self.currentState->notEmpty()
+self.title->notEmpty()
+self.description->notEmpty()
+self.date->notEmpty()
+self.reporter->notEmpty()
+self.pin->notEmpty()
+
+context Problem::accept()
+pre: self.currentState.oclIsTypeOf(Open) or self.currentState.oclIsTypeOf(declined)
+post: self.currentState.oclIsTypeOf(Accepted)
+
+context Problem::decline()
+pre: self.currentState.oclIsTypeOf(Open) or self.currentState.oclIsTypeOf(Accepted)
+post: self.currentState.oclIsTypeOf(Declined)
+
+context Problem::close()
+pre: self.currentState.oclIsTypeOf(Declined) or self.currentState.oclIsTypeOf(InProgress)
+post: self.currentState.oclIsTypeOf(Closed)
+
+context Problem::approach()
+pre: self.currentState.oclIsTypeOf(Accepted)
+post: self.currentState.oclIsTypeOf(InProgress)
+
+context Problem::abort()
+pre: self.currentState.oclIsTypeOf(InProgress)
+post: self.currentState.oclIsTypeOf(Accepted)
+
+context Problem::setState(newState: ProblemState)
+post: self.currentState = newState
+
+context Problem::getAcceptedState(): Accepted
+body: //TODO hier wahrscheinlich garnix rein (also body weg lassen)
+
+context Problem::getDeclinedState(): Declined
+body: 
+
+context Problem::getInProgressState(): InProgress
+body:
+
+context Problem::getClosedState(): Closed
+body:
+
+context Problem::getOpenState(): Open
+body:
