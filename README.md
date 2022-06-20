@@ -1,6 +1,6 @@
-# Domain Microservice **`BuildingManagement`** 
+# Domain Microservice **`Building`** 
 
-`<Description>`
+This microservice provides a construction of buildinginformation and can be requested by an API endpoint.
 
 *Guidelines for the creation of the artifacts are available in the GitLab documentation [Artifact Guidelines](https://git.scc.kit.edu/cm-tm/cm-team/1-1.cmdocumentation/3.artifactguidelines)*
 
