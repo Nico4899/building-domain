@@ -5,3 +5,4 @@ This diagram describes the building entity, with its rooms, components and notif
 ![Entity Relation View](../figures/building_entity_2.0.png)
 
 A description of the identification number called "in" in this diagram can be found in the [Ubiquitous Language](https://git.scc.kit.edu/-/ide/project/cm-tm/cm-team/3.projectwork/pse/docsc/tree/english-translation/-/pages/ubiquitous_language.md/).
+ 
