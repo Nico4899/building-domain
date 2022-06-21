@@ -638,14 +638,14 @@ paths:
         schema:
           $ref: '#/components/schemas/nin'
       requestBody:
-        $ref: '#/components/requestBodies/notification'
+        $ref: '#/components/requestBodies/room'
       responses:
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/notification'
+                $ref: '#/components/schemas/room'
     delete:
       tags:
       - Notifications
@@ -940,11 +940,7 @@ paths:
         $ref: '#/components/requestBodies/building'
       responses:
         "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/building'
+          $ref: '#/components/responses'
     delete:
       tags:
       - Favorites
@@ -965,20 +961,20 @@ components:
   schemas:
     bin:
       minimum: 1
-      type: string
-      example: b-432
+      type: integer
+      example: 432
     cin:
       minimum: 1
-      type: string
-      example: c-41
+      type: integer
+      example: 41
     rin:
       minimum: 1
-      type: string
-      example: r-516
+      type: integer
+      example: 516
     nin:
       minimum: 1
-      type: string
-      example: n-7
+      type: integer
+      example: 7
     aoNumber:
       type: string
     components:
@@ -1170,7 +1166,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/notification'
+            $ref: '#/components/schemas/notification/properties/title'
     building:
       content:
         application/json:

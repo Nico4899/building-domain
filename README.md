@@ -10,7 +10,7 @@ This microservice provides a construction of buildinginformation and can be requ
 
  [Domain Constraints](pages/domain_constraints.md)
 
- [API Specification](pages/api.md) 
+ [API Specification](api/openapi.yaml) 
 
 ## Implementation and Tests
 
