@@ -910,57 +910,6 @@ paths:
       responses:
         "200":
           description: Successfully deleted.
-  /favorites:
-    get:
-      tags:
-      - Favorites
-      summary: Get all favorites.
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/building'
-  /favorites/{bin}:
-    post:
-      tags:
-      - Favorites
-      summary: Add a new favorite.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      requestBody:
-        $ref: '#/components/requestBodies/building'
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/building'
-    delete:
-      tags:
-      - Favorites
-      summary: Delete a favorite.
-      parameters:
-      - name: bin
-        in: path
-        description: The Building Identification Number (BIN) as unique number of a building.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/bin'
-      responses:
-        "200":
-          description: Successfully deleted.
 components:
   schemas:
     bin:
