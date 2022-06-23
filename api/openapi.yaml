@@ -94,6 +94,10 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/room'
+        400:
+          description: invalid request message framing.
+        404:
+          description: Requested data doesn't exist.  
     post:
       tags:
         - Rooms
@@ -123,8 +127,6 @@ paths:
           $ref: '#/components/responses/room'
         400:
           description: invalid request message framing.
-        401:
-          description: unauthorized access.
         404:
           description: Requested data doesn't exist.
     put:
@@ -168,8 +170,6 @@ paths:
           $ref: '#/components/responses/component'
         400:
           description: invalid request message framing.
-        401:
-          description: unauthorized access.
         404:
           description: Requested data doesn't exist.
     post:
@@ -201,8 +201,6 @@ paths:
           $ref: '#/components/responses/component'
         400:
           description: invalid request message framing.
-        401:
-          description: unauthorized access.
         404:
           description: Requested data doesn't exist.
     post:
@@ -335,8 +333,6 @@ paths:
             $ref: '#/components/responses/notification'
         400:
           description: invalid request message framing.
-        401:
-          description: unauthorized access.
         404:
           description: Requested data doesn't exist.
     delete:
@@ -431,8 +427,6 @@ paths:
             $ref: '#/components/responses/notification'
         400:
           description: invalid request message framing.
-        401:
-          description: unauthorized access.
         404:
           description: Requested data doesn't exist.
     delete:
