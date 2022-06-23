@@ -19,7 +19,6 @@ paths:
       summary: Get information about all buildings
       responses:
         200:
-          $ref: '#/components/responses/200'
           $ref: '#/components/responses/building'
         400:
           description: invalid bin format.
