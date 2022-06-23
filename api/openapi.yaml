@@ -20,6 +20,10 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/building'
+        400:
+          description: invalid request message framing.
+        404:
+          description: Requested data doesn't exist.
     post:
       tags:
         - Buildings
@@ -29,6 +33,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/building'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
   
   /buildings/{bin}:
     parameters:
@@ -40,6 +50,10 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/building'
+        400:
+          description: invalid request message framing.
+        404:
+          description: Requested data doesn't exist.
     put:
       tags:
         - Buildings
@@ -50,11 +64,11 @@ paths:
         200:
           $ref: '#/components/responses/building'
         400:
-          description: invalid bin format.
+          description: invalid request message framing.
         401:
           description: unauthorized access.
         404:
-          description: building not found.
+          description: Requested data doesn't exist.
     delete:
       tags:
         - Buildings
@@ -62,6 +76,12 @@ paths:
       responses:
         200:
           description: Successfully deleted.
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     
   /buildings/{bin}/rooms:
     parameters:
@@ -83,6 +103,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/building'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
           
   /building/{bin}/rooms/{rin}:
     parameters:
@@ -96,11 +122,11 @@ paths:
         200:
           $ref: '#/components/responses/room'
         400:
-          description: invalid bin/rin format.
+          description: invalid request message framing.
         401:
           description: unauthorized access.
         404:
-          description: room not found.
+          description: Requested data doesn't exist.
     put:
       tags:
         - Rooms
@@ -110,6 +136,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/room'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     delete:
       tags:
         - Rooms
@@ -117,6 +149,12 @@ paths:
       responses:
         200:
           description: Successfully deleted.
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
           
   /buildings/{bin}/components:
     parameters:
@@ -128,6 +166,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/component'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     post:
       tags: 
         - Components
@@ -137,6 +181,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/building'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
   
   /buildings/{bin}/rooms/{rin}/components:
     parameters:
@@ -149,6 +199,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/component'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     post:
       tags: 
         - Components
@@ -158,6 +214,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/building'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
   
   /buildings/{bin}/components/{cin}:
     parameters:
@@ -172,6 +234,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/component'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     delete:
       tags:
         - Components
@@ -179,6 +247,12 @@ paths:
       responses:
         200:
           description: Successfully deleted.
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
           
   /buildings/{bin}/rooms/{rin}/components/{cin}:
     parameters:
@@ -194,6 +268,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/component'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     delete:
       tags:
         - Components
@@ -201,6 +281,12 @@ paths:
       responses:
         200:
           description: Successfully deleted.
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
   
   /buildings/{bin}/notifications:
     parameters:
@@ -214,6 +300,12 @@ paths:
         responses:
           200:
             $ref: '#/components/responses/building'
+          400:
+            description: invalid request message framing.
+          401:
+            description: unauthorized access.
+          404:
+            description: Requested data doesn't exist.
   
   /buildings/{bin}/notifications/{nin}:
     parameters:
@@ -228,6 +320,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     get:
       tags:
         - Notifications
@@ -235,6 +333,12 @@ paths:
       responses:
         200:
             $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     delete:
       tags:
         - Notifications
@@ -242,6 +346,12 @@ paths:
       responses:
         200:
           description: Successfully deleted.
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
           
   /buildings/{bin}/components/{cin}/notifications/{nin}:
     parameters:
@@ -257,6 +367,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     delete:
       tags:
         - Notifications
@@ -264,6 +380,12 @@ paths:
       responses:
         200:
           description: Successfully deleted.
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
           
   /buildings/{bin}/rooms/{rin}/notifications/{nin}:
     parameters:
@@ -279,6 +401,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/room'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     put:
       tags:
         - Notifications
@@ -288,6 +416,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     get:
       tags:
         - Notifications
@@ -295,6 +429,12 @@ paths:
       responses:
         200:
             $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     delete:
       tags:
         - Notifications
@@ -302,6 +442,12 @@ paths:
       responses:
         200:
           description: Successfully deleted.
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
           
   /buildings/{bin}/rooms/{rin}/components/{cin}/notifications/{nin}:
     parameters:
@@ -316,6 +462,12 @@ paths:
       responses:
         200:
           description: Successfully deleted.
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
     put:
       tags:
         - Notifications
@@ -325,6 +477,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
         
 components:
   requestBodies:
@@ -523,8 +681,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/room'
-        bin:
-          $ref: '#/components/schemas/bin'
+        in:
+          $ref: '#/components/schemas/in'
             
     buildingItem:
       type: object
@@ -567,10 +725,10 @@ components:
           
         notifications:
           $ref: '#/components/schemas/notifications'
-        rin:
-          $ref: '#/components/schemas/rin'
+        in:
+          $ref: '#/components/schemas/in'
         parent:
-          $ref: '#/components/schemas/bin'
+          $ref: '#/components/schemas/in'
           
     position:
       type: object
@@ -609,8 +767,8 @@ components:
         date:
           type: string
           format: date
-        nin:
-          $ref: '#/components/schemas/nin'
+        in:
+          $ref: '#/components/schemas/in'
         parent:
           $ref: '#/components/schemas/in'
     
@@ -623,10 +781,10 @@ components:
             - elevator
             - ramp
           example: elevator
-        cin:
-          $ref: '#/components/schemas/cin'
-        rin:
-          $ref: '#/components/schemas/rin'
+        in:
+          $ref: '#/components/schemas/in'
+        parent:
+          $ref: '#/components/schemas/in'
         title:
           type: string
           example: "Aufzug fährt nur bis zum 3. Stock."
