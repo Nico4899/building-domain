@@ -625,11 +625,8 @@ components:
           example: elevator
         cin:
           $ref: '#/components/schemas/cin'
-        rin:
+        parent:
           $ref: '#/components/schemas/rin'
-        title:
-          type: string
-          example: "Aufzug fährt nur bis zum 3. Stock."
         notification:
           $ref: '#/components/schemas/notification'
         position:
