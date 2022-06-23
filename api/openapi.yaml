@@ -19,7 +19,14 @@ paths:
       summary: Get information about all buildings
       responses:
         200:
+          $ref: '#/components/responses/200'
           $ref: '#/components/responses/building'
+        400:
+          description: invalid bin format.
+        401:
+          description: unauthorized access.
+        404:
+          description: building not found.
     post:
       tags:
         - Buildings
@@ -29,6 +36,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/building'
+        400:
+          description: invalid bin format.
+        401:
+          description: unauthorized access.
+        404:
+          description: building not found.
   
   /buildings/{bin}:
     parameters:
@@ -383,6 +396,9 @@ components:
             $ref: '#/components/schemas/component'
             
   responses:
+    200:
+      description: Successful operation.
+
     building:
       description: Successful operation
       content:
