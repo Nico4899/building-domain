@@ -443,22 +443,6 @@ paths:
       - $ref: '#/components/parameters/rin'
       - $ref: '#/components/parameters/nin'
 
-    post:
-      tags: 
-        - Notifications
-      summary: Add a new notification to a specific room.
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        200:
-          $ref: '#/components/responses/room'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-
     put:
       tags:
         - Notifications
