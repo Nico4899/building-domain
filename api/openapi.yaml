@@ -2,14 +2,8 @@ openapi: 3.0.0
 info:
   version: '1'
   title: API for Building
-  description: REST API provided by Domain Microservice BuildingManagement.
+  description: REST API provided by Domain Microservice Building.
 servers:
-  # Added by API Auto Mocking Plugin
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/Smart_Campus/Building_API/1
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/Smart_Campus/Building_Management/1
 
 paths:
   /buildings:
@@ -103,7 +97,7 @@ paths:
         - Rooms
       summary: Add a new room to a specified building
       requestBody:
-        $ref: '#/components/requestBodies/roomRequestBody'
+        $ref: '#/components/requestBodies/room'
       responses:
         200:
           $ref: '#/components/responses/building'
@@ -348,12 +342,36 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
+
+  /buildings/{bin}/components/{cin}/notifications:
+    
+    parameters:
+      - $ref: '#/components/parameters/bin'
+      - $ref: '#/components/parameters/cin'
+    
+    post:
+      tags: 
+        - Notifications
+      summary: Add a new notification to a specific building component.
+      requestBody:
+        $ref: '#/components/requestBodies/notification'
+      responses:
+        200:
+          $ref: '#/components/responses/room'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
           
   /buildings/{bin}/components/{cin}/notifications/{nin}:
+
     parameters:
       - $ref: '#/components/parameters/bin'
       - $ref: '#/components/parameters/cin'
       - $ref: '#/components/parameters/nin'
+
     put:
       tags:
         - Notifications
@@ -369,6 +387,7 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
+
     delete:
       tags:
         - Notifications
@@ -382,12 +401,25 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
-          
-  /buildings/{bin}/rooms/{rin}/notifications/{nin}:
+
+    get:
+      tags:
+        - Notifications
+      summary: Get information about a specific notification of a building component.
+      responses:
+        200:
+            $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
+        404:
+          description: Requested data doesn't exist.
+
+  /buildings/{bin}/rooms/{rin}/notifications:
+
     parameters:
       - $ref: '#/components/parameters/bin'
       - $ref: '#/components/parameters/rin'
-      - $ref: '#/components/parameters/nin'
+
     post:
       tags: 
         - Notifications
@@ -403,6 +435,30 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
+          
+  /buildings/{bin}/rooms/{rin}/notifications/{nin}:
+
+    parameters:
+      - $ref: '#/components/parameters/bin'
+      - $ref: '#/components/parameters/rin'
+      - $ref: '#/components/parameters/nin'
+
+    post:
+      tags: 
+        - Notifications
+      summary: Add a new notification to a specific room.
+      requestBody:
+        $ref: '#/components/requestBodies/notification'
+      responses:
+        200:
+          $ref: '#/components/responses/room'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
+
     put:
       tags:
         - Notifications
@@ -418,6 +474,7 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
+
     get:
       tags:
         - Notifications
@@ -429,6 +486,7 @@ paths:
           description: invalid request message framing.
         404:
           description: Requested data doesn't exist.
+
     delete:
       tags:
         - Notifications
@@ -442,6 +500,29 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
+
+  /buildings/{bin}/rooms/{rin}/components/{cin}/notifications:
+
+    parameters:
+      - $ref: '#/components/parameters/bin'
+      - $ref: '#/components/parameters/rin'
+      - $ref: '#/components/parameters/cin'
+
+    post:
+      tags: 
+        - Notifications
+      summary: Add a new notification to a specific room component.
+      requestBody:
+        $ref: '#/components/requestBodies/notification'
+      responses:
+        200:
+          $ref: '#/components/responses/room'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
           
   /buildings/{bin}/rooms/{rin}/components/{cin}/notifications/{nin}:
     parameters:
@@ -449,6 +530,7 @@ paths:
       - $ref: '#/components/parameters/rin'
       - $ref: '#/components/parameters/cin'
       - $ref: '#/components/parameters/nin'
+
     delete:
       tags:
         - Notifications
@@ -462,6 +544,7 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
+
     put:
       tags:
         - Notifications
@@ -475,6 +558,18 @@ paths:
           description: invalid request message framing.
         401:
           description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
+
+    get:
+      tags:
+        - Notifications
+      summary: Get information about a specific notification of a room component.
+      responses:
+        200:
+            $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
         404:
           description: Requested data doesn't exist.
         
@@ -492,41 +587,11 @@ components:
           schema:
             $ref: '#/components/schemas/building'
             
-    buildingIdentificationNumber:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/building/properties/aoNumber'
-            
     room:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/room'
-            
-    roomRequestBody:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/roomRequestBody'
-            
-    buildingName:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/building/properties/name'
-            
-    roomName:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/room/properties/name'
-            
-    roomIdentificationNumber:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/room/properties/aoNumber'
             
     component:
       content:
@@ -600,7 +665,6 @@ components:
       schema:
         $ref: '#/components/schemas/nin'
         
-      
   schemas:
   # single values
     in:
@@ -640,7 +704,7 @@ components:
       items:
         $ref: '#/components/schemas/notification'
         
-  # multi-value schemas
+  # multiple values
     building:
       type: object
       properties:
@@ -653,10 +717,8 @@ components:
           type: integer
           minimum: 1
           example: 3
-        
         position:
           $ref: '#/components/schemas/position'
-        
         campusLocation:
           type: string
           enum:
@@ -664,34 +726,16 @@ components:
             - north_campus
             - east_campus
             - west_campus
-            
         components:
-          $ref: '#/components/schemas/components'
-          
+          $ref: '#/components/schemas/components' 
         notifications:
           $ref: '#/components/schemas/notifications'
-          
         rooms:
           type: array
           items:
             $ref: '#/components/schemas/room'
         in:
           $ref: '#/components/schemas/in'
-            
-    buildingItem:
-      type: object
-      properties:
-        name: 
-          type: string
-        aoNumber:
-          $ref: '#/components/schemas/aoNumber'
-        self_uri:
-          type: string
-          format: uri
-      example:
-        name: 'Audimax'
-        aoNumber: 30.95
-        self_uri: '/buildings/Audimax(30.95)'
             
     room:
       type: object
@@ -716,7 +760,6 @@ components:
             - library
         components:
           $ref: '#/components/schemas/components'
-          
         notifications:
           $ref: '#/components/schemas/notifications'
         in:
@@ -737,17 +780,6 @@ components:
           minimum: -180
           maximum: 180
           example: 38.432693
-          
-          
-    roomRequestBody:
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/room/properties/name'
-        aoNumber:
-          $ref: '#/components/schemas/room/properties/aoNumber'
-        buildingAoNumber:
-          $ref: '#/components/schemas/building/properties/aoNumber'
         
     notification:
       type: object
@@ -775,13 +807,13 @@ components:
             - elevator
             - ramp
           example: elevator
+        description:
+          type: string
+          example: "Uhr mit 4 Zeigern."
         in:
           $ref: '#/components/schemas/in'
         parent:
           $ref: '#/components/schemas/in'
-        title:
-          type: string
-          example: "Aufzug fährt nur bis zum 3. Stock."
         notification:
           $ref: '#/components/schemas/notification'
         position:
