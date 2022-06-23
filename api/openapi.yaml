@@ -20,12 +20,6 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/building'
-        400:
-          description: invalid bin format.
-        401:
-          description: unauthorized access.
-        404:
-          description: building not found.
     post:
       tags:
         - Buildings
@@ -35,12 +29,6 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/building'
-        400:
-          description: invalid bin format.
-        401:
-          description: unauthorized access.
-        404:
-          description: building not found.
   
   /buildings/{bin}:
     parameters:
@@ -395,9 +383,6 @@ components:
             $ref: '#/components/schemas/component'
             
   responses:
-    200:
-      description: Successful operation.
-
     building:
       description: Successful operation
       content:
@@ -640,8 +625,11 @@ components:
           example: elevator
         cin:
           $ref: '#/components/schemas/cin'
-        parent:
+        rin:
           $ref: '#/components/schemas/rin'
+        title:
+          type: string
+          example: "Aufzug fährt nur bis zum 3. Stock."
         notification:
           $ref: '#/components/schemas/notification'
         position:
