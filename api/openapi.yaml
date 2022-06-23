@@ -451,6 +451,10 @@ components:
       
   schemas:
   # single values
+    in:
+      type: string
+      minimum: 1
+  
     bin:
       type: string
       example: b-432
@@ -519,6 +523,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/room'
+        bin:
+          $ref: '#/components/schemas/bin'
             
     buildingItem:
       type: object
@@ -561,6 +567,10 @@ components:
           
         notifications:
           $ref: '#/components/schemas/notifications'
+        rin:
+          $ref: '#/components/schemas/rin'
+        parent:
+          $ref: '#/components/schemas/bin'
           
     position:
       type: object
@@ -595,9 +605,14 @@ components:
           example: "Aufzug kaputt"
         description:
           type: string
+          example: "Aufzug fährt nur bis zum 3. Stock."
         date:
           type: string
           format: date
+        nin:
+          $ref: '#/components/schemas/nin'
+        parent:
+          $ref: '#/components/schemas/in'
     
     component:
       type: object
@@ -608,6 +623,13 @@ components:
             - elevator
             - ramp
           example: elevator
+        cin:
+          $ref: '#/components/schemas/cin'
+        rin:
+          $ref: '#/components/schemas/rin'
+        title:
+          type: string
+          example: "Aufzug fährt nur bis zum 3. Stock."
         notification:
           $ref: '#/components/schemas/notification'
         position:
