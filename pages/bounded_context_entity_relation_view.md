@@ -1,6 +1,6 @@
 # Bounded Context Entity Relation View
 
-This diagram describes the building entity, with its rooms, components and notifications. The abstract class AccessibleObject, provides us the possibility to handle rooms and buildings same, and collects ther redundant attributes and moethods. The notificatable interface provides an interface to manage notifications.
+This diagram describes the building entity, with its rooms, components and notifications. The abstract class AccessibleObject, provides us the possibility to handle rooms and buildings same, and collects ther redundant attributes and methods. The notificatable interface provides an interface to manage notifications.
 
 ![Entity Relation View](../figures/building_entity_2.0.png)
 
