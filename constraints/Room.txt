@@ -1,0 +1,32 @@
+context Room inv:
+self.name->notEmpty()
+self.aoNumber->notEmpty()
+self.in
+self.floor
+
+context Room::getComponents(): Set<Component>
+body: self.components
+
+context Room::addComponent(component:Component):
+pre: not self.getComponents()->exists(component)
+post: self.getComponents()->exists(component)
+
+context Room::removeComponent(component:Component):
+pre: self.getComponents()->exists(component)
+post: not self.getComponents()->exists(component)
+
+context Room::addNotification(notification:Notification):
+pre: not self.getNotifications()->exists(notification)
+post: self.getNotifications()->exists(notification)
+
+context Room::deleteNotification(notification:Notification):
+pre: self.getNotifications()->exists(notification)
+post: not self.getNotifications()->exists(notification)
+
+context Room::updateNotifications(newNotification:Notification):
+pre: self.getNotifications() contains oldNotification
+post: self.getNotifications() contains oldNotification == newNotification
+
+context Room::getNotifications():
+body: self.notifications
+
