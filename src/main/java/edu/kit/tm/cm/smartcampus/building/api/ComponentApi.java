@@ -16,22 +16,27 @@ import java.util.Collection;
 public interface ComponentApi {
 
     @GetMapping("/buildings/{bin}/components")
-    Collection<Component> getComponents(@PathVariable String bin);
+    Collection<Component> getBuildingComponents(@PathVariable String bin);
 
     @PostMapping("/buildings/{bin}/components")
-    Building createComponent(@PathVariable String bin, @RequestBody ComponentRequest componentRequest);
+    Building createBuildingComponent(@PathVariable String bin, @RequestBody ComponentRequest componentRequest);
 
     @GetMapping("/buildings/{bin}/rooms/{rin}/components")
-    Collection<Component> getComponents(@PathVariable String bin, @PathVariable String rin);
+    Collection<Component> getRoomComponents(@PathVariable String bin, @PathVariable String rin);
 
-    //TODO WIP
-    @GetMapping("/buildings/{bin}")
-    Building getBuilding(@PathVariable String bin);
+    @PostMapping("/buildings/{bin}/rooms/{rin}/components")
+    Building createRoomComponent(@PathVariable String bin, @PathVariable String rin, @RequestBody ComponentRequest componentRequest);
 
-    @PutMapping("/buildings/{bin}")
-    Building editBuilding(@PathVariable String bin, @RequestBody BuildingRequest buildingRequest);
+    @PutMapping("/buildings/{bin}/components/{cin}")
+    Component editBuildingComponent(@PathVariable String bin, @PathVariable String cin, @RequestBody ComponentRequest componentRequest);
 
-    @DeleteMapping("/buildings/{bin}")
-    void deleteBuilding(@PathVariable String bin);
+    @DeleteMapping("/buildings/{bin}/components/{cin}")
+    void deleteBuildingComponent(@PathVariable String bin, @PathVariable String cin);
+
+    @PutMapping("/buildings/{bin}/rooms/{rin}/components/{cin}")
+    Component editRoomComponent(@PathVariable String bin, @PathVariable String rin, @PathVariable String cin, @RequestBody ComponentRequest componentRequest);
+
+    @DeleteMapping("/buildings/{bin}/rooms/{rin}/components/{cin}")
+    void deleteRoomComponent(@PathVariable String bin, @PathVariable String rin, @PathVariable String cin);
 
 }
