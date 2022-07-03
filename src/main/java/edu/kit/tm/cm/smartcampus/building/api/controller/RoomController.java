@@ -1,8 +1,9 @@
-package main.java.edu.kit.tm.cm.smartcampus.building.api.controller;
+package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import main.java.edu.kit.tm.cm.smartcampus.building.api.RoomApi;
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
+
+import edu.kit.tm.cm.smartcampus.building.api.RoomApi;
+import edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
+import edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
 
 public class RoomController implements RoomApi {
     @Override

@@ -1,9 +1,8 @@
-package main.java.edu.kit.tm.cm.smartcampus.building.api;
+package edu.kit.tm.cm.smartcampus.building.api;
 
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.BuildingRequest;
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.ComponentRequest;
-import main.java.edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import main.java.edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

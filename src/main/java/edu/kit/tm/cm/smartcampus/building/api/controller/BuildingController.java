@@ -1,10 +1,11 @@
-package main.java.edu.kit.tm.cm.smartcampus.building.api.controller;
+package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import main.java.edu.kit.tm.cm.smartcampus.building.api.BuildingApi;
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.BuildingRequest;
-import main.java.edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.api.BuildingApi;
+import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingRequest;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 
 import java.util.Collection;
+
 
 public class BuildingController implements BuildingApi {
     @Override

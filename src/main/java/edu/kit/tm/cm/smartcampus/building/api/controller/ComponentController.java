@@ -1,9 +1,9 @@
-package main.java.edu.kit.tm.cm.smartcampus.building.api.controller;
+package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import main.java.edu.kit.tm.cm.smartcampus.building.api.ComponentApi;
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.ComponentRequest;
-import main.java.edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import main.java.edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import edu.kit.tm.cm.smartcampus.building.api.ComponentApi;
+import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 
 import java.util.Collection;
 

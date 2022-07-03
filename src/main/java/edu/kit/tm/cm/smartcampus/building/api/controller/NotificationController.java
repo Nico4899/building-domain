@@ -1,11 +1,8 @@
-package main.java.edu.kit.tm.cm.smartcampus.building.api.controller;
+package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import main.java.edu.kit.tm.cm.smartcampus.building.api.NotificationApi;
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
-import main.java.edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import edu.kit.tm.cm.smartcampus.building.api.NotificationApi;
+import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
+import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
 
 public class NotificationController implements NotificationApi {
 

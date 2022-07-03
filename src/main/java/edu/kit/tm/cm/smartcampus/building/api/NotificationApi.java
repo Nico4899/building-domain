@@ -1,7 +1,8 @@
-package main.java.edu.kit.tm.cm.smartcampus.building.api;
+package edu.kit.tm.cm.smartcampus.building.api;
 
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
+import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
+import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
+
 import org.springframework.web.bind.annotation.*;
 
 public interface NotificationApi {

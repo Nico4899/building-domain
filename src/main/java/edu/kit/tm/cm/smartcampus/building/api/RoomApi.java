@@ -1,11 +1,8 @@
-package main.java.edu.kit.tm.cm.smartcampus.building.api;
+package edu.kit.tm.cm.smartcampus.building.api;
 
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
-import main.java.edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
-import main.java.edu.kit.tm.cm.smartcampus.building.logic.model.Room;
+import edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
+import edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
 
 public interface RoomApi {
 
