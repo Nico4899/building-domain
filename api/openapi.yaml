@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: SmartCampus-Building Domain
   description: SmartCampus-Building Domain specified as REST-API
-  version: 1.0.0
+  version: 2.0.0
 
 paths:
 
@@ -674,70 +674,107 @@ components:
 
     # single request and response schemas
 
-    response_message:
-      type: object
-      properties:
-        message:
-          type: string
-          example: "example message."
-        successful:
-          type: boolean
-
     building_request:
       type: object
       properties:
-        building:
-          $ref: '#/components/schemas/building'
+        building_name:
+          type: string
+          example: "Audimax"
+        building_number:
+          type: string
+          example: "30.95"
+        num_floors:
+          type: integer
+          minimum: 1
+          example: 3
+        geographical_location:
+          $ref: '#/components/schemas/geographical_location'
+        campus_location:
+          type: string
+          enum:
+            - south_campus
+            - north_campus
+            - east_campus
+            - west_campus
+
 
     building_response:
       type: object
       properties:
         building:
           $ref: '#/components/schemas/building'
-        response_message:
-          $ref: '#/components/schemas/response_message'
 
     room_request:
       type: object
       properties:
-        building:
-          $ref: '#/components/schemas/room'
+        room_name:
+          type: string
+          example: "Fritz-Haller-Hörsaal (HS 37)"
+        room_number:
+          type: string
+          example: "001"
+        floor:
+          type: integer
+          example: 0
+        room_category:
+          type: string
+          enum:
+            - sports
+            - cafeteria
+            - restroom
+            - restroom_handicapped
+            - office
+            - lecture_room
+            - seminar_room
+            - library
+        geographical_location:
+          $ref: '#/components/schemas/geographical_location'
 
     room_response:
       type: object
       properties:
-        building:
+        room:
           $ref: '#/components/schemas/room'
-        response_message:
-          $ref: '#/components/schemas/response_message'
 
     component_request:
       type: object
       properties:
-        building:
-          $ref: '#/components/schemas/component'
+        componentType:
+          type: string
+          enum:
+            - elevator
+            - ramp
+          example: elevator
+        component_description:
+          type: string
+          example: "Clock without pointer."
+        geographical_location:
+          $ref: '#/components/schemas/geographical_location'
 
     component_response:
       type: object
       properties:
-        building:
+        component:
           $ref: '#/components/schemas/component'
-        response_message:
-          $ref: '#/components/schemas/response_message'
 
     notification_request:
       type: object
       properties:
-        building:
-          $ref: '#/components/schemas/notification'
+        notification_title:
+          type: string
+          example: "Elevator stuck"
+        notification_description:
+          type: string
+          example: "Elevator is stuck in 3rd floor."
+        creation_date:
+          type: string
+          format: date
 
     notification_response:
       type: object
       properties:
-        building:
+        notification:
           $ref: '#/components/schemas/notification'
-        response_message:
-          $ref: '#/components/schemas/response_message'
 
     # multi value responses
 
@@ -772,8 +809,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/component'
-
-
-
-
-
