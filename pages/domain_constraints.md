@@ -15,25 +15,9 @@
 
 [Notification Constraints](/constraints/Notification.txt)
 
-## APIController
+## GeographicalLocation
 
-[APIController Constraints](/constraints/APIController.txt)
-
-## BuildingManager
-
-[BuildingManager Constraints](/constraints/BuildingManager.txt)
-
-## Favorites
-
-[Favorites Constraints](/constraints/Favorites.txt)
-
-## Filter
-
-[Filter Constraints](/constraints/Filter.txt)
-
-## Position
-
-[Position Constraints](/constraints/Position.txt)
+[GeographicalLocation Constraints](/constraints/GeographicalLocation)
 
 ## Room
 

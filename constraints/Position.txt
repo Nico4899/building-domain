@@ -1,3 +1,0 @@
-context Position inv:
-self.lat->notEmpty()
-self.lon->notEmpty()

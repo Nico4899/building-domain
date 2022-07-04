@@ -1,3 +1,0 @@
-context Favorites inv:
-self.in->notEmpty()
-self.owner->notEmpty()

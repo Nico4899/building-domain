@@ -1,5 +1,6 @@
 context Notification inv:
-self.title -> notEmpty()
-self.description -> notEmpty()
-self.date -> notEmpty()
-self.in -> notEmpty()
+self.notificationTitle -> notEmpty()
+self.notificationDescription -> notEmpty()
+self.creationDate -> notEmpty()
+self.identificationNumber -> notEmpty()
+self.parentIdentificationNumber -> notEmpty()
