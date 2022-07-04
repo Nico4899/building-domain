@@ -1,6 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.api;
 
-import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.api.payload.*;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,27 +15,25 @@ import java.util.Collection;
 public interface ComponentApi {
 
     @GetMapping("/buildings/{bin}/components")
-    Collection<Component> getBuildingComponents(@PathVariable String bin);
+    ComponentsResponse getBuildingComponents(@PathVariable String bin);
 
     @PostMapping("/buildings/{bin}/components")
-    Building createBuildingComponent(@PathVariable String bin, @RequestBody ComponentRequest componentRequest);
+    ComponentResponse createBuildingComponent(@PathVariable String bin, @RequestBody ComponentRequest componentRequest);
 
-    @GetMapping("/buildings/{bin}/rooms/{rin}/components")
-    Collection<Component> getRoomComponents(@PathVariable String bin, @PathVariable String rin);
+    @GetMapping("/rooms/{rin}/components")
+    ComponentsResponse getRoomComponents(@PathVariable String rin);
 
-    @PostMapping("/buildings/{bin}/rooms/{rin}/components")
-    Building createRoomComponent(@PathVariable String bin, @PathVariable String rin, @RequestBody ComponentRequest componentRequest);
+    @PostMapping("/rooms/{rin}/components")
+    ComponentResponse createRoomComponent(@PathVariable String rin, @RequestBody ComponentRequest componentRequest);
 
-    @PutMapping("/buildings/{bin}/components/{cin}")
-    Component editBuildingComponent(@PathVariable String bin, @PathVariable String cin, @RequestBody ComponentRequest componentRequest);
+    @GetMapping("/components/{cin}")
+    ComponentResponse getComponent(@PathVariable String cin);
 
-    @DeleteMapping("/buildings/{bin}/components/{cin}")
-    void deleteBuildingComponent(@PathVariable String bin, @PathVariable String cin);
+    @PutMapping("/components/{cin}")
+    ComponentResponse editComponent(@PathVariable String cin, @RequestBody ComponentRequest componentRequest);
 
-    @PutMapping("/buildings/{bin}/rooms/{rin}/components/{cin}")
-    Component editRoomComponent(@PathVariable String bin, @PathVariable String rin, @PathVariable String cin, @RequestBody ComponentRequest componentRequest);
+    @DeleteMapping("/components/{cin}")
+    void deleteComponent(@PathVariable String cin);
 
-    @DeleteMapping("/buildings/{bin}/rooms/{rin}/components/{cin}")
-    void deleteRoomComponent(@PathVariable String bin, @PathVariable String rin, @PathVariable String cin);
 
 }

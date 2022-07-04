@@ -2,49 +2,47 @@ package edu.kit.tm.cm.smartcampus.building.api.controller;
 
 import edu.kit.tm.cm.smartcampus.building.api.ComponentApi;
 import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentResponse;
+import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentsResponse;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 
 import java.util.Collection;
 
 public class ComponentController implements ComponentApi {
+
     @Override
-    public Collection<Component> getBuildingComponents(String bin) {
+    public ComponentsResponse getBuildingComponents(String bin) {
         return null;
     }
 
     @Override
-    public Building createBuildingComponent(String bin, ComponentRequest componentRequest) {
+    public ComponentResponse createBuildingComponent(String bin, ComponentRequest componentRequest) {
         return null;
     }
 
     @Override
-    public Collection<Component> getRoomComponents(String bin, String rin) {
+    public ComponentsResponse getRoomComponents(String rin) {
         return null;
     }
 
     @Override
-    public Building createRoomComponent(String bin, String rin, ComponentRequest componentRequest) {
+    public ComponentResponse createRoomComponent(String rin, ComponentRequest componentRequest) {
         return null;
     }
 
     @Override
-    public Component editBuildingComponent(String bin, String cin, ComponentRequest componentRequest) {
+    public ComponentResponse getComponent(String cin) {
         return null;
     }
 
     @Override
-    public void deleteBuildingComponent(String bin, String cin) {
-
-    }
-
-    @Override
-    public Component editRoomComponent(String bin, String rin, String cin, ComponentRequest componentRequest) {
+    public ComponentResponse editComponent(String cin, ComponentRequest componentRequest) {
         return null;
     }
 
     @Override
-    public void deleteRoomComponent(String bin, String rin, String cin) {
+    public void deleteComponent(String cin) {
 
     }
 }
