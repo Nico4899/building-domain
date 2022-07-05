@@ -28,7 +28,7 @@ base-chart:
   nameOverride: ""
 
   ingress:
-    enabled: enabled
+    enabled: true
     # HTTP traffic will be forwarded to HTTPS
     redirectHttp: true
     # Allows the Ingress to be accessible from the outside, enable only if required since DNS could take more then 2h
