@@ -4,10 +4,11 @@ package edu.kit.tm.cm.smartcampus.building.api.controller;
 import edu.kit.tm.cm.smartcampus.building.api.RoomApi;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
+import edu.kit.tm.cm.smartcampus.building.api.payload.RoomsResponse;
 
 public class RoomController implements RoomApi {
     @Override
-    public RoomResponse getRooms(String bin) {
+    public RoomsResponse getRooms(String bin) {
         return null;
     }
 

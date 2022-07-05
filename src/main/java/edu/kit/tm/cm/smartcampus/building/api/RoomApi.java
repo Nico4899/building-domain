@@ -2,12 +2,13 @@ package edu.kit.tm.cm.smartcampus.building.api;
 
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
+import edu.kit.tm.cm.smartcampus.building.api.payload.RoomsResponse;
 import org.springframework.web.bind.annotation.*;
 
 public interface RoomApi {
 
     @GetMapping("/buildings/{bin}/rooms")
-    RoomResponse getRooms(@PathVariable String bin);
+    RoomsResponse getRooms(@PathVariable String bin);
 
     @PostMapping("/buildings/{bin}/rooms")
     RoomResponse addRoom(@PathVariable String bin, @RequestBody RoomRequest roomRequest);

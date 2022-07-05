@@ -3,9 +3,9 @@ package edu.kit.tm.cm.smartcampus.building.api.controller;
 import edu.kit.tm.cm.smartcampus.building.api.NotificationApi;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
+import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationsResponse;
 
 public class NotificationController implements NotificationApi {
-
     @Override
     public NotificationResponse getNotification(String nin) {
         return null;
@@ -22,7 +22,7 @@ public class NotificationController implements NotificationApi {
     }
 
     @Override
-    public NotificationResponse getBuildingNotifications(String bin) {
+    public NotificationsResponse getBuildingNotifications(String bin) {
         return null;
     }
 
@@ -32,7 +32,7 @@ public class NotificationController implements NotificationApi {
     }
 
     @Override
-    public NotificationResponse getRoomNotifications(String rin) {
+    public NotificationsResponse getRoomNotifications(String rin) {
         return null;
     }
 
@@ -42,12 +42,12 @@ public class NotificationController implements NotificationApi {
     }
 
     @Override
-    public NotificationResponse getComponentsNotifications(String cin) {
+    public NotificationsResponse getComponentNotifications(String cin) {
         return null;
     }
 
     @Override
-    public NotificationResponse addComponentsNotification(String cin, NotificationRequest notificationRequest) {
+    public NotificationResponse addComponentNotification(String cin, NotificationRequest notificationRequest) {
         return null;
     }
 }

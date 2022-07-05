@@ -3,6 +3,7 @@ package edu.kit.tm.cm.smartcampus.building.api;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
 
+import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationsResponse;
 import org.springframework.web.bind.annotation.*;
 
 public interface NotificationApi {
@@ -19,14 +20,15 @@ public interface NotificationApi {
 
     //Buildings
     @GetMapping("/buildings/{bin}/notifications")
-    NotificationResponse getBuildingNotifications(@PathVariable String bin);
+    NotificationsResponse getBuildingNotifications(@PathVariable String bin);
+
     @PostMapping("buildings/{bin}/notifications")
     NotificationResponse addBuildingNotification(@PathVariable String bin,
                                                  @RequestBody NotificationRequest notificationRequest);
 
     //Rooms
     @GetMapping("/rooms/{rin}/notifications")
-    NotificationResponse getRoomNotifications(@PathVariable String rin);
+    NotificationsResponse getRoomNotifications(@PathVariable String rin);
 
     @PostMapping("rooms/{rin}/notifications")
     NotificationResponse addRoomNotification(@PathVariable String rin,
@@ -34,10 +36,10 @@ public interface NotificationApi {
 
     //Components
     @GetMapping("/components/{cin}/notifications")
-    NotificationResponse getComponentsNotifications(@PathVariable String cin);
+    NotificationsResponse getComponentNotifications(@PathVariable String cin);
 
     @PostMapping("components/{cin}/notifications")
-    NotificationResponse addComponentsNotification(@PathVariable String cin,
+    NotificationResponse addComponentNotification(@PathVariable String cin,
                                              @RequestBody NotificationRequest notificationRequest);
 
 }
