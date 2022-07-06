@@ -4,7 +4,7 @@ import edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomsResponse;
 import org.springframework.web.bind.annotation.*;
-
+@RequestMapping
 public interface RoomApi {
 
     @GetMapping("/buildings/{bin}/rooms")

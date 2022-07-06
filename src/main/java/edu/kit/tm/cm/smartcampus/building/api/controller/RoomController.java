@@ -5,7 +5,9 @@ import edu.kit.tm.cm.smartcampus.building.api.RoomApi;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomsResponse;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class RoomController implements RoomApi {
     @Override
     public RoomsResponse getRooms(String bin) {

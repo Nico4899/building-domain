@@ -4,7 +4,9 @@ import edu.kit.tm.cm.smartcampus.building.api.NotificationApi;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationsResponse;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class NotificationController implements NotificationApi {
     @Override
     public NotificationResponse getNotification(String nin) {

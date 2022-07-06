@@ -6,9 +6,10 @@ import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentResponse;
 import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentsResponse;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-
+@RestController
 public class ComponentController implements ComponentApi {
 
     @Override

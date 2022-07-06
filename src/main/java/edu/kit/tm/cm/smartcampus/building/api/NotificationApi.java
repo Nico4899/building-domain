@@ -5,7 +5,7 @@ import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
 
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationsResponse;
 import org.springframework.web.bind.annotation.*;
-
+@RequestMapping
 public interface NotificationApi {
 
     @GetMapping("/notifications/{nin}")
