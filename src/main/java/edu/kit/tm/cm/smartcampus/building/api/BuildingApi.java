@@ -21,7 +21,7 @@ public interface BuildingApi {
     BuildingResponse getBuilding(@PathVariable String bin);
 
     @PutMapping("/buildings/{bin}")
-    BuildingResponse editBuilding(@PathVariable String bin, @RequestBody BuildingRequest buildingRequest);
+    BuildingResponse editBuilding(@PathVariable String bin, @RequestBody BuildingRequest buildingRequest); //TODO rückgabetyp evtl nur auf bin? @Jonathan
 
     @DeleteMapping("/buildings/{bin}")
     void deleteBuilding(@PathVariable String bin);
