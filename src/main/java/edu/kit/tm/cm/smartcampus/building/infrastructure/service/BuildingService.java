@@ -1,29 +1,29 @@
-package edu.kit.tm.cm.smartcampus.building.logic.operations;
+package edu.kit.tm.cm.smartcampus.building.infrastructure.service;
 
 import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingResponse;
 import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingsResponse;
-import edu.kit.tm.cm.smartcampus.building.logic.LogicUtils;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class BuildingOperations {
+public class BuildingService {
 
     private final BuildingRepository buildingRepository;
 
     @Autowired
-    public BuildingOperations(BuildingRepository buildingRepository) {
+    public BuildingService(BuildingRepository buildingRepository) {
         this.buildingRepository = buildingRepository;
     }
 
-    public BuildingsResponse listBuildings() { //TODO oder hier Rückgabetypen immer Building oder so? @Jonathan
+    public Collection<Building> listBuildings() { //TODO oder hier Rückgabetypen immer Building oder so? @Jonathan
         return LogicUtils.convertBuildingsToBuildingResponse(buildingRepository.findAll());
     }
 
@@ -45,12 +45,11 @@ public class BuildingOperations {
         buildingRepository.delete(bin);
     }
 
-    public BuildingResponse editBuilding(String bin, BuildingRequest buildingRequest) {
+    public Building editBuilding(String bin, BuildingRequest buildingRequest) {
         Building building = LogicUtils.convertBuildingRequestToBuilding(buildingRequest);
         building.setId(bin);
         //TODO exceptions je nach rückgabetyp
-        buildingRepository.update(building);
-        return LogicUtils.convertBuildingToBuildingResponse(building);
+        return buildingRepository.save(building);
     }
 
 }

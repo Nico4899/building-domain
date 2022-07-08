@@ -3,13 +3,17 @@ package edu.kit.tm.cm.smartcampus.building.api.controller;
 import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingResponse;
 import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingsResponse;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RequestMapping
 public interface BuildingAPI {
 
   @GetMapping("/buildings")
-  BuildingsResponse listBuildings();
+  Collection<Building> listBuildings();
 
   @PostMapping("/buildings")
   BuildingResponse createBuilding(@RequestBody BuildingRequest buildingRequest);
