@@ -5,7 +5,7 @@ import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingResponse;
 import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingsResponse;
 import edu.kit.tm.cm.smartcampus.building.logic.LogicUtils;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import edu.kit.tm.cm.smartcampus.building.logic.model.BuildingRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

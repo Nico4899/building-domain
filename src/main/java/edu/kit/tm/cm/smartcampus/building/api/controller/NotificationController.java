@@ -1,6 +1,5 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import edu.kit.tm.cm.smartcampus.building.api.NotificationApi;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationsResponse;

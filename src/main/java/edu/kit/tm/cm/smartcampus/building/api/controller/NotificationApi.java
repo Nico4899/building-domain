@@ -1,4 +1,4 @@
-package edu.kit.tm.cm.smartcampus.building.api;
+package edu.kit.tm.cm.smartcampus.building.api.controller;
 
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;

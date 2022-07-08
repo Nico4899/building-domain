@@ -1,9 +1,10 @@
-package edu.kit.tm.cm.smartcampus.building.api;
+package edu.kit.tm.cm.smartcampus.building.api.controller;
 
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
 import edu.kit.tm.cm.smartcampus.building.api.payload.RoomsResponse;
 import org.springframework.web.bind.annotation.*;
+
 @RequestMapping
 public interface RoomApi {
 
