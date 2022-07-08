@@ -1,34 +1,31 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import edu.kit.tm.cm.smartcampus.building.api.payload.*;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+
 @RequestMapping
 public interface ComponentApi {
 
-    @GetMapping("/buildings/{bin}/components")
-    ComponentsResponse getBuildingComponents(@PathVariable String bin);
+  @GetMapping("/buildings/{bin}/components")
+  Collection<Component> listBuildingComponents(@PathVariable String bin);
 
-    @PostMapping("/buildings/{bin}/components")
-    ComponentResponse createBuildingComponent(@PathVariable String bin, @RequestBody ComponentRequest componentRequest);
+  @PostMapping("/buildings/{bin}/components")
+  Component createBuildingComponent(@PathVariable String bin, @RequestBody Component component);
 
-    @GetMapping("/rooms/{rin}/components")
-    ComponentsResponse getRoomComponents(@PathVariable String rin);
+  @GetMapping("/rooms/{rin}/components")
+  Collection<Component> listRoomComponents(@PathVariable String rin);
 
-    @PostMapping("/rooms/{rin}/components")
-    ComponentResponse createRoomComponent(@PathVariable String rin, @RequestBody ComponentRequest componentRequest);
+  @PostMapping("/rooms/{rin}/components")
+  Component createRoomComponent(@PathVariable String rin, @RequestBody Component component);
 
-    @GetMapping("/components/{cin}")
-    ComponentResponse getComponent(@PathVariable String cin);
+  @GetMapping("/components/{cin}")
+  Component getComponent(@PathVariable String cin);
 
-    @PutMapping("/components/{cin}")
-    ComponentResponse editComponent(@PathVariable String cin, @RequestBody ComponentRequest componentRequest);
+  @PutMapping("/components/{cin}")
+  Component updateComponent(@PathVariable String cin, @RequestBody Component component);
 
-    @DeleteMapping("/components/{cin}")
-    void deleteComponent(@PathVariable String cin);
-
-
+  @DeleteMapping("/components/{cin}")
+  void removeComponent(@PathVariable String cin);
 }

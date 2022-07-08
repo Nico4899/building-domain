@@ -1,10 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingRequest;
-import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingResponse;
-import edu.kit.tm.cm.smartcampus.building.api.payload.BuildingsResponse;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -16,15 +12,13 @@ public interface BuildingAPI {
   Collection<Building> listBuildings();
 
   @PostMapping("/buildings")
-  BuildingResponse createBuilding(@RequestBody BuildingRequest buildingRequest);
+  Building createBuilding(@RequestBody Building building);
 
   @GetMapping("/buildings/{bin}")
-  BuildingResponse getBuilding(@PathVariable String bin);
+  Building getBuilding(@PathVariable String bin);
 
   @PutMapping("/buildings/{bin}")
-  BuildingResponse editBuilding(
-      @PathVariable String bin,
-      @RequestBody BuildingRequest buildingRequest); // TODO rückgabetyp evtl nur auf bin? @Jonathan
+  Building updateBuilding(@PathVariable String bin, @RequestBody Building building);
 
   @DeleteMapping("/buildings/{bin}")
   void deleteBuilding(@PathVariable String bin);

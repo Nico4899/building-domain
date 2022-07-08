@@ -1,45 +1,44 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationRequest;
-import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationResponse;
-
-import edu.kit.tm.cm.smartcampus.building.api.payload.NotificationsResponse;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+
 @RequestMapping
 public interface NotificationApi {
 
-    @GetMapping("/notifications/{nin}")
-    NotificationResponse getNotification(@PathVariable String nin);
+  @GetMapping("/notifications/{nin}")
+  Notification getNotification(@PathVariable String nin);
 
-    @PutMapping("/notifications/{nin}")
-    NotificationResponse editNotification(@PathVariable String nin,
-                                          @RequestBody NotificationRequest notificationRequest);
+  @PutMapping("/notifications/{nin}")
+  Notification updateNotification(@PathVariable String nin, @RequestBody Notification notification);
 
-    @DeleteMapping("/notifications/{nin}")
-    void deleteNotification(@PathVariable String nin);
+  @DeleteMapping("/notifications/{nin}")
+  void deleteNotification(@PathVariable String nin);
 
-    //Buildings
-    @GetMapping("/buildings/{bin}/notifications")
-    NotificationsResponse getBuildingNotifications(@PathVariable String bin);
+  // Buildings
+  @GetMapping("/buildings/{bin}/notifications")
+  Collection<Building> listBuildingNotifications(@PathVariable String bin);
 
-    @PostMapping("buildings/{bin}/notifications")
-    NotificationResponse addBuildingNotification(@PathVariable String bin,
-                                                 @RequestBody NotificationRequest notificationRequest);
+  @PostMapping("buildings/{bin}/notifications")
+  Notification addBuildingNotification(
+      @PathVariable String bin, @RequestBody Notification notification);
 
-    //Rooms
-    @GetMapping("/rooms/{rin}/notifications")
-    NotificationsResponse getRoomNotifications(@PathVariable String rin);
+  // Rooms
+  @GetMapping("/rooms/{rin}/notifications")
+  Collection<Notification> listRoomNotifications(@PathVariable String rin);
 
-    @PostMapping("rooms/{rin}/notifications")
-    NotificationResponse addRoomNotification(@PathVariable String rin,
-                                             @RequestBody NotificationRequest notificationRequest);
+  @PostMapping("rooms/{rin}/notifications")
+  Notification addRoomNotification(
+      @PathVariable String rin, @RequestBody Notification notification);
 
-    //Components
-    @GetMapping("/components/{cin}/notifications")
-    NotificationsResponse getComponentNotifications(@PathVariable String cin);
+  // Components
+  @GetMapping("/components/{cin}/notifications")
+  Collection<Notification> listComponentNotifications(@PathVariable String cin);
 
-    @PostMapping("components/{cin}/notifications")
-    NotificationResponse addComponentNotification(@PathVariable String cin,
-                                             @RequestBody NotificationRequest notificationRequest);
-
+  @PostMapping("components/{cin}/notifications")
+  Notification addComponentNotification(
+      @PathVariable String cin, @RequestBody Notification notification);
 }

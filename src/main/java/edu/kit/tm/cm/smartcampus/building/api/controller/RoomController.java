@@ -1,36 +1,33 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-
-import edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
-import edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
-import edu.kit.tm.cm.smartcampus.building.api.payload.RoomsResponse;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
 
 @RestController
 public class RoomController implements RoomApi {
 
-    @Override
-    public RoomsResponse getRooms(String bin) {
-        return null;
-    }
+  @Override
+  public Collection<Room> getRooms(String bin) {
+    return null;
+  }
 
-    @Override
-    public RoomResponse addRoom(String bin, RoomRequest roomRequest) {
-        return null;
-    }
+  @Override
+  public Room addRoom(String bin, Room room) {
+    return null;
+  }
 
-    @Override
-    public RoomResponse getRoom(String rin) {
-        return null;
-    }
+  @Override
+  public Room getRoom(String rin) {
+    return null;
+  }
 
-    @Override
-    public RoomResponse editRoom(String rin, RoomRequest roomRequest) {
-        return null;
-    }
+  @Override
+  public Room editRoom(String rin, Room room) {
+    return null;
+  }
 
-    @Override
-    public void deleteRoom(String rin) {
-
-    }
+  @Override
+  public void deleteRoom(String rin) {}
 }

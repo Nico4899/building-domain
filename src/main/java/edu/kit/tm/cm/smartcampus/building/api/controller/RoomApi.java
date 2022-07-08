@@ -1,26 +1,25 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import edu.kit.tm.cm.smartcampus.building.api.payload.RoomRequest;
-import edu.kit.tm.cm.smartcampus.building.api.payload.RoomResponse;
-import edu.kit.tm.cm.smartcampus.building.api.payload.RoomsResponse;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RequestMapping
 public interface RoomApi {
 
-    @GetMapping("/buildings/{bin}/rooms")
-    RoomsResponse getRooms(@PathVariable String bin);
+  @GetMapping("/buildings/{bin}/rooms")
+  Collection<Room> getRooms(@PathVariable String bin);
 
-    @PostMapping("/buildings/{bin}/rooms")
-    RoomResponse addRoom(@PathVariable String bin, @RequestBody RoomRequest roomRequest);
+  @PostMapping("/buildings/{bin}/rooms")
+  Room addRoom(@PathVariable String bin, @RequestBody Room room);
 
-    @GetMapping("/rooms/{rin}")
-    RoomResponse getRoom(@PathVariable String rin);
+  @GetMapping("/rooms/{rin}")
+  Room getRoom(@PathVariable String rin);
 
-    @PutMapping("/rooms/{rin}")
-    RoomResponse editRoom(@PathVariable String rin, @RequestBody RoomRequest roomRequest);
+  @PutMapping("/rooms/{rin}")
+  Room editRoom(@PathVariable String rin, @RequestBody Room room);
 
-    @DeleteMapping("/rooms/{rin}")
-    void deleteRoom(@PathVariable String rin);
-
+  @DeleteMapping("/rooms/{rin}")
+  void deleteRoom(@PathVariable String rin);
 }

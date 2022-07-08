@@ -1,43 +1,43 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentRequest;
-import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentResponse;
-import edu.kit.tm.cm.smartcampus.building.api.payload.ComponentsResponse;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
 
 @RestController
 public class ComponentController implements ComponentApi {
 
   @Override
-  public ComponentsResponse getBuildingComponents(String bin) {
+  public Collection<Component> listBuildingComponents(String bin) {
     return null;
   }
 
   @Override
-  public ComponentResponse createBuildingComponent(String bin, ComponentRequest componentRequest) {
+  public Component createBuildingComponent(String bin, Component component) {
     return null;
   }
 
   @Override
-  public ComponentsResponse getRoomComponents(String rin) {
+  public Collection<Component> listRoomComponents(String rin) {
     return null;
   }
 
   @Override
-  public ComponentResponse createRoomComponent(String rin, ComponentRequest componentRequest) {
+  public Component createRoomComponent(String rin, Component component) {
     return null;
   }
 
   @Override
-  public ComponentResponse getComponent(String cin) {
+  public Component getComponent(String cin) {
     return null;
   }
 
   @Override
-  public ComponentResponse editComponent(String cin, ComponentRequest componentRequest) {
+  public Component updateComponent(String cin, Component component) {
     return null;
   }
 
   @Override
-  public void deleteComponent(String cin) {}
+  public void removeComponent(String cin) {}
 }
