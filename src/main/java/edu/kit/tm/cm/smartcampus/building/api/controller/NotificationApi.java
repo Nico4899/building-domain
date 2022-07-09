@@ -23,7 +23,7 @@ public interface NotificationApi {
   Collection<Building> listBuildingNotifications(@PathVariable String bin);
 
   @PostMapping("buildings/{bin}/notifications")
-  Notification addBuildingNotification(
+  Notification createBuildingNotification(
       @PathVariable String bin, @RequestBody Notification notification);
 
   // Rooms
@@ -31,7 +31,7 @@ public interface NotificationApi {
   Collection<Notification> listRoomNotifications(@PathVariable String rin);
 
   @PostMapping("rooms/{rin}/notifications")
-  Notification addRoomNotification(
+  Notification createRoomNotification(
       @PathVariable String rin, @RequestBody Notification notification);
 
   // Components
@@ -39,6 +39,6 @@ public interface NotificationApi {
   Collection<Notification> listComponentNotifications(@PathVariable String cin);
 
   @PostMapping("components/{cin}/notifications")
-  Notification addComponentNotification(
+  Notification createComponentNotification(
       @PathVariable String cin, @RequestBody Notification notification);
 }

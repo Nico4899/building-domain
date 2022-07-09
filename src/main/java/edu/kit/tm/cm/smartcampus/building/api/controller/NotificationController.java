@@ -28,7 +28,7 @@ public class NotificationController implements NotificationApi {
   }
 
   @Override
-  public Notification addBuildingNotification(String bin, Notification notification) {
+  public Notification createBuildingNotification(String bin, Notification notification) {
     return null;
   }
 
@@ -38,7 +38,7 @@ public class NotificationController implements NotificationApi {
   }
 
   @Override
-  public Notification addRoomNotification(String rin, Notification notification) {
+  public Notification createRoomNotification(String rin, Notification notification) {
     return null;
   }
 
@@ -48,7 +48,7 @@ public class NotificationController implements NotificationApi {
   }
 
   @Override
-  public Notification addComponentNotification(String cin, Notification notification) {
+  public Notification createComponentNotification(String cin, Notification notification) {
     return null;
   }
 }

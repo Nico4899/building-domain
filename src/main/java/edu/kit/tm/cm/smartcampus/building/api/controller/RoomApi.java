@@ -9,16 +9,16 @@ import java.util.Collection;
 public interface RoomApi {
 
   @GetMapping("/buildings/{bin}/rooms")
-  Collection<Room> getRooms(@PathVariable String bin);
+  Collection<Room> listRooms(@PathVariable String bin);
 
   @PostMapping("/buildings/{bin}/rooms")
-  Room addRoom(@PathVariable String bin, @RequestBody Room room);
+  Room createRoom(@RequestBody Room room);
 
   @GetMapping("/rooms/{rin}")
   Room getRoom(@PathVariable String rin);
 
   @PutMapping("/rooms/{rin}")
-  Room editRoom(@PathVariable String rin, @RequestBody Room room);
+  Room updateRoom(@PathVariable String rin, @RequestBody Room room);
 
   @DeleteMapping("/rooms/{rin}")
   void deleteRoom(@PathVariable String rin);
