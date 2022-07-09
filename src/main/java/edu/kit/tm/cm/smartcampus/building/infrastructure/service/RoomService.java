@@ -11,36 +11,36 @@ import java.util.Collection;
 
 @Service
 public class RoomService {
-    private final RoomRepository roomRepository;
+  private final RoomRepository roomRepository;
 
-    @Autowired
-    public RoomService(RoomRepository roomRepository) {
-        this.roomRepository = roomRepository;
-    }
+  @Autowired
+  public RoomService(RoomRepository roomRepository) {
+    this.roomRepository = roomRepository;
+  }
 
-    public Collection<Room> listRooms() {
-        Collection<Room> rooms = new ArrayList<>();
-        for (Room room : roomRepository.findAll()) rooms.add(room);
-        return rooms;
-    }
+  public Collection<Room> listRooms() {
+    Collection<Room> rooms = new ArrayList<>();
+    for (Room room : roomRepository.findAll()) rooms.add(room);
+    return rooms;
+  }
 
-    public Room getRoom(String rin) throws NotFoundException {
-        if (roomRepository.findById(rin).isPresent()) {
-            return roomRepository.findById(rin).get();
-        }
-        throw new NotFoundException();
+  public Room getRoom(String rin) throws NotFoundException {
+    if (roomRepository.findById(rin).isPresent()) {
+      return roomRepository.findById(rin).get();
     }
+    throw new NotFoundException();
+  }
 
-    public Room createRoom(Room room) {
-        return this.roomRepository.save(room);
-    }
+  public Room createRoom(Room room) {
+    return this.roomRepository.save(room);
+  }
 
-    public void deleteRoom(String rin) {
-        roomRepository.deleteById(rin);
-    }
+  public void deleteRoom(String rin) {
+    roomRepository.deleteById(rin);
+  }
 
-    public Room updateRoom(String rin, Room room) {
-        room.setIdentificationNumber(rin);
-        return this.roomRepository.save(room);
-    }
+  public Room updateRoom(String rin, Room room) {
+    room.setIdentificationNumber(rin);
+    return this.roomRepository.save(room);
+  }
 }

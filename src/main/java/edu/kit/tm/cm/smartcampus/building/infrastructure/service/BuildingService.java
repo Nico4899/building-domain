@@ -12,36 +12,36 @@ import java.util.Collection;
 @Service
 public class BuildingService {
 
-    private final BuildingRepository buildingRepository;
+  private final BuildingRepository buildingRepository;
 
-    @Autowired
-    public BuildingService(BuildingRepository buildingRepository) {
-        this.buildingRepository = buildingRepository;
-    }
+  @Autowired
+  public BuildingService(BuildingRepository buildingRepository) {
+    this.buildingRepository = buildingRepository;
+  }
 
-    public Collection<Building> listBuildings() {
-        Collection<Building> buildings = new ArrayList<>();
-        for (Building building : buildingRepository.findAll()) buildings.add(building);
-        return buildings;
-    }
+  public Collection<Building> listBuildings() {
+    Collection<Building> buildings = new ArrayList<>();
+    for (Building building : buildingRepository.findAll()) buildings.add(building);
+    return buildings;
+  }
 
-    public Building getBuilding(String bin) throws NotFoundException {
-        if (buildingRepository.findById(bin).isPresent()) {
-            return buildingRepository.findById(bin).get();
-        }
-        throw new NotFoundException();
+  public Building getBuilding(String bin) throws NotFoundException {
+    if (buildingRepository.findById(bin).isPresent()) {
+      return buildingRepository.findById(bin).get();
     }
+    throw new NotFoundException();
+  }
 
-    public Building createBuilding(Building building) {
-        return this.buildingRepository.save(building);
-    }
+  public Building createBuilding(Building building) {
+    return this.buildingRepository.save(building);
+  }
 
-    public void deleteBuilding(String bin) {
-        buildingRepository.deleteById(bin);
-    }
+  public void deleteBuilding(String bin) {
+    buildingRepository.deleteById(bin);
+  }
 
-    public Building updateBuilding(String bin, Building building) {
-        building.setIdentificationNumber(bin);
-        return this.buildingRepository.save(building);
-    }
+  public Building updateBuilding(String bin, Building building) {
+    building.setIdentificationNumber(bin);
+    return this.buildingRepository.save(building);
+  }
 }

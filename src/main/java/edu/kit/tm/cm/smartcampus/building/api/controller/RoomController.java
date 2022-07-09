@@ -1,6 +1,5 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller;
 
-import edu.kit.tm.cm.smartcampus.building.infrastructure.service.BuildingService;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.RoomService;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,36 +10,36 @@ import java.util.Collection;
 @RestController
 public class RoomController implements RoomApi {
 
-    private final RoomService roomService;
+  private final RoomService roomService;
 
-    @Autowired
-    public RoomController(RoomService roomService) {
-        this.roomService = roomService;
-    }
+  @Autowired
+  public RoomController(RoomService roomService) {
+    this.roomService = roomService;
+  }
 
-    @Override
-    public Collection<Room> listRooms(String bin) {
-        return roomService.listRooms();
-    }
+  @Override
+  public Collection<Room> listRooms(String bin) {
+    return roomService.listRooms();
+  }
 
-    @Override
-    public Room createRoom(Room room) {
-        return roomService.createRoom(room);
-    }
+  @Override
+  public Room createRoom(Room room) {
+    return roomService.createRoom(room);
+  }
 
-    @Override
-    public Room getRoom(String rin) {
-        return null;
-        //return roomService.getRoom(rin); TODO
-    }
+  @Override
+  public Room getRoom(String rin) {
+    return null;
+    //return roomService.getRoom(rin); TODO
+  }
 
-    @Override
-    public Room updateRoom(String rin, Room room) {
-        return roomService.updateRoom(rin, room);
-    }
+  @Override
+  public Room updateRoom(String rin, Room room) {
+    return roomService.updateRoom(rin, room);
+  }
 
-    @Override
-    public void deleteRoom(String rin) {
-        roomService.deleteRoom(rin);
-    }
+  @Override
+  public void deleteRoom(String rin) {
+    roomService.deleteRoom(rin);
+  }
 }

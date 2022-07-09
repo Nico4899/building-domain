@@ -20,7 +20,8 @@ public class NotificationController implements NotificationApi {
   }
 
   @Override
-  public void deleteNotification(String nin) {}
+  public void deleteNotification(String nin) {
+  }
 
   @Override
   public Collection<Building> listBuildingNotifications(String bin) {

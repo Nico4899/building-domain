@@ -10,36 +10,36 @@ import java.util.Collection;
 @RestController
 public class BuildingController implements BuildingAPI {
 
-    private final BuildingService buildingService;
+  private final BuildingService buildingService;
 
-    @Autowired
-    public BuildingController(BuildingService buildingService) {
-        this.buildingService = buildingService;
-    }
+  @Autowired
+  public BuildingController(BuildingService buildingService) {
+    this.buildingService = buildingService;
+  }
 
-    @Override
-    public Collection<Building> listBuildings() {
-        return buildingService.listBuildings();
-    }
+  @Override
+  public Collection<Building> listBuildings() {
+    return buildingService.listBuildings();
+  }
 
-    @Override
-    public Building createBuilding(Building building) {
-        return buildingService.createBuilding(building);
-    }
+  @Override
+  public Building createBuilding(Building building) {
+    return buildingService.createBuilding(building);
+  }
 
-    @Override
-    public Building getBuilding(String bin) {
-        return null;
-        //return buildingService.getBuilding(bin); TODO
-    }
+  @Override
+  public Building getBuilding(String bin) {
+    return null;
+    //return buildingService.getBuilding(bin); TODO
+  }
 
-    @Override
-    public Building updateBuilding(String bin, Building building) {
-        return buildingService.updateBuilding(bin, building);
-    }
+  @Override
+  public Building updateBuilding(String bin, Building building) {
+    return buildingService.updateBuilding(bin, building);
+  }
 
-    @Override
-    public void deleteBuilding(String bin) {
-        buildingService.deleteBuilding(bin);
-    }
+  @Override
+  public void deleteBuilding(String bin) {
+    buildingService.deleteBuilding(bin);
+  }
 }
