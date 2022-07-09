@@ -8,16 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 @Data
 @Builder
@@ -43,7 +34,7 @@ public class Room {
       strategy =
           "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
       parameters = {
-          @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "r-")
+        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "r-")
       })
   @Column(
       name = "identification_number",

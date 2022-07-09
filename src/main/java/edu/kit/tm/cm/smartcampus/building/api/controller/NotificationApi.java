@@ -30,7 +30,7 @@ public interface NotificationApi {
 
   @PostMapping("buildings/{bin}/notifications")
   Notification createBuildingNotification(
-      @PathVariable String bin, @RequestBody Notification notification);
+          @PathVariable String bin, @RequestBody Notification notification);
 
   // Rooms
   @GetMapping("/rooms/{rin}/notifications")
@@ -38,7 +38,7 @@ public interface NotificationApi {
 
   @PostMapping("rooms/{rin}/notifications")
   Notification createRoomNotification(
-      @PathVariable String rin, @RequestBody Notification notification);
+          @PathVariable String rin, @RequestBody Notification notification);
 
   // Components
   @GetMapping("/components/{cin}/notifications")
@@ -46,5 +46,5 @@ public interface NotificationApi {
 
   @PostMapping("components/{cin}/notifications")
   Notification createComponentNotification(
-      @PathVariable String cin, @RequestBody Notification notification);
+          @PathVariable String cin, @RequestBody Notification notification);
 }
