@@ -1,6 +1,7 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.service;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.BuildingRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.NotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,23 +25,23 @@ public class BuildingService {
     return buildings;
   }
 
-  public Building getBuilding(String identificationNumber) throws Exception {
-    if (buildingRepository.findById(identificationNumber).isPresent()) {
-      return buildingRepository.findById(identificationNumber).get();
+  public Building getBuilding(String bin) throws NotFoundException {
+    if (buildingRepository.findById(bin).isPresent()) {
+      return buildingRepository.findById(bin).get();
     }
-    throw new Exception(); // TODO not found exception?
+    throw new NotFoundException();
   }
 
   public Building createBuilding(Building building) {
     return this.buildingRepository.save(building);
   }
 
-  public void deleteBuilding(String identificationNumber) {
-    buildingRepository.deleteById(identificationNumber);
+  public void deleteBuilding(String bin) {
+    buildingRepository.deleteById(bin);
   }
 
-  public Building updateBuilding(String identificationNumber, Building building) {
-    building.setId(identificationNumber);
+  public Building updateBuilding(String bin, Building building) {
+    building.setIdentificationNumber(bin);
     return this.buildingRepository.save(building);
   }
 }

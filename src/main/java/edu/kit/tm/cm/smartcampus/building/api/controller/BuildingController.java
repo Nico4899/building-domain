@@ -19,24 +19,27 @@ public class BuildingController implements BuildingAPI {
 
   @Override
   public Collection<Building> listBuildings() {
-    return null;
+    return buildingService.listBuildings();
   }
 
   @Override
   public Building createBuilding(Building building) {
-    return null;
+    return buildingService.createBuilding(building);
   }
 
   @Override
   public Building getBuilding(String bin) {
     return null;
+    //return buildingService.getBuilding(bin); TODO
   }
 
   @Override
   public Building updateBuilding(String bin, Building building) {
-    return null;
+    return buildingService.updateBuilding(bin, building);
   }
 
   @Override
-  public void deleteBuilding(String bin) {}
+  public void deleteBuilding(String bin) {
+    buildingService.deleteBuilding(bin);
+  }
 }

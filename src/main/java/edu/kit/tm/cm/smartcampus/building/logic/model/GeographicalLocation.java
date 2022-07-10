@@ -9,7 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/** This class represents a geographical location, by longitude and latitude coordinates. */
+/**
+ * This class represents a geographical location, by longitude and latitude coordinates.
+ */
 @Builder
 @Data
 @NoArgsConstructor

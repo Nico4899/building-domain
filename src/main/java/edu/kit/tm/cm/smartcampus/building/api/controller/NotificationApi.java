@@ -2,7 +2,13 @@ package edu.kit.tm.cm.smartcampus.building.api.controller;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
 
@@ -23,22 +29,22 @@ public interface NotificationApi {
   Collection<Building> listBuildingNotifications(@PathVariable String bin);
 
   @PostMapping("buildings/{bin}/notifications")
-  Notification addBuildingNotification(
-      @PathVariable String bin, @RequestBody Notification notification);
+  Notification createBuildingNotification(
+          @PathVariable String bin, @RequestBody Notification notification);
 
   // Rooms
   @GetMapping("/rooms/{rin}/notifications")
   Collection<Notification> listRoomNotifications(@PathVariable String rin);
 
   @PostMapping("rooms/{rin}/notifications")
-  Notification addRoomNotification(
-      @PathVariable String rin, @RequestBody Notification notification);
+  Notification createRoomNotification(
+          @PathVariable String rin, @RequestBody Notification notification);
 
   // Components
   @GetMapping("/components/{cin}/notifications")
   Collection<Notification> listComponentNotifications(@PathVariable String cin);
 
   @PostMapping("components/{cin}/notifications")
-  Notification addComponentNotification(
-      @PathVariable String cin, @RequestBody Notification notification);
+  Notification createComponentNotification(
+          @PathVariable String cin, @RequestBody Notification notification);
 }

@@ -1,11 +1,24 @@
 package edu.kit.tm.cm.smartcampus.building.logic.model;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.PrefixSequenceGenerator;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 @Setter
 @Getter
@@ -35,9 +48,9 @@ public class Building {
       strategy =
           "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
       parameters = {
-        @Parameter(
-            name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER,
-            value = "b-")
+          @Parameter(
+              name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER,
+              value = "b-")
       })
   @Column(
       name = "identification_number",

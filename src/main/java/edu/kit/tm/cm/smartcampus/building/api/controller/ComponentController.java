@@ -39,5 +39,6 @@ public class ComponentController implements ComponentApi {
   }
 
   @Override
-  public void removeComponent(String cin) {}
+  public void removeComponent(String cin) {
+  }
 }
