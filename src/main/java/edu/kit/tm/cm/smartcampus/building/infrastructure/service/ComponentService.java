@@ -18,7 +18,7 @@ public class ComponentService {
   }
 
   public Collection<Component> listBuildingComponents(String bin) {
-    return componentRepository.findAllBuildingComponents();
+    return componentRepository.findAllComponents(bin);
   }
 
   public Component createBuildingComponent(String bin, Component component) {
@@ -30,19 +30,19 @@ public class ComponentService {
   }
 
   public Collection<Component> listRoomComponents(String rin) {
-    return componentRepository.findAllRoomComponents();
+    return componentRepository.findAllComponents(rin);
   }
 
   public Component getComponent(String cin) {
-    return componentRepository.findById(cin);
+    return componentRepository.findById(cin).get();
   }
 
   public Component updateComponent(Component component) {
-    return componentRepository.update(component);
+    return componentRepository.save(component);
   }
 
   public void deleteComponent(String cin) {
-    componentRepository.delete(cin);
+    componentRepository.deleteById(cin);
   }
 
 }

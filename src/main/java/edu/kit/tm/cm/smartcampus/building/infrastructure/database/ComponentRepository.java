@@ -11,11 +11,8 @@ import java.util.Collection;
 @Repository
 public interface ComponentRepository extends CrudRepository<Component, String> {
 
-  @Query("SELECT '*' From component Where 'parent_identification_number' = 'bin'")
-  Collection<Component> findAllBuildingComponents(@Param("bin") String bin);
-
-  @Query("SELECT '*' From component Where 'parent_identification_number' = 'rin'")
-  Collection<Component> findAllRoomComponents(@Param("rin") String rin);
+  @Query(value = "SELECT '*' From component Where 'parent_identification_number' = 'parent_id'", nativeQuery = true)
+  Collection<Component> findAllComponents(@Param("parent_id") String parent_id);
 
   Component createBuildingComponent(String bin, Component component);
 
