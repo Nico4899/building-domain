@@ -1,23 +1,21 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.database;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.Optional;
 
 @Repository
-public interface ComponentRepository {
+public interface ComponentRepository extends CrudRepository<Component, String> {
 
-  Component findById(String cin);
+  @Query("SELECT '*' From component Where 'parent_identification_number' = 'bin'")
+  Collection<Component> findAllBuildingComponents(@Param("bin") String bin);
 
-  Component update(Component component);
-
-  void delete(String cin);
-
-  Collection<Component> findAllBuildingComponents();
-
-  Collection<Component> findAllRoomComponents();
+  @Query("SELECT '*' From component Where 'parent_identification_number' = 'rin'")
+  Collection<Component> findAllRoomComponents(@Param("rin") String rin);
 
   Component createBuildingComponent(String bin, Component component);
 

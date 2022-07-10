@@ -1,12 +1,14 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.database;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
 
+@Repository
 public class ComponentDatabaseRepository implements ComponentRepository {
 
   @PersistenceContext
@@ -29,7 +31,6 @@ public class ComponentDatabaseRepository implements ComponentRepository {
 
   @Override
   public Collection<Component> findAllBuildingComponents() {
-
     Query query = entityManager.createQuery("SELECT c FROM component c",
             Component.class); //Todo SQL Abfrage richtig
 
