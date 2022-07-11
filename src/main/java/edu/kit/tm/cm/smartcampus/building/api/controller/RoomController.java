@@ -28,14 +28,14 @@ public class RoomController implements RoomApi {
   }
 
   @Override
-  public Room getRoom(String rin) {
-    return null;
-    //return roomService.getRoom(rin); TODO
+  public Room updateRoom(Room room) {
+    return roomService.updateRoom(room);
   }
 
   @Override
-  public Room updateRoom(String rin, Room room) {
-    return roomService.updateRoom(rin, room);
+  public Room getRoom(String rin) {
+    return null;
+    //return roomService.getRoom(rin); TODO exceptions
   }
 
   @Override

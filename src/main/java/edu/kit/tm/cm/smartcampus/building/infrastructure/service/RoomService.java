@@ -39,8 +39,7 @@ public class RoomService {
     roomRepository.deleteById(rin);
   }
 
-  public Room updateRoom(String rin, Room room) {
-    room.setIdentificationNumber(rin);
+  public Room updateRoom(Room room) {
     return this.roomRepository.save(room);
   }
 }

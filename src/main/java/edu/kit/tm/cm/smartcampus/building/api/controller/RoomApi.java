@@ -17,14 +17,15 @@ public interface RoomApi {
   @GetMapping("/buildings/{bin}/rooms")
   Collection<Room> listRooms(@PathVariable String bin);
 
-  @PostMapping("/buildings/{bin}/rooms")
+  @PostMapping("/rooms")
   Room createRoom(@RequestBody Room room);
+
+  @PutMapping("/rooms")
+  Room updateRoom(@RequestBody Room room);
 
   @GetMapping("/rooms/{rin}")
   Room getRoom(@PathVariable String rin);
 
-  @PutMapping("/rooms/{rin}")
-  Room updateRoom(@PathVariable String rin, @RequestBody Room room);
 
   @DeleteMapping("/rooms/{rin}")
   void deleteRoom(@PathVariable String rin);
