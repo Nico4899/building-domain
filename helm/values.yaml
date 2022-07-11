@@ -78,7 +78,7 @@ base-chart:
 
   # Subchart configuration for upstream postgres chart from bitnami
   postgresql:
-    enabled: false
+    enabled: true
     resources:
       limits:
         cpu: 100m
