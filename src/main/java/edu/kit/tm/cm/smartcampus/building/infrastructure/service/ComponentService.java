@@ -21,12 +21,8 @@ public class ComponentService {
     return componentRepository.findAllComponents(bin);
   }
 
-  public Component createBuildingComponent(String bin, Component component) {
-    return componentRepository.createBuildingComponent(bin, component);
-  }
-
-  public Component createRoomComponent(String rin, Component component) {
-    return componentRepository.createRoomComponent(rin, component);
+  public Component createComponent(Component component) {
+    return componentRepository.createComponent(component);
   }
 
   public Collection<Component> listRoomComponents(String rin) {

@@ -9,29 +9,6 @@ import java.util.Collection;
 @RestController
 public class NotificationController implements NotificationApi {
 
-  @Override
-  public Notification getNotification(String nin) {
-    return null;
-  }
-
-  @Override
-  public Notification updateNotification(String nin, Notification notification) {
-    return null;
-  }
-
-  @Override
-  public void deleteNotification(String nin) {
-  }
-
-  @Override
-  public Collection<Building> listBuildingNotifications(String bin) {
-    return null;
-  }
-
-  @Override
-  public Notification createBuildingNotification(String bin, Notification notification) {
-    return null;
-  }
 
   @Override
   public Collection<Notification> listRoomNotifications(String rin) {
@@ -39,7 +16,7 @@ public class NotificationController implements NotificationApi {
   }
 
   @Override
-  public Notification createRoomNotification(String rin, Notification notification) {
+  public Collection<Building> listBuildingNotifications(String bin) {
     return null;
   }
 
@@ -49,7 +26,21 @@ public class NotificationController implements NotificationApi {
   }
 
   @Override
-  public Notification createComponentNotification(String cin, Notification notification) {
+  public Notification getNotification(String nin) {
     return null;
+  }
+
+  @Override
+  public Notification updateNotification(Notification notification) {
+    return null;
+  }
+
+  @Override
+  public Notification createNotification(Notification notification) {
+    return null;
+  }
+
+  @Override
+  public void deleteNotification(String nin) {
   }
 }

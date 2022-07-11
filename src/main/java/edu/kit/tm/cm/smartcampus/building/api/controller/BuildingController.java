@@ -34,8 +34,8 @@ public class BuildingController implements BuildingAPI {
   }
 
   @Override
-  public Building updateBuilding(String bin, Building building) {
-    return buildingService.updateBuilding(bin, building);
+  public Building updateBuilding(Building building) {
+    return buildingService.updateBuilding(building);
   }
 
   @Override

@@ -20,11 +20,11 @@ public interface BuildingAPI {
   @PostMapping("/buildings")
   Building createBuilding(@RequestBody Building building);
 
+  @PutMapping("/buildings")
+  Building updateBuilding(@RequestBody Building building);
+
   @GetMapping("/buildings/{bin}")
   Building getBuilding(@PathVariable String bin);
-
-  @PutMapping("/buildings/{bin}")
-  Building updateBuilding(@PathVariable String bin, @RequestBody Building building);
 
   @DeleteMapping("/buildings/{bin}")
   void deleteBuilding(@PathVariable String bin);

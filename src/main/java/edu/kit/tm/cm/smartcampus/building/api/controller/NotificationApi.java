@@ -15,36 +15,24 @@ import java.util.Collection;
 @RequestMapping
 public interface NotificationApi {
 
-  @GetMapping("/notifications/{nin}")
-  Notification getNotification(@PathVariable String nin);
-
-  @PutMapping("/notifications/{nin}")
-  Notification updateNotification(@PathVariable String nin, @RequestBody Notification notification);
-
-  @DeleteMapping("/notifications/{nin}")
-  void deleteNotification(@PathVariable String nin);
-
-  // Buildings
-  @GetMapping("/buildings/{bin}/notifications")
-  Collection<Building> listBuildingNotifications(@PathVariable String bin);
-
-  @PostMapping("buildings/{bin}/notifications")
-  Notification createBuildingNotification(
-          @PathVariable String bin, @RequestBody Notification notification);
-
-  // Rooms
   @GetMapping("/rooms/{rin}/notifications")
   Collection<Notification> listRoomNotifications(@PathVariable String rin);
 
-  @PostMapping("rooms/{rin}/notifications")
-  Notification createRoomNotification(
-          @PathVariable String rin, @RequestBody Notification notification);
+  @GetMapping("/buildings/{bin}/notifications")
+  Collection<Building> listBuildingNotifications(@PathVariable String bin);
 
-  // Components
   @GetMapping("/components/{cin}/notifications")
   Collection<Notification> listComponentNotifications(@PathVariable String cin);
 
-  @PostMapping("components/{cin}/notifications")
-  Notification createComponentNotification(
-          @PathVariable String cin, @RequestBody Notification notification);
+  @GetMapping("/notifications/{nin}")
+  Notification getNotification(@PathVariable String nin);
+
+  @PutMapping("/notifications")
+  Notification updateNotification(@RequestBody Notification notification);
+
+  @PostMapping("/notifications")
+  Notification createNotification(@RequestBody Notification notification);
+
+  @DeleteMapping("/notifications/{nin}")
+  void deleteNotification(@PathVariable String nin);
 }

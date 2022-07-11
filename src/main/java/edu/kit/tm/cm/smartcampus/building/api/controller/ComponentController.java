@@ -21,8 +21,8 @@ public class ComponentController implements ComponentApi {
   }
 
   @Override
-  public Component createBuildingComponent(String bin, Component component) {
-    return componentService.createBuildingComponent(bin, component);
+  public Component createComponent(Component component) {
+    return componentService.createComponent(component);
   }
 
   @Override
@@ -31,17 +31,12 @@ public class ComponentController implements ComponentApi {
   }
 
   @Override
-  public Component createRoomComponent(String rin, Component component) {
-    return componentService.createRoomComponent(rin, component);
-  }
-
-  @Override
   public Component getComponent(String cin) {
     return componentService.getComponent(cin);
   }
 
   @Override
-  public Component updateComponent(String cin, Component component) {//Todo warum cin hier , Api anpasen?
+  public Component updateComponent(Component component) {
     return componentService.updateComponent(component);
   }
 

@@ -40,8 +40,7 @@ public class BuildingService {
     buildingRepository.deleteById(bin);
   }
 
-  public Building updateBuilding(String bin, Building building) {
-    building.setIdentificationNumber(bin);
+  public Building updateBuilding(Building building) {
     return this.buildingRepository.save(building);
   }
 }
