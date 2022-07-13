@@ -12,13 +12,13 @@ public interface NotificationRepository extends CrudRepository<Notification, Str
 
   @Query(
       "SELECT notification From notification notification Where notification.parentIdentificationNumber =: #{#bin}")
-  Collection<Component> findAllBuildingNotifications(@Param("bin") String bin);
+  Collection<Notification> findAllBuildingNotifications(@Param("bin") String bin);
 
   @Query(
       "SELECT notification From notification notification Where notification.parentIdentificationNumber =: #{#rin}")
-  Collection<Component> findAllRoomNotifications(@Param("rin") String rin);
+  Collection<Notification> findAllRoomNotifications(@Param("rin") String rin);
 
   @Query(
       "SELECT notification From notification notification Where notification.parentIdentificationNumber =: #{#cin}")
-  Collection<Component> findAllComponentNotifications(@Param("cin") String cin);
+  Collection<Notification> findAllComponentNotifications(@Param("cin") String cin);
 }

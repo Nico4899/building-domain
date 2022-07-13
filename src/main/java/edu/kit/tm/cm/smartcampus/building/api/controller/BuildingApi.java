@@ -79,7 +79,7 @@ public interface BuildingApi {
   void removeNotification(@PathVariable String nin);
 
   @GetMapping("/buildings/{bin}/notifications")
-  Collection<Building> listBuildingNotifications(@PathVariable String bin);
+  Collection<Notification> listBuildingNotifications(@PathVariable String bin);
 
   @GetMapping("/rooms/{rin}/notifications")
   Collection<Notification> listRoomNotifications(@PathVariable String rin);

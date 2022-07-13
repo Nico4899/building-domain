@@ -11,5 +11,5 @@ import java.util.Collection;
 public interface RoomRepository extends CrudRepository<Room, String> {
 
   @Query("SELECT room From room room Where room.parentIdentificationNumber =: #{#bin}")
-  Collection<Component> findAllBuildingRooms(@Param("bin") String bin);
+  Collection<Room> findAllBuildingRooms(@Param("bin") String bin);
 }
