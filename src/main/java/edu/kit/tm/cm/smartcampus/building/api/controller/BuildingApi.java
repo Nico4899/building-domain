@@ -27,11 +27,11 @@ public interface BuildingApi {
   @GetMapping("/buildings/{bin}")
   Building getBuilding(@PathVariable String bin);
 
-  @PutMapping("/buildings/{bin}")
-  Building updateBuilding(@PathVariable String bin, @RequestBody Building building);
+  @PutMapping("/buildings")
+  Building updateBuilding( @RequestBody Building building);
 
   @DeleteMapping("/buildings/{bin}")
-  void deleteBuilding(@PathVariable String bin);
+  void removeBuilding(@PathVariable String bin);
 
   // room mappings
   @GetMapping("/buildings/{bin}/rooms")
@@ -43,30 +43,27 @@ public interface BuildingApi {
   @GetMapping("/rooms/{rin}")
   Room getRoom(@PathVariable String rin);
 
-  @PutMapping("/rooms/{rin}")
-  Room updateRoom(@PathVariable String rin, @RequestBody Room room);
+  @PutMapping("/rooms")
+  Room updateRoom(@RequestBody Room room);
 
   @DeleteMapping("/rooms/{rin}")
-  void deleteRoom(@PathVariable String rin);
+  void removeRoom(@PathVariable String rin);
 
   // component mappings
   @GetMapping("/buildings/{bin}/components")
   Collection<Component> listBuildingComponents(@PathVariable String bin);
 
-  @PostMapping("/buildings/{bin}/components")
-  Component createBuildingComponent(@PathVariable String bin, @RequestBody Component component);
-
   @GetMapping("/rooms/{rin}/components")
   Collection<Component> listRoomComponents(@PathVariable String rin);
 
-  @PostMapping("/rooms/{rin}/components")
-  Component createRoomComponent(@PathVariable String rin, @RequestBody Component component);
+  @PostMapping("/components")
+  Component createComponent(@RequestBody Component component);
 
   @GetMapping("/components/{cin}")
   Component getComponent(@PathVariable String cin);
 
-  @PutMapping("/components/{cin}")
-  Component updateComponent(@PathVariable String cin, @RequestBody Component component);
+  @PutMapping("/components")
+  Component updateComponent(@RequestBody Component component);
 
   @DeleteMapping("/components/{cin}")
   void removeComponent(@PathVariable String cin);
@@ -75,11 +72,11 @@ public interface BuildingApi {
   @GetMapping("/notifications/{nin}")
   Notification getNotification(@PathVariable String nin);
 
-  @PutMapping("/notifications/{nin}")
-  Notification updateNotification(@PathVariable String nin, @RequestBody Notification notification);
+  @PutMapping("/notifications")
+  Notification updateNotification(@RequestBody Notification notification);
 
   @DeleteMapping("/notifications/{nin}")
-  void deleteNotification(@PathVariable String nin);
+  void removeNotification(@PathVariable String nin);
 
   @GetMapping("/buildings/{bin}/notifications")
   Collection<Building> listBuildingNotifications(@PathVariable String bin);
