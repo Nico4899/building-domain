@@ -25,7 +25,7 @@ import javax.persistence.SequenceGenerator;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "Building")
+@Entity(name = "building")
 public class Building {
 
   @Column(name = "num_floors")

@@ -21,6 +21,7 @@ public class BuildingController
     this.buildingService = buildingService;
   }
 
+  // "/buildings" urls
   @Override
   public Collection<Building> listBuildings() {
     return buildingService.listBuildings();
@@ -52,6 +53,17 @@ public class BuildingController
   }
 
   @Override
+  public Collection<Component> listBuildingComponents(String bin) {
+    return buildingService.listBuildingComponents(bin);
+  }
+
+  @Override
+  public Collection<Notification> listBuildingNotifications(String bin) {
+    return buildingService.listBuildingNotifications(bin);
+  }
+
+  // "/rooms" urls
+  @Override
   public Room createRoom(Room room) {
     return buildingService.createRoom(room);
   }
@@ -72,15 +84,17 @@ public class BuildingController
   }
 
   @Override
-  public Collection<Component> listBuildingComponents(String bin) {
-    return buildingService.listBuildingComponents(bin);
-  }
-
-  @Override
   public Collection<Component> listRoomComponents(String rin) {
     return buildingService.listRoomComponents(rin);
   }
 
+  @Override
+  public Collection<Notification> listRoomNotifications(String rin) {
+    return buildingService.listRoomNotifications(rin);
+  }
+
+
+  // "/components" urls
   @Override
   public Component createComponent(Component component) {
     return buildingService.createComponent(component);
@@ -102,6 +116,12 @@ public class BuildingController
   }
 
   @Override
+  public Collection<Notification> listComponentNotifications(String cin) {
+    return buildingService.listComponentNotifications(cin);
+  }
+
+  // "/notifications" urls
+  @Override
   public Notification getNotification(String nin) {
     return buildingService.getNotification(nin);
   }
@@ -114,21 +134,6 @@ public class BuildingController
   @Override
   public void removeNotification(String nin) {
     buildingService.removeNotification(nin);
-  }
-
-  @Override
-  public Collection<Notification> listBuildingNotifications(String bin) {
-    return buildingService.listBuildingNotifications(bin);
-  }
-
-  @Override
-  public Collection<Notification> listRoomNotifications(String rin) {
-    return buildingService.listRoomNotifications(rin);
-  }
-
-  @Override
-  public Collection<Notification> listComponentNotifications(String cin) {
-    return buildingService.listComponentNotifications(cin);
   }
 
   @Override

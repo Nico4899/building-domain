@@ -59,22 +59,23 @@ public class BuildingService {
   }
 
   public Building updateBuilding(Building building) {
-    if(!buildingRepository.existsById(building.getIdentificationNumber())) throw new ResourceNotFoundException();
+    if (!buildingRepository.existsById(building.getIdentificationNumber()))
+      throw new ResourceNotFoundException();
     return buildingRepository.save(building);
   }
 
   public Collection<Notification> listBuildingNotifications(String bin) {
-    if(!roomRepository.existsById(bin)) throw new NoSuchElementException();
+    if (!roomRepository.existsById(bin)) throw new NoSuchElementException();
     return notificationRepository.findAllBuildingNotifications(bin);
   }
 
   public Collection<Room> listBuildingRooms(String bin) {
-    if(!buildingRepository.existsById(bin)) throw new ResourceNotFoundException();
+    if (!buildingRepository.existsById(bin)) throw new ResourceNotFoundException();
     return roomRepository.findAllBuildingRooms(bin);
   }
 
   public Collection<Component> listBuildingComponents(String bin) {
-    return componentRepository.findAllRoomComponents(bin);
+    return componentRepository.findAllBuildingComponents(bin);
   }
 
   // rooms
@@ -94,7 +95,7 @@ public class BuildingService {
   }
 
   public void removeRoom(String rin) {
-    if(!roomRepository.existsById(rin)) throw new ResourceNotFoundException();
+    if (!roomRepository.existsById(rin)) throw new ResourceNotFoundException();
     roomRepository.deleteById(rin);
   }
 
@@ -103,7 +104,7 @@ public class BuildingService {
   }
 
   public Collection<Notification> listRoomNotifications(String rin) {
-    if(!roomRepository.existsById(rin)) throw new NoSuchElementException();
+    if (!roomRepository.existsById(rin)) throw new NoSuchElementException();
     return notificationRepository.findAllRoomNotifications(rin);
   }
 
@@ -117,7 +118,8 @@ public class BuildingService {
   }
 
   public Component updateComponent(Component component) {
-    if(!componentRepository.existsById(component.getIdentificationNumber())) throw new ResourceNotFoundException();
+    if (!componentRepository.existsById(component.getIdentificationNumber()))
+      throw new ResourceNotFoundException();
     return componentRepository.save(component);
   }
 
@@ -126,28 +128,30 @@ public class BuildingService {
   }
 
   public Collection<Notification> listComponentNotifications(String cin) {
-    if(!componentRepository.existsById(cin)) throw new NoSuchElementException();
+    if (!componentRepository.existsById(cin)) throw new NoSuchElementException();
     return notificationRepository.findAllComponentNotifications(cin);
   }
 
   // notifications
   public Notification getNotification(String nin) {
-    if(!notificationRepository.existsById(nin)) throw new ResourceNotFoundException();
+    if (!notificationRepository.existsById(nin)) throw new ResourceNotFoundException();
     return notificationRepository.findById(nin).orElse(null);
   }
 
   public Notification updateNotification(Notification notification) {
-    if(!notificationRepository.existsById(notification.getIdentificationNumber())) throw new ResourceNotFoundException();
+    if (!notificationRepository.existsById(notification.getIdentificationNumber()))
+      throw new ResourceNotFoundException();
     return notificationRepository.save(notification);
   }
 
   public Notification createNotification(Notification notification) {
-    if(!notificationRepository.existsById(notification.getIdentificationNumber())) throw new ResourceNotFoundException();
+    if (!notificationRepository.existsById(notification.getIdentificationNumber()))
+      throw new ResourceNotFoundException();
     return notificationRepository.save(notification);
   }
 
   public void removeNotification(String nin) {
-    if(!notificationRepository.existsById(nin)) throw new ResourceNotFoundException();
+    if (!notificationRepository.existsById(nin)) throw new ResourceNotFoundException();
     notificationRepository.deleteById(nin);
   }
 }

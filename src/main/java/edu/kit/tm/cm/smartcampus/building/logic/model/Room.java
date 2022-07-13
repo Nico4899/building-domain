@@ -17,7 +17,6 @@ import javax.persistence.*;
 @Entity(name = "room")
 public class Room {
 
-  @Column(name = "floor", nullable = false, updatable = false, columnDefinition = "TEXT")
   private int floor;
 
   @Column(name = "room_name", nullable = false, updatable = false, columnDefinition = "TEXT")

@@ -8,12 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Data
@@ -31,7 +26,7 @@ public class Notification {
       strategy =
           "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
       parameters = {
-          @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "n-")
+        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "n-")
       })
   @Column(
       name = "identification_number",
