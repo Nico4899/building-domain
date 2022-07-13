@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-public class BuildingController implements BuildingApi {
+public class BuildingController
+    implements BuildingOperations, RoomOperations, ComponentOperations, NotificationOperations {
 
   private final BuildingService buildingService;
 
@@ -22,135 +23,116 @@ public class BuildingController implements BuildingApi {
 
   @Override
   public Collection<Building> listBuildings() {
-    // return buildingService.listBuildings();
-    return null;
+    return buildingService.listBuildings();
   }
 
   @Override
   public Building createBuilding(Building building) {
-    // return buildingService.createBuilding(building);
-    return null;
+    return buildingService.createBuilding(building);
   }
 
   @Override
   public Building getBuilding(String bin) {
-    // return buildingService.getBuilding(bin);
-    return null;
+    return buildingService.getBuilding(bin);
   }
 
   @Override
   public Building updateBuilding(Building building) {
-    // return buildingService.updateBuilding(building);
-    return null;
+    return buildingService.updateBuilding(building);
   }
 
   @Override
   public void removeBuilding(String bin) {
-    // buildingService.removeBuilding(bin);
+    buildingService.removeBuilding(bin);
   }
 
   @Override
-  public Collection<Room> listRooms(String bin) {
-    // return buildingService.listRooms(bin);
-    return null;
+  public Collection<Room> listBuildingRooms(String bin) {
+    return buildingService.listBuildingRooms(bin);
   }
 
   @Override
   public Room createRoom(Room room) {
-    // return buildingService.createRoom(room);
-    return null;
+    return buildingService.createRoom(room);
   }
 
   @Override
   public Room getRoom(String rin) {
-    // return buildingService.getRoom(rin);
-    return null;
+    return buildingService.getRoom(rin);
   }
 
   @Override
   public Room updateRoom(Room room) {
-    // return buildingService.updateRoom(room);
-    return null;
+    return buildingService.updateRoom(room);
   }
 
   @Override
   public void removeRoom(String rin) {
-    // buildingService.removeRoom(rin);
+    buildingService.removeRoom(rin);
   }
 
   @Override
   public Collection<Component> listBuildingComponents(String bin) {
-    // return buildingService.listBuildingComponents(bin);
-    return null;
+    return buildingService.listBuildingComponents(bin);
   }
 
   @Override
   public Collection<Component> listRoomComponents(String rin) {
-    // return buildingService.listRoomComponents(rin);
-    return null;
+    return buildingService.listRoomComponents(rin);
   }
 
   @Override
   public Component createComponent(Component component) {
-    // return buildingService.createComponent(component);
-    return null;
+    return buildingService.createComponent(component);
   }
 
   @Override
   public Component getComponent(String cin) {
-    // return buildingService.getComponent(cin);
-    return null;
+    return buildingService.getComponent(cin);
   }
 
   @Override
   public Component updateComponent(Component component) {
-    // return buildingService.updateComponent(component);
-    return null;
+    return buildingService.updateComponent(component);
   }
 
   @Override
   public void removeComponent(String cin) {
-    // buildingService.removeComponent(cin);
+    buildingService.removeComponent(cin);
   }
 
   @Override
   public Notification getNotification(String nin) {
-    // return buildingService.getComponent(nin);
-    return null;
+    return buildingService.getNotification(nin);
   }
 
   @Override
   public Notification updateNotification(Notification notification) {
-    // return buildingService.updateNotification(notification);
-    return null;
+    return buildingService.updateNotification(notification);
   }
 
   @Override
   public void removeNotification(String nin) {
-    // buildingService.removeNotification(nin);
+    buildingService.removeNotification(nin);
   }
 
   @Override
-  public Collection<Building> listBuildingNotifications(String bin) {
-    // return buildingService.listBuildingNotifications(bin);
-    return null;
+  public Collection<Notification> listBuildingNotifications(String bin) {
+    return buildingService.listBuildingNotifications(bin);
   }
 
   @Override
   public Collection<Notification> listRoomNotifications(String rin) {
-    // return buildingService.listRoomNotifications(rin);
-    return null;
+    return buildingService.listRoomNotifications(rin);
   }
 
   @Override
   public Collection<Notification> listComponentNotifications(String cin) {
-    // return buildingService.listComponentNotifications(cin);
-    return null;
+    return buildingService.listComponentNotifications(cin);
   }
 
   @Override
   public Notification createNotification(Notification notification) {
-    // return buildingService.createNotification(notification);
-    return null;
+    return buildingService.createNotification(notification);
   }
 }

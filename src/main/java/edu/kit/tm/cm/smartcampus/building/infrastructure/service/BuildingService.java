@@ -4,7 +4,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.BuildingReposi
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.NotFoundException;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
@@ -39,6 +39,7 @@ public class BuildingService {
     this.notificationRepository = notificationRepository;
   }
 
+  // buildings
   public Collection<Building> listBuildings() {
     Collection<Building> buildings = new ArrayList<>();
     for (Building building : buildingRepository.findAll()) buildings.add(building);
@@ -58,36 +59,47 @@ public class BuildingService {
   }
 
   public Building updateBuilding(Building building) {
-    if(!buildingRepository.existsById(building.getIdentificationNumber())) throw new NotFoundException();
+    if(!buildingRepository.existsById(building.getIdentificationNumber())) throw new ResourceNotFoundException();
     return buildingRepository.save(building);
   }
-
-
-  public Component createComponent(Component component) {
-    return componentRepository.save(component);
-  }
-
-  public Collection<Component> listRoomComponents(String rin) {
-    return componentRepository.findAllRoomComponents(rin);
-  }
-
-  public Component getComponent(String cin) {
-    return componentRepository.findById(cin).get();
-  }
-
-  public Component updateComponent(Component component) {
-    if(!componentRepository.existsById(component.getIdentificationNumber())) throw new NotFoundException();
-    return componentRepository.save(component);
-  }
-
-  public void removeComponent(String cin) {
-    componentRepository.deleteById(cin);
-  }
-
 
   public Collection<Notification> listBuildingNotifications(String bin) {
     if(!roomRepository.existsById(bin)) throw new NoSuchElementException();
     return notificationRepository.findAllBuildingNotifications(bin);
+  }
+
+  public Collection<Room> listBuildingRooms(String bin) {
+    if(!buildingRepository.existsById(bin)) throw new ResourceNotFoundException();
+    return roomRepository.findAllBuildingRooms(bin);
+  }
+
+  public Collection<Component> listBuildingComponents(String bin) {
+    return componentRepository.findAllRoomComponents(bin);
+  }
+
+  // rooms
+  public Room getRoom(String rin) throws ResourceNotFoundException {
+    if (roomRepository.existsById(rin)) {
+      return roomRepository.findById(rin).get();
+    }
+    throw new ResourceNotFoundException();
+  }
+
+  public Room createRoom(Room room) {
+    return this.roomRepository.save(room);
+  }
+
+  public Room updateRoom(Room room) {
+    return this.roomRepository.save(room);
+  }
+
+  public void removeRoom(String rin) {
+    if(!roomRepository.existsById(rin)) throw new ResourceNotFoundException();
+    roomRepository.deleteById(rin);
+  }
+
+  public Collection<Component> listRoomComponents(String rin) {
+    return componentRepository.findAllRoomComponents(rin);
   }
 
   public Collection<Notification> listRoomNotifications(String rin) {
@@ -95,52 +107,47 @@ public class BuildingService {
     return notificationRepository.findAllRoomNotifications(rin);
   }
 
+  // components
+  public Component createComponent(Component component) {
+    return componentRepository.save(component);
+  }
+
+  public Component getComponent(String cin) {
+    return componentRepository.findById(cin).get();
+  }
+
+  public Component updateComponent(Component component) {
+    if(!componentRepository.existsById(component.getIdentificationNumber())) throw new ResourceNotFoundException();
+    return componentRepository.save(component);
+  }
+
+  public void removeComponent(String cin) {
+    componentRepository.deleteById(cin);
+  }
+
   public Collection<Notification> listComponentNotifications(String cin) {
     if(!componentRepository.existsById(cin)) throw new NoSuchElementException();
     return notificationRepository.findAllComponentNotifications(cin);
   }
 
+  // notifications
   public Notification getNotification(String nin) {
-    if(!notificationRepository.existsById(nin)) throw new NotFoundException();
+    if(!notificationRepository.existsById(nin)) throw new ResourceNotFoundException();
     return notificationRepository.findById(nin).orElse(null);
   }
 
   public Notification updateNotification(Notification notification) {
-    if(!notificationRepository.existsById(notification.getIdentificationNumber())) throw new NotFoundException();
+    if(!notificationRepository.existsById(notification.getIdentificationNumber())) throw new ResourceNotFoundException();
     return notificationRepository.save(notification);
   }
 
   public Notification createNotification(Notification notification) {
-    if(!notificationRepository.existsById(notification.getIdentificationNumber())) throw new NotFoundException();
+    if(!notificationRepository.existsById(notification.getIdentificationNumber())) throw new ResourceNotFoundException();
     return notificationRepository.save(notification);
   }
 
   public void removeNotification(String nin) {
-    if(!notificationRepository.existsById(nin)) throw new NotFoundException();
+    if(!notificationRepository.existsById(nin)) throw new ResourceNotFoundException();
     notificationRepository.deleteById(nin);
-  }
-
-  public Collection<Room> listRooms(String bin) {
-    if(!buildingRepository.existsById(bin)) throw new NotFoundException();
-    return roomRepository.findAllBuildingRooms(bin);
-  }
-
-  public Room getRoom(String rin) throws NotFoundException {
-    if (roomRepository.existsById(rin)) {
-      return roomRepository.findById(rin).get();
-    }
-    throw new NotFoundException();
-  }
-
-  public Room createRoom(Room room) {
-    return this.roomRepository.save(room);
-  }
-
-  public void deleteRoom(String rin) {
-    roomRepository.deleteById(rin);
-  }
-
-  public Room updateRoom(Room room) {
-    return this.roomRepository.save(room);
   }
 }
