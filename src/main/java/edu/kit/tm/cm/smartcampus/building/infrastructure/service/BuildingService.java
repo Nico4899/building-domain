@@ -6,11 +6,14 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.NotificationRe
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.NotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 @Service
 public class BuildingService {
@@ -41,11 +44,36 @@ public class BuildingService {
     return buildings;
   }
 
+  public Collection<Room> listBuildingRooms() {
+    return Collections.emptyList();
+  }
+
+  public Collection<Component> listBuildingComponents() {
+    return Collections.emptyList();
+  }
+
+  public Collection<Component> listRoomComponents() {
+    return Collections.emptyList();
+  }
+
+  public Collection<Room> listBuildingNotifications() {
+    return Collections.emptyList();
+  }
+
+  public Collection<Room> listRoomNotifications() {
+    return Collections.emptyList();
+  }
+
+  public Collection<Room> listComponentNotifications() {
+    return Collections.emptyList();
+  }
+
   public Building getBuilding(String bin) throws NotFoundException {
-    if (buildingRepository.findById(bin).isPresent()) {
-      return buildingRepository.findById(bin).get();
-    }
-    throw new NotFoundException();
+    return null;
+  }
+
+  public Room getRoom(String rin) {
+
   }
 
   public Building createBuilding(Building building) {
