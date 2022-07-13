@@ -1,6 +1,9 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.service;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.BuildingRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.ComponentRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.NotificationRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.NotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +17,22 @@ public class BuildingService {
 
   private final BuildingRepository buildingRepository;
 
+  private final RoomRepository roomRepository;
+
+  private final ComponentRepository componentRepository;
+
+  private final NotificationRepository notificationRepository;
+
   @Autowired
-  public BuildingService(BuildingRepository buildingRepository) {
+  public BuildingService(
+      BuildingRepository buildingRepository,
+      RoomRepository roomRepository,
+      ComponentRepository componentRepository,
+      NotificationRepository notificationRepository) {
     this.buildingRepository = buildingRepository;
+    this.roomRepository = roomRepository;
+    this.componentRepository = componentRepository;
+    this.notificationRepository = notificationRepository;
   }
 
   public Collection<Building> listBuildings() {
