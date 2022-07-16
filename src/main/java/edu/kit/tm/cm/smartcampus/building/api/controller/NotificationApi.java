@@ -4,7 +4,7 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/notifications")
-public interface NotificationOperations {
+public interface NotificationApi {
 
   @GetMapping("/{nin}")
   Notification getNotification(@PathVariable String nin);

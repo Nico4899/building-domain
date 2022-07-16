@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RequestMapping("/components")
-public interface ComponentOperations {
+public interface ComponentApi {
 
   @PostMapping("")
   Component createComponent(@RequestBody Component component);

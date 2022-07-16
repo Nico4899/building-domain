@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RequestMapping("/rooms")
-public interface RoomOperations {
+public interface RoomApi {
 
   @PostMapping("")
   Room createRoom(@RequestBody Room room);

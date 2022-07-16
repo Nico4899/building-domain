@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @RestController
 public class BuildingController
-    implements BuildingOperations, RoomOperations, ComponentOperations, NotificationOperations {
+    implements BuildingApi, RoomApi, ComponentApi, NotificationApi {
 
   private final BuildingService buildingService;
 
