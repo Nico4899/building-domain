@@ -1,4 +1,5 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions;
 
-public class NotFoundException extends RuntimeException {
+public class InvalidArgumentsException extends RuntimeException {
+
 }

@@ -2,13 +2,17 @@ package edu.kit.tm.cm.smartcampus.building.api.controller;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.BuildingService;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
 @RestController
-public class BuildingController implements BuildingAPI {
+public class BuildingController
+    implements BuildingOperations, RoomOperations, ComponentOperations, NotificationOperations {
 
   private final BuildingService buildingService;
 
@@ -17,6 +21,7 @@ public class BuildingController implements BuildingAPI {
     this.buildingService = buildingService;
   }
 
+  // "/buildings" urls
   @Override
   public Collection<Building> listBuildings() {
     return buildingService.listBuildings();
@@ -29,8 +34,7 @@ public class BuildingController implements BuildingAPI {
 
   @Override
   public Building getBuilding(String bin) {
-    return null;
-    //return buildingService.getBuilding(bin); TODO
+    return buildingService.getBuilding(bin);
   }
 
   @Override
@@ -39,7 +43,101 @@ public class BuildingController implements BuildingAPI {
   }
 
   @Override
-  public void deleteBuilding(String bin) {
-    buildingService.deleteBuilding(bin);
+  public void removeBuilding(String bin) {
+    buildingService.removeBuilding(bin);
+  }
+
+  @Override
+  public Collection<Room> listBuildingRooms(String bin) {
+    return buildingService.listBuildingRooms(bin);
+  }
+
+  @Override
+  public Collection<Component> listBuildingComponents(String bin) {
+    return buildingService.listBuildingComponents(bin);
+  }
+
+  @Override
+  public Collection<Notification> listBuildingNotifications(String bin) {
+    return buildingService.listBuildingNotifications(bin);
+  }
+
+  // "/rooms" urls
+  @Override
+  public Room createRoom(Room room) {
+    return buildingService.createRoom(room);
+  }
+
+  @Override
+  public Room getRoom(String rin) {
+    return buildingService.getRoom(rin);
+  }
+
+  @Override
+  public Room updateRoom(Room room) {
+    return buildingService.updateRoom(room);
+  }
+
+  @Override
+  public void removeRoom(String rin) {
+    buildingService.removeRoom(rin);
+  }
+
+  @Override
+  public Collection<Component> listRoomComponents(String rin) {
+    return buildingService.listRoomComponents(rin);
+  }
+
+  @Override
+  public Collection<Notification> listRoomNotifications(String rin) {
+    return buildingService.listRoomNotifications(rin);
+  }
+
+
+  // "/components" urls
+  @Override
+  public Component createComponent(Component component) {
+    return buildingService.createComponent(component);
+  }
+
+  @Override
+  public Component getComponent(String cin) {
+    return buildingService.getComponent(cin);
+  }
+
+  @Override
+  public Component updateComponent(Component component) {
+    return buildingService.updateComponent(component);
+  }
+
+  @Override
+  public void removeComponent(String cin) {
+    buildingService.removeComponent(cin);
+  }
+
+  @Override
+  public Collection<Notification> listComponentNotifications(String cin) {
+    return buildingService.listComponentNotifications(cin);
+  }
+
+  // "/notifications" urls
+  @Override
+  public Notification getNotification(String nin) {
+    return buildingService.getNotification(nin);
+  }
+
+  @Override
+  public Notification updateNotification(Notification notification) {
+    return buildingService.updateNotification(notification);
+  }
+
+  @Override
+  public void removeNotification(String nin) {
+    buildingService.removeNotification(nin);
+  }
+
+  @Override
+  public Notification createNotification(Notification notification) {
+    return buildingService.createNotification(notification);
   }
 }
