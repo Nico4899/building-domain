@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/** This class represents a geographical location, by longitude and latitude coordinates. */
+/**
+ * This class represents a geographical location, by longitude and latitude coordinates.
+ */
 @Builder
 @Data
 @NoArgsConstructor
@@ -16,7 +18,8 @@ import javax.persistence.Id;
 @Entity(name = "geographical_location")
 public class GeographicalLocation {
 
-  @Id private Long id;
+  @Id
+  private Long id;
   private double latitude;
   private double longitude;
 }

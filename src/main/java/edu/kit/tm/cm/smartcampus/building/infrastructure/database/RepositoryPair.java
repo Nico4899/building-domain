@@ -14,6 +14,7 @@ public class RepositoryPair extends Pair {
     this.prefix = prefix;
     this.repository = repository;
   }
+
   @Override
   public String getLeft() {
     return prefix;

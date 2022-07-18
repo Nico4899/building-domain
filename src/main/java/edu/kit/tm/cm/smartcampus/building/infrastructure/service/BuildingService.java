@@ -31,10 +31,10 @@ public class BuildingService {
 
   @Autowired
   public BuildingService(
-      BuildingRepository buildingRepository,
-      RoomRepository roomRepository,
-      ComponentRepository componentRepository,
-      NotificationRepository notificationRepository) {
+          BuildingRepository buildingRepository,
+          RoomRepository roomRepository,
+          ComponentRepository componentRepository,
+          NotificationRepository notificationRepository) {
     this.buildingRepository = buildingRepository;
     this.roomRepository = roomRepository;
     this.componentRepository = componentRepository;

@@ -26,17 +26,17 @@ public class PrefixSequenceGenerator extends SequenceStyleGenerator {
 
   @Override
   public Serializable generate(SharedSessionContractImplementor session, Object object)
-      throws HibernateException {
+          throws HibernateException {
 
     return valuePrefix + super.generate(session, object);
   }
 
   @Override
   public void configure(Type type, Properties params, ServiceRegistry serviceRegistry)
-      throws MappingException {
+          throws MappingException {
 
     super.configure(LongType.INSTANCE, params, serviceRegistry);
     valuePrefix =
-        ConfigurationHelper.getString(VALUE_PREFIX_PARAMETER, params, VALUE_PREFIX_DEFAULT);
+            ConfigurationHelper.getString(VALUE_PREFIX_PARAMETER, params, VALUE_PREFIX_DEFAULT);
   }
 }
