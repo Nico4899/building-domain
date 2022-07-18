@@ -29,24 +29,24 @@ public class Room {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_sequence")
   @SequenceGenerator(name = "room_sequence", allocationSize = 1)
   @GenericGenerator(
-      name = "room_sequence",
-      strategy =
-          "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
-      parameters = {
-        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "r-")
-      })
+          name = "room_sequence",
+          strategy =
+                  "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
+          parameters = {
+                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "r-")
+          })
   @Column(
-      name = "identification_number",
-      nullable = false,
-      updatable = false,
-      columnDefinition = "TEXT")
+          name = "identification_number",
+          nullable = false,
+          updatable = false,
+          columnDefinition = "TEXT")
   private String identificationNumber;
 
   @Column(
-      name = "parent_identification_number",
-      nullable = false,
-      updatable = false,
-      columnDefinition = "TEXT")
+          name = "parent_identification_number",
+          nullable = false,
+          updatable = false,
+          columnDefinition = "TEXT")
   private String parentIdentificationNumber;
 
   @OneToOne(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.PERSIST)

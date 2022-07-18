@@ -25,10 +25,10 @@ public final class ServiceValidation {
 
   @Autowired
   public ServiceValidation(
-      BuildingRepository buildingRepository,
-      RoomRepository roomRepository,
-      ComponentRepository componentRepository,
-      NotificationRepository notificationRepository) {
+          BuildingRepository buildingRepository,
+          RoomRepository roomRepository,
+          ComponentRepository componentRepository,
+          NotificationRepository notificationRepository) {
     this.buildingPair = new RepositoryPair(buildingInfo, buildingRepository);
     this.roomPair = new RepositoryPair(roomInfo, roomRepository);
     this.componentPair = new RepositoryPair(componentInfo, componentRepository);
@@ -51,15 +51,21 @@ public final class ServiceValidation {
   public RepositoryPair getReferencedRepository(String parentId) {
     String prefix = parentId.substring(0, 1);
     switch (prefix) {
-      case buildinPrefix -> {return buildingPair;}
-      case roomPrefix -> {return roomPair;}
-      case componentPrefix -> {return componentPair;}
-      case notificationPrefix -> {return notificationPair;}
+      case buildinPrefix -> {
+        return buildingPair;
+      }
+      case roomPrefix -> {
+        return roomPair;
+      }
+      case componentPrefix -> {
+        return componentPair;
+      }
+      case notificationPrefix -> {
+        return notificationPair;
+      }
     }
     return null;
   }
-
-
 
 
 }

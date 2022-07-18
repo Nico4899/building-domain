@@ -15,15 +15,15 @@ public class ServerExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(InvalidArgumentsException.class)
   protected ResponseEntity<Object> handleInvalidArgumentsException(
-      RuntimeException exception, WebRequest request) {
+          RuntimeException exception, WebRequest request) {
     return handleExceptionInternal(
-        exception, exception.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+            exception, exception.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
   }
 
   @ExceptionHandler(ResourceNotFoundException.class)
   protected ResponseEntity<Object> handleResourceNotFoundException(
-      RuntimeException exception, WebRequest request) {
+          RuntimeException exception, WebRequest request) {
     return handleExceptionInternal(
-        exception, exception.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+            exception, exception.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
   }
 }

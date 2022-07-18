@@ -22,40 +22,40 @@ public class Notification {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notification_sequence")
   @SequenceGenerator(name = "notification_sequence", allocationSize = 1)
   @GenericGenerator(
-      name = "notification_sequence",
-      strategy =
-          "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
-      parameters = {
-        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "n-")
-      })
+          name = "notification_sequence",
+          strategy =
+                  "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
+          parameters = {
+                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "n-")
+          })
   @Column(
-      name = "identification_number",
-      nullable = false,
-      updatable = false,
-      columnDefinition = "TEXT")
+          name = "identification_number",
+          nullable = false,
+          updatable = false,
+          columnDefinition = "TEXT")
   private String identificationNumber;
 
   @Column(
-      name = "notification_title",
-      nullable = false,
-      updatable = false,
-      columnDefinition = "TEXT")
+          name = "notification_title",
+          nullable = false,
+          updatable = false,
+          columnDefinition = "TEXT")
   private String notificationTitle;
 
   @Column(
-      name = "notification_description",
-      nullable = false,
-      updatable = false,
-      columnDefinition = "TEXT")
+          name = "notification_description",
+          nullable = false,
+          updatable = false,
+          columnDefinition = "TEXT")
   private String notificationDescription;
 
   @Column(name = "creation_time", nullable = false, updatable = false, columnDefinition = "TEXT")
   private Timestamp creationTime;
 
   @Column(
-      name = "parent_identification_number",
-      nullable = false,
-      updatable = false,
-      columnDefinition = "TEXT")
+          name = "parent_identification_number",
+          nullable = false,
+          updatable = false,
+          columnDefinition = "TEXT")
   private String parentIdentificationNumber;
 }
