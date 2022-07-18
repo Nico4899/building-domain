@@ -27,6 +27,8 @@ public class BuildingService {
 
   private final NotificationRepository notificationRepository;
 
+  private final ServiceValidation serviceValidation;
+
   @Autowired
   public BuildingService(
       BuildingRepository buildingRepository,
@@ -37,6 +39,8 @@ public class BuildingService {
     this.roomRepository = roomRepository;
     this.componentRepository = componentRepository;
     this.notificationRepository = notificationRepository;
+    this.serviceValidation = new ServiceValidation(buildingRepository, roomRepository, componentRepository,
+        notificationRepository);
   }
 
   // buildings
@@ -46,11 +50,13 @@ public class BuildingService {
     return buildings;
   }
 
-  public Building getBuilding(String bin) {
+  public Building getBuilding(String bin) throws ResourceNotFoundException {
+    if(buildingRepository.findById(bin).isEmpty()) { throw new ResourceNotFoundException();}
     return buildingRepository.findById(bin).get();
   }
 
   public Building createBuilding(Building building) {
+    serviceValidation.validateReferencedId(building)
     return buildingRepository.save(building);
   }
 
