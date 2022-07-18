@@ -1,6 +1,5 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.database;
 
-import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

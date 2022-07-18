@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RequestMapping("/buildings")
-public interface BuildingOperations {
+public interface BuildingApi {
 
   @GetMapping("")
   Collection<Building> listBuildings();

@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @RestController
 public class BuildingController
-    implements BuildingOperations, RoomOperations, ComponentOperations, NotificationOperations {
+        implements BuildingApi, RoomApi, ComponentApi, NotificationApi {
 
   private final BuildingService buildingService;
 
@@ -92,7 +92,6 @@ public class BuildingController
   public Collection<Notification> listRoomNotifications(String rin) {
     return buildingService.listRoomNotifications(rin);
   }
-
 
   // "/components" urls
   @Override
