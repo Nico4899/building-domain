@@ -30,11 +30,9 @@ public class Component {
           parameters = {
                   @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "c-")
           })
-  @Column(name = "identification_number")
-  private String identificationNumber;
+  private String cin;
 
-  @Column(name = "parent_identification_number")
-  private String parentIdentificationNumber;
+  private String parentIn;
 
   @Column(name = "component_type")
   private ComponentType componentType;

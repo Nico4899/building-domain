@@ -10,14 +10,14 @@ import java.util.Collection;
 public interface NotificationRepository extends CrudRepository<Notification, String> {
 
   @Query(
-          "SELECT notification From notification notification Where notification.parentIdentificationNumber =: #{#bin}")
+          "SELECT notification From notification notification Where notification.parentIn =: #{#bin}")
   Collection<Notification> findAllBuildingNotifications(@Param("bin") String bin);
 
   @Query(
-          "SELECT notification From notification notification Where notification.parentIdentificationNumber =: #{#rin}")
+          "SELECT notification From notification notification Where notification.parentIn =: #{#rin}")
   Collection<Notification> findAllRoomNotifications(@Param("rin") String rin);
 
   @Query(
-          "SELECT notification From notification notification Where notification.parentIdentificationNumber =: #{#cin}")
+          "SELECT notification From notification notification Where notification.parentIn =: #{#cin}")
   Collection<Notification> findAllComponentNotifications(@Param("cin") String cin);
 }

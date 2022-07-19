@@ -33,8 +33,7 @@ public class Building {
           parameters = {
                   @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "b-")
           })
-  @Column(name = "identification_number")
-  private String identificationNumber;
+  private String bin;
 
   @Column(name = "num_floors")
   private int numFloors;

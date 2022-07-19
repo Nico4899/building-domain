@@ -33,11 +33,9 @@ public class Room {
           parameters = {
                   @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "r-")
           })
-  @Column(name = "identification_number")
-  private String identificationNumber;
+  private String rin;
 
-  @Column(name = "parent_identification_number")
-  private String parentIdentificationNumber;
+  private String parentIn;
 
   private int floor;
 

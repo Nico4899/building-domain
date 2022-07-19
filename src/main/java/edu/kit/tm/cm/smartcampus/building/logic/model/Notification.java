@@ -35,11 +35,9 @@ public class Notification {
           parameters = {
                   @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "n-")
           })
-  @Column(name = "identification_number")
-  private String identificationNumber;
+  private String nin;
 
-  @Column(name = "parent_identification_number")
-  private String parentIdentificationNumber;
+  private String parentIn;
 
   @Column(name = "creation_time")
   private Timestamp creationTime;

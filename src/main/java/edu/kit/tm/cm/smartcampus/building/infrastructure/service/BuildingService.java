@@ -71,8 +71,8 @@ public class BuildingService {
   }
 
   public Building updateBuilding(Building building) {
-    if (!buildingRepository.existsById(building.getIdentificationNumber()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, building.getIdentificationNumber()));
+    if (!buildingRepository.existsById(building.getBin()))
+      throw new ResourceNotFoundException(String.format(NOT_FOUND, building.getBin()));
     return buildingRepository.save(building);
   }
 
@@ -100,7 +100,7 @@ public class BuildingService {
   }
 
   public Room createRoom(Room room) {
-    if (serviceValidation.validateReferencedId(room.getIdentificationNumber(), room.getParentIdentificationNumber())) {
+    if (serviceValidation.validateReferencedId(room.getRin(), room.getParentIn())) {
       return this.roomRepository.save(room);
     } else {
       throw new ResourceNotFoundException(UNKNOWN_ERROR);
@@ -109,8 +109,8 @@ public class BuildingService {
   }
 
   public Room updateRoom(Room room) { //todo Nochmal parent checken?
-    if (!roomRepository.existsById(room.getIdentificationNumber()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, room.getIdentificationNumber()));
+    if (!roomRepository.existsById(room.getRin()))
+      throw new ResourceNotFoundException(String.format(NOT_FOUND, room.getRin()));
     return this.roomRepository.save(room);
   }
 
@@ -132,11 +132,11 @@ public class BuildingService {
 
   // components
   public Component createComponent(Component component) {
-    if(serviceValidation.validateReferencedId(component.getIdentificationNumber(),
-        component.getParentIdentificationNumber())) {
+    if(serviceValidation.validateReferencedId(component.getCin(),
+        component.getParentIn())) {
       return componentRepository.save(component);
     } else {
-      throw new ResourceNotFoundException(String.format(UNKNOWN_ERROR, component.getIdentificationNumber()));
+      throw new ResourceNotFoundException(String.format(UNKNOWN_ERROR, component.getCin()));
     }
   }
 
@@ -147,8 +147,8 @@ public class BuildingService {
   }
 
   public Component updateComponent(Component component) {
-    if (!componentRepository.existsById(component.getIdentificationNumber()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, component.getIdentificationNumber()));
+    if (!componentRepository.existsById(component.getCin()))
+      throw new ResourceNotFoundException(String.format(NOT_FOUND, component.getCin()));
     return componentRepository.save(component);
   }
 
@@ -170,14 +170,14 @@ public class BuildingService {
   }
 
   public Notification updateNotification(Notification notification) {
-    if (!notificationRepository.existsById(notification.getIdentificationNumber()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, notification.getIdentificationNumber()));
+    if (!notificationRepository.existsById(notification.getNin()))
+      throw new ResourceNotFoundException(String.format(NOT_FOUND, notification.getNin()));
     return notificationRepository.save(notification);
   }
 
   public Notification createNotification(Notification notification) {
-    if (!notificationRepository.existsById(notification.getIdentificationNumber()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, notification.getIdentificationNumber()));
+    if (!notificationRepository.existsById(notification.getNin()))
+      throw new ResourceNotFoundException(String.format(NOT_FOUND, notification.getNin()));
     return notificationRepository.save(notification);
   }
 
