@@ -1,6 +1,9 @@
-package edu.kit.tm.cm.smartcampus.building.infrastructure.service;
+package edu.kit.tm.cm.smartcampus.building.infrastructure.validation;
 
-import edu.kit.tm.cm.smartcampus.building.infrastructure.database.*;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

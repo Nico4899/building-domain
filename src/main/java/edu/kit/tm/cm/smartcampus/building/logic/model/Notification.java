@@ -1,9 +1,9 @@
 package edu.kit.tm.cm.smartcampus.building.logic.model;
 
-import edu.kit.tm.cm.smartcampus.building.infrastructure.database.PrefixSequenceGenerator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -11,7 +11,7 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Data
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,40 +22,24 @@ public class Notification {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notification_sequence")
   @SequenceGenerator(name = "notification_sequence", allocationSize = 1)
   @GenericGenerator(
-          name = "notification_sequence",
-          strategy =
-                  "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
-          parameters = {
-                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "n-")
-          })
-  @Column(
-          name = "identification_number",
-          nullable = false,
-          updatable = false,
-          columnDefinition = "TEXT")
+      name = "notification_sequence",
+      strategy =
+          "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
+      parameters = {
+        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "n-")
+      })
+  @Column(name = "identification_number")
   private String identificationNumber;
 
-  @Column(
-          name = "notification_title",
-          nullable = false,
-          updatable = false,
-          columnDefinition = "TEXT")
+  @Column(name = "notification_title")
   private String notificationTitle;
 
-  @Column(
-          name = "notification_description",
-          nullable = false,
-          updatable = false,
-          columnDefinition = "TEXT")
+  @Column(name = "notification_description")
   private String notificationDescription;
 
-  @Column(name = "creation_time", nullable = false, updatable = false, columnDefinition = "TEXT")
+  @Column(name = "creation_time")
   private Timestamp creationTime;
 
-  @Column(
-          name = "parent_identification_number",
-          nullable = false,
-          updatable = false,
-          columnDefinition = "TEXT")
+  @Column(name = "parent_identification_number")
   private String parentIdentificationNumber;
 }
