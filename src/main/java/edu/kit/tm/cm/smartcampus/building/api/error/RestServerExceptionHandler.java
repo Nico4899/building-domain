@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class ServerExceptionHandler extends ResponseEntityExceptionHandler {
+public class RestServerExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(InvalidArgumentsException.class)
   protected ResponseEntity<Object> handleInvalidArgumentsException(

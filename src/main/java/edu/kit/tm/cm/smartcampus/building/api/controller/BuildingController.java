@@ -1,5 +1,9 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller;
 
+import edu.kit.tm.cm.smartcampus.building.api.operations.BuildingOperations;
+import edu.kit.tm.cm.smartcampus.building.api.operations.ComponentOperations;
+import edu.kit.tm.cm.smartcampus.building.api.operations.NotificationOperations;
+import edu.kit.tm.cm.smartcampus.building.api.operations.RoomOperations;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.BuildingService;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
@@ -12,7 +16,7 @@ import java.util.Collection;
 
 @RestController
 public class BuildingController
-        implements BuildingApi, RoomApi, ComponentApi, NotificationApi {
+        implements BuildingOperations, RoomOperations, ComponentOperations, NotificationOperations {
 
   private final BuildingService buildingService;
 

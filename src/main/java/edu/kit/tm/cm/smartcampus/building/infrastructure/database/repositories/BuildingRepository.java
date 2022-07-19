@@ -1,4 +1,4 @@
-package edu.kit.tm.cm.smartcampus.building.infrastructure.database;
+package edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import org.springframework.data.repository.CrudRepository;
