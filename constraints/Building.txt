@@ -14,7 +14,7 @@ self.buildingNumber.matches(regular) |self.buildingNumber.matches(east)
                 | self.buildingNumber.matches(northThree) | self.buildingNumber.matches(northFour) 
                 | self.buildingNumber.matches(northFive)
 
-self.identificationNumber.matches(^b-\d+$)
+self.bin.matches(^b-\d+$)
 
 self.numFloors > 0
 
