@@ -8,7 +8,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgum
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public final class ServiceValidation {
+public final class ServiceValidator {
 
   private static final String BIN_PATTERN = "^b-\\d+$";
   private static final String RIN_PATTERN = "^r-\\d+$";
@@ -28,7 +28,7 @@ public final class ServiceValidation {
   private final String notificationPrefix = "n";
 
   @Autowired
-  public ServiceValidation(
+  public ServiceValidator(
       BuildingRepository buildingRepository,
       RoomRepository roomRepository,
       ComponentRepository componentRepository,
