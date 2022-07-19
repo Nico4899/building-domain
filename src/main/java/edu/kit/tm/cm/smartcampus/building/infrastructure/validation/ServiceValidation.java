@@ -47,7 +47,7 @@ public final class ServiceValidation {
    *                     must not be a notificationId
    * @return Optional of the name of the parent / referenced object (e.g. "building")
    */
-  public boolean validateReferencedId(String id, String referencedId) {
+  public boolean validateReferencedId(String id, String referencedId) { //todo regex als variable in text und notification parent
     if(id == null || referencedId == null) {
       throw new ResourceNotFoundException("Either identification number or parent number is null!");
     }
