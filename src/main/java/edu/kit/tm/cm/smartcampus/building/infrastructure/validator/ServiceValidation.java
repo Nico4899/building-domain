@@ -1,4 +1,4 @@
-package edu.kit.tm.cm.smartcampus.building.infrastructure.validation;
+package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;

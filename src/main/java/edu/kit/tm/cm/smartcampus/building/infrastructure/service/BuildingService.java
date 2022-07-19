@@ -5,7 +5,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.C
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.validation.ServiceValidation;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.ServiceValidation;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
