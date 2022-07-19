@@ -5,11 +5,8 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.C
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.ServiceValidation;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.ServiceValidator;
+import edu.kit.tm.cm.smartcampus.building.logic.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +28,7 @@ public class BuildingService {
 
   private final NotificationRepository notificationRepository;
 
-  private final ServiceValidation serviceValidation;
-
+  private final ServiceValidator serviceValidator;
 
 
   @Autowired
@@ -45,8 +41,8 @@ public class BuildingService {
     this.roomRepository = roomRepository;
     this.componentRepository = componentRepository;
     this.notificationRepository = notificationRepository;
-    this.serviceValidation = new ServiceValidation(buildingRepository, roomRepository, componentRepository,
-        notificationRepository);
+    this.serviceValidator = new ServiceValidator(buildingRepository, roomRepository, componentRepository,
+            notificationRepository);
   }
 
   // buildings
@@ -100,7 +96,7 @@ public class BuildingService {
   }
 
   public Room createRoom(Room room) {
-    if (serviceValidation.validateReferencedId(room.getRin(), room.getParentIn())) {
+    if (serviceValidator.validateReferencedId(room.getRin(), room.getParentIn())) {
       return this.roomRepository.save(room);
     } else {
       throw new ResourceNotFoundException(UNKNOWN_ERROR);
@@ -132,8 +128,8 @@ public class BuildingService {
 
   // components
   public Component createComponent(Component component) {
-    if(serviceValidation.validateReferencedId(component.getCin(),
-        component.getParentIn())) {
+    if (serviceValidator.validateReferencedId(component.getCin(),
+            component.getParentIn())) {
       return componentRepository.save(component);
     } else {
       throw new ResourceNotFoundException(String.format(UNKNOWN_ERROR, component.getCin()));
@@ -185,4 +181,41 @@ public class BuildingService {
     if (!notificationRepository.existsById(nin)) throw new ResourceNotFoundException(String.format(NOT_FOUND, nin));
     notificationRepository.deleteById(nin);
   }
+
+  public void validateBuilding(Building building) {
+    //bliblablub
+  }
+
+  public void validateRoom(Room room) {
+    //bliblablub
+  }
+
+  public void validateComponent(Component component) {
+    //bliblablub
+  }
+
+  public void validateNotification(Notification notification) {
+    //bliblablub
+  }
+
+  public void validateBin(String bin) {
+    //bliblablub
+  }
+
+  public void validateRin(String rin) {
+    //bliblablub
+  }
+
+  public void validateCin(String cin) {
+    //bliblablub
+  }
+
+  public void validateNin(String nin) {
+    //bliblablub
+  }
+
+  public void validateGeographicalLocation(GeographicalLocation geographicalLocation){
+    //blubliblab
+  }
+
 }

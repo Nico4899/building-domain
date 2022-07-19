@@ -1,6 +1,7 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
+import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
 import lombok.AllArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ import java.util.Map;
  */
 @Component
 @AllArgsConstructor
-public class InputValidator {
+public class InputValidator { //TODO final?
 
   /**
    * Validates weather objects are not null or not.
@@ -85,6 +86,38 @@ public class InputValidator {
     }
   }
 
-  //TODO location validation + im service aufrufen
+  /**
+   * Validates weather geographical locations have valid latitude and longitude values or not.
+   *
+   * @param geographicalLocations Map of geographical locations to be checked and their names (key = name,
+   *                              value=geographical location)
+   */
+  public void validateGeographicalLocation(Map<String, GeographicalLocation> geographicalLocations) {
+    InvalidArgumentsException invalidArgumentsException = new InvalidArgumentsException();
+    boolean valid = true;
+
+    for (Map.Entry<String, GeographicalLocation> entry : geographicalLocations.entrySet()) {
+      if (entry.getValue().getLatitude() > 90.0 || entry.getValue().getLatitude() < -90.0) {
+        invalidArgumentsException.appendWrongArguments(
+                entry.getKey() + " latitude",
+                entry.getValue().getLatitude() + "",
+                "should be between -90.000000 and 90.000000",
+                true);
+        valid = false;
+      }
+      if (entry.getValue().getLongitude() > 180.0 || entry.getValue().getLongitude() < -180.0) {
+        invalidArgumentsException.appendWrongArguments(
+                entry.getKey() + " longitude",
+                entry.getValue().getLongitude() + "",
+                "should be between -180.000000 and 180.000000",
+                true);
+        valid = false;
+      }
+    }
+
+    if (!valid) {
+      throw invalidArgumentsException;
+    }
+  }
 
 }
