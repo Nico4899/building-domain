@@ -4,13 +4,13 @@ self.roomName -> notEmpty()
 
 self.roomNumber -> notEmpty()
 
-self.identificationNumber.matches(^r-\d+$)
+self.rin.matches(^r-\d+$)
 
-self.parentIdentificationNumber.matches(^b-\d+$)
+self.parentIn.matches(^b-\d+$)
 
-building.findById(self.parentIdentificationNumber)->exists()
+building.findById(self.parentIn)->exists()
 
-self.floor < building.findById(self.parentIdentificationNumber).floors
+self.floor < building.findById(self.parentIn).floors
 
 self.roomType -> notEmpty()
 
