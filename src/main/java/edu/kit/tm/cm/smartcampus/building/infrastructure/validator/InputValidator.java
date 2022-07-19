@@ -14,7 +14,7 @@ import java.util.Map;
  */
 @Component
 @AllArgsConstructor
-public class InputValidator { //TODO final?
+public final class InputValidator {
 
   /**
    * Validates weather objects are not null or not.
