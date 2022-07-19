@@ -1,8 +1,22 @@
 context Room inv:
+
 self.roomName -> notEmpty()
+
 self.roomNumber -> notEmpty()
-self.identificationNumber -> notEmpty()
-self.floor -> notEmpty()
-self.parentIdentificationNumber -> notEmpty()
-self.geographicalLocation -> notEmpty()
+
+self.identificationNumber.matches(^r-\d+$)
+
+self.parentIdentificationNumber.matches(^b-\d+$)
+
+building.findById(self.parentIdentificationNumber)->exists()
+
+self.floor < building.findById(self.parentIdentificationNumber).floors
+
 self.roomType -> notEmpty()
+
+self.geographicalLocation -> notEmpty()
+
+
+
+
+

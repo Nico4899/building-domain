@@ -1,5 +1,16 @@
 context Component inv:
-self.componentType -> notEmpty()
+
 self.componentDescription -> notEmpty()
-self.identificationNumber -> notEmpty()
-self.parentIdentificationNumber -> notEmpty()
+
+self.identificationNumber.matches(^c-\d+$)
+
+self.parentIdentificationNumber.matches(^b-\d+$) | self.parentIdentificationNumber.matches(^r-\d+$)
+self.parentIdentificationNumber.matches(^b-\d+$) -> implies building.findById(self.parentIdentificationNumber)->exists()
+self.parentIdentificationNumber.matches(^r-\d+$) -> implies room.findById(self.parentIdentificationNumber)->exists()
+
+self.componentType -> notEmpty()
+
+self.geographicalLocation -> notEmpty()
+
+
+
