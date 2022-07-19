@@ -17,8 +17,6 @@ import javax.persistence.*;
 @Entity(name = "room")
 public class Room {
 
-  private int floor;
-
   @Column(name = "room_name")
   private String roomName;
 
@@ -29,22 +27,25 @@ public class Room {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_sequence")
   @SequenceGenerator(name = "room_sequence", allocationSize = 1)
   @GenericGenerator(
-      name = "room_sequence",
-      strategy =
-          "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
-      parameters = {
-        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "r-")
-      })
+          name = "room_sequence",
+          strategy =
+                  "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
+          parameters = {
+                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "r-")
+          })
   @Column(name = "identification_number")
   private String identificationNumber;
 
   @Column(name = "parent_identification_number")
   private String parentIdentificationNumber;
 
+  private int floor;
+
+  @Column(name = "room_type")
+  private RoomType roomType;
+
   @OneToOne(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.PERSIST)
   @JoinColumn(name = "geographical_location")
   private GeographicalLocation geographicalLocation;
 
-  @Column(name = "room_type")
-  private RoomType roomType;
 }

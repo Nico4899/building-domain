@@ -18,28 +18,30 @@ import java.sql.Timestamp;
 @Entity(name = "notification")
 public class Notification {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notification_sequence")
-  @SequenceGenerator(name = "notification_sequence", allocationSize = 1)
-  @GenericGenerator(
-      name = "notification_sequence",
-      strategy =
-          "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
-      parameters = {
-        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "n-")
-      })
-  @Column(name = "identification_number")
-  private String identificationNumber;
-
   @Column(name = "notification_title")
   private String notificationTitle;
+
 
   @Column(name = "notification_description")
   private String notificationDescription;
 
-  @Column(name = "creation_time")
-  private Timestamp creationTime;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notification_sequence")
+  @SequenceGenerator(name = "notification_sequence", allocationSize = 1)
+  @GenericGenerator(
+          name = "notification_sequence",
+          strategy =
+                  "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
+          parameters = {
+                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "n-")
+          })
+  @Column(name = "identification_number")
+  private String identificationNumber;
 
   @Column(name = "parent_identification_number")
   private String parentIdentificationNumber;
+
+  @Column(name = "creation_time")
+  private Timestamp creationTime;
+
 }
