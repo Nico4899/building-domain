@@ -5,7 +5,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.C
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
-import edu.kit.tm.cm.smartcampus.building.utils;
+import edu.kit.tm.cm.smartcampus.building.GlobalStringCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 
@@ -25,7 +25,7 @@ public class ComponentValidator extends Validator<Component> {
 
   @Override
   protected String getValidateRegex() {
-    return utils.CIN_PATTERN;
+    return GlobalStringCollection.CIN_PATTERN;
   }
 
   @Override

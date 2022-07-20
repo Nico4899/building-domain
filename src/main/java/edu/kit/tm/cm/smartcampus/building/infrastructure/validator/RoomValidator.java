@@ -5,7 +5,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.C
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
-import edu.kit.tm.cm.smartcampus.building.utils;
+import edu.kit.tm.cm.smartcampus.building.GlobalStringCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class RoomValidator extends Validator<Room> {
 
   @Override
   protected String getValidateRegex() {
-    return utils.RIN_PATTERN;
+    return GlobalStringCollection.RIN_PATTERN;
   }
 
   @Override
@@ -59,11 +59,11 @@ public class RoomValidator extends Validator<Room> {
 
     validateMatchesRegex(
       Map.of(
-        "room_identification number", Pair.of(object.getRin(), "TODO rin regex"),
-        "room parent identification number", Pair.of(object.getParentIn(), "TODO bin regex")));
+        GlobalStringCollection.IDENTIFICATION_NUMBER_NAME, Pair.of(object.getRin(), GlobalStringCollection.RIN_PATTERN),
+        GlobalStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME, Pair.of(object.getParentIn(), GlobalStringCollection.BIN_PATTERN)));
 
     validateGeographicalLocation(
-      Map.of("room geographical location", object.getGeographicalLocation()));
+      Map.of(GlobalStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
     validateExists(object.getParentIn(), "parent_identification_number");
   }

@@ -7,7 +7,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.R
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
-import edu.kit.tm.cm.smartcampus.building.utils;
+import edu.kit.tm.cm.smartcampus.building.GlobalStringCollection;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Pair;
 
@@ -21,7 +21,10 @@ import java.util.Map;
  */
 public abstract class Validator<T> {
 
-  public static final String VALIDATE_REGEX = "";
+  public static final int MAX_LATITUDE_VALUE = 90;
+  public static final int MIN_LATITUDE_VALUE = -90;
+  public static final int MAX_LONGITUDE_VALUE = 180;
+  public static final double MIN_LONGITUDE_VALUE = -180.0;
 
   private final BuildingRepository buildingRepository;
   private final RoomRepository roomRepository;
@@ -121,18 +124,18 @@ public abstract class Validator<T> {
     boolean valid = true;
 
     for (Map.Entry<String, GeographicalLocation> entry : geographicalLocations.entrySet()) {
-      if (entry.getValue().getLatitude() > 90.0 || entry.getValue().getLatitude() < -90.0) {
+      if (entry.getValue().getLatitude() > MAX_LATITUDE_VALUE || entry.getValue().getLatitude() < MIN_LATITUDE_VALUE) {
         invalidArgumentsException.appendWrongArguments(
-            entry.getKey() + " latitude",
-            entry.getValue().getLatitude() + "",
+            entry.getKey() + GlobalStringCollection.SPACE + GlobalStringCollection.LATITUDE_NAME,
+          Double.toString(entry.getValue().getLatitude()),
             "should be between -90.000000 and 90.000000",
             true);
         valid = false;
       }
-      if (entry.getValue().getLongitude() > 180.0 || entry.getValue().getLongitude() < -180.0) {
+      if (entry.getValue().getLongitude() > MAX_LONGITUDE_VALUE || entry.getValue().getLongitude() < MIN_LONGITUDE_VALUE) {
         invalidArgumentsException.appendWrongArguments(
-            entry.getKey() + " longitude",
-            entry.getValue().getLongitude() + "",
+            entry.getKey() + GlobalStringCollection.LONGITUDE_NAME,
+            Double.toString(entry.getValue().getLongitude()),
             "should be between -180.000000 and 180.000000",
             true);
         valid = false;
@@ -144,8 +147,7 @@ public abstract class Validator<T> {
     }
   }
 
-  protected void validateExists(String inputIdentificationNumber, String name)
-      throws InvalidArgumentsException, ResourceNotFoundException {
+  protected void validateExists(String inputIdentificationNumber, String name) {
     Collection<CrudRepository<?, String>> repositories =
         List.of(buildingRepository, roomRepository, componentRepository, notificationRepository);
     boolean found = false;
@@ -156,15 +158,15 @@ public abstract class Validator<T> {
     }
     if (!found) {
       throw new ResourceNotFoundException(
-          String.format(utils.RESOURCE_NOT_FOUND_MESSAGE, name, inputIdentificationNumber));
+          String.format(GlobalStringCollection.RESOURCE_NOT_FOUND_MESSAGE, name, inputIdentificationNumber));
     }
   }
 
 
   public void validate(String identificationNumber) {
-    validateNotNull(Map.of("identification_number", identificationNumber));
-    validateMatchesRegex(Map.of("identification_number", Pair.of(identificationNumber, getValidateRegex())));
-    validateExists(identificationNumber, "identification_number");
+    validateNotNull(Map.of(GlobalStringCollection.IDENTIFICATION_NUMBER_NAME, identificationNumber));
+    validateMatchesRegex(Map.of(GlobalStringCollection.IDENTIFICATION_NUMBER_NAME, Pair.of(identificationNumber, getValidateRegex())));
+    validateExists(identificationNumber, GlobalStringCollection.IDENTIFICATION_NUMBER_NAME);
   }
 
   protected abstract String getValidateRegex();
