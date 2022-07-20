@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import static edu.kit.tm.cm.smartcampus.building.utils.*;
 
-public final class ServiceValidator {
+public final class DataValidator {
 
 
   private final BuildingRepository buildingRepository;
@@ -25,7 +25,7 @@ public final class ServiceValidator {
 
   private final String notificationPrefix = "n";
 
-  public ServiceValidator(
+  public DataValidator(
           BuildingRepository buildingRepository,
           RoomRepository roomRepository,
           ComponentRepository componentRepository,
@@ -200,6 +200,5 @@ public final class ServiceValidator {
       }
     }
   }
-
 
 }
