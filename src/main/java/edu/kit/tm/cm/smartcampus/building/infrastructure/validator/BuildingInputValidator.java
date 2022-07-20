@@ -25,7 +25,7 @@ public class BuildingInputValidator extends InputValidator {
    */
   public void validateBuilding(Building building) { //TODO validate numFloors
     validateNotNull(Map.of(
-            "building ", building,
+            "building", building,
             "building name", building.getBuildingName(),
             "building number", building.getBuildingNumber(),
             "building identification number", building.getBin(),
