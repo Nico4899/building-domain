@@ -9,6 +9,8 @@ public final class utils {
 
   public final static String TAB = "  ";
 
+  public final static String OR = "or";
+
 
   //General
   public final static String BUILDING = "building";
@@ -22,15 +24,19 @@ public final class utils {
   public final static String PROBLEM = "problem";
 
 
-  public final static String BUILDING_PATTERN = "^b-\\d+$";
+  public final static String BIN_PATTERN = "^b-\\d+$";
 
-  public final static String ROOM_PATTERN = "^r-\\d+$";
+  public final static String RIN_PATTERN = "^r-\\d+$";
 
-  public final static String COMPONENT_PATTERN = "^c-\\d+$";
+  public final static String CIN_PATTERN = "^c-\\d+$";
 
-  public final static String NOTIFICATION_PATTERN = "^n-\\d+$";
+  public final static String NIN_PATTERN = "^n-\\d+$";
 
-  public final static String PROBLEM_PATTERN = "^p-\\d+$";
+  public final static String PIN_PATTERN = "^p-\\d+$";
+
+  public final static String PARENT = "parent";
+
+  public final static String REFERENCED = "referenced object";
 
 
   //Error messages
@@ -40,6 +46,9 @@ public final class utils {
 
   public final static String REFERENCED_NOT_FOUND_ERROR = "Referenced object was not found.";
 
+
+  //Hints
+  public final static String EXPECTED_FORMAT = "Should match:";
 
 
 }

@@ -6,15 +6,12 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.N
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
+import edu.kit.tm.cm.smartcampus.building.utils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static edu.kit.tm.cm.smartcampus.building.utils.BUILDING;
+import static edu.kit.tm.cm.smartcampus.building.utils.*;
 
 public final class ServiceValidator {
-
-  private static final String BIN_PATTERN = "^b-\\d+$";
-  private static final String RIN_PATTERN = "^r-\\d+$";
-  private static final String PIN_PATTERN = "^p-\\d+$";
 
 
   private final BuildingRepository buildingRepository;
@@ -49,42 +46,61 @@ public final class ServiceValidator {
    *                     must not be a notificationId
    * @return Optional of the name of the parent / referenced object (e.g. "building")
    */
-  public boolean validateReferencedId(String id, String referencedId) { //todo regex als variable in text und notification parent
-    if(id == null || referencedId == null) {
+  public void validateReferencedId(String id, String referencedId) { //todo regex als variable in text und notification parent
+    if (id == null || referencedId == null) {
       throw new ResourceNotFoundException("Either identification number or parent number is null!");
     }
     String prefixReferenced = referencedId.substring(0, 1);
     String prefixId = id.substring(0, 1);
     InvalidArgumentsException inArgsEx = new InvalidArgumentsException();
+    boolean exceptionThrown = false;
     switch (prefixId) {
-      case buildingPrefix -> {inArgsEx.appendWrongArguments(BUILDING, id, );//("Id " + id + "belongs to a building but a building " +
-          //"cannot have a parent.");
+      case buildingPrefix -> {
+        inArgsEx.appendWrongArguments(BUILDING, id, PARENT_NOT_ALLOWED_ERROR, true);
+        throw inArgsEx;
       }
       case roomPrefix -> {
-        if(referencedId.matches(BIN_PATTERN) && checkParentOfRoom(referencedId)) {
-          return true;
-        } else {
-          throw new InvalidArgumentsException(id + " does not match pattern ^b-\\d+$");
+        if (!referencedId.matches(BIN_PATTERN)) {
+          inArgsEx.appendWrongArguments(PARENT, referencedId, EXPECTED_FORMAT + SPACE + BIN_PATTERN,
+              true);
+          exceptionThrown = true;
+        }
+        if (!checkParentOfRoom(referencedId)) {
+          inArgsEx.appendWrongArguments(PARENT, referencedId, PARENT_NOT_FOUND_ERROR, true);
+          exceptionThrown = true;
         }
       }
       case componentPrefix -> {
-        if( (referencedId.matches(BIN_PATTERN) || referencedId.matches(RIN_PATTERN) )
-            && checkParentOfComponent(referencedId, prefixReferenced) ) {
-          return true;
-        } else {
-          throw new InvalidArgumentsException(id + " does not match pattern ^b-\\d+$ or ^r-\\d+$");
+        if (!(referencedId.matches(BIN_PATTERN) || referencedId.matches(RIN_PATTERN))) {
+          inArgsEx.appendWrongArguments(PARENT, referencedId, EXPECTED_FORMAT + SPACE + BIN_PATTERN + SPACE +
+              OR + SPACE + RIN_PATTERN, true);
+          exceptionThrown = true;
+        }
+        if (!checkParentOfComponent(referencedId, prefixReferenced)) {
+          inArgsEx.appendWrongArguments(PARENT, referencedId, PARENT_NOT_FOUND_ERROR, true);
+          exceptionThrown = true;
         }
       }
       case notificationPrefix -> {
-        if(referencedId.matches(PIN_PATTERN)) {
-          return true;
-        } else {
-          throw new InvalidArgumentsException(id + " does not match pattern ^n-\\d+$");
+        if (!(referencedId.matches(BIN_PATTERN) || referencedId.matches(RIN_PATTERN)
+            || referencedId.matches(CIN_PATTERN))) {
+          inArgsEx.appendWrongArguments(PARENT, referencedId, EXPECTED_FORMAT + SPACE + BIN_PATTERN + SPACE +
+              OR + SPACE + RIN_PATTERN + SPACE + OR + CIN_PATTERN, true);
+          exceptionThrown = true;
+        }
+        if (!checkReferencedOfNotification(referencedId, prefixReferenced)) {
+          inArgsEx.appendWrongArguments(REFERENCED, referencedId, REFERENCED_NOT_FOUND_ERROR, true);
+          exceptionThrown = true;
         }
       }
-      default -> {return false;}
+      default -> {
+      }
+    }
+    if (exceptionThrown) {
+      throw inArgsEx;
     }
   }
+
 
 
   /**
@@ -93,12 +109,7 @@ public final class ServiceValidator {
    * @return Optional.of("room") if true or Optional.empty() otherwise
    */
   private boolean checkParentOfRoom(String parentId) throws ResourceNotFoundException {
-    if(buildingRepository.findById(parentId).isPresent()) {
-      return true;
-    } else {
-      throw new ResourceNotFoundException("Parent is building but there is no building with this parentId (" + parentId
-          + ") in the database.");
-    }
+    return buildingRepository.findById(parentId).isPresent();
   }
 
 
@@ -108,31 +119,32 @@ public final class ServiceValidator {
    * @param parentPrefix
    * @return
    */
-  private boolean checkParentOfComponent(String parentId, String parentPrefix) throws ResourceNotFoundException {
+  private boolean checkParentOfComponent(String parentId, String parentPrefix) {
     switch (parentPrefix) {
-      case roomPrefix -> {
-        if(roomRepository.findById(parentId).isPresent()) {
-          return true;
-        } else {
-          throw new ResourceNotFoundException("Parent is room but there is no room with this parentId (" + parentId +
-          ") in the database.");
-          //todo so bei allen machen
-        }
-      }
       case buildingPrefix -> {
-        if(buildingRepository.findById(parentId).isPresent()) {
-          return true;
-        } else {
-          throw new ResourceNotFoundException("Parent is building but there is no building with this parentId (" +
-              parentId + ") in the database.");
-        }
+        return buildingRepository.findById(parentId).isPresent();
+      }
+      case roomPrefix -> {
+        return roomRepository.findById(parentId).isPresent();
       }
       default -> { return false; }
     }
   }
 
-
-
+  private boolean checkReferencedOfNotification(String parentId, String parentPrefix) {
+    switch (parentPrefix) {
+      case buildingPrefix -> {
+        return buildingRepository.findById(parentId).isPresent();
+      }
+      case roomPrefix -> {
+        return roomRepository.findById(parentId).isPresent();
+      }
+      case componentPrefix -> {
+        return componentRepository.findById(parentId).isPresent();
+      }
+      default -> { return false; }
+    }
+  }
 
 
 
