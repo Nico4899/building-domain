@@ -33,10 +33,12 @@ public class Building {
           parameters = {
                   @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "b-")
           })
+  @Column(name = "building_identification_number")
   private String bin;
 
-  @Column(name = "num_floors")
-  private int numFloors;
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.PERSIST) //TODO testen ob des so passt
+  @Column(name = "building_floors")
+  private Floors buildingFloors;
 
   @Column(name = "campus_location")
   private CampusLocation campusLocation;

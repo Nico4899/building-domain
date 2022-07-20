@@ -1,11 +1,11 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import lombok.AllArgsConstructor;
 import org.springframework.data.util.Pair;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  * Class representing a building input validator which checks given objects from the building model and thereby
  * validates them and throws the right exceptions when an input is invalid.
  */
-@Component
+@org.springframework.stereotype.Component
 @AllArgsConstructor
 public class BuildingInputValidator extends InputValidator {
 
@@ -23,13 +23,13 @@ public class BuildingInputValidator extends InputValidator {
    *
    * @param building the building to be validated
    */
-  public void validateBuilding(Building building) { //TODO validate numFloors
+  public void validate(Building building) { //TODO validate numFloors
     validateNotNull(Map.of(
-            "building ", building,
+            "building", building,
             "building name", building.getBuildingName(),
             "building number", building.getBuildingNumber(),
             "building identification number", building.getBin(),
-            "building number of floors", building.getNumFloors(),
+            "building floors", building.getBuildingFloors(),
             "building campus location", building.getCampusLocation(),
             "building geographical location", building.getGeographicalLocation()
     ));
@@ -54,7 +54,7 @@ public class BuildingInputValidator extends InputValidator {
    *
    * @param room the room to be validated
    */
-  public void validateRoom(Room room) { //TODO validate numFloors
+  public void validate(Room room) { //TODO validate numFloors
     validateNotNull(Map.of(
             "room ", room,
             "room name", room.getRoomName(),
@@ -87,7 +87,7 @@ public class BuildingInputValidator extends InputValidator {
    *
    * @param component the component to be validated
    */
-  public void validateComponent(edu.kit.tm.cm.smartcampus.building.logic.model.Component component) { //TODOOOOOOOOOOOOOOOOOOOOOOOOOO
+  public void validate(Component component) {
     validateNotNull(Map.of(
             "component ", component,
             "component description", component.getComponentDescription(),
@@ -115,9 +115,9 @@ public class BuildingInputValidator extends InputValidator {
    * Validates a notification regarding everything that has nothing to do with the database (e.g. whether attributes are
    * null, empty or do nat match a regex ...)
    *
-   * @param notification
+   * @param notification the notification to be validated
    */
-  public void validateNotification(Notification notification) { //TODO validate notification.getCreationTime().getTime()
+  public void validate(Notification notification) {
     validateNotNull(Map.of(
             "notification ", notification,
             "notification title", notification.getNotificationTitle(),
@@ -139,43 +139,15 @@ public class BuildingInputValidator extends InputValidator {
   }
 
   /**
-   * Validates a bin regarding everything that has nothing to do with the database.
+   * Validates an identification number regarding everything that has nothing to do with the database.
    *
-   * @param bin the bin to be validated
+   * @param in      the identification number to be validated
+   * @param inName  the name of the identification number
+   * @param inRegex the regex that the identification number should match
    */
-  public void validateBin(String bin) {
-    validateNotNull(Map.of("building identification number", bin));
-    validateNotNull(Map.of("building identification number", Pair.of(bin, "TODO bin regex")));
-  }
-
-  /**
-   * Validates a rin regarding everything that has nothing to do with the database.
-   *
-   * @param rin the rin to be validated
-   */
-  public void validate(String name, String identificationNumber, String pattern) {
-    validateNotNull(Map.of(name, identificationNumber));
-    validateNotNull(Map.of("room identification number", Pair.of(identificationNumber)));
-  }
-
-  /**
-   * Validates a cin regarding everything that has nothing to do with the database.
-   *
-   * @param cin the cin to be validated
-   */
-  public void validateCin(String cin) {
-    validateNotNull(Map.of("component identification number", cin));
-    validateNotNull(Map.of("component identification number", Pair.of(cin, "TODO cin regex")));
-  }
-
-  /**
-   * Validates a nin regarding everything that has nothing to do with the database.
-   *
-   * @param nin the nin to be validated
-   */
-  public void validateNin(String nin) {
-    validateNotNull(Map.of("notification identification number", nin));
-    validateNotNull(Map.of("notification identification number", Pair.of(nin, "TODO nin regex")));
+  public void validateIn(String in, String inName, String inRegex) {
+    validateNotNull(Map.of(inName, in));
+    validateNotNull(Map.of(inName, Pair.of(in, inRegex)));
   }
 
 }

@@ -60,141 +60,141 @@ public class BuildingService {
   }
 
   public Building getBuilding(String bin) throws ResourceNotFoundException {
-    buildingInputValidator.validateBin(bin);
+    buildingInputValidator.validateIn(bin,"building identification number", "bin regex todo");
     dataValidator.validateInIsMapped(buildingRepository, bin);
     return buildingRepository.findById(bin).get();
   }
 
   public Building createBuilding(Building building) {
-    buildingInputValidator.validateBuilding(building);
+    buildingInputValidator.validate(building);
     dataValidator.validateInDoesNotExist(buildingRepository, building.getBin());
     return buildingRepository.save(building);
   }
 
   public void removeBuilding(String bin) {
-    buildingInputValidator.validateBin(bin);
+    buildingInputValidator.validateIn(bin,"building identification number", "bin regex todo");
     dataValidator.validateInIsMapped(buildingRepository, bin);
     buildingRepository.deleteById(bin);
   }
 
   public Building updateBuilding(Building building) {
-    buildingInputValidator.validateBuilding(building);
+    buildingInputValidator.validate(building);
     dataValidator.validateInIsMapped(buildingRepository, building.getBin());
     return buildingRepository.save(building);
   }
 
   public Collection<Notification> listBuildingNotifications(String bin) {
-    buildingInputValidator.validateBin(bin);
+    buildingInputValidator.validateIn(bin,"building identification number", "bin regex todo");
     dataValidator.validateInIsMapped(buildingRepository, bin);
     return notificationRepository.findAllBuildingNotifications(bin);
   }
 
   public Collection<Room> listBuildingRooms(String bin) {
-    buildingInputValidator.validateBin(bin);
+    buildingInputValidator.validateIn(bin,"building identification number", "bin regex todo");
     dataValidator.validateInIsMapped(buildingRepository, bin);
     return roomRepository.findAllBuildingRooms(bin);
   }
 
   public Collection<Component> listBuildingComponents(String bin) {
-    buildingInputValidator.validateBin(bin);
+    buildingInputValidator.validateIn(bin,"building identification number", "bin regex todo");
     dataValidator.validateInIsMapped(buildingRepository, bin);
     return componentRepository.findAllBuildingComponents(bin);
   }
 
   // rooms
   public Room getRoom(String rin) throws ResourceNotFoundException {
-    buildingInputValidator.validateRin(rin);
+    buildingInputValidator.validateIn(rin,"room identification number", "rin regex todo");
     dataValidator.validateInIsMapped(roomRepository, rin);
     throw new ResourceNotFoundException(String.format(NOT_FOUND, rin));
   }
 
   public Room createRoom(Room room) {
-    buildingInputValidator.validateRoom(room);
+    buildingInputValidator.validate(room);
     dataValidator.validateInDoesNotExist(roomRepository, room.getRin());
     dataValidator.validateReferencedId(room.getRin(), room.getParentIn());
     return this.roomRepository.save(room);
   }
 
   public Room updateRoom(Room room) {
-    buildingInputValidator.validateRoom(room);
+    buildingInputValidator.validate(room);
     dataValidator.validateInIsMapped(roomRepository, room.getRin());
     dataValidator.validateReferencedId(room.getRin(), room.getParentIn());
     return this.roomRepository.save(room);
   }
 
   public void removeRoom(String rin) {
-    buildingInputValidator.validateRin(rin);
+    buildingInputValidator.validateIn(rin,"room identification number", "rin regex todo");
     dataValidator.validateInIsMapped(roomRepository, rin);
     roomRepository.deleteById(rin);
   }
 
   public Collection<Component> listRoomComponents(String rin) {
-    buildingInputValidator.validateRin(rin);
+    buildingInputValidator.validateIn(rin,"room identification number", "rin regex todo");
     dataValidator.validateInIsMapped(roomRepository, rin);
     return componentRepository.findAllRoomComponents(rin);
   }
 
   public Collection<Notification> listRoomNotifications(String rin) {
-    buildingInputValidator.validateRin(rin);
+    buildingInputValidator.validateIn(rin,"room identification number", "rin regex todo");
     dataValidator.validateInIsMapped(roomRepository, rin);
     return notificationRepository.findAllRoomNotifications(rin);
   }
 
   // components
   public Component createComponent(Component component) {
-    buildingInputValidator.validateComponent(component);
+    buildingInputValidator.validate(component);
     dataValidator.validateInDoesNotExist(componentRepository, component.getCin());
     dataValidator.validateReferencedId(component.getCin(), component.getParentIn());
     return componentRepository.save(component);
   }
 
   public Component getComponent(String cin) {
-    buildingInputValidator.validateCin(cin);
+    buildingInputValidator.validateIn(cin,"component identification number", "cin regex todo");
     dataValidator.validateInIsMapped(componentRepository, cin);
     return componentRepository.findById(cin).get();
   }
 
   public Component updateComponent(Component component) {
-    buildingInputValidator.validateComponent(component);
+    buildingInputValidator.validate(component);
     dataValidator.validateInIsMapped(componentRepository, component.getCin());
     dataValidator.validateReferencedId(component.getCin(), component.getParentIn());
     return componentRepository.save(component);
   }
 
   public void removeComponent(String cin) {
-    buildingInputValidator.validateCin(cin);
+    buildingInputValidator.validateIn(cin,"component identification number", "cin regex todo");
     dataValidator.validateInIsMapped(componentRepository, cin);
     componentRepository.deleteById(cin);
   }
 
   public Collection<Notification> listComponentNotifications(String cin) {
-    buildingInputValidator.validateCin(cin);
+    buildingInputValidator.validateIn(cin,"component identification number", "cin regex todo");
     dataValidator.validateInIsMapped(componentRepository, cin);
     return notificationRepository.findAllComponentNotifications(cin);
   }
 
   // notifications
   public Notification getNotification(String nin) {
-    buildingInputValidator.validateNin(nin);
+    buildingInputValidator.validateIn(nin,"notification identification number", "nin regex todo");
     dataValidator.validateInIsMapped(notificationRepository, nin);
     return notificationRepository.findById(nin).orElse(null);
   }
 
   public Notification updateNotification(Notification notification) {
-    buildingInputValidator.validateNotification(notification);
+    buildingInputValidator.validate(notification);
     dataValidator.validateInIsMapped(notificationRepository, notification.getNin());
     return notificationRepository.save(notification);
   }
 
   public Notification createNotification(Notification notification) {
-    buildingInputValidator.validateNotification(notification);
+    buildingInputValidator.validate(notification);
     dataValidator.validateInDoesNotExist(notificationRepository, notification.getNin());
     dataValidator.validateReferencedId(notification.getNin(), notification.getParentIn());
     return notificationRepository.save(notification);
   }
 
   public void removeNotification(String nin) {
-    buildingInputValidator.validateNin(nin);
+    buildingInputValidator.validateIn(nin,"notification identification number", "nin regex todo");
     dataValidator.validateInIsMapped(notificationRepository, nin);
     notificationRepository.deleteById(nin);
   }
