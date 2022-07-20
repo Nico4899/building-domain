@@ -37,7 +37,9 @@ public class NotificationValidator extends Validator<Notification> {
   @Override
   public void validateUpdate(Notification object) {
     validateBase(object);
-    validateExists(object.getNin(), GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
+    validateExists(
+        object.getIdentificationNumber(),
+        GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
   }
 
   private void validateBase(Notification object) {
@@ -50,9 +52,9 @@ public class NotificationValidator extends Validator<Notification> {
             GlobalBuildingStringCollection.NOTIFICATION_DESCRIPTION_NAME,
             object.getNotificationDescription(),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-            object.getNin(),
+            object.getIdentificationNumber(),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
-            object.getParentIn(),
+            object.getParentIdentificationNumber(),
             GlobalBuildingStringCollection.CREATION_TIME_NAME,
             object.getCreationTime()));
 
@@ -65,10 +67,15 @@ public class NotificationValidator extends Validator<Notification> {
     validateMatchesRegex(
         Map.of(
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getNin(), GlobalBuildingStringCollection.NIN_PATTERN),
+                Pair.of(
+                    object.getIdentificationNumber(), GlobalBuildingStringCollection.NIN_PATTERN),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getParentIn(), GlobalBuildingStringCollection.BIN_RIN_CIN_PATTERN)));
+                Pair.of(
+                    object.getParentIdentificationNumber(),
+                    GlobalBuildingStringCollection.BIN_RIN_CIN_PATTERN)));
 
-    validateExists(object.getParentIn(), GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
+    validateExists(
+        object.getParentIdentificationNumber(),
+        GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 }

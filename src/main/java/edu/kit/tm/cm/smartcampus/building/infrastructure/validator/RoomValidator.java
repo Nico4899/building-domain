@@ -37,7 +37,7 @@ public class RoomValidator extends Validator<Room> {
   @Override
   public void validateUpdate(Room object) {
     validateBase(object);
-    validateExists(object.getRin(), GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
+    validateExists(object.getIdentificationNumber(), GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
   }
 
   private void validateBase(Room object) {
@@ -48,8 +48,8 @@ public class RoomValidator extends Validator<Room> {
         Map.of(
             GlobalBuildingStringCollection.ROOM_NAME, object.getRoomName(),
             GlobalBuildingStringCollection.ROOM_NUMBER, object.getRoomNumber(),
-            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME, object.getRin(),
-            GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME, object.getParentIn(),
+            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber(),
+            GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME, object.getParentIdentificationNumber(),
             GlobalBuildingStringCollection.FLOOR_NAME, object.getFloor(),
             GlobalBuildingStringCollection.ROOM_TYPE_NAME, object.getRoomType(),
             GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
@@ -62,14 +62,14 @@ public class RoomValidator extends Validator<Room> {
     validateMatchesRegex(
         Map.of(
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getRin(), GlobalBuildingStringCollection.RIN_PATTERN),
+                Pair.of(object.getIdentificationNumber(), GlobalBuildingStringCollection.RIN_PATTERN),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getParentIn(), GlobalBuildingStringCollection.BIN_PATTERN)));
+                Pair.of(object.getParentIdentificationNumber(), GlobalBuildingStringCollection.BIN_PATTERN)));
 
     validateGeographicalLocation(
         Map.of(
             GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
-    validateExists(object.getParentIn(), GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
+    validateExists(object.getParentIdentificationNumber(), GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 }

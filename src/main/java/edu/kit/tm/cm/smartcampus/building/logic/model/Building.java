@@ -27,16 +27,19 @@ public class Building {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "building_sequence")
   @SequenceGenerator(name = "building_sequence", allocationSize = 1)
   @GenericGenerator(
-          name = "building_sequence",
-          strategy =
-                  "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
-          parameters = {
-                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "b-")
-          })
+      name = "building_sequence",
+      strategy =
+          "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
+      parameters = {
+        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "b-")
+      })
   @Column(name = "building_identification_number")
-  private String bin;
+  private String identificationNumber;
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.PERSIST) //TODO testen ob des so passt
+  @OneToOne(
+      fetch = FetchType.LAZY,
+      mappedBy = "id",
+      cascade = CascadeType.PERSIST) // TODO testen ob des so passt
   @Column(name = "building_floors")
   private Floors buildingFloors;
 

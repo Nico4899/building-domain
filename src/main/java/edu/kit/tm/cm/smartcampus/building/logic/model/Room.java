@@ -27,15 +27,17 @@ public class Room {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_sequence")
   @SequenceGenerator(name = "room_sequence", allocationSize = 1)
   @GenericGenerator(
-          name = "room_sequence",
-          strategy =
-                  "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
-          parameters = {
-                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "r-")
-          })
-  private String rin;
+      name = "room_sequence",
+      strategy =
+          "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
+      parameters = {
+        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "r-")
+      })
+  @Column(name = "identification_number")
+  private String identificationNumber;
 
-  private String parentIn;
+  @Column(name = "parent_identification_number")
+  private String parentIdentificationNumber;
 
   private int floor;
 
@@ -45,5 +47,4 @@ public class Room {
   @OneToOne(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.PERSIST)
   @JoinColumn(name = "geographical_location")
   private GeographicalLocation geographicalLocation;
-
 }

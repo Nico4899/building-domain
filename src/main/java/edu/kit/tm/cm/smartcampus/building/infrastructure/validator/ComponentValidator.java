@@ -36,7 +36,9 @@ public class ComponentValidator extends Validator<Component> {
   @Override
   public void validateUpdate(Component object) {
     validateBase(object);
-    validateExists(object.getCin(), GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
+    validateExists(
+        object.getIdentificationNumber(),
+        GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
   }
 
   private void validateBase(Component object) {
@@ -48,9 +50,9 @@ public class ComponentValidator extends Validator<Component> {
             GlobalBuildingStringCollection.COMPONENT_DESCRIPTION_NAME,
             object.getComponentDescription(),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-            object.getCin(),
+            object.getIdentificationNumber(),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
-            object.getParentIn(),
+            object.getParentIdentificationNumber(),
             GlobalBuildingStringCollection.COMPONENT_TYPE_NAME,
             object.getComponentType(),
             GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME,
@@ -58,18 +60,25 @@ public class ComponentValidator extends Validator<Component> {
 
     validateNotEmpty(
         Map.of(
-            GlobalBuildingStringCollection.COMPONENT_DESCRIPTION_NAME, object.getComponentDescription()));
+            GlobalBuildingStringCollection.COMPONENT_DESCRIPTION_NAME,
+            object.getComponentDescription()));
 
     validateMatchesRegex(
         Map.of(
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getCin(), GlobalBuildingStringCollection.CIN_PATTERN),
+                Pair.of(
+                    object.getIdentificationNumber(), GlobalBuildingStringCollection.CIN_PATTERN),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getParentIn(), GlobalBuildingStringCollection.BIN_RIN_PATTERN)));
+                Pair.of(
+                    object.getParentIdentificationNumber(),
+                    GlobalBuildingStringCollection.BIN_RIN_PATTERN)));
 
     validateGeographicalLocation(
         Map.of(
-            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
-    validateExists(object.getParentIn(), GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
+            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME,
+            object.getGeographicalLocation()));
+    validateExists(
+        object.getParentIdentificationNumber(),
+        GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 }

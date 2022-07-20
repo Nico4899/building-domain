@@ -37,7 +37,9 @@ public class BuildingValidator extends Validator<Building> {
   @Override
   public void validateUpdate(Building object) {
     validateBase(object);
-    validateExists(object.getBin(), GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
+    validateExists(
+        object.getIdentificationNumber(),
+        GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
   }
 
   private void validateBase(Building object) {
@@ -50,7 +52,7 @@ public class BuildingValidator extends Validator<Building> {
             GlobalBuildingStringCollection.BUILDING_NUMBER,
             object.getBuildingNumber(),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-            object.getBin(),
+            object.getIdentificationNumber(),
             GlobalBuildingStringCollection.FLOORS_NAME,
             object.getBuildingFloors(),
             GlobalBuildingStringCollection.CAMPUS_LOCATION_NAME,
@@ -58,17 +60,20 @@ public class BuildingValidator extends Validator<Building> {
             GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME,
             object.getGeographicalLocation()));
 
-    validateNotEmpty(Map.of(GlobalBuildingStringCollection.BUILDING_NAME, object.getBuildingName()));
+    validateNotEmpty(
+        Map.of(GlobalBuildingStringCollection.BUILDING_NAME, object.getBuildingName()));
 
     validateMatchesRegex(
         Map.of(
             GlobalBuildingStringCollection.BUILDING_NUMBER,
                 Pair.of(object.getBuildingNumber(), GlobalBuildingStringCollection.BIN_PATTERN),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getBin(), GlobalBuildingStringCollection.BIN_PATTERN)));
+                Pair.of(
+                    object.getIdentificationNumber(), GlobalBuildingStringCollection.BIN_PATTERN)));
 
     validateGeographicalLocation(
         Map.of(
-            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME,
+            object.getGeographicalLocation()));
   }
 }
