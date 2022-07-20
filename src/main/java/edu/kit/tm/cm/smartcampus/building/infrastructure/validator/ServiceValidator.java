@@ -8,6 +8,8 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgum
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static edu.kit.tm.cm.smartcampus.building.utils.BUILDING;
+
 public final class ServiceValidator {
 
   private static final String BIN_PATTERN = "^b-\\d+$";
@@ -53,9 +55,10 @@ public final class ServiceValidator {
     }
     String prefixReferenced = referencedId.substring(0, 1);
     String prefixId = id.substring(0, 1);
+    InvalidArgumentsException inArgsEx = new InvalidArgumentsException();
     switch (prefixId) {
-      case buildingPrefix -> {throw new InvalidArgumentsException("Id " + id + "belongs to a building but a building " +
-          "cannot have a parent.");
+      case buildingPrefix -> {inArgsEx.appendWrongArguments(BUILDING, id, );//("Id " + id + "belongs to a building but a building " +
+          //"cannot have a parent.");
       }
       case roomPrefix -> {
         if(referencedId.matches(BIN_PATTERN) && checkParentOfRoom(referencedId)) {
