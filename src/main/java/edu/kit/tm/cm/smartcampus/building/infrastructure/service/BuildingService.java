@@ -72,6 +72,7 @@ public class BuildingService {
   public void removeBuilding(String identificationNumber) {
     this.buildingValidator.validate(identificationNumber);
     buildingRepository.deleteById(identificationNumber);
+    this.cleanUpBuilding(identificationNumber);
   }
 
   public Building updateBuilding(Building building) {
@@ -113,6 +114,7 @@ public class BuildingService {
   public void removeRoom(String identificationNumber) {
     this.roomValidator.validate(identificationNumber);
     roomRepository.deleteById(identificationNumber);
+    this.cleanUpRoom(identificationNumber);
   }
 
   public Collection<Component> listRoomComponents(String identificationNumber) {
@@ -144,6 +146,7 @@ public class BuildingService {
   public void removeComponent(String identificationNumber) {
     this.componentValidator.validate(identificationNumber);
     componentRepository.deleteById(identificationNumber);
+    this.cleanUpComponent(identificationNumber);
   }
 
   public Collection<Notification> listComponentNotifications(String identificationNumber) {
@@ -171,4 +174,20 @@ public class BuildingService {
     this.notificationValidator.validate(identificationNumber);
     notificationRepository.deleteById(identificationNumber);
   }
+
+  private void cleanUpBuilding(String identificationNumber) {
+    roomRepository.cleanUpBuilding(identificationNumber);
+    componentRepository.cleanUpBuilding(identificationNumber);
+    notificationRepository.cleanUpBuilding(identificationNumber);
+  }
+
+  private void cleanUpRoom(String identificationNumber) {
+    componentRepository.cleanUpRoom(identificationNumber);
+    notificationRepository.cleanUpRoom(identificationNumber);
+  }
+
+  private void cleanUpComponent(String identificationNumber) {
+    notificationRepository.cleanUpComponent(identificationNumber);
+  }
+
 }

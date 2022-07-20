@@ -23,4 +23,16 @@ public interface NotificationRepository extends CrudRepository<Notification, Str
       "SELECT notification From notification notification Where notification.parentIdentificationNumber =: #{#parentIdentificationNumber}")
   Collection<Notification> findAllComponentNotifications(
       @Param("cin") String parentIdentificationNumber);
+
+  @Query(
+      "DELETE From notification Where notification .parentIdentificationNumber =: #{#parentIdentificationNumber}")//TODO prüfen
+  void cleanUpBuilding(@Param("bin") String parentIdentificationNumber);
+
+  @Query(
+      "DELETE From notification Where notification.parentIdentificationNumber =: #{#parentIdentificationNumber}")
+  void cleanUpRoom(@Param("rin") String parentIdentificationNumber);
+
+  @Query(
+      "DELETE From notification Where notification.parentIdentificationNumber =: #{#parentIdentificationNumber}")
+  void cleanUpComponent(@Param("cin") String parentIdentificationNumber);
 }
