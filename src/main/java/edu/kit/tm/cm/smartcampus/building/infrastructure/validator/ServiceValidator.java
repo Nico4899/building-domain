@@ -6,8 +6,8 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.N
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
-import edu.kit.tm.cm.smartcampus.building.utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 
 import static edu.kit.tm.cm.smartcampus.building.utils.*;
 
@@ -26,7 +26,6 @@ public final class ServiceValidator {
 
   private final String notificationPrefix = "n";
 
-  @Autowired
   public ServiceValidator(
       BuildingRepository buildingRepository,
       RoomRepository roomRepository,
@@ -38,6 +37,56 @@ public final class ServiceValidator {
     this.notificationRepository = notificationRepository;
   }
 
+  public void validateInIsMapped(CrudRepository repository, String in) throws ResourceNotFoundException {
+    if(repository.findById(in).isEmpty()) {
+      throw new ResourceNotFoundException(String.format(NOT_FOUND, in));
+    }
+  }
+
+  /*public void validateInDoesNotExist(String in) {
+    String prefixIn = in.substring(0, 1);
+    InvalidArgumentsException inArgsEx = new InvalidArgumentsException();
+    boolean exceptionThrown = false;
+    switch (prefixIn) {
+      case buildingPrefix -> {
+        if(buildingRepository.findById(in).isPresent()) {
+          inArgsEx.appendWrongArguments(BUILDING, in, RESOURCE_ALREADY_EXISTS, true);
+          exceptionThrown = true;
+        }
+      }
+      case roomPrefix -> {
+        if(roomRepository.findById(in).isPresent()) {
+          inArgsEx.appendWrongArguments(ROOM, in, RESOURCE_ALREADY_EXISTS, true);
+          exceptionThrown = true;
+        }
+      }
+      case componentPrefix -> {
+        if(componentRepository.findById(in).isPresent()) {
+          inArgsEx.appendWrongArguments(COMPONENT, in, RESOURCE_ALREADY_EXISTS, true);
+          exceptionThrown = true;
+        }
+      }
+      case notificationPrefix -> {
+        if(notificationRepository.findById(in).isPresent()) {
+          inArgsEx.appendWrongArguments(NOTIFICATION, in, RESOURCE_ALREADY_EXISTS, true);
+          exceptionThrown = true;
+        }
+      }
+    }
+    if(exceptionThrown) {
+      throw inArgsEx;
+    }
+  }*/
+
+  public void validateInDoesNotExist(CrudRepository repository, String in) {
+    InvalidArgumentsException inArgsEx = new InvalidArgumentsException();
+    if(repository.existsById(in)) {
+      inArgsEx.appendWrongArguments(IN, in, RESOURCE_ALREADY_EXISTS, true);
+      throw inArgsEx;
+    }
+  }
+
+
   /**
    * Validates whether the referencedId / referenceId of an object is within the constraints. Cannot be invoked on a
    * building as it has no referencedId. Does NOT check whether the given strings are null.
@@ -46,9 +95,10 @@ public final class ServiceValidator {
    *                     must not be a notificationId
    * @return Optional of the name of the parent / referenced object (e.g. "building")
    */
-  public void validateReferencedId(String id, String referencedId) { //todo regex als variable in text und notification parent
+  public void validateReferencedId(String id, String referencedId) throws InvalidArgumentsException,
+      ResourceNotFoundException {
     if (id == null || referencedId == null) {
-      throw new ResourceNotFoundException("Either identification number or parent number is null!");
+      throw new ResourceNotFoundException(OBJECTS_ARE_NULL + SPACE + id + COMMA + SPACE + referencedId);
     }
     String prefixReferenced = referencedId.substring(0, 1);
     String prefixId = id.substring(0, 1);

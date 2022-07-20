@@ -63,132 +63,120 @@ public class BuildingService {
   }
 
   public Building getBuilding(String bin) throws ResourceNotFoundException {
-    if (!buildingRepository.existsById(bin)) throw new ResourceNotFoundException(String.format(NOT_FOUND, bin));
+    serviceValidator.validateInIsMapped(buildingRepository, bin);
     return buildingRepository.findById(bin).get();
   }
 
   public Building createBuilding(Building building) {
+    serviceValidator.validateInDoesNotExist(buildingRepository, building.getBin());
     return buildingRepository.save(building);
   }
 
   public void removeBuilding(String bin) {
-    if (!buildingRepository.existsById(bin)) throw new ResourceNotFoundException(String.format(NOT_FOUND, bin));
+    serviceValidator.validateInIsMapped(buildingRepository, bin);
     buildingRepository.deleteById(bin);
   }
 
   public Building updateBuilding(Building building) {
-    if (!buildingRepository.existsById(building.getBin()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, building.getBin()));
+    serviceValidator.validateInIsMapped(buildingRepository, building.getBin());
     return buildingRepository.save(building);
   }
 
   public Collection<Notification> listBuildingNotifications(String bin) {
-    if (!roomRepository.existsById(bin)) throw new NoSuchElementException();
+    serviceValidator.validateInIsMapped(buildingRepository, bin);
     return notificationRepository.findAllBuildingNotifications(bin);
   }
 
   public Collection<Room> listBuildingRooms(String bin) {
-    if (!buildingRepository.existsById(bin)) throw new ResourceNotFoundException(String.format(NOT_FOUND, bin));
+    serviceValidator.validateInIsMapped(buildingRepository, bin);
     return roomRepository.findAllBuildingRooms(bin);
   }
 
   public Collection<Component> listBuildingComponents(String bin) {
-    if (!buildingRepository.existsById(bin)) throw new ResourceNotFoundException(String.format(NOT_FOUND, bin));
+    serviceValidator.validateInIsMapped(buildingRepository, bin);
     return componentRepository.findAllBuildingComponents(bin);
   }
 
   // rooms
   public Room getRoom(String rin) throws ResourceNotFoundException {
-    if (roomRepository.existsById(rin)) {
-      return roomRepository.findById(rin).get();
-    }
+    serviceValidator.validateInIsMapped(roomRepository, rin);
     throw new ResourceNotFoundException(String.format(NOT_FOUND, rin));
   }
 
   public Room createRoom(Room room) {
-    if (serviceValidator.validateReferencedId(room.getRin(), room.getParentIn())) {
-      return this.roomRepository.save(room);
-    } else {
-      throw new ResourceNotFoundException(UNKNOWN_ERROR);
-    }
-
+    serviceValidator.validateInDoesNotExist(roomRepository, room.getRin());
+    serviceValidator.validateReferencedId(room.getRin(), room.getParentIn());
+    return this.roomRepository.save(room);
   }
 
-  public Room updateRoom(Room room) { //todo Nochmal parent checken?
-    if (!roomRepository.existsById(room.getRin()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, room.getRin()));
+  public Room updateRoom(Room room) {
+    serviceValidator.validateInIsMapped(roomRepository, room.getRin());
+    serviceValidator.validateReferencedId(room.getRin(), room.getParentIn());
     return this.roomRepository.save(room);
   }
 
   public void removeRoom(String rin) {
-    if (!roomRepository.existsById(rin)) throw new ResourceNotFoundException(String.format(NOT_FOUND, rin));
+    serviceValidator.validateInIsMapped(roomRepository, rin);
     roomRepository.deleteById(rin);
   }
 
   public Collection<Component> listRoomComponents(String rin) {
-    if (!roomRepository.existsById(rin))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, rin));
+    serviceValidator.validateInIsMapped(roomRepository, rin);
     return componentRepository.findAllRoomComponents(rin);
   }
 
   public Collection<Notification> listRoomNotifications(String rin) {
-    if (!roomRepository.existsById(rin)) throw new NoSuchElementException();
+    serviceValidator.validateInIsMapped(roomRepository, rin);
     return notificationRepository.findAllRoomNotifications(rin);
   }
 
   // components
   public Component createComponent(Component component) {
-    if (serviceValidator.validateReferencedId(component.getCin(),
-            component.getParentIn())) {
-      return componentRepository.save(component);
-    } else {
-      throw new ResourceNotFoundException(String.format(UNKNOWN_ERROR, component.getCin()));
-    }
+    serviceValidator.validateInDoesNotExist(componentRepository, component.getCin());
+    serviceValidator.validateReferencedId(component.getCin(), component.getParentIn());
+    return componentRepository.save(component);
   }
 
   public Component getComponent(String cin) {
-    if (!componentRepository.existsById(cin))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, cin));
+    serviceValidator.validateInIsMapped(componentRepository, cin);
     return componentRepository.findById(cin).get();
   }
 
   public Component updateComponent(Component component) {
-    if (!componentRepository.existsById(component.getCin()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, component.getCin()));
+    serviceValidator.validateInIsMapped(componentRepository, component.getCin());
+    serviceValidator.validateReferencedId(component.getCin(), component.getParentIn());
     return componentRepository.save(component);
   }
 
   public void removeComponent(String cin) {
-    if (!componentRepository.existsById(cin))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, cin));
+    serviceValidator.validateInIsMapped(componentRepository, cin);
     componentRepository.deleteById(cin);
   }
 
   public Collection<Notification> listComponentNotifications(String cin) {
-    if (!componentRepository.existsById(cin)) throw new NoSuchElementException();
+    serviceValidator.validateInIsMapped(componentRepository, cin);
     return notificationRepository.findAllComponentNotifications(cin);
   }
 
   // notifications
   public Notification getNotification(String nin) {
-    if (!notificationRepository.existsById(nin)) throw new ResourceNotFoundException(String.format(NOT_FOUND, nin));
+  serviceValidator.validateInIsMapped(notificationRepository, nin);
     return notificationRepository.findById(nin).orElse(null);
   }
 
   public Notification updateNotification(Notification notification) {
-    if (!notificationRepository.existsById(notification.getNin()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, notification.getNin()));
+    serviceValidator.validateInIsMapped(notificationRepository, notification.getNin());
     return notificationRepository.save(notification);
   }
 
   public Notification createNotification(Notification notification) {
-    if (!notificationRepository.existsById(notification.getNin()))
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, notification.getNin()));
+    serviceValidator.validateInDoesNotExist(notificationRepository, notification.getNin());
+    serviceValidator.validateReferencedId(notification.getNin(), notification.getParentIn());
     return notificationRepository.save(notification);
   }
 
   public void removeNotification(String nin) {
-    if (!notificationRepository.existsById(nin)) throw new ResourceNotFoundException(String.format(NOT_FOUND, nin));
+    serviceValidator.validateInIsMapped(notificationRepository, nin);
     notificationRepository.deleteById(nin);
   }
 
