@@ -6,7 +6,6 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.N
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
 import static edu.kit.tm.cm.smartcampus.building.utils.*;
@@ -27,10 +26,10 @@ public final class ServiceValidator {
   private final String notificationPrefix = "n";
 
   public ServiceValidator(
-      BuildingRepository buildingRepository,
-      RoomRepository roomRepository,
-      ComponentRepository componentRepository,
-      NotificationRepository notificationRepository) {
+          BuildingRepository buildingRepository,
+          RoomRepository roomRepository,
+          ComponentRepository componentRepository,
+          NotificationRepository notificationRepository) {
     this.buildingRepository = buildingRepository;
     this.roomRepository = roomRepository;
     this.componentRepository = componentRepository;
@@ -38,7 +37,7 @@ public final class ServiceValidator {
   }
 
   public void validateInIsMapped(CrudRepository repository, String in) throws ResourceNotFoundException {
-    if(repository.findById(in).isEmpty()) {
+    if (repository.findById(in).isEmpty()) {
       throw new ResourceNotFoundException(String.format(NOT_FOUND, in));
     }
   }
@@ -79,8 +78,8 @@ public final class ServiceValidator {
   }*/
 
   public void validateInDoesNotExist(CrudRepository repository, String in) {
-    InvalidArgumentsException inArgsEx = new InvalidArgumentsException();
-    if(repository.existsById(in)) {
+    if (repository.existsById(in)) {
+      InvalidArgumentsException inArgsEx = new InvalidArgumentsException();
       inArgsEx.appendWrongArguments(IN, in, RESOURCE_ALREADY_EXISTS, true);
       throw inArgsEx;
     }
@@ -90,13 +89,14 @@ public final class ServiceValidator {
   /**
    * Validates whether the referencedId / referenceId of an object is within the constraints. Cannot be invoked on a
    * building as it has no referencedId. Does NOT check whether the given strings are null.
-   * @param id id of the considered object, must not be a buildingId
+   *
+   * @param id           id of the considered object, must not be a buildingId
    * @param referencedId referencedId / referenceId of the considered object, whether it is valid depends on the id,
    *                     must not be a notificationId
    * @return Optional of the name of the parent / referenced object (e.g. "building")
    */
   public void validateReferencedId(String id, String referencedId) throws InvalidArgumentsException,
-      ResourceNotFoundException {
+          ResourceNotFoundException {
     if (id == null || referencedId == null) {
       throw new ResourceNotFoundException(OBJECTS_ARE_NULL + SPACE + id + COMMA + SPACE + referencedId);
     }
@@ -112,7 +112,7 @@ public final class ServiceValidator {
       case roomPrefix -> {
         if (!referencedId.matches(BIN_PATTERN)) {
           inArgsEx.appendWrongArguments(PARENT, referencedId, EXPECTED_FORMAT + SPACE + BIN_PATTERN,
-              true);
+                  true);
           exceptionThrown = true;
         }
         if (!checkParentOfRoom(referencedId)) {
@@ -123,7 +123,7 @@ public final class ServiceValidator {
       case componentPrefix -> {
         if (!(referencedId.matches(BIN_PATTERN) || referencedId.matches(RIN_PATTERN))) {
           inArgsEx.appendWrongArguments(PARENT, referencedId, EXPECTED_FORMAT + SPACE + BIN_PATTERN + SPACE +
-              OR + SPACE + RIN_PATTERN, true);
+                  OR + SPACE + RIN_PATTERN, true);
           exceptionThrown = true;
         }
         if (!checkParentOfComponent(referencedId, prefixReferenced)) {
@@ -133,9 +133,9 @@ public final class ServiceValidator {
       }
       case notificationPrefix -> {
         if (!(referencedId.matches(BIN_PATTERN) || referencedId.matches(RIN_PATTERN)
-            || referencedId.matches(CIN_PATTERN))) {
+                || referencedId.matches(CIN_PATTERN))) {
           inArgsEx.appendWrongArguments(PARENT, referencedId, EXPECTED_FORMAT + SPACE + BIN_PATTERN + SPACE +
-              OR + SPACE + RIN_PATTERN + SPACE + OR + CIN_PATTERN, true);
+                  OR + SPACE + RIN_PATTERN + SPACE + OR + CIN_PATTERN, true);
           exceptionThrown = true;
         }
         if (!checkReferencedOfNotification(referencedId, prefixReferenced)) {
@@ -152,11 +152,11 @@ public final class ServiceValidator {
   }
 
 
-
   /**
    * Checks whether room parent is actually a building
+   *
    * @param parentId
-   * @return Optional.of("room") if true or Optional.empty() otherwise
+   * @return Optional.of(" room ") if true or Optional.empty() otherwise
    */
   private boolean checkParentOfRoom(String parentId) throws ResourceNotFoundException {
     return buildingRepository.findById(parentId).isPresent();
@@ -165,6 +165,7 @@ public final class ServiceValidator {
 
   /**
    * Checks whether parentId of a component references a building or a room
+   *
    * @param parentId
    * @param parentPrefix
    * @return
@@ -177,7 +178,9 @@ public final class ServiceValidator {
       case roomPrefix -> {
         return roomRepository.findById(parentId).isPresent();
       }
-      default -> { return false; }
+      default -> {
+        return false;
+      }
     }
   }
 
@@ -192,10 +195,11 @@ public final class ServiceValidator {
       case componentPrefix -> {
         return componentRepository.findById(parentId).isPresent();
       }
-      default -> { return false; }
+      default -> {
+        return false;
+      }
     }
   }
-
 
 
 }
