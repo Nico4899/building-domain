@@ -1,6 +1,16 @@
 context Notification inv:
+
 self.notificationTitle -> notEmpty()
+
 self.notificationDescription -> notEmpty()
+
+self.nin.matches(^n-\d+$)
+
+self.parentIn.matches(^b-\d+$) | self.parentIn.matches(^r-\d+$) | self.parentIn.matches(^c-\d+$)
+self.parentIn.matches(^b-\d+$) -> implies building.findById(self.parentIn)->exists()
+self.parentIn.matches(^r-\d+$) -> implies room.findById(self.parentIn)->exists()
+self.parentIn.matches(^c-\d+$) -> implies component.findById(self.parentIn)->exists()
+
 self.creationDate -> notEmpty()
-self.identificationNumber -> notEmpty()
-self.parentIdentificationNumber -> notEmpty()
+
+

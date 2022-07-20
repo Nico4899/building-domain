@@ -1,10 +1,10 @@
-package edu.kit.tm.cm.smartcampus.building.api.controller;
+package edu.kit.tm.cm.smartcampus.building.api.operations;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/notifications")
-public interface NotificationApi {
+public interface NotificationOperations {
 
   @GetMapping("/{nin}")
   Notification getNotification(@PathVariable String nin);

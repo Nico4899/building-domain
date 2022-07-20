@@ -5,21 +5,28 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * This class represents a geographical location, by longitude and latitude coordinates.
+ * This class represents floors of a building.
+ * The ground-floor hast the value 0 by convention.
  */
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Entity(name = "geographical_location")
-public class GeographicalLocation {
+@Entity(name = "floors")
+public class Floors {
 
   @Id
   private Long id;
-  private double latitude;
-  private double longitude;
+
+  @Column(name = "highest_floor")
+  private int highestFloor;
+
+  @Column(name = "lowest_floor")
+  private int lowestFloor;
+
 }

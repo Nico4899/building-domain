@@ -1,4 +1,4 @@
-package edu.kit.tm.cm.smartcampus.building.api.controller;
+package edu.kit.tm.cm.smartcampus.building.api.operations;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RequestMapping("/rooms")
-public interface RoomApi {
+public interface RoomOperations {
 
   @PostMapping("")
   Room createRoom(@RequestBody Room room);

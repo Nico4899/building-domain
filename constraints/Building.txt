@@ -6,14 +6,31 @@ self.northTwo.matches(^[0-9]{4}[.][0-9]{1,2}?$)
 self.northThree.matches(^[0-9]{1}[.][0-9]{3}[.][0-9]{1,2}?$)
 self.northFour.matches(^[0-9]{3}[\/][0-9]{1}?$)
 self.northFive.matches(^[0-9]{3}[a-z]{1}?$)
+
 self.buildingName -> notEmpty()
-self.buildingNumber -> notEmpty() implies self.aoNumber.toString().matches(regular) |
-                self.aoNumber.toString().matches(east) | self.aoNumber.toString().matches(northOne) |
-		self.aoNumber.toString().matches(northTwo) | self.aoNumber.toString().matches(northThree) |
-                self.aoNumber.toString().matches(northFour) | self.aoNumber.toString().matches(northFive)
-self.identificationNumber -> notEmpty()
+
+self.buildingNumber.matches(regular) |self.buildingNumber.matches(east) 
+                | self.buildingNumber.matches(northOne) | self.buildingNumber.matches(northTwo) 
+                | self.buildingNumber.matches(northThree) | self.buildingNumber.matches(northFour) 
+                | self.buildingNumber.matches(northFive)
+
+self.bin.matches(^b-\d+$)
+
 self.numFloors > 0
-self.geographicalLocation -> notEmpty()
+
 self.campusLocation -> notEmpty()
+
+self.geographicalLocation -> notEmpty()
+
+
+
+
+
+
+
+
+
+
+
 
 
