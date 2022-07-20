@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
+import com.sun.istack.NotNull;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.Map;
  */
 @Component
 @AllArgsConstructor
-public final class InputValidator {
+public class InputValidator {
 
   /**
    * Validates weather objects are not null or not.
