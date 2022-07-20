@@ -153,9 +153,9 @@ public class BuildingInputValidator extends InputValidator {
    *
    * @param rin the rin to be validated
    */
-  public void validateRin(String rin) {
-    validateNotNull(Map.of("room identification number", rin));
-    validateNotNull(Map.of("room identification number", Pair.of(rin, "TODO rin regex")));
+  public void validate(String name, String identificationNumber, String pattern) {
+    validateNotNull(Map.of(name, identificationNumber));
+    validateNotNull(Map.of("room identification number", Pair.of(identificationNumber)));
   }
 
   /**

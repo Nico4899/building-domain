@@ -8,6 +8,9 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgum
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Collection;
+import java.util.List;
+
 import static edu.kit.tm.cm.smartcampus.building.utils.*;
 
 public final class DataValidator {
@@ -36,9 +39,9 @@ public final class DataValidator {
     this.notificationRepository = notificationRepository;
   }
 
-  public void validateInIsMapped(CrudRepository repository, String in) throws ResourceNotFoundException {
-    if (repository.findById(in).isEmpty()) {
-      throw new ResourceNotFoundException(String.format(NOT_FOUND, in));
+  public void validateBuildingExists(String identificationNumber) throws ResourceNotFoundException {
+    if (!buildingRepository.existsById(identificationNumber)) {
+      throw new ResourceNotFoundException(String.format(NOT_FOUND, identificationNumber));
     }
   }
 
@@ -87,20 +90,33 @@ public final class DataValidator {
 
 
   /**
-   * Validates whether the referencedId / referenceId of an object is within the constraints. Cannot be invoked on a
-   * building as it has no referencedId. Does NOT check whether the given strings are null.
+   * Validates whether the relatedIdentificationNumber / referenceId of an object is within the constraints. Cannot be invoked on a
+   * building as it has no relatedIdentificationNumber. Does NOT check whether the given strings are null.
    *
    * @param id           id of the considered object, must not be a buildingId
-   * @param referencedId referencedId / referenceId of the considered object, whether it is valid depends on the id,
+   * @param relatedIdentificationNumber relatedIdentificationNumber / referenceId of the considered object, whether it is valid depends on the id,
    *                     must not be a notificationId
    * @return Optional of the name of the parent / referenced object (e.g. "building")
    */
-  public void validateReferencedId(String id, String referencedId) throws InvalidArgumentsException,
+  public void validateRelationExists(String relatedIdentificationNumber) throws InvalidArgumentsException,
           ResourceNotFoundException {
-    if (id == null || referencedId == null) {
-      throw new ResourceNotFoundException(OBJECTS_ARE_NULL + SPACE + id + COMMA + SPACE + referencedId);
+    Collection<CrudRepository<?, String>> repositories = List.of(buildingRepository, roomRepository, componentRepository);
+    boolean found = false;
+    for (CrudRepository<?,String> repository : repositories) {
+      if (repository.existsById(relatedIdentificationNumber)) {
+        found = true;
+      }
     }
-    String prefixReferenced = referencedId.substring(0, 1);
+    if (!found) {
+      throw new InvalidArgumentsException();
+    }
+
+
+    /*
+    if (id == null || relatedIdentificationNumber == null) {
+      throw new ResourceNotFoundException(OBJECTS_ARE_NULL + SPACE + id + COMMA + SPACE + relatedIdentificationNumber);
+    }
+    String prefixReferenced = relatedIdentificationNumber.substring(0, 1);
     String prefixId = id.substring(0, 1);
     InvalidArgumentsException inArgsEx = new InvalidArgumentsException();
     boolean exceptionThrown = false;
@@ -110,36 +126,36 @@ public final class DataValidator {
         throw inArgsEx;
       }
       case roomPrefix -> {
-        if (!referencedId.matches(BIN_PATTERN)) {
-          inArgsEx.appendWrongArguments(PARENT, referencedId, EXPECTED_FORMAT + SPACE + BIN_PATTERN,
+        if (!relatedIdentificationNumber.matches(BIN_PATTERN)) {
+          inArgsEx.appendWrongArguments(PARENT, relatedIdentificationNumber, EXPECTED_FORMAT + SPACE + BIN_PATTERN,
                   true);
           exceptionThrown = true;
         }
-        if (!checkParentOfRoom(referencedId)) {
-          inArgsEx.appendWrongArguments(PARENT, referencedId, PARENT_NOT_FOUND_ERROR, true);
+        if (!checkParentOfRoom(relatedIdentificationNumber)) {
+          inArgsEx.appendWrongArguments(PARENT, relatedIdentificationNumber, PARENT_NOT_FOUND_ERROR, true);
           exceptionThrown = true;
         }
       }
       case componentPrefix -> {
-        if (!(referencedId.matches(BIN_PATTERN) || referencedId.matches(RIN_PATTERN))) {
-          inArgsEx.appendWrongArguments(PARENT, referencedId, EXPECTED_FORMAT + SPACE + BIN_PATTERN + SPACE +
+        if (!(relatedIdentificationNumber.matches(BIN_PATTERN) || relatedIdentificationNumber.matches(RIN_PATTERN))) {
+          inArgsEx.appendWrongArguments(PARENT, relatedIdentificationNumber, EXPECTED_FORMAT + SPACE + BIN_PATTERN + SPACE +
                   OR + SPACE + RIN_PATTERN, true);
           exceptionThrown = true;
         }
-        if (!checkParentOfComponent(referencedId, prefixReferenced)) {
-          inArgsEx.appendWrongArguments(PARENT, referencedId, PARENT_NOT_FOUND_ERROR, true);
+        if (!checkParentOfComponent(relatedIdentificationNumber, prefixReferenced)) {
+          inArgsEx.appendWrongArguments(PARENT, relatedIdentificationNumber, PARENT_NOT_FOUND_ERROR, true);
           exceptionThrown = true;
         }
       }
       case notificationPrefix -> {
-        if (!(referencedId.matches(BIN_PATTERN) || referencedId.matches(RIN_PATTERN)
-                || referencedId.matches(CIN_PATTERN))) {
-          inArgsEx.appendWrongArguments(PARENT, referencedId, EXPECTED_FORMAT + SPACE + BIN_PATTERN + SPACE +
+        if (!(relatedIdentificationNumber.matches(BIN_PATTERN) || relatedIdentificationNumber.matches(RIN_PATTERN)
+                || relatedIdentificationNumber.matches(CIN_PATTERN))) {
+          inArgsEx.appendWrongArguments(PARENT, relatedIdentificationNumber, EXPECTED_FORMAT + SPACE + BIN_PATTERN + SPACE +
                   OR + SPACE + RIN_PATTERN + SPACE + OR + CIN_PATTERN, true);
           exceptionThrown = true;
         }
-        if (!checkReferencedOfNotification(referencedId, prefixReferenced)) {
-          inArgsEx.appendWrongArguments(REFERENCED, referencedId, REFERENCED_NOT_FOUND_ERROR, true);
+        if (!checkReferencedOfNotification(relatedIdentificationNumber, prefixReferenced)) {
+          inArgsEx.appendWrongArguments(REFERENCED, relatedIdentificationNumber, REFERENCED_NOT_FOUND_ERROR, true);
           exceptionThrown = true;
         }
       }
@@ -149,6 +165,7 @@ public final class DataValidator {
     if (exceptionThrown) {
       throw inArgsEx;
     }
+    */
   }
 
 

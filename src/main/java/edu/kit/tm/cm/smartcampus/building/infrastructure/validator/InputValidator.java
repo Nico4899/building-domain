@@ -1,11 +1,9 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
-import com.sun.istack.NotNull;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
 import lombok.AllArgsConstructor;
 import org.springframework.data.util.Pair;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -13,9 +11,8 @@ import java.util.Map;
  * Class representing an input validator which checks given inputs and thereby validates them and throws the right
  * exceptions when an input is invalid.
  */
-@Component
 @AllArgsConstructor
-public class InputValidator {
+public abstract class InputValidator {
 
   /**
    * Validates weather objects are not null or not.
