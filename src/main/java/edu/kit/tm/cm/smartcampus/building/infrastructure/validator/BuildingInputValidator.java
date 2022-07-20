@@ -29,7 +29,7 @@ public class BuildingInputValidator extends InputValidator {
             "building name", building.getBuildingName(),
             "building number", building.getBuildingNumber(),
             "building identification number", building.getBin(),
-            "building number of floors", building.getNumFloors(),
+            "building floors", building.getBuildingFloors(),
             "building campus location", building.getCampusLocation(),
             "building geographical location", building.getGeographicalLocation()
     ));
