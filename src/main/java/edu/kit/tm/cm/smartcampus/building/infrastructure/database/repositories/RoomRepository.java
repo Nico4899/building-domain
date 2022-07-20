@@ -9,6 +9,6 @@ import java.util.Collection;
 
 public interface RoomRepository extends CrudRepository<Room, String> {
 
-  @Query("SELECT room From room room Where room.parentIn =: #{#bin}")
-  Collection<Room> findAllBuildingRooms(@Param("bin") String bin);
+  @Query("SELECT room From room room Where room.parentIn =: #{#parentIdentificationNumber}")
+  Collection<Room> findAllBuildingRooms(@Param("bin") String parentIdentificationNumber);
 }

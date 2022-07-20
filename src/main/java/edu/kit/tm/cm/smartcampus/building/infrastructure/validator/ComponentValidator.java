@@ -1,11 +1,11 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
+import edu.kit.tm.cm.smartcampus.building.GlobalBuildingStringCollection;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
-import edu.kit.tm.cm.smartcampus.building.GlobalStringCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 
@@ -25,7 +25,7 @@ public class ComponentValidator extends Validator<Component> {
 
   @Override
   protected String getValidateRegex() {
-    return GlobalStringCollection.CIN_PATTERN;
+    return GlobalBuildingStringCollection.CIN_PATTERN;
   }
 
   @Override
@@ -36,30 +36,40 @@ public class ComponentValidator extends Validator<Component> {
   @Override
   public void validateUpdate(Component object) {
     validateBase(object);
-    validateExists(object.getCin(), "identification_number");
+    validateExists(object.getCin(), GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
   }
 
   private void validateBase(Component object) {
+
+    validateNotNull(Map.of(GlobalBuildingStringCollection.COMPONENT, object));
+
     validateNotNull(
         Map.of(
-            "component ", object,
-            "component description", object.getComponentDescription(),
-            "component identification number", object.getCin(),
-            "component parent identification number", object.getParentIn(),
-            "component type", object.getComponentType(),
-            "component geographical location", object.getGeographicalLocation()));
+            GlobalBuildingStringCollection.COMPONENT_DESCRIPTION_NAME,
+            object.getComponentDescription(),
+            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
+            object.getCin(),
+            GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
+            object.getParentIn(),
+            GlobalBuildingStringCollection.COMPONENT_TYPE_NAME,
+            object.getComponentType(),
+            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME,
+            object.getGeographicalLocation()));
 
-    validateNotEmpty(Map.of("component description", object.getComponentDescription()));
+    validateNotEmpty(
+        Map.of(
+            GlobalBuildingStringCollection.COMPONENT_DESCRIPTION_NAME, object.getComponentDescription()));
 
     validateMatchesRegex(
         Map.of(
-            "component identification number", Pair.of(object.getCin(), "TODO cin regex"),
-            "component parent identification number",
-                Pair.of(object.getParentIn(), "TODO bin/rin regex")));
+            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
+                Pair.of(object.getCin(), GlobalBuildingStringCollection.CIN_PATTERN),
+            GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
+                Pair.of(object.getParentIn(), GlobalBuildingStringCollection.BIN_RIN_PATTERN)));
 
     validateGeographicalLocation(
-        Map.of("component geographical location", object.getGeographicalLocation()));
-    validateExists(object.getParentIn(), "parent_identification_number");
-
+        Map.of(
+            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+    validateExists(object.getParentIn(), GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 }

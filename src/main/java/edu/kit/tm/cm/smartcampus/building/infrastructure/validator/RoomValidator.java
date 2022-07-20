@@ -1,11 +1,11 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
+import edu.kit.tm.cm.smartcampus.building.GlobalBuildingStringCollection;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
-import edu.kit.tm.cm.smartcampus.building.GlobalStringCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class RoomValidator extends Validator<Room> {
 
   @Override
   protected String getValidateRegex() {
-    return GlobalStringCollection.RIN_PATTERN;
+    return GlobalBuildingStringCollection.RIN_PATTERN;
   }
 
   @Override
@@ -37,34 +37,39 @@ public class RoomValidator extends Validator<Room> {
   @Override
   public void validateUpdate(Room object) {
     validateBase(object);
-    validateExists(object.getRin(), "identification_number");
+    validateExists(object.getRin(), GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
   }
 
   private void validateBase(Room object) {
+
+    validateNotNull(Map.of(GlobalBuildingStringCollection.ROOM, object));
+
     validateNotNull(
-      Map.of(
-        "room ", object,
-        "room_name", object.getRoomName(),
-        "room_number", object.getRoomNumber(),
-        "room_identification number", object.getRin(),
-        "room_parent identification number", object.getParentIn(),
-        "room_floor", object.getFloor(),
-        "room_type", object.getRoomType(),
-        "room_geographical_location", object.getGeographicalLocation()));
+        Map.of(
+            GlobalBuildingStringCollection.ROOM_NAME, object.getRoomName(),
+            GlobalBuildingStringCollection.ROOM_NUMBER, object.getRoomNumber(),
+            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME, object.getRin(),
+            GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME, object.getParentIn(),
+            GlobalBuildingStringCollection.FLOOR_NAME, object.getFloor(),
+            GlobalBuildingStringCollection.ROOM_TYPE_NAME, object.getRoomType(),
+            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
     validateNotEmpty(
-      Map.of(
-        "room_name", object.getRoomName(),
-        "room_number", object.getRoomNumber()));
+        Map.of(
+            GlobalBuildingStringCollection.ROOM_NAME, object.getRoomName(),
+            GlobalBuildingStringCollection.ROOM_NUMBER, object.getRoomNumber()));
 
     validateMatchesRegex(
-      Map.of(
-        GlobalStringCollection.IDENTIFICATION_NUMBER_NAME, Pair.of(object.getRin(), GlobalStringCollection.RIN_PATTERN),
-        GlobalStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME, Pair.of(object.getParentIn(), GlobalStringCollection.BIN_PATTERN)));
+        Map.of(
+            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
+                Pair.of(object.getRin(), GlobalBuildingStringCollection.RIN_PATTERN),
+            GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
+                Pair.of(object.getParentIn(), GlobalBuildingStringCollection.BIN_PATTERN)));
 
     validateGeographicalLocation(
-      Map.of(GlobalStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+        Map.of(
+            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
-    validateExists(object.getParentIn(), "parent_identification_number");
+    validateExists(object.getParentIn(), GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 }

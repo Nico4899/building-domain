@@ -59,7 +59,7 @@ public class BuildingService {
     return buildings;
   }
 
-  public Building getBuilding(String identificationNumber) throws ResourceNotFoundException {
+  public Building getBuilding(String identificationNumber){
     this.buildingValidator.validate(identificationNumber);
     return buildingRepository.findById(identificationNumber).get();
   }

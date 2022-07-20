@@ -12,10 +12,10 @@ import java.util.Collection;
 public interface ComponentRepository extends CrudRepository<Component, String> {
 
   @Query(
-          "SELECT component From component component Where component.parentIn =: #{#bin}")
-  Collection<Component> findAllBuildingComponents(@Param("bin") String bin);
+          "SELECT component From component component Where component.parentIn =: #{#parentIdentificationNumber}")
+  Collection<Component> findAllBuildingComponents(@Param("bin") String parentIdentificationNumber);
 
   @Query(
-          "SELECT component From component component Where component.parentIn =: #{#rin}")
-  Collection<Component> findAllRoomComponents(@Param("rin") String rin);
+          "SELECT component From component component Where component.parentIn =: #{#parentIdentificationNumber}")
+  Collection<Component> findAllRoomComponents(@Param("rin") String parentIdentificationNumber);
 }

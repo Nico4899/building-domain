@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
+import edu.kit.tm.cm.smartcampus.building.GlobalBuildingStringCollection;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
@@ -7,7 +8,6 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.R
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
-import edu.kit.tm.cm.smartcampus.building.GlobalStringCollection;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Pair;
 
@@ -21,10 +21,10 @@ import java.util.Map;
  */
 public abstract class Validator<T> {
 
-  public static final int MAX_LATITUDE_VALUE = 90;
-  public static final int MIN_LATITUDE_VALUE = -90;
-  public static final int MAX_LONGITUDE_VALUE = 180;
-  public static final double MIN_LONGITUDE_VALUE = -180.0;
+  public static final double MAX_LATITUDE_VALUE = 90;
+  public static final double MIN_LATITUDE_VALUE = -90;
+  public static final double MAX_LONGITUDE_VALUE = 180;
+  public static final double MIN_LONGITUDE_VALUE = -180;
 
   private final BuildingRepository buildingRepository;
   private final RoomRepository roomRepository;
@@ -54,7 +54,10 @@ public abstract class Validator<T> {
     for (Map.Entry<String, Object> entry : objects.entrySet()) {
       if (entry.getValue() == null) {
         invalidArgumentsException.appendWrongArguments(
-            entry.getKey(), "null", "should not be null", true);
+            entry.getKey(),
+            GlobalBuildingStringCollection.NULL,
+            GlobalBuildingStringCollection.SHOULD_NOT_BE_NULL_MESSAGE,
+            true);
         valid = false;
       }
     }
@@ -76,7 +79,10 @@ public abstract class Validator<T> {
     for (Map.Entry<String, String> entry : strings.entrySet()) {
       if (!entry.getValue().isEmpty()) {
         invalidArgumentsException.appendWrongArguments(
-            entry.getKey() + ": ", entry.getValue(), "should not be empty", true);
+            entry.getKey() + GlobalBuildingStringCollection.COLON,
+            entry.getValue(),
+            GlobalBuildingStringCollection.SHOULD_NOT_BE_EMPTY_MESSAGE,
+            true);
         valid = false;
       }
     }
@@ -101,7 +107,8 @@ public abstract class Validator<T> {
         invalidArgumentsException.appendWrongArguments(
             entry.getKey(),
             entry.getValue().getFirst(),
-            "should match: " + entry.getValue().getSecond(),
+            String.format(
+                GlobalBuildingStringCollection.SHOULD_MATCH_MESSAGE, entry.getValue().getSecond()),
             true);
         valid = false;
       }
@@ -124,19 +131,27 @@ public abstract class Validator<T> {
     boolean valid = true;
 
     for (Map.Entry<String, GeographicalLocation> entry : geographicalLocations.entrySet()) {
-      if (entry.getValue().getLatitude() > MAX_LATITUDE_VALUE || entry.getValue().getLatitude() < MIN_LATITUDE_VALUE) {
+      if (entry.getValue().getLatitude() > MAX_LATITUDE_VALUE
+          || entry.getValue().getLatitude() < MIN_LATITUDE_VALUE) {
         invalidArgumentsException.appendWrongArguments(
-            entry.getKey() + GlobalStringCollection.SPACE + GlobalStringCollection.LATITUDE_NAME,
-          Double.toString(entry.getValue().getLatitude()),
-            "should be between -90.000000 and 90.000000",
+            entry.getKey() + GlobalBuildingStringCollection.SPACE + GlobalBuildingStringCollection.LATITUDE_NAME,
+            Double.toString(entry.getValue().getLatitude()),
+            String.format(
+                GlobalBuildingStringCollection.SHOULD_BE_BETWEEN_MESSAGE,
+                MIN_LATITUDE_VALUE,
+                MAX_LATITUDE_VALUE),
             true);
         valid = false;
       }
-      if (entry.getValue().getLongitude() > MAX_LONGITUDE_VALUE || entry.getValue().getLongitude() < MIN_LONGITUDE_VALUE) {
+      if (entry.getValue().getLongitude() > MAX_LONGITUDE_VALUE
+          || entry.getValue().getLongitude() < MIN_LONGITUDE_VALUE) {
         invalidArgumentsException.appendWrongArguments(
-            entry.getKey() + GlobalStringCollection.LONGITUDE_NAME,
+            entry.getKey() + GlobalBuildingStringCollection.LONGITUDE_NAME,
             Double.toString(entry.getValue().getLongitude()),
-            "should be between -180.000000 and 180.000000",
+            String.format(
+                GlobalBuildingStringCollection.SHOULD_BE_BETWEEN_MESSAGE,
+                MIN_LONGITUDE_VALUE,
+                MAX_LONGITUDE_VALUE),
             true);
         valid = false;
       }
@@ -158,15 +173,21 @@ public abstract class Validator<T> {
     }
     if (!found) {
       throw new ResourceNotFoundException(
-          String.format(GlobalStringCollection.RESOURCE_NOT_FOUND_MESSAGE, name, inputIdentificationNumber));
+          String.format(
+              GlobalBuildingStringCollection.RESOURCE_NOT_FOUND_ERROR_MESSAGE,
+              name,
+              inputIdentificationNumber));
     }
   }
 
-
   public void validate(String identificationNumber) {
-    validateNotNull(Map.of(GlobalStringCollection.IDENTIFICATION_NUMBER_NAME, identificationNumber));
-    validateMatchesRegex(Map.of(GlobalStringCollection.IDENTIFICATION_NUMBER_NAME, Pair.of(identificationNumber, getValidateRegex())));
-    validateExists(identificationNumber, GlobalStringCollection.IDENTIFICATION_NUMBER_NAME);
+    validateNotNull(
+        Map.of(GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME, identificationNumber));
+    validateMatchesRegex(
+        Map.of(
+            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
+            Pair.of(identificationNumber, getValidateRegex())));
+    validateExists(identificationNumber, GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
   }
 
   protected abstract String getValidateRegex();
@@ -174,5 +195,4 @@ public abstract class Validator<T> {
   public abstract void validateCreate(T object);
 
   public abstract void validateUpdate(T object);
-
 }
