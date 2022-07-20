@@ -1,11 +1,11 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import lombok.AllArgsConstructor;
 import org.springframework.data.util.Pair;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  * Class representing a building input validator which checks given objects from the building model and thereby
  * validates them and throws the right exceptions when an input is invalid.
  */
-@Component
+@org.springframework.stereotype.Component
 @AllArgsConstructor
 public class BuildingInputValidator extends InputValidator {
 
@@ -87,7 +87,7 @@ public class BuildingInputValidator extends InputValidator {
    *
    * @param component the component to be validated
    */
-  public void validateComponent(edu.kit.tm.cm.smartcampus.building.logic.model.Component component) { //TODOOOOOOOOOOOOOOOOOOOOOOOOOO
+  public void validateComponent(Component component) {
     validateNotNull(Map.of(
             "component ", component,
             "component description", component.getComponentDescription(),
