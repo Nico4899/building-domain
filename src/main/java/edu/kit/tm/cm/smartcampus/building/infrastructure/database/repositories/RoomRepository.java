@@ -1,6 +1,7 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +14,8 @@ public interface RoomRepository extends CrudRepository<Room, String> {
       "SELECT room From room room Where room.parentIdentificationNumber =: #{#parentIdentificationNumber}")
   Collection<Room> findAllBuildingRooms(@Param("bin") String parentIdentificationNumber);
 
+  @Modifying
   @Query(
-      "DELETE From room Where room.parentIdentificationNumber =: #{#parentIdentificationNumber}")//TODO pruefen
-  void cleanUpBuilding(@Param("bin") String parentIdentificationNumber);
+      "DELETE From room Where room.parentIdentificationNumber =: #{#parentIdentificationNumber}")
+  void cleanUp(@Param("bin") String parentIdentificationNumber);
 }

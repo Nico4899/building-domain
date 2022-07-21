@@ -177,18 +177,18 @@ public class BuildingService {
   }
 
   private void cleanUpBuilding(String identificationNumber) {
-    roomRepository.cleanUpBuilding(identificationNumber);
-    componentRepository.cleanUpBuilding(identificationNumber);
-    notificationRepository.cleanUpBuilding(identificationNumber);
+    roomRepository.cleanUp(identificationNumber);
+    componentRepository.cleanUp(identificationNumber);
+    notificationRepository.cleanUp(identificationNumber);
   }
 
   private void cleanUpRoom(String identificationNumber) {
-    componentRepository.cleanUpRoom(identificationNumber);
-    notificationRepository.cleanUpRoom(identificationNumber);
+    componentRepository.cleanUp(identificationNumber);
+    notificationRepository.cleanUp(identificationNumber);
   }
 
   private void cleanUpComponent(String identificationNumber) {
-    notificationRepository.cleanUpComponent(identificationNumber);
+    notificationRepository.cleanUp(identificationNumber);
   }
 
 }
