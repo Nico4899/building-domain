@@ -7,6 +7,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.N
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
 import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Pair;
@@ -96,7 +97,7 @@ public abstract class Validator<T> {
    * Validates weather Strings match given regexes or not.
    *
    * @param strings Map of strings and their regexes to be checked and their names (key=name,
-   *     value=pair of string and regex)
+   *                value=pair of string and regex)
    */
   protected void validateMatchesRegex(Map<String, Pair<String, String>> strings) {
     InvalidArgumentsException invalidArgumentsException = new InvalidArgumentsException();
@@ -123,7 +124,7 @@ public abstract class Validator<T> {
    * Validates weather geographical locations have valid latitude and longitude values or not.
    *
    * @param geographicalLocations Map of geographical locations to be checked and their names (key =
-   *     name, value=geographical location)
+   *                              name, value=geographical location)
    */
   protected void validateGeographicalLocation(
       Map<String, GeographicalLocation> geographicalLocations) {
@@ -152,6 +153,31 @@ public abstract class Validator<T> {
                 GlobalBuildingStringCollection.SHOULD_BE_BETWEEN_MESSAGE,
                 MIN_LONGITUDE_VALUE,
                 MAX_LONGITUDE_VALUE),
+            true);
+        valid = false;
+      }
+    }
+
+    if (!valid) {
+      throw invalidArgumentsException;
+    }
+  }
+
+  /**
+   * Validates weather floors have valid attributes or not.
+   *
+   * @param floors Map of floors to be checked and their names (key = name, value=floors)
+   */
+  public void validateFloors(Map<String, Floors> floors) { //TODO cool formatieren
+    InvalidArgumentsException invalidArgumentsException = new InvalidArgumentsException();
+    boolean valid = true;
+
+    for (Map.Entry<String, Floors> entry : floors.entrySet()) {
+      if (entry.getValue().getHighestFloor() < entry.getValue().getLowestFloor()) {
+        invalidArgumentsException.appendWrongArguments(
+            entry.getKey() + " highest floor",
+            entry.getValue().getHighestFloor() + "",
+            "should be higher than lowest floor: " + entry.getValue().getLowestFloor(),
             true);
         valid = false;
       }

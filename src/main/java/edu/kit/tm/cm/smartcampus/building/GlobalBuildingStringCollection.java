@@ -31,6 +31,10 @@ public final class GlobalBuildingStringCollection {
   public static final String CREATION_TIME_NAME = "creation_time";
   public static final String FLOORS_NAME = "floors";
 
+  public static final String LOWEST_FLOOR_NAME = "lowest floor";
+
+  public static final String HIGHEST_FLOOR_NAME = "highest floor";
+
   // messages
   public static final String SHOULD_MATCH_MESSAGE = "should match: %s";
   public static final String SHOULD_BE_BETWEEN_MESSAGE = "should be between %s and %s";
