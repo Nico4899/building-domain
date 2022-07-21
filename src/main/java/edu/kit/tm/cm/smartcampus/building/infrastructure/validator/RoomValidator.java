@@ -5,6 +5,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.B
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
@@ -62,14 +63,31 @@ public class RoomValidator extends Validator<Room> {
     validateMatchesRegex(
         Map.of(
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getIdentificationNumber(), GlobalBuildingStringCollection.RIN_PATTERN),
+            Pair.of(object.getIdentificationNumber(), GlobalBuildingStringCollection.RIN_PATTERN),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getParentIdentificationNumber(), GlobalBuildingStringCollection.BIN_PATTERN)));
+            Pair.of(object.getParentIdentificationNumber(), GlobalBuildingStringCollection.BIN_PATTERN)));
 
     validateGeographicalLocation(
         Map.of(
             GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
-    validateExists(object.getParentIdentificationNumber(), GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
+    validateExists(object.getParentIdentificationNumber(),
+        GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);
+
+    //validateFloor(object);
+
   }
+
+  /*private void validateFloor(final Room object) { //TODO wie macht man dat ganze schön? -> wahrscheinlich direkt in den Validator (mache ich demnächst)
+    BuildingRepository buildingRepository;
+    Floors floors = buildingRepository.findById(object.getIdentificationNumber()).get().getBuildingFloors();
+    if (object.getFloor() < floors.getLowestFloor()) {
+      //throw exception
+    }
+    if (object.getFloor() > floors.getHighestFloor()) {
+      //throw exception
+    }
+  }*/
+
+
 }
