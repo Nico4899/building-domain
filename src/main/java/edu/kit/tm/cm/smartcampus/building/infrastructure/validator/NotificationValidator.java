@@ -31,18 +31,24 @@ public class NotificationValidator extends Validator<Notification> {
 
   @Override
   public void validateCreate(Notification object) {
+    validateNotNull(Map.of(GlobalBuildingStringCollection.NOTIFICATION, object));
+
+    validateNotNull(
+        Map.of(
+            GlobalBuildingStringCollection.NOTIFICATION_TITLE_NAME,
+            object.getNotificationTitle(),
+            GlobalBuildingStringCollection.NOTIFICATION_DESCRIPTION_NAME,
+            object.getNotificationDescription(),
+            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
+            object.getIdentificationNumber(),
+            GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
+            object.getParentIdentificationNumber()));
+
     validateBase(object);
   }
 
   @Override
   public void validateUpdate(Notification object) {
-    validateBase(object);
-    validateExists(
-        object.getIdentificationNumber(),
-        GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
-  }
-
-  private void validateBase(Notification object) {
     validateNotNull(Map.of(GlobalBuildingStringCollection.NOTIFICATION, object));
 
     validateNotNull(
@@ -58,21 +64,29 @@ public class NotificationValidator extends Validator<Notification> {
             GlobalBuildingStringCollection.CREATION_TIME_NAME,
             object.getCreationTime()));
 
+    validateBase(object);
+
+    validateExists(
+        object.getIdentificationNumber(),
+        GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
+  }
+
+  private void validateBase(Notification object) {
     validateNotEmpty(
         Map.of(
             GlobalBuildingStringCollection.NOTIFICATION_TITLE_NAME, object.getNotificationTitle(),
             GlobalBuildingStringCollection.NOTIFICATION_DESCRIPTION_NAME,
-                object.getNotificationDescription()));
+            object.getNotificationDescription()));
 
     validateMatchesRegex(
         Map.of(
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-                Pair.of(
-                    object.getIdentificationNumber(), GlobalBuildingStringCollection.NIN_PATTERN),
+            Pair.of(
+                object.getIdentificationNumber(), GlobalBuildingStringCollection.NIN_PATTERN),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
-                Pair.of(
-                    object.getParentIdentificationNumber(),
-                    GlobalBuildingStringCollection.BIN_RIN_CIN_PATTERN)));
+            Pair.of(
+                object.getParentIdentificationNumber(),
+                GlobalBuildingStringCollection.BIN_RIN_CIN_PATTERN)));
 
     validateExists(
         object.getParentIdentificationNumber(),

@@ -4,7 +4,6 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.B
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.BuildingValidator;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.ComponentValidator;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.NotificationValidator;
@@ -16,7 +15,7 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.UncheckedIOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -59,7 +58,7 @@ public class BuildingService {
     return buildings;
   }
 
-  public Building getBuilding(String identificationNumber){
+  public Building getBuilding(String identificationNumber) {
     this.buildingValidator.validate(identificationNumber);
     return buildingRepository.findById(identificationNumber).get();
   }
@@ -167,7 +166,9 @@ public class BuildingService {
 
   public Notification createNotification(Notification notification) {
     this.notificationValidator.validateCreate(notification);
-    return notificationRepository.save(notification);
+    Notification createdNotification = this.notificationRepository.save(notification);
+    createdNotification.setCreationTime(new Timestamp(System.currentTimeMillis()));
+    return createdNotification;
   }
 
   public void removeNotification(String identificationNumber) {
