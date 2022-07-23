@@ -3,6 +3,7 @@ package edu.kit.tm.cm.smartcampus.building.api.operations;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.web.bind.annotation.*;
 
+//TODO javadocs
 @RequestMapping("/notifications")
 public interface NotificationOperations {
 

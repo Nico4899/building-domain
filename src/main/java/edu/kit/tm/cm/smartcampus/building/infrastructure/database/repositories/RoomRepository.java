@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 
+//TODO javadocs
 public interface RoomRepository extends CrudRepository<Room, String> {
 
   @Query(

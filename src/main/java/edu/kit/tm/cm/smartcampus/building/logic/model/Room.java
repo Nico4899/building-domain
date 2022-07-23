@@ -10,6 +10,7 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
+//TODO javadocs
 @Getter
 @Builder
 @NoArgsConstructor

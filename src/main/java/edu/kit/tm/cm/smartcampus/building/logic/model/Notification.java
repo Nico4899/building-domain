@@ -8,6 +8,7 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+//TODO javadocs
 @Getter
 @Setter
 @NoArgsConstructor

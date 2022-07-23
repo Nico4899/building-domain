@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
+//TODO javadocs
 @Repository
 public interface ComponentRepository extends CrudRepository<Component, String> {
 

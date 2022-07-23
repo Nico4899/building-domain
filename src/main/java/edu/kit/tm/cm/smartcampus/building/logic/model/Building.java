@@ -1,12 +1,15 @@
 package edu.kit.tm.cm.smartcampus.building.logic.model;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
+// TODO javadocs
 @Setter
 @Getter
 @NoArgsConstructor
@@ -40,7 +43,7 @@ public class Building {
   private double latitude;
   private double longitude;
 
-  /** This enum describes campus location. */
+  /** This enum describes a building's campus location. */
   public enum CampusLocation {
     NORTH_CAMPUS,
     EAST_CAMPUS,

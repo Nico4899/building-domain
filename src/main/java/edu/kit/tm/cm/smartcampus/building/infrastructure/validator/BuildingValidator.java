@@ -1,6 +1,5 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
-import edu.kit.tm.cm.smartcampus.building.GlobalBuildingStringCollection;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+// TODO javadocs
 @Component
 public class BuildingValidator extends Validator<Building> {
 
@@ -26,7 +26,7 @@ public class BuildingValidator extends Validator<Building> {
 
   @Override
   protected String getValidateRegex() {
-    return GlobalBuildingStringCollection.BIN_PATTERN;
+    return BIN_PATTERN;
   }
 
   @Override
@@ -37,42 +37,36 @@ public class BuildingValidator extends Validator<Building> {
   @Override
   public void validateUpdate(Building object) {
     validateBase(object);
-    validateExists(
-        object.getIdentificationNumber(),
-        GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME);
+    validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
   }
 
   private void validateBase(Building object) {
-    validateNotNull(Map.of(GlobalBuildingStringCollection.BUILDING, object));
+    validateNotNull(Map.of(BUILDING, object));
 
     validateNotNull(
         Map.of(
-            GlobalBuildingStringCollection.BUILDING_NAME,
+            BUILDING_NAME,
             object.getName(),
-            GlobalBuildingStringCollection.BUILDING_NUMBER,
+            BUILDING_NUMBER,
             object.getName(),
-            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
+            IDENTIFICATION_NUMBER_NAME,
             object.getIdentificationNumber(),
-            GlobalBuildingStringCollection.CAMPUS_LOCATION_NAME,
+            CAMPUS_LOCATION_NAME,
             object.getCampusLocation()));
 
-    validateNotEmpty(Map.of(GlobalBuildingStringCollection.BUILDING_NAME, object.getName()));
+    validateNotEmpty(Map.of(BUILDING_NAME, object.getName()));
 
     validateMatchesRegex(
         Map.of(
-            GlobalBuildingStringCollection.BUILDING_NUMBER,
-            Pair.of(object.getNumber(), GlobalBuildingStringCollection.BIN_PATTERN),
-            GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-            Pair.of(object.getIdentificationNumber(), GlobalBuildingStringCollection.BIN_PATTERN)));
+            BUILDING_NUMBER,
+            Pair.of(object.getNumber(), BIN_PATTERN),
+            IDENTIFICATION_NUMBER_NAME,
+            Pair.of(object.getIdentificationNumber(), BIN_PATTERN)));
 
     validateCoordinates(
-        Map.of(
-            GlobalBuildingStringCollection.COORDINATES_NAME,
-            Pair.of(object.getLatitude(), object.getLongitude())));
+        Map.of(COORDINATES_NAME, Pair.of(object.getLatitude(), object.getLongitude())));
 
     validateFloorValues(
-        Map.of(
-            GlobalBuildingStringCollection.FLOORS_NAME,
-            Pair.of(object.getLowestFloor(), object.getHighestFloor())));
+        Map.of(FLOORS_NAME, Pair.of(object.getLowestFloor(), object.getHighestFloor())));
   }
 }

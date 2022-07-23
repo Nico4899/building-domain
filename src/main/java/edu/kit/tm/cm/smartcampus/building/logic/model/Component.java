@@ -9,6 +9,7 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
+//TODO javadocs
 @Setter
 @Getter
 @NoArgsConstructor
