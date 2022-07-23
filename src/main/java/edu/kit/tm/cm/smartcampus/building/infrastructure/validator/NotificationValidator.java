@@ -36,9 +36,9 @@ public class NotificationValidator extends Validator<Notification> {
     validateNotNull(
         Map.of(
             GlobalBuildingStringCollection.NOTIFICATION_TITLE_NAME,
-            object.getNotificationTitle(),
+            object.getTitle(),
             GlobalBuildingStringCollection.NOTIFICATION_DESCRIPTION_NAME,
-            object.getNotificationDescription(),
+            object.getDescription(),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
             object.getIdentificationNumber(),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
@@ -54,9 +54,9 @@ public class NotificationValidator extends Validator<Notification> {
     validateNotNull(
         Map.of(
             GlobalBuildingStringCollection.NOTIFICATION_TITLE_NAME,
-            object.getNotificationTitle(),
+            object.getTitle(),
             GlobalBuildingStringCollection.NOTIFICATION_DESCRIPTION_NAME,
-            object.getNotificationDescription(),
+            object.getDescription(),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
             object.getIdentificationNumber(),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
@@ -74,9 +74,9 @@ public class NotificationValidator extends Validator<Notification> {
   private void validateBase(Notification object) {
     validateNotEmpty(
         Map.of(
-            GlobalBuildingStringCollection.NOTIFICATION_TITLE_NAME, object.getNotificationTitle(),
+            GlobalBuildingStringCollection.NOTIFICATION_TITLE_NAME, object.getTitle(),
             GlobalBuildingStringCollection.NOTIFICATION_DESCRIPTION_NAME,
-            object.getNotificationDescription()));
+            object.getDescription()));
 
     validateMatchesRegex(
         Map.of(

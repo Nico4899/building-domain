@@ -48,42 +48,31 @@ public class BuildingValidator extends Validator<Building> {
     validateNotNull(
         Map.of(
             GlobalBuildingStringCollection.BUILDING_NAME,
-            object.getBuildingName(),
+            object.getName(),
             GlobalBuildingStringCollection.BUILDING_NUMBER,
-            object.getBuildingNumber(),
+            object.getName(),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
             object.getIdentificationNumber(),
-            GlobalBuildingStringCollection.FLOORS_NAME,
-            object.getBuildingFloors(),
-            GlobalBuildingStringCollection.HIGHEST_FLOOR_NAME,
-            object.getBuildingFloors().getHighestFloor(),
-            GlobalBuildingStringCollection.LOWEST_FLOOR_NAME,
-            object.getBuildingFloors().getLowestFloor(),
             GlobalBuildingStringCollection.CAMPUS_LOCATION_NAME,
-            object.getCampusLocation(),
-            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME,
-            object.getGeographicalLocation()));
+            object.getCampusLocation()));
 
-    validateNotEmpty(
-        Map.of(GlobalBuildingStringCollection.BUILDING_NAME,
-            object.getBuildingName()));
+    validateNotEmpty(Map.of(GlobalBuildingStringCollection.BUILDING_NAME, object.getName()));
 
     validateMatchesRegex(
         Map.of(
             GlobalBuildingStringCollection.BUILDING_NUMBER,
-            Pair.of(object.getBuildingNumber(), GlobalBuildingStringCollection.BIN_PATTERN),
+            Pair.of(object.getNumber(), GlobalBuildingStringCollection.BIN_PATTERN),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
-            Pair.of(
-                object.getIdentificationNumber(), GlobalBuildingStringCollection.BIN_PATTERN)));
+            Pair.of(object.getIdentificationNumber(), GlobalBuildingStringCollection.BIN_PATTERN)));
 
-    validateGeographicalLocation(
+    validateCoordinates(
         Map.of(
-            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME,
-            object.getGeographicalLocation()));
+            GlobalBuildingStringCollection.COORDINATES_NAME,
+            Pair.of(object.getLatitude(), object.getLongitude())));
 
-    validateFloors(
+    validateFloorValues(
         Map.of(
-            GlobalBuildingStringCollection.FLOORS_NAME, object.getBuildingFloors()
-        ));
+            GlobalBuildingStringCollection.FLOORS_NAME,
+            Pair.of(object.getLowestFloor(), object.getHighestFloor())));
   }
 }

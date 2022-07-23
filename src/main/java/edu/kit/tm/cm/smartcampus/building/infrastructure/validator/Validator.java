@@ -7,8 +7,6 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.N
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
-import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Pair;
 
@@ -97,7 +95,7 @@ public abstract class Validator<T> {
    * Validates weather Strings match given regexes or not.
    *
    * @param strings Map of strings and their regexes to be checked and their names (key=name,
-   *                value=pair of string and regex)
+   *     value=pair of string and regex)
    */
   protected void validateMatchesRegex(Map<String, Pair<String, String>> strings) {
     InvalidArgumentsException invalidArgumentsException = new InvalidArgumentsException();
@@ -121,22 +119,23 @@ public abstract class Validator<T> {
   }
 
   /**
-   * Validates weather geographical locations have valid latitude and longitude values or not.
+   * Validates weather coordinates have valid latitude and longitude values or not.
    *
-   * @param geographicalLocations Map of geographical locations to be checked and their names (key =
-   *                              name, value=geographical location)
+   * @param coordinates coordinates to be checked mapped by their names (key = name,
+   *     value=<latitude, longitude>)
    */
-  protected void validateGeographicalLocation(
-      Map<String, GeographicalLocation> geographicalLocations) {
+  protected void validateCoordinates(Map<String, Pair<Double, Double>> coordinates) {
     InvalidArgumentsException invalidArgumentsException = new InvalidArgumentsException();
     boolean valid = true;
 
-    for (Map.Entry<String, GeographicalLocation> entry : geographicalLocations.entrySet()) {
-      if (entry.getValue().getLatitude() > MAX_LATITUDE_VALUE
-          || entry.getValue().getLatitude() < MIN_LATITUDE_VALUE) {
+    for (Map.Entry<String, Pair<Double, Double>> entry : coordinates.entrySet()) {
+      if (entry.getValue().getFirst() > MAX_LATITUDE_VALUE
+          || entry.getValue().getFirst() < MIN_LATITUDE_VALUE) {
         invalidArgumentsException.appendWrongArguments(
-            entry.getKey() + GlobalBuildingStringCollection.SPACE + GlobalBuildingStringCollection.LATITUDE_NAME,
-            Double.toString(entry.getValue().getLatitude()),
+            entry.getKey()
+                + GlobalBuildingStringCollection.SPACE
+                + GlobalBuildingStringCollection.LATITUDE_NAME,
+            Double.toString(entry.getValue().getFirst()),
             String.format(
                 GlobalBuildingStringCollection.SHOULD_BE_BETWEEN_MESSAGE,
                 MIN_LATITUDE_VALUE,
@@ -144,11 +143,11 @@ public abstract class Validator<T> {
             true);
         valid = false;
       }
-      if (entry.getValue().getLongitude() > MAX_LONGITUDE_VALUE
-          || entry.getValue().getLongitude() < MIN_LONGITUDE_VALUE) {
+      if (entry.getValue().getSecond() > MAX_LONGITUDE_VALUE
+          || entry.getValue().getSecond() < MIN_LONGITUDE_VALUE) {
         invalidArgumentsException.appendWrongArguments(
             entry.getKey() + GlobalBuildingStringCollection.LONGITUDE_NAME,
-            Double.toString(entry.getValue().getLongitude()),
+            Double.toString(entry.getValue().getSecond()),
             String.format(
                 GlobalBuildingStringCollection.SHOULD_BE_BETWEEN_MESSAGE,
                 MIN_LONGITUDE_VALUE,
@@ -166,18 +165,20 @@ public abstract class Validator<T> {
   /**
    * Validates weather floors have valid attributes or not.
    *
-   * @param floors Map of floors to be checked and their names (key = name, value=floors)
+   * @param maxAndMinFloor max and min floor number to be checked and their names (key = name,
+   *     value=<minFloor, maxFloor>)
    */
-  public void validateFloors(Map<String, Floors> floors) { //TODO cool formatieren
+  public void validateFloorValues(
+      Map<String, Pair<Integer, Integer>> maxAndMinFloor) { // TODO cool formatieren
     InvalidArgumentsException invalidArgumentsException = new InvalidArgumentsException();
     boolean valid = true;
 
-    for (Map.Entry<String, Floors> entry : floors.entrySet()) {
-      if (entry.getValue().getHighestFloor() < entry.getValue().getLowestFloor()) {
+    for (Map.Entry<String, Pair<Integer, Integer>> entry : maxAndMinFloor.entrySet()) {
+      if (entry.getValue().getSecond() < entry.getValue().getFirst()) {
         invalidArgumentsException.appendWrongArguments(
             entry.getKey() + " highest floor",
-            entry.getValue().getHighestFloor() + "",
-            "should be higher than lowest floor: " + entry.getValue().getLowestFloor(),
+            entry.getValue().getSecond() + "",
+            "should be higher than lowest floor: " + entry.getValue().getFirst(),
             true);
         valid = false;
       }

@@ -48,20 +48,16 @@ public class ComponentValidator extends Validator<Component> {
     validateNotNull(
         Map.of(
             GlobalBuildingStringCollection.COMPONENT_DESCRIPTION_NAME,
-            object.getComponentDescription(),
+            object.getDescription(),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME,
             object.getIdentificationNumber(),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
             object.getParentIdentificationNumber(),
             GlobalBuildingStringCollection.COMPONENT_TYPE_NAME,
-            object.getComponentType(),
-            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME,
-            object.getGeographicalLocation()));
+            object.getType()));
 
     validateNotEmpty(
-        Map.of(
-            GlobalBuildingStringCollection.COMPONENT_DESCRIPTION_NAME,
-            object.getComponentDescription()));
+        Map.of(GlobalBuildingStringCollection.COMPONENT_DESCRIPTION_NAME, object.getDescription()));
 
     validateMatchesRegex(
         Map.of(
@@ -73,10 +69,10 @@ public class ComponentValidator extends Validator<Component> {
                     object.getParentIdentificationNumber(),
                     GlobalBuildingStringCollection.BIN_RIN_PATTERN)));
 
-    validateGeographicalLocation(
+    validateCoordinates(
         Map.of(
-            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME,
-            object.getGeographicalLocation()));
+            GlobalBuildingStringCollection.COORDINATES_NAME,
+            Pair.of(object.getLatitude(), object.getLongitude())));
     validateExists(
         object.getParentIdentificationNumber(),
         GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);

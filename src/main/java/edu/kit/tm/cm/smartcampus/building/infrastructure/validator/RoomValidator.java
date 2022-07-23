@@ -5,7 +5,6 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.B
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
@@ -47,18 +46,17 @@ public class RoomValidator extends Validator<Room> {
 
     validateNotNull(
         Map.of(
-            GlobalBuildingStringCollection.ROOM_NAME, object.getRoomName(),
-            GlobalBuildingStringCollection.ROOM_NUMBER, object.getRoomNumber(),
+            GlobalBuildingStringCollection.ROOM_NAME, object.getName(),
+            GlobalBuildingStringCollection.ROOM_NUMBER, object.getNumber(),
             GlobalBuildingStringCollection.IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber(),
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME, object.getParentIdentificationNumber(),
             GlobalBuildingStringCollection.FLOOR_NAME, object.getFloor(),
-            GlobalBuildingStringCollection.ROOM_TYPE_NAME, object.getRoomType(),
-            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+            GlobalBuildingStringCollection.ROOM_TYPE_NAME, object.getType()));
 
     validateNotEmpty(
         Map.of(
-            GlobalBuildingStringCollection.ROOM_NAME, object.getRoomName(),
-            GlobalBuildingStringCollection.ROOM_NUMBER, object.getRoomNumber()));
+            GlobalBuildingStringCollection.ROOM_NAME, object.getName(),
+            GlobalBuildingStringCollection.ROOM_NUMBER, object.getNumber()));
 
     validateMatchesRegex(
         Map.of(
@@ -67,9 +65,9 @@ public class RoomValidator extends Validator<Room> {
             GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME,
             Pair.of(object.getParentIdentificationNumber(), GlobalBuildingStringCollection.BIN_PATTERN)));
 
-    validateGeographicalLocation(
+    validateCoordinates(
         Map.of(
-            GlobalBuildingStringCollection.GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+            GlobalBuildingStringCollection.COORDINATES_NAME, Pair.of(object.getLatitude(), object.getLongitude())));
 
     validateExists(object.getParentIdentificationNumber(),
         GlobalBuildingStringCollection.PARENT_IDENTIFICATION_NUMBER_NAME);

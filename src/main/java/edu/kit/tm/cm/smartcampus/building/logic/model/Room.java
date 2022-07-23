@@ -17,12 +17,6 @@ import javax.persistence.*;
 @Entity(name = "room")
 public class Room {
 
-  @Column(name = "room_name")
-  private String roomName;
-
-  @Column(name = "room_number")
-  private String roomNumber;
-
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_sequence")
   @SequenceGenerator(name = "room_sequence", allocationSize = 1)
@@ -39,12 +33,22 @@ public class Room {
   @Column(name = "parent_identification_number")
   private String parentIdentificationNumber;
 
+  private String name;
+  private String number;
   private int floor;
+  private Type type;
+  private double latitude;
+  private double longitude;
 
-  @Column(name = "room_type")
-  private RoomType roomType;
-
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.PERSIST)
-  @JoinColumn(name = "geographical_location")
-  private GeographicalLocation geographicalLocation;
+  /** This enum represents the possible room types. */
+  public enum Type {
+    CAFETERIA,
+    RESTROOM,
+    RESTROOM_HANDICAPPED,
+    OFFICE,
+    LIBRARY,
+    SEMINAR_ROOM,
+    LECTURE_ROOM,
+    SPORTS
+  }
 }

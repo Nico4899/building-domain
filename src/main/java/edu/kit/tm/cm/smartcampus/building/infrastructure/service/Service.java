@@ -13,14 +13,13 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Service
-public class BuildingService {
+@org.springframework.stereotype.Service
+public class Service {
 
   private final BuildingRepository buildingRepository;
   private final RoomRepository roomRepository;
@@ -32,7 +31,7 @@ public class BuildingService {
   private final NotificationValidator notificationValidator;
 
   @Autowired
-  public BuildingService(
+  public Service(
       BuildingRepository buildingRepository,
       RoomRepository roomRepository,
       ComponentRepository componentRepository,

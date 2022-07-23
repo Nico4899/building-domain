@@ -1,27 +1,17 @@
 package edu.kit.tm.cm.smartcampus.building.logic.model;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
+@Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity(name = "building")
 public class Building {
-
-  @Column(name = "building_name")
-  private String buildingName;
-
-  @Column(name = "building_number")
-  private String buildingNumber;
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "building_sequence")
@@ -36,17 +26,25 @@ public class Building {
   @Column(name = "building_identification_number")
   private String identificationNumber;
 
-  @OneToOne(
-      fetch = FetchType.LAZY,
-      mappedBy = "id",
-      cascade = CascadeType.PERSIST) // TODO testen ob des so passt
-  @Column(name = "building_floors")
-  private Floors buildingFloors;
+  @Column(name = "highest_floor")
+  private int highestFloor;
+
+  @Column(name = "lowest_floor")
+  private int lowestFloor;
 
   @Column(name = "campus_location")
   private CampusLocation campusLocation;
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.PERSIST)
-  @JoinColumn(name = "geographical_location")
-  private GeographicalLocation geographicalLocation;
+  private String name;
+  private String number;
+  private double latitude;
+  private double longitude;
+
+  /** This enum describes campus location. */
+  public enum CampusLocation {
+    NORTH_CAMPUS,
+    EAST_CAMPUS,
+    SOUTH_CAMPUS,
+    WEST_CAMPUS
+  }
 }

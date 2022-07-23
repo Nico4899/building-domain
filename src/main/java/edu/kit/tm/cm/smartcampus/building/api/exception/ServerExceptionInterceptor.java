@@ -1,4 +1,4 @@
-package edu.kit.tm.cm.smartcampus.building.api.error;
+package edu.kit.tm.cm.smartcampus.building.api.exception;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class RestServerExceptionHandler extends ResponseEntityExceptionHandler {
+public class ServerExceptionInterceptor extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(InvalidArgumentsException.class)
   protected ResponseEntity<Object> handleInvalidArgumentsException(

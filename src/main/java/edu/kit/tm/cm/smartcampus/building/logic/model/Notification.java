@@ -1,11 +1,7 @@
 package edu.kit.tm.cm.smartcampus.building.logic.model;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -14,17 +10,9 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "notification")
 public class Notification {
-
-  @Column(name = "notification_title")
-  private String notificationTitle;
-
-  @Column(name = "notification_description")
-  private String notificationDescription;
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notification_sequence")
@@ -44,4 +32,7 @@ public class Notification {
 
   @Column(name = "creation_time")
   private Timestamp creationTime;
+
+  private String title;
+  private String description;
 }

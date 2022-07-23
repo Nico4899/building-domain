@@ -30,10 +30,9 @@ public final class GlobalBuildingStringCollection {
   public static final String NOTIFICATION_TITLE_NAME = "notification_title";
   public static final String CREATION_TIME_NAME = "creation_time";
   public static final String FLOORS_NAME = "floors";
-
-  public static final String LOWEST_FLOOR_NAME = "lowest floor";
-
-  public static final String HIGHEST_FLOOR_NAME = "highest floor";
+  public static final String COORDINATES_NAME = "coordinates";
+  public static final String LOWEST_FLOOR_NAME = "lowest_floor";
+  public static final String HIGHEST_FLOOR_NAME = "highest_floor";
 
   // messages
   public static final String SHOULD_MATCH_MESSAGE = "should match: %s";
@@ -51,6 +50,7 @@ public final class GlobalBuildingStringCollection {
   public static final String NIN_PATTERN = "^n-\\d+$";
   public static final String BIN_RIN_PATTERN = BIN_PATTERN + "|" + RIN_PATTERN;
   public static final String BIN_RIN_CIN_PATTERN = BIN_PATTERN + "|" + RIN_PATTERN + "|" + CIN_PATTERN;;
+
 
 
   private GlobalBuildingStringCollection() {}
