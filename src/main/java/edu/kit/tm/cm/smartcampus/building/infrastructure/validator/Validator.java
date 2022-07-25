@@ -123,7 +123,7 @@ public abstract class Validator<T> {
     boolean valid = true;
 
     for (Map.Entry<String, String> entry : strings.entrySet()) {
-      if (!entry.getValue().isEmpty()) {
+      if (entry.getValue().isEmpty()) {
         invalidArgumentsStringBuilder.appendMessage(entry.getKey(), entry.getValue(),
                 SHOULD_NOT_BE_EMPTY_MESSAGE, true);
         valid = false;
