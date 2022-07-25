@@ -9,27 +9,44 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
-//TODO javadocs
+import static edu.kit.tm.cm.smartcampus.building.logic.model.Component.COMPONENT_TABLE_NAME;
+
+/**
+ * This class represents a domain entity component.
+ */
 @Setter
 @Getter
 @NoArgsConstructor
-@Entity(name = "component")
+@Entity(name = COMPONENT_TABLE_NAME)
 public class Component {
 
+  /**
+   * The constant COMPONENT_TABLE_NAME.
+   */
+  // table name (must be public, else annotation can't find it)
+  public static final String COMPONENT_TABLE_NAME = "component";
+
+  // constants this class uses
+  private static final String COMPONENT_SEQUENCE_NAME = "component_sequence";
+  private static final String GENERATOR_PATH =
+          "edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator";
+  private static final String COMPONENT_IDENTIFICATION_NUMBER_PREFIX = "c-";
+  private static final String IDENTIFICATION_NUMBER_COLUMN = "identification_number";
+  private static final String PARENT_IDENTIFICATION_NUMBER_COLUMN = "parent_identification_number";
+
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "component_sequence")
-  @SequenceGenerator(name = "component_sequence", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = COMPONENT_SEQUENCE_NAME)
+  @SequenceGenerator(name = COMPONENT_SEQUENCE_NAME, allocationSize = 1)
   @GenericGenerator(
-      name = "component_sequence",
-      strategy =
-          "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
-      parameters = {
-        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "c-")
-      })
-  @Column(name = "identification_number")
+          name = COMPONENT_SEQUENCE_NAME,
+          strategy = GENERATOR_PATH,
+          parameters = {
+                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = COMPONENT_IDENTIFICATION_NUMBER_PREFIX)
+          })
+  @Column(name = IDENTIFICATION_NUMBER_COLUMN)
   private String identificationNumber;
 
-  @Column(name = "parent_identification_number")
+  @Column(name = PARENT_IDENTIFICATION_NUMBER_COLUMN)
   private String parentIdentificationNumber;
 
   private Type type;
@@ -37,9 +54,17 @@ public class Component {
   private double latitude;
   private double longitude;
 
-  /** This enum represents all component types. */
+  /**
+   * This enum represents all component types.
+   */
   public enum Type {
+    /**
+     * Elevator.
+     */
     ELEVATOR,
+    /**
+     * Stairs.
+     */
     STAIRS
   }
 }

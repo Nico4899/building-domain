@@ -60,7 +60,7 @@ public abstract class Validator<T> {
   public static final String NIN_PATTERN = "^n-\\d+$";
   public static final String BIN_RIN_PATTERN = BIN_PATTERN + "|" + RIN_PATTERN;
   public static final String BIN_RIN_CIN_PATTERN =
-      BIN_PATTERN + "|" + RIN_PATTERN + "|" + CIN_PATTERN;
+          BIN_PATTERN + "|" + RIN_PATTERN + "|" + CIN_PATTERN;
   public static final String FLOOR_HAS_TO_BE_BETWEEN_MESSAGE = "floor has to be between: ";
   public static final String AND = " and ";
   private static final double MAX_LATITUDE_VALUE = 90;
@@ -72,11 +72,17 @@ public abstract class Validator<T> {
   private final ComponentRepository componentRepository;
   private final NotificationRepository notificationRepository;
 
-  protected Validator(
-      BuildingRepository buildingRepository,
-      RoomRepository roomRepository,
-      ComponentRepository componentRepository,
-      NotificationRepository notificationRepository) {
+  /**
+   * Instantiates a new validator.
+   *
+   * @param buildingRepository     the building repository in which all building are saved
+   * @param roomRepository         the room repository in which all room are saved
+   * @param componentRepository    the component repository in which all component are saved
+   * @param notificationRepository the notification repository in which all notification are saved
+   */
+  protected Validator(BuildingRepository buildingRepository, RoomRepository roomRepository,
+                      ComponentRepository componentRepository,
+                      NotificationRepository notificationRepository) {
     this.buildingRepository = buildingRepository;
     this.roomRepository = roomRepository;
     this.componentRepository = componentRepository;
@@ -90,13 +96,13 @@ public abstract class Validator<T> {
    */
   protected void validateNotNull(Map<String, Object> objects) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
-        new InvalidArgumentsStringBuilder();
+            new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
     for (Map.Entry<String, Object> entry : objects.entrySet()) {
       if (entry.getValue() == null) {
-        invalidArgumentsStringBuilder.appendMessage(
-            entry.getKey(), NULL, SHOULD_NOT_BE_NULL_MESSAGE, true);
+        invalidArgumentsStringBuilder.appendMessage(entry.getKey(), NULL,
+                SHOULD_NOT_BE_NULL_MESSAGE, true);
         valid = false;
       }
     }
@@ -113,13 +119,13 @@ public abstract class Validator<T> {
    */
   protected void validateNotEmpty(Map<String, String> strings) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
-        new InvalidArgumentsStringBuilder();
+            new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
     for (Map.Entry<String, String> entry : strings.entrySet()) {
       if (!entry.getValue().isEmpty()) {
-        invalidArgumentsStringBuilder.appendMessage(
-            entry.getKey(), entry.getValue(), SHOULD_NOT_BE_EMPTY_MESSAGE, true);
+        invalidArgumentsStringBuilder.appendMessage(entry.getKey(), entry.getValue(),
+                SHOULD_NOT_BE_EMPTY_MESSAGE, true);
         valid = false;
       }
     }
@@ -133,20 +139,17 @@ public abstract class Validator<T> {
    * Validates weather Strings match given regexes or not.
    *
    * @param strings Map of strings and their regexes to be checked and their names (key=name,
-   *     value=pair of string and regex)
+   *                value=pair of string and regex)
    */
   protected void validateMatchesRegex(Map<String, Pair<String, String>> strings) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
-        new InvalidArgumentsStringBuilder();
+            new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
     for (Map.Entry<String, Pair<String, String>> entry : strings.entrySet()) {
       if (!entry.getValue().getFirst().matches(entry.getValue().getSecond())) {
-        invalidArgumentsStringBuilder.appendMessage(
-            entry.getKey(),
-            entry.getValue().getFirst(),
-            String.format(SHOULD_MATCH_MESSAGE, entry.getValue().getSecond()),
-            true);
+        invalidArgumentsStringBuilder.appendMessage(entry.getKey(), entry.getValue().getFirst(),
+                String.format(SHOULD_MATCH_MESSAGE, entry.getValue().getSecond()), true);
         valid = false;
       }
     }
@@ -160,30 +163,26 @@ public abstract class Validator<T> {
    * Validates weather coordinates have valid latitude and longitude values or not.
    *
    * @param coordinates coordinates to be checked mapped by their names (key = name,
-   *     value=<latitude, longitude>)
+   *                    value=<latitude, longitude>)
    */
   protected void validateCoordinates(Map<String, Pair<Double, Double>> coordinates) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
-        new InvalidArgumentsStringBuilder();
+            new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
     for (Map.Entry<String, Pair<Double, Double>> entry : coordinates.entrySet()) {
-      if (entry.getValue().getFirst() > MAX_LATITUDE_VALUE
-          || entry.getValue().getFirst() < MIN_LATITUDE_VALUE) {
-        invalidArgumentsStringBuilder.appendMessage(
-            entry.getKey() + SPACE + LATITUDE_NAME,
-            Double.toString(entry.getValue().getFirst()),
-            String.format(SHOULD_BE_BETWEEN_MESSAGE, MIN_LATITUDE_VALUE, MAX_LATITUDE_VALUE),
-            true);
+      if (entry.getValue().getFirst() > MAX_LATITUDE_VALUE || entry.getValue().getFirst() < MIN_LATITUDE_VALUE) {
+        invalidArgumentsStringBuilder.appendMessage(entry.getKey() + SPACE + LATITUDE_NAME,
+                Double.toString(entry.getValue().getFirst()),
+                String.format(SHOULD_BE_BETWEEN_MESSAGE, MIN_LATITUDE_VALUE, MAX_LATITUDE_VALUE),
+                true);
         valid = false;
       }
-      if (entry.getValue().getSecond() > MAX_LONGITUDE_VALUE
-          || entry.getValue().getSecond() < MIN_LONGITUDE_VALUE) {
-        invalidArgumentsStringBuilder.appendMessage(
-            entry.getKey() + SPACE + LONGITUDE_NAME,
-            Double.toString(entry.getValue().getSecond()),
-            String.format(SHOULD_BE_BETWEEN_MESSAGE, MIN_LONGITUDE_VALUE, MAX_LONGITUDE_VALUE),
-            true);
+      if (entry.getValue().getSecond() > MAX_LONGITUDE_VALUE || entry.getValue().getSecond() < MIN_LONGITUDE_VALUE) {
+        invalidArgumentsStringBuilder.appendMessage(entry.getKey() + SPACE + LONGITUDE_NAME,
+                Double.toString(entry.getValue().getSecond()),
+                String.format(SHOULD_BE_BETWEEN_MESSAGE, MIN_LONGITUDE_VALUE,
+                        MAX_LONGITUDE_VALUE), true);
         valid = false;
       }
     }
@@ -197,21 +196,18 @@ public abstract class Validator<T> {
    * Validates weather floors have valid attributes or not.
    *
    * @param maxAndMinFloor max and min floor number to be checked and their names (key = name,
-   *     value=<minFloor, maxFloor>)
+   *                       value=<minFloor, maxFloor>)
    */
-  public void validateFloorValues(
-      Map<String, Pair<Integer, Integer>> maxAndMinFloor) { // TODO cool formatieren
+  public void validateFloorValues(Map<String, Pair<Integer, Integer>> maxAndMinFloor) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
-        new InvalidArgumentsStringBuilder();
+            new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
     for (Map.Entry<String, Pair<Integer, Integer>> entry : maxAndMinFloor.entrySet()) {
       if (entry.getValue().getSecond() < entry.getValue().getFirst()) {
-        invalidArgumentsStringBuilder.appendMessage(
-            entry.getKey() + " highest floor",
-            entry.getValue().getSecond() + "",
-            "should be higher than lowest floor: " + entry.getValue().getFirst(),
-            true);
+        invalidArgumentsStringBuilder.appendMessage(entry.getKey() + " highest floor",
+                entry.getValue().getSecond() + "",
+                "should be higher than lowest floor: " + entry.getValue().getFirst(), true);
         valid = false;
       }
     }
@@ -225,33 +221,33 @@ public abstract class Validator<T> {
    * Validates weather a given room floor is valid or not.
    *
    * @param floor max and min floor number to be checked and their names (key = name,
-   *     value=<minFloor, maxFloor>)
+   *              value=<minFloor, maxFloor>)
    */
   protected void validateValidRoomFloor(int floor, String parentIdentificationNumber) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
-        new InvalidArgumentsStringBuilder();
+            new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
     Building building = buildingRepository.findById(parentIdentificationNumber).get();
     if (floor < building.getLowestFloor() || floor > building.getHighestFloor()) {
       valid = false;
-      invalidArgumentsStringBuilder.appendMessage(
-          FLOOR_NAME,
-          Integer.toString(floor),
-          FLOOR_HAS_TO_BE_BETWEEN_MESSAGE
-              + building.getLowestFloor()
-              + AND
-              + building.getHighestFloor(),
-          true);
+      invalidArgumentsStringBuilder.appendMessage(FLOOR_NAME, Integer.toString(floor),
+              FLOOR_HAS_TO_BE_BETWEEN_MESSAGE + building.getLowestFloor() + AND + building.getHighestFloor(), true);
     }
     if (!valid) {
       throw new InvalidArgumentsException(invalidArgumentsStringBuilder.build());
     }
   }
 
+  /**
+   * Validate if entity exists.
+   *
+   * @param inputIdentificationNumber the input identification number
+   * @param name                      the name of the given value
+   */
   protected void validateExists(String inputIdentificationNumber, String name) {
-    Collection<CrudRepository<?, String>> repositories =
-        List.of(buildingRepository, roomRepository, componentRepository, notificationRepository);
+    Collection<CrudRepository<?, String>> repositories = List.of(buildingRepository,
+            roomRepository, componentRepository, notificationRepository);
     boolean found = false;
     for (CrudRepository<?, String> repository : repositories) {
       if (repository.existsById(inputIdentificationNumber)) {
@@ -263,17 +259,37 @@ public abstract class Validator<T> {
     }
   }
 
+  /**
+   * Validate a given identification number for requests containing only the identification number.
+   *
+   * @param identificationNumber the identification number
+   */
   public void validate(String identificationNumber) {
     validateNotNull(Map.of(IDENTIFICATION_NUMBER_NAME, identificationNumber));
-    validateMatchesRegex(
-        Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(identificationNumber, getValidateRegex())));
+    validateMatchesRegex(Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(identificationNumber,
+            getValidateRegex())));
     validateExists(identificationNumber, IDENTIFICATION_NUMBER_NAME);
   }
 
+  /**
+   * Gets validate regex for the {@link Validator#validate(String)} method.
+   *
+   * @return the validate regex
+   */
   protected abstract String getValidateRegex();
 
+  /**
+   * Validate create operation.
+   *
+   * @param object the object to be validated
+   */
   public abstract void validateCreate(T object);
 
+  /**
+   * Validate update operation.
+   *
+   * @param object the object to be validated
+   */
   public abstract void validateUpdate(T object);
 
   @NoArgsConstructor
@@ -287,11 +303,11 @@ public abstract class Validator<T> {
     private final StringBuilder stringBuilder = new StringBuilder();
 
     /**
-     * Append erro message.
+     * Append error message.
      *
-     * @param name the name
-     * @param input the input
-     * @param hint the hint
+     * @param name    the name
+     * @param input   the input
+     * @param hint    the hint
      * @param hasHint if a hint is provided
      */
     public void appendMessage(String name, String input, String hint, boolean hasHint) {
@@ -318,14 +334,7 @@ public abstract class Validator<T> {
     }
 
     private void appendWithHint(String name, String input, String hint) {
-      stringBuilder
-          .append(COMMA)
-          .append(name)
-          .append(COLON)
-          .append(input)
-          .append(LEFT_PARENTHESIS)
-          .append(hint)
-          .append(RIGHT_PARENTHESIS);
+      stringBuilder.append(COMMA).append(name).append(COLON).append(input).append(LEFT_PARENTHESIS).append(hint).append(RIGHT_PARENTHESIS);
     }
 
     private void appendWithoutHint(String name, String input) {
@@ -337,13 +346,7 @@ public abstract class Validator<T> {
     }
 
     private void appendFirstIterationWithHint(String name, String input, String hint) {
-      stringBuilder
-          .append(name)
-          .append(COLON)
-          .append(input)
-          .append(LEFT_PARENTHESIS)
-          .append(hint)
-          .append(RIGHT_PARENTHESIS);
+      stringBuilder.append(name).append(COLON).append(input).append(LEFT_PARENTHESIS).append(hint).append(RIGHT_PARENTHESIS);
     }
   }
 }

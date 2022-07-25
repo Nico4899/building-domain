@@ -9,22 +9,24 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
-//TODO javadocs
+/**
+ * This repository uses the standard implementation of {@link CrudRepository} and contains {@link
+ * Component} entities. Primary keys are here of type {@link String} and have format: 'c-(positive
+ * int)'
+ */
 @Repository
 public interface ComponentRepository extends CrudRepository<Component, String> {
 
-  @Query(
-      "SELECT component From component component Where component.parentIdentificationNumber =: "
-          + "#{#parentIdentificationNumber}")
+  @Query("SELECT component From component component Where component.parentIdentificationNumber "
+          + "=: #{#parentIdentificationNumber}")
   Collection<Component> findAllBuildingComponents(@Param("bin") String parentIdentificationNumber);
 
-  @Query(
-      "SELECT component From component component Where component.parentIdentificationNumber =: "
-          + "#{#parentIdentificationNumber}")
+  @Query("SELECT component From component component Where component.parentIdentificationNumber "
+          + "=: #{#parentIdentificationNumber}")
   Collection<Component> findAllRoomComponents(@Param("rin") String parentIdentificationNumber);
 
   @Modifying
-  @Query(
-      "DELETE From component Where component.parentIdentificationNumber =: #{#parentIdentificationNumber}")
+  @Query("DELETE From component Where component.parentIdentificationNumber =: "
+          + "#{#parentIdentificationNumber}")
   void cleanUp(@Param("bin") String parentIdentificationNumber);
 }

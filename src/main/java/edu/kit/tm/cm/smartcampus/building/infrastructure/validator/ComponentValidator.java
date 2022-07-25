@@ -4,13 +4,17 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.B
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 
 import java.util.Map;
 
-// TODO javadocs
+/**
+ * This class is a child implementation of the {@link Validator}, it focuses on validating {@link
+ * Component} requests. It calls parent methods to validate certain attributes.
+ */
 @org.springframework.stereotype.Component
 public class ComponentValidator extends Validator<Component> {
 

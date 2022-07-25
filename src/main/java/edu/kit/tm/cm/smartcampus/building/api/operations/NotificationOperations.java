@@ -3,19 +3,45 @@ package edu.kit.tm.cm.smartcampus.building.api.operations;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.web.bind.annotation.*;
 
-//TODO javadocs
+/**
+ * This interface provides all rest server operations connected "/notifications" requests.
+ */
 @RequestMapping("/notifications")
 public interface NotificationOperations {
 
+  /**
+   * Create a new {@link Notification} on "/notifications" url in this domain service.
+   *
+   * @param notification the notification to be created in this service
+   * @return the created notification
+   */
+  @PostMapping("")
+  Notification createNotification(@RequestBody Notification notification);
+
+  /**
+   * Get a specific {@link Notification} on "/notifications/{nin}" url from tis domain service.
+   *
+   * @param nin identification number of the requested notification in this domain service
+   * @return the requested notification
+   */
   @GetMapping("/{nin}")
   Notification getNotification(@PathVariable String nin);
 
+  /**
+   * Update a specific {@link Notification} on "/notifications" url in this domain service.
+   *
+   * @param notification the notification to be updated in this service
+   * @return the updated notification with updated attributes
+   */
   @PutMapping("")
   Notification updateNotification(@RequestBody Notification notification);
 
+  /**
+   * Remove a {@link Notification} on "/notifications/{nin}" from this domain service.
+   *
+   * @param nin identification number of the notification to be removed
+   */
   @DeleteMapping("/{nin}")
   void removeNotification(@PathVariable String nin);
 
-  @PostMapping("")
-  Notification createNotification(@RequestBody Notification notification);
 }

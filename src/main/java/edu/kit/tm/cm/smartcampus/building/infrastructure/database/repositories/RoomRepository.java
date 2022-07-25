@@ -8,15 +8,18 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 
-//TODO javadocs
+/**
+ * This repository uses the standard implementation of {@link CrudRepository} and contains {@link
+ * Room} entities. Primary keys are here of type {@link String} and have format: 'r-(positive
+ * int)'
+ */
 public interface RoomRepository extends CrudRepository<Room, String> {
 
-  @Query(
-      "SELECT room From room room Where room.parentIdentificationNumber =: #{#parentIdentificationNumber}")
+  @Query("SELECT room From room room Where room.parentIdentificationNumber =: "
+          + "#{#parentIdentificationNumber}")
   Collection<Room> findAllBuildingRooms(@Param("bin") String parentIdentificationNumber);
 
   @Modifying
-  @Query(
-      "DELETE From room Where room.parentIdentificationNumber =: #{#parentIdentificationNumber}")
+  @Query("DELETE From room Where room.parentIdentificationNumber =: #{#parentIdentificationNumber}")
   void cleanUp(@Param("bin") String parentIdentificationNumber);
 }

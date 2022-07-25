@@ -9,33 +9,53 @@ import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
-// TODO javadocs
+import static edu.kit.tm.cm.smartcampus.building.logic.model.Building.BUILDING_TABLE_NAME;
+
+/**
+ * This class represents a domain entity building.
+ */
 @Setter
 @Getter
 @NoArgsConstructor
-@Entity(name = "building")
+@Entity(name = BUILDING_TABLE_NAME)
 public class Building {
 
+  /**
+   * The constant BUILDING_TABLE_NAME.
+   */
+  // table name (must be public, else annotation can't find it)
+  public static final String BUILDING_TABLE_NAME = "building";
+
+  // constants this class uses
+  private static final String BUILDING_SEQUENCE_NAME = "building_sequence";
+  private static final String GENERATOR_PATH =
+          "edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator";
+  private static final String BUILDING_IDENTIFICATION_NUMBER_PREFIX = "b-";
+  private static final String IDENTIFICATION_NUMBER_COLUMN = "identification_number";
+  private static final String HIGHEST_FLOOR_COLUMN = "highest_floor";
+  private static final String LOWEST_FLOOR_COLUMN = "lowest_floor";
+  private static final String CAMPUS_LOCATION_COLUMN = "campus_location";
+
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "building_sequence")
-  @SequenceGenerator(name = "building_sequence", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = BUILDING_SEQUENCE_NAME)
+  @SequenceGenerator(name = BUILDING_SEQUENCE_NAME, allocationSize = 1)
   @GenericGenerator(
-      name = "building_sequence",
-      strategy =
-          "edu/kit/tm/cm/smartcampus/building/infrastructure/database/PrefixSequenceGenerator.java",
-      parameters = {
-        @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = "b-")
-      })
-  @Column(name = "building_identification_number")
+          name = BUILDING_SEQUENCE_NAME,
+          strategy = GENERATOR_PATH,
+          parameters = {
+                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER,
+                          value = BUILDING_IDENTIFICATION_NUMBER_PREFIX)
+          })
+  @Column(name = IDENTIFICATION_NUMBER_COLUMN)
   private String identificationNumber;
 
-  @Column(name = "highest_floor")
+  @Column(name = HIGHEST_FLOOR_COLUMN)
   private int highestFloor;
 
-  @Column(name = "lowest_floor")
+  @Column(name = LOWEST_FLOOR_COLUMN)
   private int lowestFloor;
 
-  @Column(name = "campus_location")
+  @Column(name = CAMPUS_LOCATION_COLUMN)
   private CampusLocation campusLocation;
 
   private String name;
@@ -43,11 +63,25 @@ public class Building {
   private double latitude;
   private double longitude;
 
-  /** This enum describes a building's campus location. */
+  /**
+   * This enum describes a building's campus location.
+   */
   public enum CampusLocation {
+    /**
+     * North campus.
+     */
     NORTH_CAMPUS,
+    /**
+     * East campus.
+     */
     EAST_CAMPUS,
+    /**
+     * South campus.
+     */
     SOUTH_CAMPUS,
+    /**
+     * West campus.
+     */
     WEST_CAMPUS
   }
 }

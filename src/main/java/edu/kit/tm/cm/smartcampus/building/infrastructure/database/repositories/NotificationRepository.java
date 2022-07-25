@@ -8,29 +8,30 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 
-// TODO javadocs
+/**
+ * This repository uses the standard implementation of {@link CrudRepository} and contains {@link
+ * Notification} entities. Primary keys are here of type {@link String} and have format: 'n-
+ * (positive int)'
+ */
 public interface NotificationRepository extends CrudRepository<Notification, String> {
 
-  @Query(
-      "SELECT notification From notification notification Where notification.parentIdentificationNumber =: "
-          + "#{#parentIdentificationNumber}")
+  @Query("SELECT notification From notification notification Where notification"
+          + ".parentIdentificationNumber =: " + "#{#parentIdentificationNumber}")
   Collection<Notification> findAllBuildingNotifications(
-      @Param("bin") String parentIdentificationNumber);
+          @Param("bin") String parentIdentificationNumber);
 
-  @Query(
-      "SELECT notification From notification notification Where notification.parentIdentificationNumber =: "
-          + "#{#parentIdentificationNumber}")
+  @Query("SELECT notification From notification notification Where notification"
+          + ".parentIdentificationNumber =: " + "#{#parentIdentificationNumber}")
   Collection<Notification> findAllRoomNotifications(
-      @Param("rin") String parentIdentificationNumber);
+          @Param("rin") String parentIdentificationNumber);
 
-  @Query(
-      "SELECT notification From notification notification Where notification.parentIdentificationNumber =: "
-          + "#{#parentIdentificationNumber}")
+  @Query("SELECT notification From notification notification Where notification"
+          + ".parentIdentificationNumber =: " + "#{#parentIdentificationNumber}")
   Collection<Notification> findAllComponentNotifications(
-      @Param("cin") String parentIdentificationNumber);
+          @Param("cin") String parentIdentificationNumber);
 
   @Modifying
-  @Query(
-      "DELETE From notification Where notification .parentIdentificationNumber =: #{#parentIdentificationNumber}")
+  @Query("DELETE From notification Where notification .parentIdentificationNumber =: "
+          + "#{#parentIdentificationNumber}")
   void cleanUp(@Param("bin") String parentIdentificationNumber);
 }
