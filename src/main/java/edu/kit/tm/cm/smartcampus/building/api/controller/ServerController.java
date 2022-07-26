@@ -5,6 +5,10 @@ import edu.kit.tm.cm.smartcampus.building.api.operations.BuildingOperations;
 import edu.kit.tm.cm.smartcampus.building.api.operations.ComponentOperations;
 import edu.kit.tm.cm.smartcampus.building.api.operations.NotificationOperations;
 import edu.kit.tm.cm.smartcampus.building.api.operations.RoomOperations;
+import edu.kit.tm.cm.smartcampus.building.api.requests.BuildingRequest;
+import edu.kit.tm.cm.smartcampus.building.api.requests.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.api.requests.NotificationRequest;
+import edu.kit.tm.cm.smartcampus.building.api.requests.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.Service;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
@@ -47,8 +51,8 @@ public class ServerController
   }
 
   @Override
-  public Building createBuilding(Building building) {
-    return service.createBuilding(building);
+  public Building createBuilding(BuildingRequest buildingRequest) {
+    return service.createBuilding(buildingRequest);
   }
 
   @Override
@@ -82,8 +86,8 @@ public class ServerController
   }
 
   @Override
-  public Room createRoom(Room room) {
-    return service.createRoom(room);
+  public Room createRoom(RoomRequest roomRequest) {
+    return service.createRoom(roomRequest);
   }
 
   @Override
@@ -112,8 +116,8 @@ public class ServerController
   }
 
   @Override
-  public Component createComponent(Component component) {
-    return service.createComponent(component);
+  public Component createComponent(ComponentRequest componentRequest) {
+    return service.createComponent(componentRequest);
   }
 
   @Override
@@ -152,7 +156,7 @@ public class ServerController
   }
 
   @Override
-  public Notification createNotification(Notification notification) {
-    return service.createNotification(notification);
+  public Notification createNotification(NotificationRequest notificationRequest) {
+    return service.createNotification(notificationRequest);
   }
 }

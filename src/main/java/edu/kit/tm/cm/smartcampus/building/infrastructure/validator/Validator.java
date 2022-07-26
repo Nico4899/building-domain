@@ -34,6 +34,14 @@ public abstract class Validator<O,R> {
   public static final String BUILDING = "building";
   public static final String NOTIFICATION = "notification";
   public static final String COMPONENT = "component";
+
+  public static final String BUILDING_REQUEST = "building_request";
+
+  public static final String ROOM_REQUEST = "room_request";
+
+  public static final String COMPONENT_REQUEST = "component_request";
+
+  public static final String NOTIFICATION_REQUEST = "notification_request";
   // entity variable names
   public static final String IDENTIFICATION_NUMBER_NAME = "identification_number";
   public static final String PARENT_IDENTIFICATION_NUMBER_NAME = "parent_identification_number";
@@ -45,6 +53,8 @@ public abstract class Validator<O,R> {
   public static final String BUILDING_NUMBER = "building_number";
   public static final String ROOM_TYPE_NAME = "room_type";
   public static final String CAMPUS_LOCATION_NAME = "campus_location";
+
+  public static final String GEOGRAPHICAL_LOCATION_NAME = "geographical_location";
   public static final String COMPONENT_TYPE_NAME = "component_type";
   public static final String FLOOR_NAME = "floor";
   public static final String COMPONENT_DESCRIPTION_NAME = "component_description";

@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
+import edu.kit.tm.cm.smartcampus.building.api.requests.BuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
@@ -16,7 +17,7 @@ import java.util.Map;
  * Building} requests. It calls parent methods to validate certain attributes.
  */
 @Component
-public class BuildingValidator extends Validator<Building, BuildingRepository> {
+public class BuildingValidator extends Validator<Building, BuildingRequest> {
 
   @Autowired
   protected BuildingValidator(BuildingRepository buildingRepository,
@@ -32,8 +33,8 @@ public class BuildingValidator extends Validator<Building, BuildingRepository> {
   }
 
   @Override
-  public void validateCreate(Building object) {
-    validateBase(object);
+  public void validateCreate(BuildingRequest buildingRequest) {
+    validateBase(buildingRequest);
   }
 
   @Override
@@ -42,22 +43,45 @@ public class BuildingValidator extends Validator<Building, BuildingRepository> {
     validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
   }
 
-  private void validateBase(Building object) {
+  private void validateBase(Building object) { //TODO kann raus?
     validateNotNull(Map.of(BUILDING, object));
 
-    validateNotNull(Map.of(BUILDING_NAME, object.getName(), BUILDING_NUMBER, object.getName(),
+    validateNotNull(Map.of(BUILDING_NAME, object.getName(), BUILDING_NUMBER, object.getNumber(),
             IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber(), CAMPUS_LOCATION_NAME,
-            object.getCampusLocation()));
+            object.getCampusLocation(), GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
     validateNotEmpty(Map.of(BUILDING_NAME, object.getName()));
 
     validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(object.getNumber(), BIN_PATTERN),
             IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), BIN_PATTERN)));
 
-    validateCoordinates(Map.of(COORDINATES_NAME, Pair.of(object.getLatitude(),
-            object.getLongitude())));
+    validateCoordinates(Map.of(COORDINATES_NAME, Pair.of(object.getGeographicalLocation().getLatitude(),
+            object.getGeographicalLocation().getLongitude())));
 
-    validateFloorValues(Map.of(FLOORS_NAME, Pair.of(object.getLowestFloor(),
-            object.getHighestFloor())));
+    validateFloorValues(Map.of(FLOORS_NAME, Pair.of(object.getFloors().getLowestFloor(),
+            object.getFloors().getHighestFloor())));
   }
+
+  private void validateBase(BuildingRequest buildingRequest) {
+    validateNotNull(Map.of(BUILDING_REQUEST, buildingRequest));
+
+    validateNotNull(Map.of(
+        BUILDING_NAME, buildingRequest.getName(),
+        BUILDING_NUMBER, buildingRequest.getNumber(),
+        CAMPUS_LOCATION_NAME, buildingRequest.getCampusLocation(),
+        GEOGRAPHICAL_LOCATION_NAME, buildingRequest.getGeographicalLocation(),
+        FLOORS_NAME, buildingRequest.getFloors())
+    );
+
+    validateNotEmpty(Map.of(BUILDING_NAME, buildingRequest.getName()));
+
+    validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(buildingRequest.getNumber(), BIN_PATTERN)));
+
+    validateCoordinates(Map.of(COORDINATES_NAME, Pair.of(buildingRequest.getGeographicalLocation().getLatitude(),
+        buildingRequest.getGeographicalLocation().getLongitude())));
+
+    validateFloorValues(Map.of(FLOORS_NAME, Pair.of(buildingRequest.getFloors().getLowestFloor(),
+        buildingRequest.getFloors().getHighestFloor())));
+  }
+
 }

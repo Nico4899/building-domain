@@ -1,10 +1,14 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.service;
 
+import edu.kit.tm.cm.smartcampus.building.api.requests.BuildingRequest;
+import edu.kit.tm.cm.smartcampus.building.api.requests.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.api.requests.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.*;
+import edu.kit.tm.cm.smartcampus.building.logic.LogicUtils;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
@@ -98,12 +102,12 @@ public class Service {
   /**
    * Create a new {@link Building} in this domain service.
    *
-   * @param building the building to be created
+   * @param buildingRequest the request for the building to be created
    * @return the created building
    */
-  public Building createBuilding(Building building) {
-    this.buildingValidator.validateCreate(building);
-    return buildingRepository.save(building);
+  public Building createBuilding(BuildingRequest buildingRequest) {
+    this.buildingValidator.validateCreate(buildingRequest);
+    return buildingRepository.save(LogicUtils.convertBuildingRequestToBuilding(buildingRequest));
   }
 
   /**
@@ -177,12 +181,12 @@ public class Service {
   /**
    * Create a new {@link Room} in this domain service.
    *
-   * @param room the room to be created
-   * @return the created room
+   * @param roomRequest the roomRequest for the room to be created
+   * @return the created roomRequest
    */
-  public Room createRoom(Room room) {
-    this.roomValidator.validateCreate(room);
-    return this.roomRepository.save(room);
+  public Room createRoom(RoomRequest roomRequest) {
+    this.roomValidator.validateCreate(roomRequest);
+    return this.roomRepository.save(LogicUtils.convertRoomRequestToRoom(roomRequest));
   }
 
   /**
@@ -234,12 +238,12 @@ public class Service {
   /**
    * Create a new {@link Component} in this domain service.
    *
-   * @param component the component to be created
-   * @return the created component
+   * @param componentRequest the componentRequest to be created
+   * @return the created componentRequest
    */
-  public Component createComponent(Component component) {
-    this.componentValidator.validateCreate(component);
-    return componentRepository.save(component);
+  public Component createComponent(ComponentRequest componentRequest) {
+    this.componentValidator.validateCreate(componentRequest);
+    return componentRepository.save(LogicUtils.convertComponentRequestToComponent(componentRequest));
   }
 
   /**

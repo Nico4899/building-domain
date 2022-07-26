@@ -5,7 +5,6 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.B
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
@@ -36,7 +35,7 @@ public class RoomValidator extends Validator<Room, RoomRequest> {
 
   @Override
   public void validateCreate(RoomRequest requestObject) {
-    validateBase(object);
+    validateBase(requestObject);
   }
 
   @Override
@@ -71,10 +70,42 @@ public class RoomValidator extends Validator<Room, RoomRequest> {
             Pair.of(object.getParentIdentificationNumber(), BIN_PATTERN)));
 
     validateCoordinates(
-        Map.of(COORDINATES_NAME, Pair.of(object.getLatitude(), object.getLongitude())));
+        Map.of(COORDINATES_NAME, Pair.of(object.getGeographicalLocation().getLatitude(),
+            object.getGeographicalLocation().getLongitude())));
 
     validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
 
     validateValidRoomFloor(object.getFloor(), object.getParentIdentificationNumber());
+  }
+
+  private void validateBase(RoomRequest roomRequest) {
+
+    validateNotNull(Map.of(ROOM_REQUEST, roomRequest));
+
+    validateNotNull(
+        Map.of(
+            ROOM_NAME, roomRequest.getName(),
+            ROOM_NUMBER, roomRequest.getNumber(),
+            PARENT_IDENTIFICATION_NUMBER_NAME, roomRequest.getParentIdentificationNumber(),
+            FLOOR_NAME, roomRequest.getFloor(),
+            ROOM_TYPE_NAME, roomRequest.getType()));
+
+    validateNotEmpty(
+        Map.of(
+            ROOM_NAME, roomRequest.getName(),
+            ROOM_NUMBER, roomRequest.getNumber()));
+
+    validateMatchesRegex(
+        Map.of(
+            PARENT_IDENTIFICATION_NUMBER_NAME,
+            Pair.of(roomRequest.getParentIdentificationNumber(), BIN_PATTERN)));
+
+    validateCoordinates(
+        Map.of(COORDINATES_NAME, Pair.of(roomRequest.getGeographicalLocation().getLatitude(),
+            roomRequest.getGeographicalLocation().getLongitude())));
+
+    validateExists(roomRequest.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+
+    validateValidRoomFloor(roomRequest.getFloor(), roomRequest.getParentIdentificationNumber());
   }
 }

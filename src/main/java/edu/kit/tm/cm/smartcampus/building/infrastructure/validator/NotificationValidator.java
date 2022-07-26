@@ -5,7 +5,6 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.B
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
@@ -44,8 +43,6 @@ public class NotificationValidator extends Validator<Notification, NotificationR
             requestObject.getTitle(),
             NOTIFICATION_DESCRIPTION_NAME,
             requestObject.getDescription(),
-            IDENTIFICATION_NUMBER_NAME,
-            requestObject.getIdentificationNumber(),
             PARENT_IDENTIFICATION_NUMBER_NAME,
             requestObject.getParentIdentificationNumber()));
 
@@ -91,4 +88,23 @@ public class NotificationValidator extends Validator<Notification, NotificationR
 
     validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
   }
+
+  private void validateBase(Notification object) {
+    validateNotEmpty(
+        Map.of(
+            NOTIFICATION_TITLE_NAME,
+            object.getTitle(),
+            NOTIFICATION_DESCRIPTION_NAME,
+            object.getDescription()));
+
+    validateMatchesRegex(
+        Map.of(
+            IDENTIFICATION_NUMBER_NAME,
+            Pair.of(object.getIdentificationNumber(), NIN_PATTERN),
+            PARENT_IDENTIFICATION_NUMBER_NAME,
+            Pair.of(object.getParentIdentificationNumber(), BIN_RIN_CIN_PATTERN)));
+
+    validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+  }
+
 }

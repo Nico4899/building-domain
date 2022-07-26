@@ -5,7 +5,6 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.B
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
@@ -34,8 +33,8 @@ public class ComponentValidator extends Validator<Component, ComponentRequest> {
   }
 
   @Override
-  public void validateCreate(Component object) {
-    validateBase(object);
+  public void validateCreate(ComponentRequest componentRequest) {
+    validateBase(componentRequest);
   }
 
   @Override
@@ -68,7 +67,32 @@ public class ComponentValidator extends Validator<Component, ComponentRequest> {
                 Pair.of(object.getParentIdentificationNumber(), BIN_RIN_PATTERN)));
 
     validateCoordinates(
-        Map.of(COORDINATES_NAME, Pair.of(object.getLatitude(), object.getLongitude())));
+        Map.of(COORDINATES_NAME, Pair.of(object.getGeographicalLocation().getLatitude(),
+            object.getGeographicalLocation().getLongitude())));
     validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+  }
+
+  private void validateBase(ComponentRequest componentRequest) {
+
+    validateNotNull(Map.of(COMPONENT_REQUEST, componentRequest));
+
+    validateNotNull(
+        Map.of(
+            COMPONENT_DESCRIPTION_NAME, componentRequest.getDescription(),
+            PARENT_IDENTIFICATION_NUMBER_NAME, componentRequest.getParentIdentificationNumber(),
+            COMPONENT_TYPE_NAME, componentRequest.getType(),
+            GEOGRAPHICAL_LOCATION_NAME, componentRequest.getGeographicalLocation()));
+
+    validateNotEmpty(Map.of(COMPONENT_DESCRIPTION_NAME, componentRequest.getDescription()));
+
+    validateMatchesRegex(
+        Map.of(
+            PARENT_IDENTIFICATION_NUMBER_NAME,
+            Pair.of(componentRequest.getParentIdentificationNumber(), BIN_RIN_PATTERN)));
+
+    validateCoordinates(
+        Map.of(COORDINATES_NAME, Pair.of(componentRequest.getGeographicalLocation().getLatitude(),
+            componentRequest.getGeographicalLocation().getLongitude())));
+    validateExists(componentRequest.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 }
