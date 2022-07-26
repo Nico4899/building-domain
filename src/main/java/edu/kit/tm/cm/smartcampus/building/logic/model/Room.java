@@ -1,10 +1,9 @@
 package edu.kit.tm.cm.smartcampus.building.logic.model;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -15,10 +14,9 @@ import static edu.kit.tm.cm.smartcampus.building.logic.model.Room.ROOM_TABLE_NAM
 /**
  * This class represents a domain entity room.
  */
+@Setter
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = ROOM_TABLE_NAME)
 public class Room {
 
@@ -30,22 +28,20 @@ public class Room {
 
   // constants this class uses
   private static final String ROOM_SEQUENCE_NAME = "room_sequence";
-  private static final String GENERATOR_PATH =
-          "edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator";
+  private static final String GENERATOR_PATH = "edu.kit.tm.cm.smartcampus.building.infrastructure"
+      + ".database.generator.PrefixSequenceGenerator";
   private static final String ROOM_IDENTIFICATION_NUMBER_PREFIX = "r-";
   private static final String IDENTIFICATION_NUMBER_COLUMN = "identification_number";
   private static final String PARENT_IDENTIFICATION_NUMBER_COLUMN = "parent_identification_number";
+  private static final String GEOGRAPHICAL_LOCATION_COLUMN = "geographical_location";
+  private static final String GEOGRAPHICAL_LOCATION_ID_COLUMN = "geographical_location_id";
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = ROOM_SEQUENCE_NAME)
   @SequenceGenerator(name = ROOM_SEQUENCE_NAME, allocationSize = 1)
-  @GenericGenerator(
-          name = ROOM_SEQUENCE_NAME,
-          strategy =
-                  GENERATOR_PATH,
-          parameters = {
-                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = ROOM_IDENTIFICATION_NUMBER_PREFIX)
-          })
+  @GenericGenerator(name = ROOM_SEQUENCE_NAME, strategy = GENERATOR_PATH, parameters =
+      {@Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value =
+          ROOM_IDENTIFICATION_NUMBER_PREFIX)})
   @Column(name = IDENTIFICATION_NUMBER_COLUMN)
   private String identificationNumber;
 
@@ -56,8 +52,12 @@ public class Room {
   private String number;
   private int floor;
   private Type type;
-  private double latitude;
-  private double longitude;
+
+  @Column(name = GEOGRAPHICAL_LOCATION_COLUMN) //TODO vllt raus(?)
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = GEOGRAPHICAL_LOCATION_ID_COLUMN, referencedColumnName =
+      GeographicalLocation.ID_COLUMN)
+  private GeographicalLocation geographicalLocation;
 
   /**
    * This enum represents the possible room types.

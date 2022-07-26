@@ -28,21 +28,20 @@ public class Component {
 
   // constants this class uses
   private static final String COMPONENT_SEQUENCE_NAME = "component_sequence";
-  private static final String GENERATOR_PATH =
-          "edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator";
+  private static final String GENERATOR_PATH = "edu.kit.tm.cm.smartcampus.building.infrastructure"
+      + ".database.generator.PrefixSequenceGenerator";
   private static final String COMPONENT_IDENTIFICATION_NUMBER_PREFIX = "c-";
   private static final String IDENTIFICATION_NUMBER_COLUMN = "identification_number";
   private static final String PARENT_IDENTIFICATION_NUMBER_COLUMN = "parent_identification_number";
+  private static final String GEOGRAPHICAL_LOCATION_COLUMN = "geographical_location";
+  private static final String GEOGRAPHICAL_LOCATION_ID_COLUMN = "geographical_location_id";
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = COMPONENT_SEQUENCE_NAME)
   @SequenceGenerator(name = COMPONENT_SEQUENCE_NAME, allocationSize = 1)
-  @GenericGenerator(
-          name = COMPONENT_SEQUENCE_NAME,
-          strategy = GENERATOR_PATH,
-          parameters = {
-                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = COMPONENT_IDENTIFICATION_NUMBER_PREFIX)
-          })
+  @GenericGenerator(name = COMPONENT_SEQUENCE_NAME, strategy = GENERATOR_PATH, parameters =
+      {@Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value =
+          COMPONENT_IDENTIFICATION_NUMBER_PREFIX)})
   @Column(name = IDENTIFICATION_NUMBER_COLUMN)
   private String identificationNumber;
 
@@ -51,8 +50,12 @@ public class Component {
 
   private Type type;
   private String description;
-  private double latitude;
-  private double longitude;
+
+  @Column(name = GEOGRAPHICAL_LOCATION_COLUMN) //TODO vllt raus(?)
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = GEOGRAPHICAL_LOCATION_ID_COLUMN, referencedColumnName =
+      GeographicalLocation.ID_COLUMN)
+  private GeographicalLocation geographicalLocation;
 
   /**
    * This enum represents all component types.

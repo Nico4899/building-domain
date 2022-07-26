@@ -15,8 +15,8 @@ import static edu.kit.tm.cm.smartcampus.building.logic.model.Notification.NOTIFI
 /**
  * This class represents a domain entity notification.
  */
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @Entity(name = NOTIFICATION_TABLE_NAME)
 public class Notification {
@@ -29,8 +29,8 @@ public class Notification {
 
   // constants this class uses
   private static final String NOTIFICATION_SEQUENCE_NAME = "notification_sequence";
-  private static final String GENERATOR_PATH =
-          "edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator";
+  private static final String GENERATOR_PATH = "edu.kit.tm.cm.smartcampus.building.infrastructure"
+      + ".database.generator.PrefixSequenceGenerator";
   private static final String NOTIFICATION_IDENTIFICATION_NUMBER_PREFIX = "n-";
   private static final String IDENTIFICATION_NUMBER_COLUMN = "identification_number";
   private static final String PARENT_IDENTIFICATION_NUMBER_COLUMN = "parent_identification_number";
@@ -39,12 +39,9 @@ public class Notification {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = NOTIFICATION_SEQUENCE_NAME)
   @SequenceGenerator(name = NOTIFICATION_SEQUENCE_NAME, allocationSize = 1)
-  @GenericGenerator(
-          name = NOTIFICATION_SEQUENCE_NAME,
-          strategy = GENERATOR_PATH,
-          parameters = {
-                  @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value = NOTIFICATION_IDENTIFICATION_NUMBER_PREFIX)
-          })
+  @GenericGenerator(name = NOTIFICATION_SEQUENCE_NAME, strategy = GENERATOR_PATH, parameters =
+      {@Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value =
+          NOTIFICATION_IDENTIFICATION_NUMBER_PREFIX)})
   @Column(name = IDENTIFICATION_NUMBER_COLUMN)
   private String identificationNumber;
 
