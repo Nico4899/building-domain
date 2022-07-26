@@ -43,7 +43,7 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
     validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
   }
 
-  private void validateBase(Building object) { //TODO kann raus?
+  private void validateBase(Building object) {
     validateNotNull(Map.of(BUILDING, object));
 
     validateNotNull(Map.of(BUILDING_NAME, object.getName(), BUILDING_NUMBER, object.getNumber(),
