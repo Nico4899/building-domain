@@ -16,7 +16,7 @@ self.buildingNumber.matches(regular) |self.buildingNumber.matches(east)
 
 self.bin.matches(^b-\d+$)
 
-self.numFloors > 0
+self.floors -> notEmpty()
 
 self.campusLocation -> notEmpty()
 
