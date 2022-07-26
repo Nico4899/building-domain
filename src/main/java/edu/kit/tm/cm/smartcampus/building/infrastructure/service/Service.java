@@ -2,6 +2,7 @@ package edu.kit.tm.cm.smartcampus.building.infrastructure.service;
 
 import edu.kit.tm.cm.smartcampus.building.api.requests.BuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.api.requests.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.api.requests.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.api.requests.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
@@ -238,7 +239,7 @@ public class Service {
   /**
    * Create a new {@link Component} in this domain service.
    *
-   * @param componentRequest the componentRequest to be created
+   * @param componentRequest the componentRequest for the component to be created
    * @return the created componentRequest
    */
   public Component createComponent(ComponentRequest componentRequest) {
@@ -317,14 +318,15 @@ public class Service {
   /**
    * Create a new {@link Notification} in this domain service.
    *
-   * @param notification the notification to be created
+   * @param notificationRequest the notificationRequest for the notification to be created
    * @return the created notification
    */
-  public Notification createNotification(Notification notification) {
-    this.notificationValidator.validateCreate(notification);
-    Notification createdNotification = this.notificationRepository.save(notification);
-    createdNotification.setCreationTime(new Timestamp(System.currentTimeMillis()));
-    return createdNotification;
+  public Notification createNotification(NotificationRequest notificationRequest) {
+    this.notificationValidator.validateCreate(notificationRequest);
+    Notification notification = this.notificationRepository.save(
+        LogicUtils.convertNotificationRequestToNotification(notificationRequest));
+    notification.setCreationTime(new Timestamp(System.currentTimeMillis()));
+    return notification;
   }
 
   /**

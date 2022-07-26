@@ -245,10 +245,11 @@ public abstract class Validator<O,R> {
     boolean valid = true;
 
     Building building = buildingRepository.findById(parentIdentificationNumber).get();
-    if (floor < building.getLowestFloor() || floor > building.getHighestFloor()) {
+    if (floor < building.getFloors().getLowestFloor() || floor > building.getFloors().getHighestFloor()) {
       valid = false;
       invalidArgumentsStringBuilder.appendMessage(FLOOR_NAME, Integer.toString(floor),
-              FLOOR_HAS_TO_BE_BETWEEN_MESSAGE + building.getLowestFloor() + AND + building.getHighestFloor(), true);
+              FLOOR_HAS_TO_BE_BETWEEN_MESSAGE + building.getFloors().getLowestFloor() + AND
+                  + building.getFloors().getHighestFloor(), true);
     }
     if (!valid) {
       throw new InvalidArgumentsException(invalidArgumentsStringBuilder.build());

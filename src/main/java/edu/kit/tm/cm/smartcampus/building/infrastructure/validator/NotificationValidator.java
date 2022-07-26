@@ -89,22 +89,20 @@ public class NotificationValidator extends Validator<Notification, NotificationR
     validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 
-  private void validateBase(Notification object) {
+  private void validateBase(NotificationRequest notificationRequest) {
     validateNotEmpty(
         Map.of(
             NOTIFICATION_TITLE_NAME,
-            object.getTitle(),
+            notificationRequest.getTitle(),
             NOTIFICATION_DESCRIPTION_NAME,
-            object.getDescription()));
+            notificationRequest.getDescription()));
 
     validateMatchesRegex(
         Map.of(
-            IDENTIFICATION_NUMBER_NAME,
-            Pair.of(object.getIdentificationNumber(), NIN_PATTERN),
             PARENT_IDENTIFICATION_NUMBER_NAME,
-            Pair.of(object.getParentIdentificationNumber(), BIN_RIN_CIN_PATTERN)));
+            Pair.of(notificationRequest.getParentIdentificationNumber(), BIN_RIN_CIN_PATTERN)));
 
-    validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+    validateExists(notificationRequest.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 
 }
