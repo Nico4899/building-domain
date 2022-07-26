@@ -91,6 +91,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>building</finalName>
     </build>
 
 </project>
