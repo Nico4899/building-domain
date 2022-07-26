@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
+import edu.kit.tm.cm.smartcampus.building.api.requests.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
@@ -17,7 +18,7 @@ import java.util.Map;
  * Notification} requests. It calls parent methods to validate certain attributes.
  */
 @Component
-public class NotificationValidator extends Validator<Notification> {
+public class NotificationValidator extends Validator<Notification, NotificationRequest> {
 
   @Autowired
   protected NotificationValidator(
@@ -34,21 +35,21 @@ public class NotificationValidator extends Validator<Notification> {
   }
 
   @Override
-  public void validateCreate(Notification object) {
-    validateNotNull(Map.of(NOTIFICATION, object));
+  public void validateCreate(NotificationRequest requestObject) {
+    validateNotNull(Map.of(NOTIFICATION, requestObject));
 
     validateNotNull(
         Map.of(
             NOTIFICATION_TITLE_NAME,
-            object.getTitle(),
+            requestObject.getTitle(),
             NOTIFICATION_DESCRIPTION_NAME,
-            object.getDescription(),
+            requestObject.getDescription(),
             IDENTIFICATION_NUMBER_NAME,
-            object.getIdentificationNumber(),
+            requestObject.getIdentificationNumber(),
             PARENT_IDENTIFICATION_NUMBER_NAME,
-            object.getParentIdentificationNumber()));
+            requestObject.getParentIdentificationNumber()));
 
-    validateBase(object);
+    validateBase(requestObject);
   }
 
   @Override

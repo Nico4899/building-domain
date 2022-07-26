@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
+import edu.kit.tm.cm.smartcampus.building.api.requests.ComponentRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
@@ -16,7 +17,7 @@ import java.util.Map;
  * Component} requests. It calls parent methods to validate certain attributes.
  */
 @org.springframework.stereotype.Component
-public class ComponentValidator extends Validator<Component> {
+public class ComponentValidator extends Validator<Component, ComponentRequest> {
 
   @Autowired
   protected ComponentValidator(

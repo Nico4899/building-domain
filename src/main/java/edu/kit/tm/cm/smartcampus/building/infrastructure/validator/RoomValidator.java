@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
 
+import edu.kit.tm.cm.smartcampus.building.api.requests.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
@@ -17,7 +18,7 @@ import java.util.Map;
  * Room} requests. It calls parent methods to validate certain attributes.
  */
 @Component
-public class RoomValidator extends Validator<Room> {
+public class RoomValidator extends Validator<Room, RoomRequest> {
 
   @Autowired
   protected RoomValidator(
@@ -34,7 +35,7 @@ public class RoomValidator extends Validator<Room> {
   }
 
   @Override
-  public void validateCreate(Room object) {
+  public void validateCreate(RoomRequest requestObject) {
     validateBase(object);
   }
 

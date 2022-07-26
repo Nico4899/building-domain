@@ -16,7 +16,7 @@ import java.util.Map;
  * Building} requests. It calls parent methods to validate certain attributes.
  */
 @Component
-public class BuildingValidator extends Validator<Building> {
+public class BuildingValidator extends Validator<Building, BuildingRepository> {
 
   @Autowired
   protected BuildingValidator(BuildingRepository buildingRepository,

@@ -17,10 +17,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class representing an input validator which checks given inputs and thereby validates them and
- * throws the right exceptions when an input is invalid.
+ * This class represents a parent class validator for any given attribute constraints. In case of
+ * invalid arguments, it throws {@link InvalidArgumentsException} and in case of nonexistence of
+ * given objects in the database, it throws {@link ResourceNotFoundException}.
+ *
+ * @param <O> the type of which this validator validates objects
+ * @param <R> the type of which this validator validates request objects for the objects
  */
-public abstract class Validator<T> {
+public abstract class Validator<O,R> {
 
   // singles
   public static final String SPACE = " ";
@@ -283,16 +287,16 @@ public abstract class Validator<T> {
   /**
    * Validate create operation.
    *
-   * @param object the object to be validated
+   * @param requestObject the request object to be validated
    */
-  public abstract void validateCreate(T object);
+  public abstract void validateCreate(R requestObject);
 
   /**
    * Validate update operation.
    *
    * @param object the object to be validated
    */
-  public abstract void validateUpdate(T object);
+  public abstract void validateUpdate(O object);
 
   @NoArgsConstructor
   private static class InvalidArgumentsStringBuilder {
