@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.api.operations;
 
+import edu.kit.tm.cm.smartcampus.building.api.requests.ComponentRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,11 @@ public interface ComponentOperations {
   /**
    * Create a new {@link Component} on "/components" url in this domain service.
    *
-   * @param component the component to be created in this service
+   * @param componentRequest the request for the component to be created in this service
    * @return the created component
    */
   @PostMapping("")
-  Component createComponent(@RequestBody Component component);
+  Component createComponent(@RequestBody ComponentRequest componentRequest);
 
   /**
    * Get a specific {@link Component} on "/components/{cin}" url from tis domain service.

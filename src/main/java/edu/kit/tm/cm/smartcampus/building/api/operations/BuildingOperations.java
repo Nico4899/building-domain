@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.api.operations;
 
+import edu.kit.tm.cm.smartcampus.building.api.requests.BuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
@@ -25,11 +26,11 @@ public interface BuildingOperations {
   /**
    * Create a new {@link Building} on "/buildings" url in this domain service.
    *
-   * @param building the building to be created in this service
+   * @param buildingRequest the request for the building to be created in this service
    * @return the created building
    */
   @PostMapping("")
-  Building createBuilding(@RequestBody Building building);
+  Building createBuilding(@RequestBody BuildingRequest buildingRequest);
 
   /**
    * Get a specific {@link Building} on "/buildings/{bin}" url from tis domain service.

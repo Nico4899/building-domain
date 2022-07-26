@@ -1,14 +1,14 @@
 package edu.kit.tm.cm.smartcampus.building.api.requests;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
- * This class represents a request for a Notification
+ * This class represents a request for a Notification.
  */
 @Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationRequest {

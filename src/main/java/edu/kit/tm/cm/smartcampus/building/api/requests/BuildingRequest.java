@@ -1,14 +1,16 @@
 package edu.kit.tm.cm.smartcampus.building.api.requests;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
+import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
+import lombok.*;
 
 /**
- * This class represents a request for a Building
+ * This class represents a request for a Building.
  */
 @Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BuildingRequest {

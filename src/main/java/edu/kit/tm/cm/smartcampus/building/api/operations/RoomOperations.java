@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.api.operations;
 
+import edu.kit.tm.cm.smartcampus.building.api.requests.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
@@ -16,11 +17,11 @@ public interface RoomOperations {
   /**
    * Create a new {@link Room} on "/rooms" url in this domain service.
    *
-   * @param room the room to be created in this service
+   * @param roomRequest the request for the room to be created in this service
    * @return the created room
    */
   @PostMapping("")
-  Room createRoom(@RequestBody Room room);
+  Room createRoom(@RequestBody RoomRequest roomRequest);
 
   /**
    * Get a specific {@link Room} on "/rooms/{rin}" url from tis domain service.

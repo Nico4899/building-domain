@@ -1,14 +1,15 @@
 package edu.kit.tm.cm.smartcampus.building.api.requests;
 
+import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
- * This class represents a request for a Room
+ * This class represents a request for a Room.
  */
 @Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoomRequest {

@@ -1,5 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.api.operations;
 
+import edu.kit.tm.cm.smartcampus.building.api.requests.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +13,11 @@ public interface NotificationOperations {
   /**
    * Create a new {@link Notification} on "/notifications" url in this domain service.
    *
-   * @param notification the notification to be created in this service
+   * @param notificationRequest the request for the notification to be created in this service
    * @return the created notification
    */
   @PostMapping("")
-  Notification createNotification(@RequestBody Notification notification);
+  Notification createNotification(@RequestBody NotificationRequest notificationRequest);
 
   /**
    * Get a specific {@link Notification} on "/notifications/{nin}" url from tis domain service.
