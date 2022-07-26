@@ -1,4 +1,4 @@
-package edu.kit.tm.cm.smartcampus.building.api.payload;
+package edu.kit.tm.cm.smartcampus.building.api.requests;
 
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import lombok.AllArgsConstructor;
