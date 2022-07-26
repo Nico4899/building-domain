@@ -66,9 +66,8 @@ public class ComponentValidator extends Validator<Component, ComponentRequest> {
             PARENT_IDENTIFICATION_NUMBER_NAME,
                 Pair.of(object.getParentIdentificationNumber(), BIN_RIN_PATTERN)));
 
-    validateCoordinates(
-        Map.of(COORDINATES_NAME, Pair.of(object.getGeographicalLocation().getLatitude(),
-            object.getGeographicalLocation().getLongitude())));
+    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+
     validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 
@@ -90,9 +89,8 @@ public class ComponentValidator extends Validator<Component, ComponentRequest> {
             PARENT_IDENTIFICATION_NUMBER_NAME,
             Pair.of(componentRequest.getParentIdentificationNumber(), BIN_RIN_PATTERN)));
 
-    validateCoordinates(
-        Map.of(COORDINATES_NAME, Pair.of(componentRequest.getGeographicalLocation().getLatitude(),
-            componentRequest.getGeographicalLocation().getLongitude())));
+    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, componentRequest.getGeographicalLocation()));
+
     validateExists(componentRequest.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 }

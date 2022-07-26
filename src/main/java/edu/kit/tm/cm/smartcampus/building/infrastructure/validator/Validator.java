@@ -7,6 +7,8 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.R
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
+import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -34,14 +36,6 @@ public abstract class Validator<O,R> {
   public static final String BUILDING = "building";
   public static final String NOTIFICATION = "notification";
   public static final String COMPONENT = "component";
-
-  public static final String BUILDING_REQUEST = "building_request";
-
-  public static final String ROOM_REQUEST = "room_request";
-
-  public static final String COMPONENT_REQUEST = "component_request";
-
-  public static final String NOTIFICATION_REQUEST = "notification_request";
   // entity variable names
   public static final String IDENTIFICATION_NUMBER_NAME = "identification_number";
   public static final String PARENT_IDENTIFICATION_NUMBER_NAME = "parent_identification_number";
@@ -53,7 +47,6 @@ public abstract class Validator<O,R> {
   public static final String BUILDING_NUMBER = "building_number";
   public static final String ROOM_TYPE_NAME = "room_type";
   public static final String CAMPUS_LOCATION_NAME = "campus_location";
-
   public static final String GEOGRAPHICAL_LOCATION_NAME = "geographical_location";
   public static final String COMPONENT_TYPE_NAME = "component_type";
   public static final String FLOOR_NAME = "floor";
@@ -62,12 +55,14 @@ public abstract class Validator<O,R> {
   public static final String NOTIFICATION_TITLE_NAME = "notification_title";
   public static final String CREATION_TIME_NAME = "creation_time";
   public static final String FLOORS_NAME = "floors";
-  public static final String COORDINATES_NAME = "coordinates";
+  public static final String HIGHEST_FLOOR_NAME = "lowest_floor";
+  public static final String LOWEST_FLOOR_NAME = "highest_floor";
   // messages
   public static final String SHOULD_MATCH_MESSAGE = "should match: %s";
   public static final String SHOULD_BE_BETWEEN_MESSAGE = "should be between %s and %s";
   public static final String SHOULD_NOT_BE_EMPTY_MESSAGE = "should not be empty";
   public static final String SHOULD_NOT_BE_NULL_MESSAGE = "should not be null";
+  public static final String SHOULD_BE_HIGHER_THAN_MESSAGE = "should be higher than";
   // patterns
   public static final String BIN_PATTERN = "^b-\\d+$";
   public static final String RIN_PATTERN = "^r-\\d+$";
@@ -82,6 +77,10 @@ public abstract class Validator<O,R> {
   private static final double MIN_LATITUDE_VALUE = -90;
   private static final double MAX_LONGITUDE_VALUE = 180;
   private static final double MIN_LONGITUDE_VALUE = -180;
+  public static final String BUILDING_REQUEST = "building_request";
+  public static final String ROOM_REQUEST = "room_request";
+  public static final String COMPONENT_REQUEST = "component_request";
+  public static final String NOTIFICATION_REQUEST = "notification_request";
   private final BuildingRepository buildingRepository;
   private final RoomRepository roomRepository;
   private final ComponentRepository componentRepository;
@@ -176,27 +175,27 @@ public abstract class Validator<O,R> {
   }
 
   /**
-   * Validates weather coordinates have valid latitude and longitude values or not.
+   * Validates weather geographical locations have valid latitude and longitude values or not.
    *
-   * @param coordinates coordinates to be checked mapped by their names (key = name,
-   *                    value=<latitude, longitude>)
+   * @param locations Map of geographical locations to be checked and their names (key = name,
+   *                    value=location)
    */
-  protected void validateCoordinates(Map<String, Pair<Double, Double>> coordinates) {
+  protected void validateGeographicalLocations(Map<String, GeographicalLocation> locations) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
             new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
-    for (Map.Entry<String, Pair<Double, Double>> entry : coordinates.entrySet()) {
-      if (entry.getValue().getFirst() > MAX_LATITUDE_VALUE || entry.getValue().getFirst() < MIN_LATITUDE_VALUE) {
+    for (Map.Entry<String, GeographicalLocation> entry : locations.entrySet()) {
+      if (entry.getValue().getLatitude() > MAX_LATITUDE_VALUE || entry.getValue().getLatitude() < MIN_LATITUDE_VALUE) {
         invalidArgumentsStringBuilder.appendMessage(entry.getKey() + SPACE + LATITUDE_NAME,
-                Double.toString(entry.getValue().getFirst()),
+                Double.toString(entry.getValue().getLatitude()),
                 String.format(SHOULD_BE_BETWEEN_MESSAGE, MIN_LATITUDE_VALUE, MAX_LATITUDE_VALUE),
                 true);
         valid = false;
       }
-      if (entry.getValue().getSecond() > MAX_LONGITUDE_VALUE || entry.getValue().getSecond() < MIN_LONGITUDE_VALUE) {
+      if (entry.getValue().getLongitude() > MAX_LONGITUDE_VALUE || entry.getValue().getLongitude() < MIN_LONGITUDE_VALUE) {
         invalidArgumentsStringBuilder.appendMessage(entry.getKey() + SPACE + LONGITUDE_NAME,
-                Double.toString(entry.getValue().getSecond()),
+                Double.toString(entry.getValue().getLongitude()),
                 String.format(SHOULD_BE_BETWEEN_MESSAGE, MIN_LONGITUDE_VALUE,
                         MAX_LONGITUDE_VALUE), true);
         valid = false;
@@ -209,21 +208,22 @@ public abstract class Validator<O,R> {
   }
 
   /**
-   * Validates weather floors have valid attributes or not.
+   * Validates weather floors objects have valid attributes or not.
    *
-   * @param maxAndMinFloor max and min floor number to be checked and their names (key = name,
-   *                       value=<minFloor, maxFloor>)
+   * @param floors Map of floors objects to be checked and their names (key = name,
+   *                       value=floors objects)
    */
-  public void validateFloorValues(Map<String, Pair<Integer, Integer>> maxAndMinFloor) {
+  public void validateFloors(Map<String, Floors> floors) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
             new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
-    for (Map.Entry<String, Pair<Integer, Integer>> entry : maxAndMinFloor.entrySet()) {
-      if (entry.getValue().getSecond() < entry.getValue().getFirst()) {
-        invalidArgumentsStringBuilder.appendMessage(entry.getKey() + " highest floor",
-                entry.getValue().getSecond() + "",
-                "should be higher than lowest floor: " + entry.getValue().getFirst(), true);
+    for (Map.Entry<String, Floors> entry : floors.entrySet()) {
+      if (entry.getValue().getHighestFloor() < entry.getValue().getLowestFloor()) {
+        invalidArgumentsStringBuilder.appendMessage(entry.getKey() + SPACE + HIGHEST_FLOOR_NAME,
+                Integer.toString(entry.getValue().getHighestFloor()),
+            SHOULD_BE_HIGHER_THAN_MESSAGE + SPACE + LOWEST_FLOOR_NAME + entry.getValue().getLowestFloor()
+            ,true);
         valid = false;
       }
     }
@@ -251,6 +251,7 @@ public abstract class Validator<O,R> {
               FLOOR_HAS_TO_BE_BETWEEN_MESSAGE + building.getFloors().getLowestFloor() + AND
                   + building.getFloors().getHighestFloor(), true);
     }
+
     if (!valid) {
       throw new InvalidArgumentsException(invalidArgumentsStringBuilder.build());
     }
@@ -266,11 +267,13 @@ public abstract class Validator<O,R> {
     Collection<CrudRepository<?, String>> repositories = List.of(buildingRepository,
             roomRepository, componentRepository, notificationRepository);
     boolean found = false;
+
     for (CrudRepository<?, String> repository : repositories) {
       if (repository.existsById(inputIdentificationNumber)) {
         found = true;
       }
     }
+
     if (!found) {
       throw new ResourceNotFoundException(name, inputIdentificationNumber);
     }

@@ -55,11 +55,9 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
     validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(object.getNumber(), BIN_PATTERN),
             IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), BIN_PATTERN)));
 
-    validateCoordinates(Map.of(COORDINATES_NAME, Pair.of(object.getGeographicalLocation().getLatitude(),
-            object.getGeographicalLocation().getLongitude())));
+    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
-    validateFloorValues(Map.of(FLOORS_NAME, Pair.of(object.getFloors().getLowestFloor(),
-            object.getFloors().getHighestFloor())));
+    validateFloors(Map.of(FLOORS_NAME, object.getFloors()));
   }
 
   private void validateBase(BuildingRequest buildingRequest) {
@@ -77,11 +75,9 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
 
     validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(buildingRequest.getNumber(), BIN_PATTERN)));
 
-    validateCoordinates(Map.of(COORDINATES_NAME, Pair.of(buildingRequest.getGeographicalLocation().getLatitude(),
-        buildingRequest.getGeographicalLocation().getLongitude())));
+    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, buildingRequest.getGeographicalLocation()));
 
-    validateFloorValues(Map.of(FLOORS_NAME, Pair.of(buildingRequest.getFloors().getLowestFloor(),
-        buildingRequest.getFloors().getHighestFloor())));
+    validateFloors(Map.of(FLOORS_NAME, buildingRequest.getFloors()));
   }
 
 }

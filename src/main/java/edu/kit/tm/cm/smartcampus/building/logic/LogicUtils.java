@@ -8,8 +8,10 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
-
+//TODO javadoc (überall!^^)
 public class LogicUtils {
+
+  private LogicUtils(){}
   
   public static Building convertBuildingRequestToBuilding(BuildingRequest buildingRequest) {
     Building building = new Building();

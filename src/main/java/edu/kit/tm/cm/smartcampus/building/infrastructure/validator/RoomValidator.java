@@ -69,9 +69,7 @@ public class RoomValidator extends Validator<Room, RoomRequest> {
             PARENT_IDENTIFICATION_NUMBER_NAME,
             Pair.of(object.getParentIdentificationNumber(), BIN_PATTERN)));
 
-    validateCoordinates(
-        Map.of(COORDINATES_NAME, Pair.of(object.getGeographicalLocation().getLatitude(),
-            object.getGeographicalLocation().getLongitude())));
+    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
     validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
 
@@ -100,9 +98,7 @@ public class RoomValidator extends Validator<Room, RoomRequest> {
             PARENT_IDENTIFICATION_NUMBER_NAME,
             Pair.of(roomRequest.getParentIdentificationNumber(), BIN_PATTERN)));
 
-    validateCoordinates(
-        Map.of(COORDINATES_NAME, Pair.of(roomRequest.getGeographicalLocation().getLatitude(),
-            roomRequest.getGeographicalLocation().getLongitude())));
+    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, roomRequest.getGeographicalLocation()));
 
     validateExists(roomRequest.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
 
