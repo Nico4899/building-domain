@@ -34,45 +34,6 @@ public class ComponentValidator extends Validator<Component, ComponentRequest> {
 
   @Override
   public void validateCreate(ComponentRequest componentRequest) {
-    validateBase(componentRequest);
-  }
-
-  @Override
-  public void validateUpdate(Component object) {
-    validateBase(object);
-    validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
-  }
-
-  private void validateBase(Component object) {
-
-    validateNotNull(Map.of(COMPONENT, object));
-
-    validateNotNull(
-        Map.of(
-            COMPONENT_DESCRIPTION_NAME,
-            object.getDescription(),
-            IDENTIFICATION_NUMBER_NAME,
-            object.getIdentificationNumber(),
-            PARENT_IDENTIFICATION_NUMBER_NAME,
-            object.getParentIdentificationNumber(),
-            COMPONENT_TYPE_NAME,
-            object.getType()));
-
-    validateNotEmpty(Map.of(COMPONENT_DESCRIPTION_NAME, object.getDescription()));
-
-    validateMatchesRegex(
-        Map.of(
-            IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), CIN_PATTERN),
-            PARENT_IDENTIFICATION_NUMBER_NAME,
-                Pair.of(object.getParentIdentificationNumber(), BIN_RIN_PATTERN)));
-
-    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
-
-    validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
-  }
-
-  private void validateBase(ComponentRequest componentRequest) {
-
     validateNotNull(Map.of(COMPONENT_REQUEST, componentRequest));
 
     validateNotNull(
@@ -93,4 +54,36 @@ public class ComponentValidator extends Validator<Component, ComponentRequest> {
 
     validateExists(componentRequest.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
   }
+
+  @Override
+  public void validateUpdate(Component object) {
+    validateNotNull(Map.of(COMPONENT, object));
+
+    validateNotNull(
+        Map.of(
+            COMPONENT, object,
+            COMPONENT_DESCRIPTION_NAME,
+            object.getDescription(),
+            IDENTIFICATION_NUMBER_NAME,
+            object.getIdentificationNumber(),
+            PARENT_IDENTIFICATION_NUMBER_NAME,
+            object.getParentIdentificationNumber(),
+            COMPONENT_TYPE_NAME,
+            object.getType()));
+
+    validateNotEmpty(Map.of(COMPONENT_DESCRIPTION_NAME, object.getDescription()));
+
+    validateMatchesRegex(
+        Map.of(
+            IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), CIN_PATTERN),
+            PARENT_IDENTIFICATION_NUMBER_NAME,
+            Pair.of(object.getParentIdentificationNumber(), BIN_RIN_PATTERN)));
+
+    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+
+    validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+
+    validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
+  }
+
 }

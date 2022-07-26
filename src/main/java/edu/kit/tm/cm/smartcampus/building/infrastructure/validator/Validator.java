@@ -213,7 +213,7 @@ public abstract class Validator<O,R> {
    * @param floors Map of floors objects to be checked and their names (key = name,
    *                       value=floors objects)
    */
-  public void validateFloors(Map<String, Floors> floors) {
+  protected void validateFloors(Map<String, Floors> floors) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
             new InvalidArgumentsStringBuilder();
     boolean valid = true;
@@ -236,10 +236,9 @@ public abstract class Validator<O,R> {
   /**
    * Validates weather a given room floor is valid or not.
    *
-   * @param floor max and min floor number to be checked and their names (key = name,
-   *              value=<minFloor, maxFloor>)
+   * @param floor the floor of the room
    */
-  protected void validateValidRoomFloor(int floor, String parentIdentificationNumber) {
+  protected void validateRoomFloor(int floor, String parentIdentificationNumber) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
             new InvalidArgumentsStringBuilder();
     boolean valid = true;

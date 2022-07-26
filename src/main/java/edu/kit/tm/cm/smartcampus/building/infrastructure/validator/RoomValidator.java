@@ -35,17 +35,35 @@ public class RoomValidator extends Validator<Room, RoomRequest> {
 
   @Override
   public void validateCreate(RoomRequest requestObject) {
-    validateBase(requestObject);
+    validateNotNull(Map.of(ROOM_REQUEST, requestObject));
+
+    validateNotNull(
+        Map.of(
+            ROOM_NAME, requestObject.getName(),
+            ROOM_NUMBER, requestObject.getNumber(),
+            PARENT_IDENTIFICATION_NUMBER_NAME, requestObject.getParentIdentificationNumber(),
+            FLOOR_NAME, requestObject.getFloor(),
+            ROOM_TYPE_NAME, requestObject.getType()));
+
+    validateNotEmpty(
+        Map.of(
+            ROOM_NAME, requestObject.getName(),
+            ROOM_NUMBER, requestObject.getNumber()));
+
+    validateMatchesRegex(
+        Map.of(
+            PARENT_IDENTIFICATION_NUMBER_NAME,
+            Pair.of(requestObject.getParentIdentificationNumber(), BIN_PATTERN)));
+
+    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, requestObject.getGeographicalLocation()));
+
+    validateExists(requestObject.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+
+    validateRoomFloor(requestObject.getFloor(), requestObject.getParentIdentificationNumber());
   }
 
   @Override
   public void validateUpdate(Room object) {
-    validateBase(object);
-    validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
-  }
-
-  private void validateBase(Room object) {
-
     validateNotNull(Map.of(ROOM, object));
 
     validateNotNull(
@@ -73,35 +91,11 @@ public class RoomValidator extends Validator<Room, RoomRequest> {
 
     validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
 
-    validateValidRoomFloor(object.getFloor(), object.getParentIdentificationNumber());
+    validateRoomFloor(object.getFloor(), object.getParentIdentificationNumber());
+
+    validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
   }
 
-  private void validateBase(RoomRequest roomRequest) {
 
-    validateNotNull(Map.of(ROOM_REQUEST, roomRequest));
 
-    validateNotNull(
-        Map.of(
-            ROOM_NAME, roomRequest.getName(),
-            ROOM_NUMBER, roomRequest.getNumber(),
-            PARENT_IDENTIFICATION_NUMBER_NAME, roomRequest.getParentIdentificationNumber(),
-            FLOOR_NAME, roomRequest.getFloor(),
-            ROOM_TYPE_NAME, roomRequest.getType()));
-
-    validateNotEmpty(
-        Map.of(
-            ROOM_NAME, roomRequest.getName(),
-            ROOM_NUMBER, roomRequest.getNumber()));
-
-    validateMatchesRegex(
-        Map.of(
-            PARENT_IDENTIFICATION_NUMBER_NAME,
-            Pair.of(roomRequest.getParentIdentificationNumber(), BIN_PATTERN)));
-
-    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, roomRequest.getGeographicalLocation()));
-
-    validateExists(roomRequest.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
-
-    validateValidRoomFloor(roomRequest.getFloor(), roomRequest.getParentIdentificationNumber());
-  }
 }

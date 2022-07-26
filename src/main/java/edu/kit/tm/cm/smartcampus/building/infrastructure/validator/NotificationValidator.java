@@ -35,7 +35,7 @@ public class NotificationValidator extends Validator<Notification, NotificationR
 
   @Override
   public void validateCreate(NotificationRequest requestObject) {
-    validateNotNull(Map.of(NOTIFICATION, requestObject));
+    validateNotNull(Map.of(NOTIFICATION_REQUEST, requestObject));
 
     validateNotNull(
         Map.of(
@@ -46,14 +46,26 @@ public class NotificationValidator extends Validator<Notification, NotificationR
             PARENT_IDENTIFICATION_NUMBER_NAME,
             requestObject.getParentIdentificationNumber()));
 
-    validateBase(requestObject);
+    validateNotEmpty(
+        Map.of(
+            NOTIFICATION_TITLE_NAME,
+            requestObject.getTitle(),
+            NOTIFICATION_DESCRIPTION_NAME,
+            requestObject.getDescription()));
+
+    validateMatchesRegex(
+        Map.of(
+            PARENT_IDENTIFICATION_NUMBER_NAME,
+            Pair.of(requestObject.getParentIdentificationNumber(), BIN_RIN_CIN_PATTERN)));
+
+    validateExists(requestObject.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 
   @Override
   public void validateUpdate(Notification object) {
     validateNotNull(Map.of(NOTIFICATION, object));
 
-    validateNotNull(
+      validateNotNull(
         Map.of(
             NOTIFICATION_TITLE_NAME,
             object.getTitle(),
@@ -66,12 +78,6 @@ public class NotificationValidator extends Validator<Notification, NotificationR
             CREATION_TIME_NAME,
             object.getCreationTime()));
 
-    validateBase(object);
-
-    validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
-  }
-
-  private void validateBase(Notification object) {
     validateNotEmpty(
         Map.of(
             NOTIFICATION_TITLE_NAME,
@@ -87,22 +93,8 @@ public class NotificationValidator extends Validator<Notification, NotificationR
             Pair.of(object.getParentIdentificationNumber(), BIN_RIN_CIN_PATTERN)));
 
     validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
-  }
 
-  private void validateBase(NotificationRequest notificationRequest) {
-    validateNotEmpty(
-        Map.of(
-            NOTIFICATION_TITLE_NAME,
-            notificationRequest.getTitle(),
-            NOTIFICATION_DESCRIPTION_NAME,
-            notificationRequest.getDescription()));
-
-    validateMatchesRegex(
-        Map.of(
-            PARENT_IDENTIFICATION_NUMBER_NAME,
-            Pair.of(notificationRequest.getParentIdentificationNumber(), BIN_RIN_CIN_PATTERN)));
-
-    validateExists(notificationRequest.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+    validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
   }
 
 }

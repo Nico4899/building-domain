@@ -34,33 +34,6 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
 
   @Override
   public void validateCreate(BuildingRequest buildingRequest) {
-    validateBase(buildingRequest);
-  }
-
-  @Override
-  public void validateUpdate(Building object) {
-    validateBase(object);
-    validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
-  }
-
-  private void validateBase(Building object) {
-    validateNotNull(Map.of(BUILDING, object));
-
-    validateNotNull(Map.of(BUILDING_NAME, object.getName(), BUILDING_NUMBER, object.getNumber(),
-            IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber(), CAMPUS_LOCATION_NAME,
-            object.getCampusLocation(), GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
-
-    validateNotEmpty(Map.of(BUILDING_NAME, object.getName()));
-
-    validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(object.getNumber(), BIN_PATTERN),
-            IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), BIN_PATTERN)));
-
-    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
-
-    validateFloors(Map.of(FLOORS_NAME, object.getFloors()));
-  }
-
-  private void validateBase(BuildingRequest buildingRequest) {
     validateNotNull(Map.of(BUILDING_REQUEST, buildingRequest));
 
     validateNotNull(Map.of(
@@ -78,6 +51,26 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
     validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, buildingRequest.getGeographicalLocation()));
 
     validateFloors(Map.of(FLOORS_NAME, buildingRequest.getFloors()));
+  }
+
+  @Override
+  public void validateUpdate(Building object) {
+    validateNotNull(Map.of(BUILDING, object));
+
+    validateNotNull(Map.of(BUILDING_NAME, object.getName(), BUILDING_NUMBER, object.getNumber(),
+        IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber(), CAMPUS_LOCATION_NAME,
+        object.getCampusLocation(), GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+
+    validateNotEmpty(Map.of(BUILDING_NAME, object.getName()));
+
+    validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(object.getNumber(), BIN_PATTERN),
+        IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), BIN_PATTERN)));
+
+    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+
+    validateFloors(Map.of(FLOORS_NAME, object.getFloors()));
+
+    validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
   }
 
 }
