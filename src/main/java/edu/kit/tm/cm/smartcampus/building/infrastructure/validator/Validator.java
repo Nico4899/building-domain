@@ -8,6 +8,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgum
 import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Pair;
 
@@ -80,6 +81,7 @@ public abstract class Validator<T> {
    * @param componentRepository    the component repository in which all component are saved
    * @param notificationRepository the notification repository in which all notification are saved
    */
+  @Autowired
   protected Validator(BuildingRepository buildingRepository, RoomRepository roomRepository,
                       ComponentRepository componentRepository,
                       NotificationRepository notificationRepository) {
