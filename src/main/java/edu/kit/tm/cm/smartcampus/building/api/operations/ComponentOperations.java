@@ -3,9 +3,14 @@ package edu.kit.tm.cm.smartcampus.building.api.operations;
 import edu.kit.tm.cm.smartcampus.building.api.requests.ComponentRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * This interface provides all rest server operations connected "/components" requests.
@@ -49,10 +54,12 @@ public interface ComponentOperations {
   void removeComponent(@PathVariable String cin);
 
   /**
-   * List all notifications that belong to a certain component on "/components/{cin}/notifications" url.
+   * List all notifications that belong to a certain component on "/components/{cin}/notifications"
+   * url.
    *
    * @param cin identification number of the component
-   * @return a collection of all {@link Notification} this domain service manages that belong to the component
+   * @return a collection of all {@link Notification} this domain service manages that belong to the
+   *     component
    */
   @GetMapping("/{cin}/notifications")
   Collection<Notification> listComponentNotifications(@PathVariable String cin);

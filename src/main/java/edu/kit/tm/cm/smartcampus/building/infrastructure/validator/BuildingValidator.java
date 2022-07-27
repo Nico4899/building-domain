@@ -6,24 +6,23 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.C
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
 /**
- * This class is a child implementation of the {@link Validator}, it focuses on validating {@link
- * Building} requests. It calls parent methods to validate certain attributes.
+ * This class is a child implementation of the {@link Validator}, it focuses on validating
+ * {@link Building} requests. It calls parent methods to validate certain attributes.
  */
 @Component
 public class BuildingValidator extends Validator<Building, BuildingRequest> {
 
   @Autowired
   protected BuildingValidator(BuildingRepository buildingRepository,
-                              RoomRepository roomRepository,
-                              ComponentRepository componentRepository,
-                              NotificationRepository notificationRepository) {
+      RoomRepository roomRepository,
+      ComponentRepository componentRepository,
+      NotificationRepository notificationRepository) {
     super(buildingRepository, roomRepository, componentRepository, notificationRepository);
   }
 
@@ -46,9 +45,11 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
 
     validateNotEmpty(Map.of(BUILDING_NAME, buildingRequest.getName()));
 
-    validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(buildingRequest.getNumber(), "30.30")/*TODO richtiges Pattern einfügen*/));
+    validateMatchesRegex(Map.of(BUILDING_NUMBER,
+        Pair.of(buildingRequest.getNumber(), "30.30")/*TODO richtiges Pattern einfügen*/));
 
-    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, buildingRequest.getGeographicalLocation()));
+    validateGeographicalLocations(
+        Map.of(GEOGRAPHICAL_LOCATION_NAME, buildingRequest.getGeographicalLocation()));
 
     validateFloors(Map.of(FLOORS_NAME, buildingRequest.getFloors()));
   }
@@ -63,10 +64,12 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
 
     validateNotEmpty(Map.of(BUILDING_NAME, object.getName()));
 
-    validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(object.getNumber(), "30.30"),//TODO richtiges Pattern einfügen
+    validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(object.getNumber(), "30.30"),
+        //TODO richtiges Pattern einfügen
         IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), BIN_PATTERN)));
 
-    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+    validateGeographicalLocations(
+        Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
     validateFloors(Map.of(FLOORS_NAME, object.getFloors()));
 

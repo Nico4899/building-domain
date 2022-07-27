@@ -1,5 +1,7 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator;
 
+import java.io.Serializable;
+import java.util.Properties;
 import org.hibernate.HibernateException;
 import org.hibernate.MappingException;
 import org.hibernate.annotations.GenericGenerator;
@@ -9,9 +11,6 @@ import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
-
-import java.io.Serializable;
-import java.util.Properties;
 
 /**
  * This class represents a custom prefix sequence generator for database primary key generation. It
@@ -26,17 +25,17 @@ public class PrefixSequenceGenerator extends SequenceStyleGenerator {
 
   @Override
   public Serializable generate(SharedSessionContractImplementor session, Object object)
-          throws HibernateException {
+      throws HibernateException {
 
     return valuePrefix + super.generate(session, object);
   }
 
   @Override
   public void configure(Type type, Properties params, ServiceRegistry serviceRegistry)
-          throws MappingException {
+      throws MappingException {
 
     super.configure(LongType.INSTANCE, params, serviceRegistry);
     valuePrefix =
-            ConfigurationHelper.getString(VALUE_PREFIX_PARAMETER, params, VALUE_PREFIX_DEFAULT);
+        ConfigurationHelper.getString(VALUE_PREFIX_PARAMETER, params, VALUE_PREFIX_DEFAULT);
   }
 }

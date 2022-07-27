@@ -6,15 +6,14 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.C
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
 /**
- * This class is a child implementation of the {@link Validator}, it focuses on validating {@link
- * Notification} requests. It calls parent methods to validate certain attributes.
+ * This class is a child implementation of the {@link Validator}, it focuses on validating
+ * {@link Notification} requests. It calls parent methods to validate certain attributes.
  */
 @Component
 public class NotificationValidator extends Validator<Notification, NotificationRequest> {
@@ -58,14 +57,15 @@ public class NotificationValidator extends Validator<Notification, NotificationR
             PARENT_IDENTIFICATION_NUMBER_NAME,
             Pair.of(requestObject.getParentIdentificationNumber(), BIN_RIN_CIN_PATTERN)));
 
-    validateExists(requestObject.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+    validateExists(requestObject.getParentIdentificationNumber(),
+        PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 
   @Override
   public void validateUpdate(Notification object) {
     validateNotNull(Map.of(NOTIFICATION, object));
 
-      validateNotNull(
+    validateNotNull(
         Map.of(
             NOTIFICATION_TITLE_NAME,
             object.getTitle(),

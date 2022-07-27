@@ -7,7 +7,7 @@ package edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions;
 public class InvalidArgumentsException extends RuntimeException {
 
   private static final String INVALID_ARGUMENTS_EXCEPTION_MESSAGE =
-    "Arguments are Invalid! Please check the following: %s";
+      "Arguments are Invalid! Please check the following: %s";
 
   /**
    * Constructs a new {@link InvalidArgumentsException}.

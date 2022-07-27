@@ -14,11 +14,13 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
  */
 public class LogicUtils {
 
-  private LogicUtils(){}
+  private LogicUtils() {
+  }
 
   /**
-   * Converts a BuildingRequest to a Building and sets all attributes of the Building to the values of the existing
-   * attributes of the Request
+   * Converts a BuildingRequest to a Building and sets all attributes of the Building to the values
+   * of the existing attributes of the Request.
+   *
    * @param buildingRequest the request to be converted
    * @return the resulting Building
    */
@@ -33,8 +35,9 @@ public class LogicUtils {
   }
 
   /**
-   * Converts a RoomRequest to a Room and sets all attributes of the Room to the values of the existing
-   * attributes of the Request
+   * Converts a RoomRequest to a Room and sets all attributes of the Room to the values of the
+   * existing attributes of the Request.
+   *
    * @param roomRequest the Request to be converted
    * @return the resulting Room
    */
@@ -50,8 +53,9 @@ public class LogicUtils {
   }
 
   /**
-   * Converts a ComponentRequest to a Component and sets all attributes of the Component to the values of the existing
-   * attributes of the Request
+   * Converts a ComponentRequest to a Component and sets all attributes of the Component to the
+   * values of the existing attributes of the Request.
+   *
    * @param componentRequest the Request to be converted
    * @return the resulting Component
    */
@@ -65,17 +69,19 @@ public class LogicUtils {
   }
 
   /**
-   * Converts a NotificationRequest to a Notification and sets all attributes of the Notification to the values of the
-   * existing attributes of the Request
+   * Converts a NotificationRequest to a Notification and sets all attributes of the Notification to
+   * the values of the existing attributes of the Request.
+   *
    * @param notificationRequest the Request to be converted
    * @return the resulting Notification
    */
-  public static Notification convertNotificationRequestToNotification(NotificationRequest notificationRequest) {
+  public static Notification convertNotificationRequestToNotification(
+      NotificationRequest notificationRequest) {
     Notification notification = new Notification();
     notification.setDescription(notificationRequest.getDescription());
     notification.setParentIdentificationNumber(notificationRequest.getParentIdentificationNumber());
     notification.setTitle(notificationRequest.getTitle());
     return notification;
   }
-  
+
 }

@@ -6,14 +6,13 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.C
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 
-import java.util.Map;
-
 /**
- * This class is a child implementation of the {@link Validator}, it focuses on validating {@link
- * Component} requests. It calls parent methods to validate certain attributes.
+ * This class is a child implementation of the {@link Validator}, it focuses on validating
+ * {@link Component} requests. It calls parent methods to validate certain attributes.
  */
 @org.springframework.stereotype.Component
 public class ComponentValidator extends Validator<Component, ComponentRequest> {
@@ -50,9 +49,11 @@ public class ComponentValidator extends Validator<Component, ComponentRequest> {
             PARENT_IDENTIFICATION_NUMBER_NAME,
             Pair.of(componentRequest.getParentIdentificationNumber(), BIN_RIN_PATTERN)));
 
-    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, componentRequest.getGeographicalLocation()));
+    validateGeographicalLocations(
+        Map.of(GEOGRAPHICAL_LOCATION_NAME, componentRequest.getGeographicalLocation()));
 
-    validateExists(componentRequest.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+    validateExists(componentRequest.getParentIdentificationNumber(),
+        PARENT_IDENTIFICATION_NUMBER_NAME);
   }
 
   @Override
@@ -79,7 +80,8 @@ public class ComponentValidator extends Validator<Component, ComponentRequest> {
             PARENT_IDENTIFICATION_NUMBER_NAME,
             Pair.of(object.getParentIdentificationNumber(), BIN_RIN_PATTERN)));
 
-    validateGeographicalLocations(Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
+    validateGeographicalLocations(
+        Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
     validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
 

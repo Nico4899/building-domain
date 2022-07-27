@@ -11,7 +11,7 @@ public class ResourceNotFoundException extends RuntimeException {
   /**
    * Constructs a {@link ResourceNotFoundException}.
    *
-   * @param name name of the resource requested
+   * @param name  name of the resource requested
    * @param value identification value of the requested resource
    */
   public ResourceNotFoundException(String name, String value) {

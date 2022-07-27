@@ -5,9 +5,14 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * This interface provides all rest server operations connected "/buildings" requests.
@@ -63,7 +68,8 @@ public interface BuildingOperations {
    * List all rooms that belong to a certain building on "/buildings/{bin}/rooms" url.
    *
    * @param bin identification number of the building
-   * @return a collection of all {@link Room} this domain service manages that belong to the building
+   * @return a collection of all {@link Room} this domain service manages that belong to the
+   *     building
    */
   @GetMapping("/{bin}/rooms")
   Collection<Room> listBuildingRooms(@PathVariable String bin);
@@ -72,16 +78,19 @@ public interface BuildingOperations {
    * List all components that belong to a certain building on "/buildings/{bin}/components" url.
    *
    * @param bin identification number of the building
-   * @return a collection of all {@link Component} this domain service manages that belong to the building
+   * @return a collection of all {@link Component} this domain service manages that belong to the
+   *     building
    */
   @GetMapping("/{bin}/components")
   Collection<Component> listBuildingComponents(@PathVariable String bin);
 
   /**
-   * List all notifications that belong to a certain building on "/buildings/{bin}/notifications" url.
+   * List all notifications that belong to a certain building on "/buildings/{bin}/notifications"
+   * url.
    *
    * @param bin identification number of the building
-   * @return a collection of all {@link Notification} this domain service manages that belong to the building
+   * @return a collection of all {@link Notification} this domain service manages that belong to the
+   *     building
    */
   @GetMapping("/{bin}/notifications")
   Collection<Notification> listBuildingNotifications(@PathVariable String bin);

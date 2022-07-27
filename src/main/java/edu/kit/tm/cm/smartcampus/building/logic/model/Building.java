@@ -1,15 +1,22 @@
 package edu.kit.tm.cm.smartcampus.building.logic.model;
 
+import static edu.kit.tm.cm.smartcampus.building.logic.model.Building.BUILDING_TABLE_NAME;
+
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
-import javax.persistence.*;
-
-import static edu.kit.tm.cm.smartcampus.building.logic.model.Building.BUILDING_TABLE_NAME;
 
 /**
  * This class represents a domain entity building.
@@ -43,9 +50,9 @@ public class Building {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = BUILDING_SEQUENCE_NAME)
   @SequenceGenerator(name = BUILDING_SEQUENCE_NAME, allocationSize = 1)
-  @GenericGenerator(name = BUILDING_SEQUENCE_NAME, strategy = GENERATOR_PATH, parameters =
-      {@Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value =
-          BUILDING_IDENTIFICATION_NUMBER_PREFIX)})
+  @GenericGenerator(name = BUILDING_SEQUENCE_NAME, strategy = GENERATOR_PATH, parameters = {
+      @Parameter(name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER,
+          value = BUILDING_IDENTIFICATION_NUMBER_PREFIX)})
   @Column(name = IDENTIFICATION_NUMBER_COLUMN)
   private String identificationNumber;
 

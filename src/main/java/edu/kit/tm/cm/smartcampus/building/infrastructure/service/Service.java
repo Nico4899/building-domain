@@ -8,24 +8,27 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.B
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.*;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.BuildingValidator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.ComponentValidator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.NotificationValidator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.RoomValidator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.Validator;
 import edu.kit.tm.cm.smartcampus.building.logic.LogicUtils;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.CrudRepository;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
  * This class represents the {@link org.springframework.stereotype.Service} of this domain service,
- * it provides all logic and holds {@link Bean} instances of {@link Validator} and {@link
- * CrudRepository}* to manage incoming requests and control sent requests.
+ * it provides all logic and holds {@link Bean} instances of {@link Validator} and
+ * {@link CrudRepository}* to manage incoming requests and control sent requests.
  */
 @org.springframework.stereotype.Service
 public class Service {
@@ -48,24 +51,24 @@ public class Service {
    *                               injected)
    * @param componentRepository    repository in which component entities are stored (constructor
    *                               injected)
-   * @param notificationRepository repository in which notification entities are stored
-   *                               (constructor injected)
+   * @param notificationRepository repository in which notification entities are stored (constructor
+   *                               injected)
    * @param buildingValidator      validator which validates various building related requests
    *                               (constructor injected)
    * @param roomValidator          validator which validates various room related requests
    *                               (constructor injected)
    * @param componentValidator     validator which validates various component related requests
    *                               (constructor injected)
-   * @param notificationValidator  validator which validates various notification related
-   *                               requests (constructor injected)
+   * @param notificationValidator  validator which validates various notification related requests
+   *                               (constructor injected)
    */
   @Autowired
   public Service(BuildingRepository buildingRepository, RoomRepository roomRepository,
-                 ComponentRepository componentRepository,
-                 NotificationRepository notificationRepository,
-                 BuildingValidator buildingValidator, RoomValidator roomValidator,
-                 ComponentValidator componentValidator,
-                 NotificationValidator notificationValidator) {
+      ComponentRepository componentRepository,
+      NotificationRepository notificationRepository,
+      BuildingValidator buildingValidator, RoomValidator roomValidator,
+      ComponentValidator componentValidator,
+      NotificationValidator notificationValidator) {
     this.buildingRepository = buildingRepository;
     this.roomRepository = roomRepository;
     this.componentRepository = componentRepository;
@@ -85,7 +88,9 @@ public class Service {
    */
   public Collection<Building> listBuildings() {
     Collection<Building> buildings = new ArrayList<>();
-    for (Building building : this.buildingRepository.findAll()) buildings.add(building);
+    for (Building building : this.buildingRepository.findAll()) {
+      buildings.add(building);
+    }
     return buildings;
   }
 
@@ -244,7 +249,8 @@ public class Service {
    */
   public Component createComponent(ComponentRequest componentRequest) {
     this.componentValidator.validateCreate(componentRequest);
-    return componentRepository.save(LogicUtils.convertComponentRequestToComponent(componentRequest));
+    return componentRepository.save(
+        LogicUtils.convertComponentRequestToComponent(componentRequest));
   }
 
   /**
@@ -340,8 +346,8 @@ public class Service {
   }
 
   /**
-   * Cleans a building up. That means: deletes all rooms, components and notifications that
-   * belong to a specified building.
+   * Cleans a building up. That means: deletes all rooms, components and notifications that belong
+   * to a specified building.
    *
    * @param identificationNumber the identification number of the building
    */
