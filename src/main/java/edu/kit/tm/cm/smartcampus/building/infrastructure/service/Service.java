@@ -183,7 +183,7 @@ public class Service {
    * Create a new {@link Room} in this domain service.
    *
    * @param roomRequest the roomRequest for the room to be created
-   * @return the created roomRequest
+   * @return the created room
    */
   public Room createRoom(RoomRequest roomRequest) {
     this.roomValidator.validateCreate(roomRequest);
@@ -240,7 +240,7 @@ public class Service {
    * Create a new {@link Component} in this domain service.
    *
    * @param componentRequest the componentRequest for the component to be created
-   * @return the created componentRequest
+   * @return the created component
    */
   public Component createComponent(ComponentRequest componentRequest) {
     this.componentValidator.validateCreate(componentRequest);
