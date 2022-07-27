@@ -11,7 +11,6 @@ import lombok.*;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class ComponentRequest {
 
   private String parentIdentificationNumber;

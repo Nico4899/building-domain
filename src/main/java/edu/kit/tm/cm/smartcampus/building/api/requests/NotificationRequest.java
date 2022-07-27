@@ -10,7 +10,6 @@ import lombok.*;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class NotificationRequest {
 
   private String parentIdentificationNumber;

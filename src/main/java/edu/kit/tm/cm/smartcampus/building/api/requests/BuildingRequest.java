@@ -12,7 +12,6 @@ import lombok.*;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class BuildingRequest {
 
   private String name;
