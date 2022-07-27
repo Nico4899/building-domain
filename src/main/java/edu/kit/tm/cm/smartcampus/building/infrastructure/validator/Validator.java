@@ -57,12 +57,22 @@ public abstract class Validator<O,R> {
   public static final String FLOORS_NAME = "floors";
   public static final String HIGHEST_FLOOR_NAME = "lowest_floor";
   public static final String LOWEST_FLOOR_NAME = "highest_floor";
+  public static final String BUILDING_REQUEST = "building_request";
+  public static final String ROOM_REQUEST = "room_request";
+  public static final String COMPONENT_REQUEST = "component_request";
+  public static final String NOTIFICATION_REQUEST = "notification_request";
   // messages
   public static final String SHOULD_MATCH_MESSAGE = "should match: %s";
   public static final String SHOULD_BE_BETWEEN_MESSAGE = "should be between %s and %s";
   public static final String SHOULD_NOT_BE_EMPTY_MESSAGE = "should not be empty";
   public static final String SHOULD_NOT_BE_NULL_MESSAGE = "should not be null";
   public static final String SHOULD_BE_HIGHER_THAN_MESSAGE = "should be higher than";
+  public static final String FLOOR_HAS_TO_BE_BETWEEN_MESSAGE = "floor has to be between: ";
+  public static final String AND = " and ";
+  private static final double MAX_LATITUDE_VALUE = 90;
+  private static final double MIN_LATITUDE_VALUE = -90;
+  private static final double MAX_LONGITUDE_VALUE = 180;
+  private static final double MIN_LONGITUDE_VALUE = -180;
   // patterns
   public static final String BIN_PATTERN = "^b-\\d+$";
   public static final String RIN_PATTERN = "^r-\\d+$";
@@ -70,17 +80,9 @@ public abstract class Validator<O,R> {
   public static final String NIN_PATTERN = "^n-\\d+$";
   public static final String BIN_RIN_PATTERN = BIN_PATTERN + "|" + RIN_PATTERN;
   public static final String BIN_RIN_CIN_PATTERN =
-          BIN_PATTERN + "|" + RIN_PATTERN + "|" + CIN_PATTERN;
-  public static final String FLOOR_HAS_TO_BE_BETWEEN_MESSAGE = "floor has to be between: ";
-  public static final String AND = " and ";
-  private static final double MAX_LATITUDE_VALUE = 90;
-  private static final double MIN_LATITUDE_VALUE = -90;
-  private static final double MAX_LONGITUDE_VALUE = 180;
-  private static final double MIN_LONGITUDE_VALUE = -180;
-  public static final String BUILDING_REQUEST = "building_request";
-  public static final String ROOM_REQUEST = "room_request";
-  public static final String COMPONENT_REQUEST = "component_request";
-  public static final String NOTIFICATION_REQUEST = "notification_request";
+      BIN_PATTERN + "|" + RIN_PATTERN + "|" + CIN_PATTERN;
+
+
   private final BuildingRepository buildingRepository;
   private final RoomRepository roomRepository;
   private final ComponentRepository componentRepository;
