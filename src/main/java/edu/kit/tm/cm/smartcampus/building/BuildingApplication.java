@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /** The main entry point of the Application. */
 @SpringBootApplication
-public class Application {
+public class BuildingApplication {
 
   /**
    * The entry point of application.
@@ -13,6 +13,6 @@ public class Application {
    * @param args the input arguments
    */
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(BuildingApplication.class, args);
   }
 }

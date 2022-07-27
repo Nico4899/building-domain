@@ -27,5 +27,4 @@ public class BuildingRequest {
 
   private Floors floors;
 
-
 }

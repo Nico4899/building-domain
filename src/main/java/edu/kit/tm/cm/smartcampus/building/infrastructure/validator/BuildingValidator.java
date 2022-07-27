@@ -30,7 +30,6 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
   protected String getValidateRegex() {
     return BIN_PATTERN;
   }
-
   @Override
   public void validateCreate(BuildingRequest buildingRequest) {
     validateNotNull(Map.of(BUILDING_REQUEST, buildingRequest));
