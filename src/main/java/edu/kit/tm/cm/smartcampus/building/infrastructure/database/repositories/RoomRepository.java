@@ -21,6 +21,6 @@ public interface RoomRepository extends CrudRepository<Room, String> {
   Collection<Room> findAllBuildingRooms(@Param("bin") String parentIdentificationNumber);
 
   @Modifying
-  @Query("DELETE From room Where room.parentIdentificationNumber = ?1")
-  void cleanUp(@Param("bin") String parentIdentificationNumber);
+  @Query("DELETE From room room Where room.parentIdentificationNumber = ?1")
+  void cleanUp(@Param("parentIdentificationNumber") String parentIdentificationNumber);
 }

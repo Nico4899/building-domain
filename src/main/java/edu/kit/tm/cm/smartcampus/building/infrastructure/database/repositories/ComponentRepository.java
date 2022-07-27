@@ -17,16 +17,13 @@ import java.util.Collection;
 @Repository
 public interface ComponentRepository extends CrudRepository<Component, String> {
 
-  @Query("SELECT component From component component Where component.parentIdentificationNumber "
-          + "=: #{#parentIdentificationNumber}")
+  @Query("SELECT component From component component Where component.parentIdentificationNumber = ?1")
   Collection<Component> findAllBuildingComponents(@Param("bin") String parentIdentificationNumber);
 
-  @Query("SELECT component From component component Where component.parentIdentificationNumber "
-          + "=: #{#parentIdentificationNumber}")
+  @Query("SELECT component From component component Where component.parentIdentificationNumber = ?1")
   Collection<Component> findAllRoomComponents(@Param("rin") String parentIdentificationNumber);
 
   @Modifying
-  @Query("DELETE From component Where component.parentIdentificationNumber =: "
-          + "#{#parentIdentificationNumber}")
-  void cleanUp(@Param("bin") String parentIdentificationNumber);
+  @Query("DELETE From component component Where component.parentIdentificationNumber = ?1")
+  void cleanUp(@Param("parentIdentificationNumber") String parentIdentificationNumber);
 }

@@ -17,23 +17,18 @@ import java.util.Collection;
 @Repository
 public interface NotificationRepository extends CrudRepository<Notification, String> {
 
-  @Query("SELECT notification From notification notification Where notification"
-          + ".parentIdentificationNumber =: " + "#{#parentIdentificationNumber}")
+  @Query("SELECT notification From notification notification Where notification.parentIdentificationNumber = ?1")
   Collection<Notification> findAllBuildingNotifications(
           @Param("bin") String parentIdentificationNumber);
 
-  @Query("SELECT notification From notification notification Where notification"
-          + ".parentIdentificationNumber =: " + "#{#parentIdentificationNumber}")
+  @Query("SELECT notification From notification notification Where notification.parentIdentificationNumber = ?1")
   Collection<Notification> findAllRoomNotifications(
           @Param("rin") String parentIdentificationNumber);
 
-  @Query("SELECT notification From notification notification Where notification"
-          + ".parentIdentificationNumber =: " + "#{#parentIdentificationNumber}")
-  Collection<Notification> findAllComponentNotifications(
-          @Param("cin") String parentIdentificationNumber);
+  @Query("SELECT notification From notification notification Where notification.parentIdentificationNumber = ?1")
+  Collection<Notification> findAllComponentNotifications(@Param("cin") String parentIdentificationNumber);
 
   @Modifying
-  @Query("DELETE From notification Where notification .parentIdentificationNumber =: "
-          + "#{#parentIdentificationNumber}")
-  void cleanUp(@Param("bin") String parentIdentificationNumber);
+  @Query("DELETE From notification notification Where notification.parentIdentificationNumber = ?1")
+  void cleanUp(@Param("parentIdentificationNumber") String parentIdentificationNumber);
 }
