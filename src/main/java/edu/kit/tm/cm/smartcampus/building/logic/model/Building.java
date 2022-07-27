@@ -35,6 +35,7 @@ public class Building {
   private static final String CAMPUS_LOCATION_COLUMN = "campus_location";
   private static final String GEOGRAPHICAL_LOCATION_COLUMN = "geographical_location";
   private static final String GEOGRAPHICAL_LOCATION_ID_COLUMN = "geographical_location_id";
+  private static final String FLOORS_ID_COLUMN = "floors_id";
 
   // constants this and other classes use
   public static final String FLOORS_COLUMN = "floors";
@@ -51,19 +52,17 @@ public class Building {
   @Column(name = CAMPUS_LOCATION_COLUMN)
   private CampusLocation campusLocation;
 
-  @Column(name = GEOGRAPHICAL_LOCATION_COLUMN) //TODO vllt raus(?)
+  private String name;
+  private String number;
+
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = GEOGRAPHICAL_LOCATION_ID_COLUMN, referencedColumnName =
       GeographicalLocation.ID_COLUMN)
   private GeographicalLocation geographicalLocation;
 
-  private String name;
-  private String number;
-
-  //TODO falls das beim building mit geoLocation klappt kann das ganze attribut wie goLocation
-  // gemacht werden und wir bleiben einfach unidirektional was ja vollkommen ausreicht
-  @Column(name = FLOORS_COLUMN)
-  @OneToOne(mappedBy = BUILDING_TABLE_NAME, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = FLOORS_ID_COLUMN, referencedColumnName =
+      Floors.ID_COLUMN)
   private Floors floors;
 
   /**

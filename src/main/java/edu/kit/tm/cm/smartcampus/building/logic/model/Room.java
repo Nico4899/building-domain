@@ -53,7 +53,6 @@ public class Room {
   private int floor;
   private Type type;
 
-  @Column(name = GEOGRAPHICAL_LOCATION_COLUMN) //TODO vllt raus(?)
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = GEOGRAPHICAL_LOCATION_ID_COLUMN, referencedColumnName =
       GeographicalLocation.ID_COLUMN)

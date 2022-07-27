@@ -29,10 +29,11 @@ public class Floors {
   private static final String LOWEST_FLOOR_COLUMN = "lowest_floor";
 
   // constants this and other classes use
-  public static final String BUILDING_COLUMN = "building"; //TODO überprüfen
+  public static final String ID_COLUMN = "id";
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = ID_COLUMN)
   private Long id;
 
   @Column(name = HIGHEST_FLOOR_COLUMN)
@@ -40,12 +41,5 @@ public class Floors {
 
   @Column(name = LOWEST_FLOOR_COLUMN)
   private int lowestFloor;
-
-  //TODO falls das beim building mit geoLocation klappt kann das ganze attribut raus und wir
-  // bleiben einfach unidirektional was ja vollkommen ausreicht
-  @Column(name = BUILDING_COLUMN)
-  @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = Building.FLOORS_COLUMN, nullable = false)
-  private Building building;
 
 }

@@ -51,7 +51,6 @@ public class Component {
   private Type type;
   private String description;
 
-  @Column(name = GEOGRAPHICAL_LOCATION_COLUMN) //TODO vllt raus(?)
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = GEOGRAPHICAL_LOCATION_ID_COLUMN, referencedColumnName =
       GeographicalLocation.ID_COLUMN)
