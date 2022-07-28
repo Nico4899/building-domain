@@ -30,6 +30,7 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
   protected String getValidateRegex() {
     return BIN_PATTERN;
   }
+
   @Override
   public void validateCreate(BuildingRequest buildingRequest) {
     validateNotNull(Map.of(BUILDING_REQUEST, buildingRequest));
@@ -44,8 +45,8 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
 
     validateNotEmpty(Map.of(BUILDING_NAME, buildingRequest.getName()));
 
-    validateMatchesRegex(Map.of(BUILDING_NUMBER,
-        Pair.of(buildingRequest.getNumber(), "30.30")/*TODO richtiges Pattern einfügen*/));
+    validateMatchesRegex(
+        Map.of(BUILDING_NUMBER, Pair.of(buildingRequest.getNumber(), BUILDING_NUMBER_PATTERN)));
 
     validateGeographicalLocations(
         Map.of(GEOGRAPHICAL_LOCATION_NAME, buildingRequest.getGeographicalLocation()));
@@ -63,9 +64,9 @@ public class BuildingValidator extends Validator<Building, BuildingRequest> {
 
     validateNotEmpty(Map.of(BUILDING_NAME, object.getName()));
 
-    validateMatchesRegex(Map.of(BUILDING_NUMBER, Pair.of(object.getNumber(), "30.30"),
-        //TODO richtiges Pattern einfügen
-        IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), BIN_PATTERN)));
+    validateMatchesRegex(
+        Map.of(BUILDING_NUMBER, Pair.of(object.getNumber(), BUILDING_NUMBER_PATTERN),
+            IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), BIN_PATTERN)));
 
     validateGeographicalLocations(
         Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));

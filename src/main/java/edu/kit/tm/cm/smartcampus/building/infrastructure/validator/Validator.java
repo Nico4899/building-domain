@@ -38,6 +38,7 @@ public abstract class Validator<O, R> {
   // entity variable names
   public static final String IDENTIFICATION_NUMBER_NAME = "identification_number";
   public static final String PARENT_IDENTIFICATION_NUMBER_NAME = "parent_identification_number";
+  public static final String PARENT_NAME = "parent";
   public static final String LONGITUDE_NAME = "longitude";
   public static final String LATITUDE_NAME = "latitude";
   public static final String ROOM_NAME = "room_name";
@@ -80,6 +81,19 @@ public abstract class Validator<O, R> {
   public static final String BIN_RIN_PATTERN = BIN_PATTERN + "|" + RIN_PATTERN;
   public static final String BIN_RIN_CIN_PATTERN =
       BIN_PATTERN + "|" + RIN_PATTERN + "|" + CIN_PATTERN;
+  private static final String BUILDING_NUMBER_REGULAR_PATTERN = "^[0-9]{2}[.][0-9]{2}?$";
+  private static final String BUILDING_NUMBER_EAST_PATTERN = "^[0-9]{2}[.][0-9]{2}[A-Z]?$";
+  private static final String BUILDING_NUMBER_NORTH_ONE_PATTERN = "^[0-9]{3,4}?$";
+  private static final String BUILDING_NUMBER_NORTH_TWO_PATTERN = "^[0-9]{4}[.][0-9]{1,2}?$";
+  private static final String BUILDING_NUMBER_NORTH_THREE_PATTERN = "^[0-9]{1}[.][0-9]{3}["
+      + ".][0-9]{1,2}?$";
+  private static final String BUILDING_NUMBER_NORTH_FOUR_PATTERN = "^[0-9]{3}[\\/][0-9]{1}?$";
+  private static final String BUILDING_NUMBER_NORTH_FIVE_PATTERN = "^[0-9]{3}[a-z]{1}?$";
+  public static final String BUILDING_NUMBER_PATTERN =
+      BUILDING_NUMBER_REGULAR_PATTERN + "|" + BUILDING_NUMBER_EAST_PATTERN + "|"
+          + BUILDING_NUMBER_NORTH_ONE_PATTERN + "|" + BUILDING_NUMBER_NORTH_TWO_PATTERN + "|"
+          + BUILDING_NUMBER_NORTH_THREE_PATTERN + "|" + BUILDING_NUMBER_NORTH_FOUR_PATTERN + "|"
+          + BUILDING_NUMBER_NORTH_FIVE_PATTERN;
 
 
   private final BuildingRepository buildingRepository;
@@ -241,7 +255,8 @@ public abstract class Validator<O, R> {
    *
    * @param floor the floor of the room
    */
-  protected void validateRoomFloor(int floor, String parentIdentificationNumber) {
+  protected void validateRoomFloor(int floor, String parentIdentificationNumber) { //TODO umbauen
+    // dass es building entgegen nimmt
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
         new InvalidArgumentsStringBuilder();
     boolean valid = true;

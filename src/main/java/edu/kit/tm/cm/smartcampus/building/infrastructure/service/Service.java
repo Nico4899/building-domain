@@ -124,7 +124,6 @@ public class Service {
   public void removeBuilding(String identificationNumber) {
     this.buildingValidator.validate(identificationNumber);
     buildingRepository.deleteById(identificationNumber);
-    this.cleanUpBuilding(identificationNumber);
   }
 
   /**
@@ -192,7 +191,11 @@ public class Service {
    */
   public Room createRoom(RoomRequest roomRequest) {
     this.roomValidator.validateCreate(roomRequest);
-    return this.roomRepository.save(LogicUtils.convertRoomRequestToRoom(roomRequest));
+    Room room = LogicUtils.convertRoomRequestToRoom(roomRequest);
+    //TODO was ist schöner? das hier machen oder in der Utils klasse?
+    room.setParentBuilding(
+        buildingRepository.findById(roomRequest.getParentIdentificationNumber()).get());
+    return this.roomRepository.save(room);
   }
 
   /**

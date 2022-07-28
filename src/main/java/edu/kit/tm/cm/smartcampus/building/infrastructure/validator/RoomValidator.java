@@ -59,22 +59,23 @@ public class RoomValidator extends Validator<Room, RoomRequest> {
 
     validateNotNull(Map.of(ROOM_NAME, object.getName(), ROOM_NUMBER, object.getNumber(),
         IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber(),
-        PARENT_IDENTIFICATION_NUMBER_NAME, object.getParentIdentificationNumber(), FLOOR_NAME,
+        PARENT_NAME, object.getParentBuilding(), FLOOR_NAME,
         object.getFloor(), ROOM_TYPE_NAME, object.getType()));
 
     validateNotEmpty(Map.of(ROOM_NAME, object.getName(), ROOM_NUMBER, object.getNumber()));
 
     validateMatchesRegex(
-        Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), RIN_PATTERN),
-            PARENT_IDENTIFICATION_NUMBER_NAME,
-            Pair.of(object.getParentIdentificationNumber(), BIN_PATTERN)));
+        Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), RIN_PATTERN)));
 
     validateGeographicalLocations(
         Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
-    validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+    //validateExists(object.getParentBuilding(), PARENT_IDENTIFICATION_NUMBER_NAME);
+    //TODo @Jonathan das braucht man ja nicht mehr weil jetzt als Attribut ein building
+    // gespeichert wird und wenn das!=null is muss es ja valid sein oder? oder gehen wir hier
+    // dann in den building validator o.ä.?
 
-    validateRoomFloor(object.getFloor(), object.getParentIdentificationNumber());
+    validateRoomFloor(object.getFloor(), object.getParentBuilding().getIdentificationNumber());
 
     validateExists(object.getIdentificationNumber(), IDENTIFICATION_NUMBER_NAME);
   }

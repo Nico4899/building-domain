@@ -10,12 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Parameter;
 
 /**
@@ -39,7 +42,8 @@ public class Room {
       + ".database.generator.PrefixSequenceGenerator";
   private static final String ROOM_IDENTIFICATION_NUMBER_PREFIX = "r-";
   private static final String IDENTIFICATION_NUMBER_COLUMN = "identification_number";
-  private static final String PARENT_IDENTIFICATION_NUMBER_COLUMN = "parent_identification_number";
+  private static final String PARENT_BUILDING_IDENTIFICATION_NUMBER_COLUMN =
+      "parent_building_identification_number";
   private static final String GEOGRAPHICAL_LOCATION_COLUMN = "geographical_location";
   private static final String GEOGRAPHICAL_LOCATION_ID_COLUMN = "geographical_location_id";
 
@@ -52,8 +56,10 @@ public class Room {
   @Column(name = IDENTIFICATION_NUMBER_COLUMN)
   private String identificationNumber;
 
-  @Column(name = PARENT_IDENTIFICATION_NUMBER_COLUMN)
-  private String parentIdentificationNumber;
+  @ManyToOne(cascade = CascadeType.REMOVE)
+  @JoinColumn(name = PARENT_BUILDING_IDENTIFICATION_NUMBER_COLUMN)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private Building parentBuilding;
 
   private String name;
   private String number;

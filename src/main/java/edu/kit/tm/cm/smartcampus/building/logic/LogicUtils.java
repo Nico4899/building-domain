@@ -35,8 +35,8 @@ public class LogicUtils {
   }
 
   /**
-   * Converts a RoomRequest to a Room and sets all attributes of the Room to the values of the
-   * existing attributes of the Request.
+   * Converts a RoomRequest to a Room and sets all attributes except of the parent Building of the
+   * Room to the values of the existing attributes of the Request.
    *
    * @param roomRequest the Request to be converted
    * @return the resulting Room
@@ -46,7 +46,6 @@ public class LogicUtils {
     room.setName(roomRequest.getName());
     room.setNumber(roomRequest.getNumber());
     room.setFloor(roomRequest.getFloor());
-    room.setParentIdentificationNumber(roomRequest.getParentIdentificationNumber());
     room.setGeographicalLocation(roomRequest.getGeographicalLocation());
     room.setType(roomRequest.getType());
     return room;

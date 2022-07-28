@@ -16,10 +16,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoomRepository extends CrudRepository<Room, String> {
 
-  @Query("SELECT room From room room Where room.parentIdentificationNumber = ?1")
+  @Query("SELECT room From room room Where room.parentBuilding.identificationNumber = ?1")
   Collection<Room> findAllBuildingRooms(@Param("bin") String parentIdentificationNumber);
 
   @Modifying
-  @Query("DELETE From room room Where room.parentIdentificationNumber = ?1")
+  @Query("DELETE From room room Where room.parentBuilding.identificationNumber = ?1")
   void cleanUp(@Param("parentIdentificationNumber") String parentIdentificationNumber);
 }
