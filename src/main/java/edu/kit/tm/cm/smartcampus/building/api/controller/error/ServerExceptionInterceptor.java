@@ -1,7 +1,7 @@
-package edu.kit.tm.cm.smartcampus.building.api.exception;
+package edu.kit.tm.cm.smartcampus.building.api.controller.error;
 
-import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.exceptions.InvalidArgumentsException;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
-package edu.kit.tm.cm.smartcampus.building.api.operations;
+package edu.kit.tm.cm.smartcampus.building.api.controller.operations;
 
-import edu.kit.tm.cm.smartcampus.building.api.requests.BuildingRequest;
+import edu.kit.tm.cm.smartcampus.building.api.controller.dto.BuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;

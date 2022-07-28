@@ -1,6 +1,6 @@
-package edu.kit.tm.cm.smartcampus.building.api.operations;
+package edu.kit.tm.cm.smartcampus.building.api.controller.operations;
 
-import edu.kit.tm.cm.smartcampus.building.api.requests.NotificationRequest;
+import edu.kit.tm.cm.smartcampus.building.api.controller.dto.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

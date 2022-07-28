@@ -1,4 +1,4 @@
-package edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions;
+package edu.kit.tm.cm.smartcampus.building.infrastructure.service.exceptions;
 
 /**
  * This exception is thrown whenever invalid arguments are found, it contains a proper error

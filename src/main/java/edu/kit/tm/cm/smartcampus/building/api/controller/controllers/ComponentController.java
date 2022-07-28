@@ -1,8 +1,8 @@
-package edu.kit.tm.cm.smartcampus.building.api.controller;
+package edu.kit.tm.cm.smartcampus.building.api.controller.controllers;
 
-import edu.kit.tm.cm.smartcampus.building.api.exception.ServerExceptionInterceptor;
-import edu.kit.tm.cm.smartcampus.building.api.operations.ComponentOperations;
-import edu.kit.tm.cm.smartcampus.building.api.requests.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.api.controller.error.ServerExceptionInterceptor;
+import edu.kit.tm.cm.smartcampus.building.api.controller.operations.ComponentOperations;
+import edu.kit.tm.cm.smartcampus.building.api.controller.dto.ComponentRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.Service;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;

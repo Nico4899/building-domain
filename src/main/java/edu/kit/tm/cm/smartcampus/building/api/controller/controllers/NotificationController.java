@@ -1,8 +1,8 @@
-package edu.kit.tm.cm.smartcampus.building.api.controller;
+package edu.kit.tm.cm.smartcampus.building.api.controller.controllers;
 
-import edu.kit.tm.cm.smartcampus.building.api.exception.ServerExceptionInterceptor;
-import edu.kit.tm.cm.smartcampus.building.api.operations.NotificationOperations;
-import edu.kit.tm.cm.smartcampus.building.api.requests.NotificationRequest;
+import edu.kit.tm.cm.smartcampus.building.api.controller.error.ServerExceptionInterceptor;
+import edu.kit.tm.cm.smartcampus.building.api.controller.operations.NotificationOperations;
+import edu.kit.tm.cm.smartcampus.building.api.controller.dto.NotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.Service;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import org.springframework.beans.factory.annotation.Autowired;

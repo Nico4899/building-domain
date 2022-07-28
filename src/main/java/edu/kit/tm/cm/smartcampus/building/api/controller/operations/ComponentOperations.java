@@ -1,6 +1,6 @@
-package edu.kit.tm.cm.smartcampus.building.api.operations;
+package edu.kit.tm.cm.smartcampus.building.api.controller.operations;
 
-import edu.kit.tm.cm.smartcampus.building.api.requests.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.api.controller.dto.ComponentRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import java.util.Collection;

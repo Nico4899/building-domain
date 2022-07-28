@@ -1,11 +1,11 @@
-package edu.kit.tm.cm.smartcampus.building.infrastructure.validator;
+package edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator;
 
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.InvalidArgumentsException;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.exceptions.ResourceNotFoundException;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.exceptions.InvalidArgumentsException;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
 import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;

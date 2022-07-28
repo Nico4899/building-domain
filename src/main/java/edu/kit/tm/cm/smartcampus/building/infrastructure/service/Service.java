@@ -1,19 +1,18 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.service;
 
-import edu.kit.tm.cm.smartcampus.building.api.requests.BuildingRequest;
-import edu.kit.tm.cm.smartcampus.building.api.requests.ComponentRequest;
-import edu.kit.tm.cm.smartcampus.building.api.requests.NotificationRequest;
-import edu.kit.tm.cm.smartcampus.building.api.requests.RoomRequest;
+import edu.kit.tm.cm.smartcampus.building.api.controller.dto.BuildingRequest;
+import edu.kit.tm.cm.smartcampus.building.api.controller.dto.ComponentRequest;
+import edu.kit.tm.cm.smartcampus.building.api.controller.dto.NotificationRequest;
+import edu.kit.tm.cm.smartcampus.building.api.controller.dto.RoomRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.BuildingValidator;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.ComponentValidator;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.NotificationValidator;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.RoomValidator;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.validator.Validator;
-import edu.kit.tm.cm.smartcampus.building.logic.LogicUtils;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.BuildingValidator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.ComponentValidator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.NotificationValidator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.RoomValidator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.Validator;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
@@ -21,6 +20,8 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import edu.kit.tm.cm.smartcampus.building.logic.operations.utility.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.CrudRepository;
@@ -113,7 +114,7 @@ public class Service {
    */
   public Building createBuilding(BuildingRequest buildingRequest) {
     this.buildingValidator.validateCreate(buildingRequest);
-    return buildingRepository.save(LogicUtils.convertBuildingRequestToBuilding(buildingRequest));
+    return buildingRepository.save(Utils.Reader.read(buildingRequest));
   }
 
   /**
@@ -191,7 +192,7 @@ public class Service {
    */
   public Room createRoom(RoomRequest roomRequest) {
     this.roomValidator.validateCreate(roomRequest);
-    Room room = LogicUtils.convertRoomRequestToRoom(roomRequest);
+    Room room = Utils.Writer.write(roomRequest);
     //TODO was ist schöner? das hier machen oder in der Utils klasse?
     room.setParentBuilding(
         buildingRepository.findById(roomRequest.getParentIdentificationNumber()).get());
@@ -253,7 +254,7 @@ public class Service {
   public Component createComponent(ComponentRequest componentRequest) {
     this.componentValidator.validateCreate(componentRequest);
     return componentRepository.save(
-        LogicUtils.convertComponentRequestToComponent(componentRequest));
+        Utils.Writer.write(componentRequest));
   }
 
   /**
@@ -332,8 +333,8 @@ public class Service {
    */
   public Notification createNotification(NotificationRequest notificationRequest) {
     this.notificationValidator.validateCreate(notificationRequest);
-    Notification notification = this.notificationRepository.save(
-        LogicUtils.convertNotificationRequestToNotification(notificationRequest));
+    Notification notification =
+        this.notificationRepository.save(Utils.Reader.read(notificationRequest));
     notification.setCreationTime(new Timestamp(System.currentTimeMillis()));
     return notification;
   }
