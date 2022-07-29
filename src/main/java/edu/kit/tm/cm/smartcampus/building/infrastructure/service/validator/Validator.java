@@ -1,11 +1,11 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator;
 
-import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.BuildingRepository;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.ComponentRepository;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.NotificationRepository;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repositories.RoomRepository;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.service.exceptions.InvalidArgumentsException;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.service.exceptions.ResourceNotFoundException;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.building.BuildingRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.component.ComponentRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.notification.NotificationRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.room.RoomRepository;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.error.exceptions.InvalidArgumentsException;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.error.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
 import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
@@ -22,14 +22,13 @@ import org.springframework.data.util.Pair;
  * invalid arguments, it throws {@link InvalidArgumentsException} and in case of nonexistence of
  * given objects in the database, it throws {@link ResourceNotFoundException}.
  *
- * @param <O> the type of which this validator validates objects
- * @param <R> the type of which this validator validates request objects for the objects
+ * @param <T> the type of which this validator validates update request objects
+ * @param <S> the other type of which the validator validates create request objects
  */
-public abstract class Validator<O, R> {
+public abstract class Validator<T, S> {
 
   // singles
   public static final String SPACE = " ";
-  public static final String COLON = ": ";
   public static final String NULL = "null";
   public static final String ROOM = "room";
   public static final String BUILDING = "building";
@@ -255,8 +254,7 @@ public abstract class Validator<O, R> {
    *
    * @param floor the floor of the room
    */
-  protected void validateRoomFloor(int floor, String parentIdentificationNumber) { //TODO umbauen
-    // dass es building entgegen nimmt
+  protected void validateRoomFloor(int floor, String parentIdentificationNumber) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
         new InvalidArgumentsStringBuilder();
     boolean valid = true;
@@ -319,16 +317,16 @@ public abstract class Validator<O, R> {
   /**
    * Validate create operation.
    *
-   * @param requestObject the request object to be validated
+   * @param object the request object to be validated
    */
-  public abstract void validateCreate(R requestObject);
+  public abstract void validateCreate(S object);
 
   /**
    * Validate update operation.
    *
    * @param object the object to be validated
    */
-  public abstract void validateUpdate(O object);
+  public abstract void validateUpdate(T object);
 
   @NoArgsConstructor
   private static class InvalidArgumentsStringBuilder {

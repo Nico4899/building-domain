@@ -50,10 +50,8 @@ public class Room {
   @Column(name = IDENTIFICATION_NUMBER_COLUMN)
   private String identificationNumber;
 
-  @ManyToOne(cascade = CascadeType.REMOVE)
-  @JoinColumn(name = PARENT_BUILDING_IDENTIFICATION_NUMBER_COLUMN)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  private Building parentBuilding;
+  @Column(name = PARENT_BUILDING_IDENTIFICATION_NUMBER_COLUMN)
+  private String parentIdentificationNumber;
 
   private String name;
   private String number;
