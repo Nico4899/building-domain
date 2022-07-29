@@ -5,13 +5,11 @@ import edu.kit.tm.cm.smartcampus.building.api.controller.component.dto.ServerCre
 import edu.kit.tm.cm.smartcampus.building.api.controller.component.dto.ServerUpdateComponentRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.Service;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
-
-import java.util.Collection;
-
-import edu.kit.tm.cm.smartcampus.building.logic.operations.utility.DataTransferUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
 
 /**
  * This class represents the component controller for this domain service. It holds a Spring
@@ -49,7 +47,7 @@ public class ComponentController implements ComponentOperations {
 
   @Override
   public Component updateComponent(ServerUpdateComponentRequest serverUpdateComponentRequest) {
-    return service.updateComponent(DataTransferUtils.Reader.readServerUpdateComponentRequest(serverUpdateComponentRequest));
+    return service.updateComponent(serverUpdateComponentRequest);
   }
 
   @Override

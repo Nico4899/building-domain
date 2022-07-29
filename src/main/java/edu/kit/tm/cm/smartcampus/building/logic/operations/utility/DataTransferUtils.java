@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public final class DataTransferUtils {
 
   @NoArgsConstructor(access = AccessLevel.PRIVATE)
-  public static class Reader {
+  public static class ServerRequestReader {
 
     public static Notification readServerCreateNotificationRequest(ServerCreateNotificationRequest serverCreateNotificationRequest) {
       Notification notification = new Notification();

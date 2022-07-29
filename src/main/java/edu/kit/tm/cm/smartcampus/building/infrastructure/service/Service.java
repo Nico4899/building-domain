@@ -121,7 +121,8 @@ public class Service {
   public Building createBuilding(ServerCreateBuildingRequest serverCreateBuildingRequest) {
     this.buildingRequestValidator.validateCreate(serverCreateBuildingRequest);
     return buildingRepository.save(
-        DataTransferUtils.Reader.readServerCreateBuildingRequest(serverCreateBuildingRequest));
+        DataTransferUtils.ServerRequestReader.readServerCreateBuildingRequest(
+            serverCreateBuildingRequest));
   }
 
   /**
@@ -142,7 +143,9 @@ public class Service {
    */
   public Building updateBuilding(ServerUpdateBuildingRequest serverUpdateBuildingRequest) {
     this.buildingRequestValidator.validateUpdate(serverUpdateBuildingRequest);
-    Building building = DataTransferUtils.Reader.readServerUpdateBuildingRequest(serverUpdateBuildingRequest);
+    Building building =
+        DataTransferUtils.ServerRequestReader.readServerUpdateBuildingRequest(
+            serverUpdateBuildingRequest);
     return buildingRepository.save(building);
   }
 
@@ -198,7 +201,8 @@ public class Service {
    */
   public Room createRoom(ServerCreateRoomRequest serverCreateRoomRequest) {
     this.roomValidator.validateCreate(serverCreateRoomRequest);
-    Room room = DataTransferUtils.Reader.readServerCreateRoomRequest(serverCreateRoomRequest);
+    Room room =
+        DataTransferUtils.ServerRequestReader.readServerCreateRoomRequest(serverCreateRoomRequest);
     return this.roomRepository.save(room);
   }
 
@@ -210,7 +214,8 @@ public class Service {
    */
   public Room updateRoom(ServerUpdateRoomRequest serverUpdateRoomRequest) {
     this.roomValidator.validateUpdate(serverUpdateRoomRequest);
-    Room room = DataTransferUtils.Reader.readServerUpdateRoomRequest(serverUpdateRoomRequest);
+    Room room =
+        DataTransferUtils.ServerRequestReader.readServerUpdateRoomRequest(serverUpdateRoomRequest);
     return this.roomRepository.save(room);
   }
 
@@ -233,7 +238,9 @@ public class Service {
    */
   public Component createComponent(ServerCreateComponentRequest serverCreateComponentRequest) {
     this.componentValidator.validateCreate(serverCreateComponentRequest);
-    return componentRepository.save(DataTransferUtils.Reader.readServerCreateComponentRequest(serverCreateComponentRequest));
+    return componentRepository.save(
+        DataTransferUtils.ServerRequestReader.readServerCreateComponentRequest(
+            serverCreateComponentRequest));
   }
 
   /**
@@ -255,7 +262,9 @@ public class Service {
    */
   public Component updateComponent(ServerUpdateComponentRequest serverUpdateComponentRequest) {
     this.componentValidator.validateUpdate(serverUpdateComponentRequest);
-    Component component = DataTransferUtils.Reader.readServerUpdateComponentRequest(serverUpdateComponentRequest);
+    Component component =
+        DataTransferUtils.ServerRequestReader.readServerUpdateComponentRequest(
+            serverUpdateComponentRequest);
     return componentRepository.save(component);
   }
 
@@ -289,7 +298,9 @@ public class Service {
    */
   public Notification updateNotification(ServerUpdateNotificationRequest serverUpdateNotificationRequest) {
     this.notificationValidator.validateUpdate(serverUpdateNotificationRequest);
-    Notification notification = DataTransferUtils.Reader.readServerUpdateNotificationRequest(serverUpdateNotificationRequest);
+    Notification notification =
+        DataTransferUtils.ServerRequestReader.readServerUpdateNotificationRequest(
+            serverUpdateNotificationRequest);
     return notificationRepository.save(notification);
   }
 
@@ -305,7 +316,8 @@ public class Service {
     this.notificationValidator.validateCreate(serverCreateNotificationRequest);
     Notification notification =
         this.notificationRepository.save(
-            DataTransferUtils.Reader.readServerCreateNotificationRequest(serverCreateNotificationRequest));
+            DataTransferUtils.ServerRequestReader.readServerCreateNotificationRequest(
+                serverCreateNotificationRequest));
     notification.setCreationTime(new Timestamp(System.currentTimeMillis()));
     return notification;
   }
