@@ -133,6 +133,7 @@ public class Service {
   public void removeBuilding(String identificationNumber) {
     this.buildingRequestValidator.validate(identificationNumber);
     buildingRepository.deleteById(identificationNumber);
+    this.cleanUpBuilding(identificationNumber);
   }
 
   /**
@@ -332,15 +333,30 @@ public class Service {
     notificationRepository.deleteById(identificationNumber);
   }
 
-  private void cleanUpBuilding(String identificationNumber) {
-    roomRepository.cleanUp(identificationNumber);
-    componentRepository.cleanUp(identificationNumber);
-    notificationRepository.cleanUp(identificationNumber);
+  private void cleanUpBuilding(String buildingIdentificationNumber) {
+    //Get all rooms belonging to building
+    Collection<Room> roomsOfBuilding = roomRepository.findAllRooms(buildingIdentificationNumber);
+    //Delete rooms and everything attached
+    for (Room room : roomsOfBuilding) {
+      cleanUpRoom(room.getIdentificationNumber());
+    }
+    //Delete components of Building and attached notifications
+    componentRepository.cleanUp(buildingIdentificationNumber);
+    //Delete notifications of Building
+    notificationRepository.cleanUp(buildingIdentificationNumber);
   }
 
-  private void cleanUpRoom(String identificationNumber) {
-    componentRepository.cleanUp(identificationNumber);
-    notificationRepository.cleanUp(identificationNumber);
+  private void cleanUpRoom(String roomIdentificationNumber) {
+    //Get all components belonging to room
+    Collection<Component> componentsOfRoom = componentRepository.findAllComponents(roomIdentificationNumber);
+    //Delete notifications belonging to components
+    for (Component component : componentsOfRoom) {
+      cleanUpComponent(component.getIdentificationNumber());
+    }
+    //Delete notifications belonging to room
+    notificationRepository.cleanUp(roomIdentificationNumber);
+    //Delete components belonging to room
+    componentRepository.cleanUp(roomIdentificationNumber);
   }
 
   private void cleanUpComponent(String identificationNumber) {

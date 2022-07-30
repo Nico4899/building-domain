@@ -20,6 +20,10 @@ public interface ComponentRepository extends CrudRepository<Component, String> {
       + "?1")
   Collection<Component> findAllComponents(@Param("bin") String parentIdentificationNumber);
 
+  /**
+   * Deletes all components that have the given parentIdentificationNumber.
+   * @param parentIdentificationNumber the parentIdentificationNumber
+   */
   @Modifying
   @Query("DELETE From component component Where component.parentIdentificationNumber = ?1")
   void cleanUp(@Param("parentIdentificationNumber") String parentIdentificationNumber);
