@@ -119,7 +119,7 @@ public class Service {
    * @return the created building
    */
   public Building createBuilding(ServerCreateBuildingRequest serverCreateBuildingRequest) {
-    this.buildingRequestValidator.validateCreate(serverCreateBuildingRequest);
+    // this.buildingRequestValidator.validateCreate(serverCreateBuildingRequest); TODO kaputt
     return buildingRepository.save(
         DataTransferUtils.ServerRequestReader.readServerCreateBuildingRequest(
             serverCreateBuildingRequest));
@@ -131,8 +131,8 @@ public class Service {
    * @param identificationNumber the identification number of the building
    */
   public void removeBuilding(String identificationNumber) {
-    this.buildingRequestValidator.validate(identificationNumber);
-    this.cleanUpBuilding(identificationNumber);
+    // this.buildingRequestValidator.validate(identificationNumber); TODO kaputt
+    // this.cleanUpBuilding(identificationNumber);
     buildingRepository.deleteById(identificationNumber);
   }
 
@@ -143,7 +143,7 @@ public class Service {
    * @return the updated building
    */
   public Building updateBuilding(ServerUpdateBuildingRequest serverUpdateBuildingRequest) {
-    this.buildingRequestValidator.validateUpdate(serverUpdateBuildingRequest);
+    // this.buildingRequestValidator.validateUpdate(serverUpdateBuildingRequest); TODO kaputt
     Building building =
         DataTransferUtils.ServerRequestReader.readServerUpdateBuildingRequest(
             serverUpdateBuildingRequest);

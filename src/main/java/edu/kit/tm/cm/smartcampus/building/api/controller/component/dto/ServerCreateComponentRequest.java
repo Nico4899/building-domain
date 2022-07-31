@@ -1,7 +1,7 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller.component.dto;
 
+import edu.kit.tm.cm.smartcampus.building.api.controller.GeographicalLocationDTO;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
-import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +14,5 @@ public class ServerCreateComponentRequest {
   private String parentIdentificationNumber;
   private Component.Type type;
   private String description;
-  private GeographicalLocation geographicalLocation;
+  private GeographicalLocationDTO geographicalLocation;
 }

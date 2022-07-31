@@ -1,6 +1,6 @@
 package edu.kit.tm.cm.smartcampus.building.api.controller.room.dto;
 
-import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
+import edu.kit.tm.cm.smartcampus.building.api.controller.GeographicalLocationDTO;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +15,6 @@ public class ServerUpdateRoomRequest {
   private String number;
   private int floor;
   private Room.Type type;
-  private GeographicalLocation geographicalLocation;
+  private GeographicalLocationDTO geographicalLocation;
   private String identificationNumber;
 }

@@ -1,5 +1,7 @@
 package edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator;
 
+import edu.kit.tm.cm.smartcampus.building.api.controller.FloorsDTO;
+import edu.kit.tm.cm.smartcampus.building.api.controller.GeographicalLocationDTO;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.building.BuildingRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.component.ComponentRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.notification.NotificationRepository;
@@ -7,15 +9,14 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.roo
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.error.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.error.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
-import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Pair;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class represents a parent class validator for any given attribute constraints. In case of
@@ -192,14 +193,14 @@ public abstract class Validator<T, S> {
    * Validates weather geographical locations have valid latitude and longitude values or not.
    *
    * @param locations Map of geographical locations to be checked and their names (key = name,
-   *                  value=location)
+   *     value=location)
    */
-  protected void validateGeographicalLocations(Map<String, GeographicalLocation> locations) {
+  protected void validateGeographicalLocations(Map<String, GeographicalLocationDTO> locations) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
         new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
-    for (Map.Entry<String, GeographicalLocation> entry : locations.entrySet()) {
+    for (Map.Entry<String, GeographicalLocationDTO> entry : locations.entrySet()) {
       if (entry.getValue().getLatitude() > MAX_LATITUDE_VALUE
           || entry.getValue().getLatitude() < MIN_LATITUDE_VALUE) {
         invalidArgumentsStringBuilder.appendMessage(entry.getKey() + SPACE + LATITUDE_NAME,
@@ -227,14 +228,14 @@ public abstract class Validator<T, S> {
    * Validates weather floors objects have valid attributes or not.
    *
    * @param floors Map of floors objects to be checked and their names (key = name, value=floors
-   *               objects)
+   *     objects)
    */
-  protected void validateFloors(Map<String, Floors> floors) {
+  protected void validateFloors(Map<String, FloorsDTO> floors) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
         new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
-    for (Map.Entry<String, Floors> entry : floors.entrySet()) {
+    for (Map.Entry<String, FloorsDTO> entry : floors.entrySet()) {
       if (entry.getValue().getHighestFloor() < entry.getValue().getLowestFloor()) {
         invalidArgumentsStringBuilder.appendMessage(entry.getKey() + SPACE + HIGHEST_FLOOR_NAME,
             Integer.toString(entry.getValue().getHighestFloor()),

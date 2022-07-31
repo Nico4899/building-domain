@@ -1,5 +1,7 @@
 package edu.kit.tm.cm.smartcampus.building.logic.operations.utility;
 
+import edu.kit.tm.cm.smartcampus.building.api.controller.FloorsDTO;
+import edu.kit.tm.cm.smartcampus.building.api.controller.GeographicalLocationDTO;
 import edu.kit.tm.cm.smartcampus.building.api.controller.building.dto.ServerCreateBuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.api.controller.building.dto.ServerUpdateBuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.api.controller.component.dto.ServerCreateComponentRequest;
@@ -8,10 +10,7 @@ import edu.kit.tm.cm.smartcampus.building.api.controller.notification.dto.Server
 import edu.kit.tm.cm.smartcampus.building.api.controller.notification.dto.ServerUpdateNotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.api.controller.room.dto.ServerCreateRoomRequest;
 import edu.kit.tm.cm.smartcampus.building.api.controller.room.dto.ServerUpdateRoomRequest;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
+import edu.kit.tm.cm.smartcampus.building.logic.model.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -34,9 +33,10 @@ public final class DataTransferUtils {
       Building building = new Building();
       building.setName(serverCreateBuildingRequest.getName());
       building.setNumber(serverCreateBuildingRequest.getNumber());
-      building.setFloors(serverCreateBuildingRequest.getFloors());
+      building.setFloors(parse(serverCreateBuildingRequest.getFloors()));
       building.setCampusLocation(serverCreateBuildingRequest.getCampusLocation());
-      building.setGeographicalLocation(serverCreateBuildingRequest.getGeographicalLocation());
+      building.setGeographicalLocation(
+          parse(serverCreateBuildingRequest.getGeographicalLocation()));
       return building;
     }
 
@@ -44,7 +44,8 @@ public final class DataTransferUtils {
       Component component = new Component();
       component.setDescription(serverCreateComponentRequest.getDescription());
       component.setType(serverCreateComponentRequest.getType());
-      component.setGeographicalLocation(serverCreateComponentRequest.getGeographicalLocation());
+      component.setGeographicalLocation(
+          parse(serverCreateComponentRequest.getGeographicalLocation()));
       component.setParentIdentificationNumber(serverCreateComponentRequest.getParentIdentificationNumber());
       return component;
     }
@@ -55,7 +56,7 @@ public final class DataTransferUtils {
       room.setName(serverCreateRoomRequest.getName());
       room.setNumber(serverCreateRoomRequest.getNumber());
       room.setType(serverCreateRoomRequest.getType());
-      room.setGeographicalLocation(serverCreateRoomRequest.getGeographicalLocation());
+      room.setGeographicalLocation(parse(serverCreateRoomRequest.getGeographicalLocation()));
       room.setParentIdentificationNumber(serverCreateRoomRequest.getParentIdentificationNumber());
       return room;
     }
@@ -74,9 +75,10 @@ public final class DataTransferUtils {
       Building building = new Building();
       building.setName(serverUpdateBuildingRequest.getName());
       building.setNumber(serverUpdateBuildingRequest.getNumber());
-      building.setFloors(serverUpdateBuildingRequest.getFloors());
+      building.setFloors(parse(serverUpdateBuildingRequest.getFloors()));
       building.setCampusLocation(serverUpdateBuildingRequest.getCampusLocation());
-      building.setGeographicalLocation(serverUpdateBuildingRequest.getGeographicalLocation());
+      building.setGeographicalLocation(
+          parse(serverUpdateBuildingRequest.getGeographicalLocation()));
       building.setIdentificationNumber(serverUpdateBuildingRequest.getIdentificationNumber());
       return building;
     }
@@ -85,7 +87,8 @@ public final class DataTransferUtils {
       Component component = new Component();
       component.setDescription(serverUpdateComponentRequest.getDescription());
       component.setType(serverUpdateComponentRequest.getType());
-      component.setGeographicalLocation(serverUpdateComponentRequest.getGeographicalLocation());
+      component.setGeographicalLocation(
+          parse(serverUpdateComponentRequest.getGeographicalLocation()));
       component.setParentIdentificationNumber(serverUpdateComponentRequest.getParentIdentificationNumber());
       component.setIdentificationNumber(serverUpdateComponentRequest.getIdentificationNumber());
       return component;
@@ -96,10 +99,24 @@ public final class DataTransferUtils {
       room.setFloor(serverUpdateRoomRequest.getFloor());
       room.setName(serverUpdateRoomRequest.getName());
       room.setNumber(serverUpdateRoomRequest.getNumber());
-      room.setGeographicalLocation(serverUpdateRoomRequest.getGeographicalLocation());
+      room.setGeographicalLocation(parse(serverUpdateRoomRequest.getGeographicalLocation()));
       room.setParentIdentificationNumber(serverUpdateRoomRequest.getParentIdentificationNumber());
       room.setIdentificationNumber(serverUpdateRoomRequest.getIdentificationNumber());
       return room;
+    }
+
+    private static Floors parse(FloorsDTO floorsDTO) {
+      Floors floors = new Floors();
+      floors.setHighestFloor(floorsDTO.getHighestFloor());
+      floors.setLowestFloor(floorsDTO.getLowestFloor());
+      return floors;
+    }
+
+    private static GeographicalLocation parse(GeographicalLocationDTO geographicalLocationDTO) {
+      GeographicalLocation geographicalLocation = new GeographicalLocation();
+      geographicalLocation.setLatitude(geographicalLocationDTO.getLatitude());
+      geographicalLocation.setLongitude(geographicalLocationDTO.getLongitude());
+      return geographicalLocation;
     }
   }
 }

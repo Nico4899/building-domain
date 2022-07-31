@@ -3,20 +3,9 @@ package edu.kit.tm.cm.smartcampus.building.api.controller.building;
 import edu.kit.tm.cm.smartcampus.building.api.controller.building.dto.ServerCreateBuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.api.controller.building.dto.ServerUpdateBuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
-import java.util.Collection;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.Collection;
 
 /**
  * This interface provides all rest server operations connected "/buildings" requests.
@@ -64,8 +53,6 @@ public interface BuildingOperations {
    *
    * @param bin identification number of the building to be removed
    */
-  @Modifying
-  @Transactional
   @DeleteMapping("/buildings/{bin}")
   void removeBuilding(@PathVariable String bin);
 }
