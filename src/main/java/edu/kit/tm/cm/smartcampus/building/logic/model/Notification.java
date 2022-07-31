@@ -39,6 +39,7 @@ public class Notification {
   private static final String IDENTIFICATION_NUMBER_COLUMN = "identification_number";
   private static final String PARENT_IDENTIFICATION_NUMBER_COLUMN = "parent_identification_number";
   private static final String CREATION_TIME_COLUMN = "creation_time";
+  private static final String LAST_MODIFIED_TIME_COLUMN = "last_modified_time";
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = NOTIFICATION_SEQUENCE_NAME)
@@ -54,6 +55,9 @@ public class Notification {
 
   @Column(name = CREATION_TIME_COLUMN)
   private Timestamp creationTime;
+
+  @Column(name = LAST_MODIFIED_TIME_COLUMN)
+  private Timestamp lastModifiedTime;
 
   private String title;
   private String description;

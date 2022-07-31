@@ -302,6 +302,7 @@ public class Service {
     Notification notification =
         DataTransferUtils.ServerRequestReader.readServerUpdateNotificationRequest(
             serverUpdateNotificationRequest);
+    notification.setLastModifiedTime(new Timestamp(System.currentTimeMillis()));
     return notificationRepository.save(notification);
   }
 
@@ -315,12 +316,10 @@ public class Service {
   public Notification createNotification(
       ServerCreateNotificationRequest serverCreateNotificationRequest) {
     this.notificationValidator.validateCreate(serverCreateNotificationRequest);
-    Notification notification =
-        this.notificationRepository.save(
-            DataTransferUtils.ServerRequestReader.readServerCreateNotificationRequest(
-                serverCreateNotificationRequest));
+    Notification notification = DataTransferUtils.ServerRequestReader.readServerCreateNotificationRequest(
+                serverCreateNotificationRequest);
     notification.setCreationTime(new Timestamp(System.currentTimeMillis()));
-    return notification;
+    return notificationRepository.save(notification);
   }
 
   /**
