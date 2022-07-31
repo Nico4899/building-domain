@@ -54,6 +54,7 @@ public final class DataTransferUtils {
       room.setFloor(serverCreateRoomRequest.getFloor());
       room.setName(serverCreateRoomRequest.getName());
       room.setNumber(serverCreateRoomRequest.getNumber());
+      room.setType(serverCreateRoomRequest.getType());
       room.setGeographicalLocation(serverCreateRoomRequest.getGeographicalLocation());
       room.setParentIdentificationNumber(serverCreateRoomRequest.getParentIdentificationNumber());
       return room;

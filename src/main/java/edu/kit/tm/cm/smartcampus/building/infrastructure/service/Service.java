@@ -339,8 +339,8 @@ public class Service {
     //Delete rooms and everything attached
     for (Room room : roomsOfBuilding) {
       cleanUpRoom(room.getIdentificationNumber());
-      roomRepository.deleteByParentId(buildingIdentificationNumber);
     }
+    roomRepository.deleteByParentId(buildingIdentificationNumber);
     //Delete components of Building and attached notifications
     componentRepository.deleteByParentId(buildingIdentificationNumber);
     //Delete notifications of Building
@@ -353,12 +353,11 @@ public class Service {
     //Delete components and notifications belonging to components
     for (Component component : componentsOfRoom) {
       cleanUpComponent(component.getIdentificationNumber());
-      componentRepository.deleteByParentId(roomIdentificationNumber);
     }
-    //Delete notifications belonging to room
-    notificationRepository.deleteByParentId(roomIdentificationNumber);
     //Delete components belonging to room
     componentRepository.deleteByParentId(roomIdentificationNumber);
+    //Delete notifications belonging to room
+    notificationRepository.deleteByParentId(roomIdentificationNumber);
   }
 
   private void cleanUpComponent(String identificationNumber) {
