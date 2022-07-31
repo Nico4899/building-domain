@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * This repository uses the standard implementation of {@link CrudRepository} and contains
@@ -19,7 +20,8 @@ public interface RoomRepository extends CrudRepository<Room, String> {
   @Query("SELECT room From room room Where room.parentIdentificationNumber = ?1")
   Collection<Room> findAllRooms(@Param("bin") String parentIdentificationNumber);
 
+  @Transactional
   @Modifying
   @Query("DELETE From room room Where room.parentIdentificationNumber = ?1")
-  void cleanUp(@Param("parentIdentificationNumber") String parentIdentificationNumber);
+  void deleteByParentId(@Param("parentIdentificationNumber") String parentIdentificationNumber);
 }

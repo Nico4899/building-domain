@@ -132,8 +132,8 @@ public class Service {
    */
   public void removeBuilding(String identificationNumber) {
     this.buildingRequestValidator.validate(identificationNumber);
-    buildingRepository.deleteById(identificationNumber);
     this.cleanUpBuilding(identificationNumber);
+    buildingRepository.deleteById(identificationNumber);
   }
 
   /**
@@ -227,8 +227,8 @@ public class Service {
    */
   public void removeRoom(String identificationNumber) {
     this.roomValidator.validate(identificationNumber);
-    roomRepository.deleteById(identificationNumber);
     this.cleanUpRoom(identificationNumber);
+    roomRepository.deleteById(identificationNumber);
   }
 
   /**
@@ -276,8 +276,8 @@ public class Service {
    */
   public void removeComponent(String identificationNumber) {
     this.componentValidator.validate(identificationNumber);
-    componentRepository.deleteById(identificationNumber);
     this.cleanUpComponent(identificationNumber);
+    componentRepository.deleteById(identificationNumber);
   }
 
   /**
@@ -339,27 +339,30 @@ public class Service {
     //Delete rooms and everything attached
     for (Room room : roomsOfBuilding) {
       cleanUpRoom(room.getIdentificationNumber());
+      roomRepository.deleteByParentId(buildingIdentificationNumber);
     }
     //Delete components of Building and attached notifications
-    componentRepository.cleanUp(buildingIdentificationNumber);
+    componentRepository.deleteByParentId(buildingIdentificationNumber);
     //Delete notifications of Building
-    notificationRepository.cleanUp(buildingIdentificationNumber);
+    notificationRepository.deleteByParentId(buildingIdentificationNumber);
   }
 
   private void cleanUpRoom(String roomIdentificationNumber) {
     //Get all components belonging to room
     Collection<Component> componentsOfRoom = componentRepository.findAllComponents(roomIdentificationNumber);
-    //Delete notifications belonging to components
+    //Delete components and notifications belonging to components
     for (Component component : componentsOfRoom) {
       cleanUpComponent(component.getIdentificationNumber());
+      componentRepository.deleteByParentId(roomIdentificationNumber);
     }
     //Delete notifications belonging to room
-    notificationRepository.cleanUp(roomIdentificationNumber);
+    notificationRepository.deleteByParentId(roomIdentificationNumber);
     //Delete components belonging to room
-    componentRepository.cleanUp(roomIdentificationNumber);
+    componentRepository.deleteByParentId(roomIdentificationNumber);
   }
 
   private void cleanUpComponent(String identificationNumber) {
-    notificationRepository.cleanUp(identificationNumber);
+    //Delete notifications belonging to room
+    notificationRepository.deleteByParentId(identificationNumber);
   }
 }

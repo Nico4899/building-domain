@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * This repository uses the standard implementation of {@link CrudRepository} and contains
@@ -24,7 +25,8 @@ public interface ComponentRepository extends CrudRepository<Component, String> {
    * Deletes all components that have the given parentIdentificationNumber.
    * @param parentIdentificationNumber the parentIdentificationNumber
    */
+  @Transactional
   @Modifying
   @Query("DELETE From component component Where component.parentIdentificationNumber = ?1")
-  void cleanUp(@Param("parentIdentificationNumber") String parentIdentificationNumber);
+  void deleteByParentId(@Param("parentIdentificationNumber") String parentIdentificationNumber);
 }
