@@ -8,9 +8,10 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.not
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.room.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.Validator;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
+import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,7 +19,8 @@ import org.springframework.stereotype.Component;
  * {@link Notification} requests. It calls parent methods to validate certain attributes.
  */
 @Component
-public class NotificationValidator extends Validator<ServerUpdateNotificationRequest, ServerCreateNotificationRequest> {
+public class NotificationValidator extends
+    Validator<ServerUpdateNotificationRequest, ServerCreateNotificationRequest> {
 
   @Autowired
   protected NotificationValidator(
@@ -36,16 +38,12 @@ public class NotificationValidator extends Validator<ServerUpdateNotificationReq
 
   @Override
   public void validateCreate(ServerCreateNotificationRequest requestObject) {
-    validateNotNull(Map.of(NOTIFICATION_REQUEST, requestObject));
+    validateNotNull(List.of(Pair.of(NOTIFICATION_REQUEST, requestObject)));
 
-    validateNotNull(
-        Map.of(
-            NOTIFICATION_TITLE_NAME,
-            requestObject.getTitle(),
-            NOTIFICATION_DESCRIPTION_NAME,
-            requestObject.getDescription(),
-            PARENT_IDENTIFICATION_NUMBER_NAME,
-            requestObject.getParentIdentificationNumber()));
+    validateNotNull(List.of(
+        Pair.of(NOTIFICATION_TITLE_NAME, requestObject.getTitle()),
+        Pair.of(NOTIFICATION_DESCRIPTION_NAME, requestObject.getDescription()),
+        Pair.of(PARENT_IDENTIFICATION_NUMBER_NAME, requestObject.getParentIdentificationNumber())));
 
     validateNotEmpty(
         Map.of(
@@ -65,18 +63,13 @@ public class NotificationValidator extends Validator<ServerUpdateNotificationReq
 
   @Override
   public void validateUpdate(ServerUpdateNotificationRequest object) {
-    validateNotNull(Map.of(NOTIFICATION, object));
+    validateNotNull(List.of(Pair.of(NOTIFICATION, object)));
 
-    validateNotNull(
-        Map.of(
-            NOTIFICATION_TITLE_NAME,
-            object.getTitle(),
-            NOTIFICATION_DESCRIPTION_NAME,
-            object.getDescription(),
-            IDENTIFICATION_NUMBER_NAME,
-            object.getIdentificationNumber(),
-            PARENT_IDENTIFICATION_NUMBER_NAME,
-            object.getParentIdentificationNumber()));
+    validateNotNull(List.of(
+        Pair.of(NOTIFICATION_TITLE_NAME, object.getTitle()),
+        Pair.of(NOTIFICATION_DESCRIPTION_NAME, object.getDescription()),
+        Pair.of(IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber()),
+        Pair.of(PARENT_IDENTIFICATION_NUMBER_NAME, object.getParentIdentificationNumber())));
 
     validateNotEmpty(
         Map.of(

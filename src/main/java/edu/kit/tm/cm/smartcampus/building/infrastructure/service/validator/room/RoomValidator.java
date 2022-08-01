@@ -8,9 +8,10 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.not
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.room.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.Validator;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
+import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,12 +34,14 @@ public class RoomValidator extends Validator<ServerUpdateRoomRequest, ServerCrea
 
   @Override
   public void validateCreate(ServerCreateRoomRequest requestObject) {
-    validateNotNull(Map.of(ROOM_REQUEST, requestObject));
+    validateNotNull(List.of(Pair.of(ROOM_REQUEST, requestObject)));
 
-    validateNotNull(
-        Map.of(ROOM_NAME, requestObject.getName(), ROOM_NUMBER, requestObject.getNumber(),
-            PARENT_IDENTIFICATION_NUMBER_NAME, requestObject.getParentIdentificationNumber(),
-            FLOOR_NAME, requestObject.getFloor(), ROOM_TYPE_NAME, requestObject.getType()));
+    validateNotNull(List.of(
+        Pair.of(ROOM_NAME, requestObject.getName()),
+        Pair.of(ROOM_NUMBER, requestObject.getNumber()),
+        Pair.of(PARENT_IDENTIFICATION_NUMBER_NAME, requestObject.getParentIdentificationNumber()),
+        Pair.of(FLOOR_NAME, requestObject.getFloor()),
+        Pair.of(ROOM_TYPE_NAME, requestObject.getType())));
 
     validateNotEmpty(
         Map.of(ROOM_NAME, requestObject.getName(), ROOM_NUMBER, requestObject.getNumber()));
@@ -57,23 +60,26 @@ public class RoomValidator extends Validator<ServerUpdateRoomRequest, ServerCrea
 
   @Override
   public void validateUpdate(ServerUpdateRoomRequest object) {
-    validateNotNull(Map.of(ROOM, object));
+    validateNotNull(List.of(Pair.of(ROOM, object)));
 
-    validateNotNull(Map.of(ROOM_NAME, object.getName(), ROOM_NUMBER, object.getNumber(),
-        IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber(),
-        PARENT_NAME, object.getParentIdentificationNumber(), FLOOR_NAME,
-        object.getFloor(), ROOM_TYPE_NAME, object.getType()));
+    validateNotNull(List.of(
+        Pair.of(ROOM_NAME, object.getName()),
+        Pair.of(ROOM_NUMBER, object.getNumber()),
+        Pair.of(IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber()),
+        Pair.of(PARENT_NAME, object.getParentIdentificationNumber()),
+        Pair.of(FLOOR_NAME, object.getFloor()),
+        Pair.of(ROOM_TYPE_NAME, object.getType())));
 
     validateNotEmpty(Map.of(ROOM_NAME, object.getName(), ROOM_NUMBER, object.getNumber()));
 
     validateMatchesRegex(
-        Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), RIN_PATTERN)));
+        Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), RIN_PATTERN)
+        ));
 
     validateGeographicalLocations(
         Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
     validateExists(object.getIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
-
 
     validateRoomFloor(object.getFloor(), object.getParentIdentificationNumber());
 

@@ -10,9 +10,9 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.service.error.exception
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.error.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.util.Pair;
 
 import java.util.Collection;
 import java.util.List;
@@ -122,16 +122,16 @@ public abstract class Validator<T, S> {
   /**
    * Validates weather objects are not null or not.
    *
-   * @param objects Map of objects to be checked and their names (key=name, value=object)
+   * @param objects List of objects to be checked and their names (key=name, value=object)
    */
-  protected void validateNotNull(Map<String, Object> objects) {
+  protected void validateNotNull(List<Pair<String,Object>> objects) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
         new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
-    for (Map.Entry<String, Object> entry : objects.entrySet()) {
-      if (entry.getValue() == null) {
-        invalidArgumentsStringBuilder.appendMessage(entry.getKey(), NULL,
+    for (Pair<String,Object> pair : objects) {
+      if (pair.getValue() == null) {
+        invalidArgumentsStringBuilder.appendMessage(pair.getKey(), NULL,
             SHOULD_NOT_BE_NULL_MESSAGE, true);
         valid = false;
       }
@@ -139,7 +139,7 @@ public abstract class Validator<T, S> {
 
     if (!valid) {
       throw new InvalidArgumentsException(invalidArgumentsStringBuilder.build());
-    }
+    } 
   }
 
   /**
@@ -169,7 +169,7 @@ public abstract class Validator<T, S> {
    * Validates weather Strings match given regexes or not.
    *
    * @param strings Map of strings and their regexes to be checked and their names (key=name,
-   *                value=pair of string and regex)
+   *                value=pair of string and regex (key=string, value=regex))
    */
   protected void validateMatchesRegex(Map<String, Pair<String, String>> strings) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
@@ -177,9 +177,9 @@ public abstract class Validator<T, S> {
     boolean valid = true;
 
     for (Map.Entry<String, Pair<String, String>> entry : strings.entrySet()) {
-      if (!entry.getValue().getFirst().matches(entry.getValue().getSecond())) {
-        invalidArgumentsStringBuilder.appendMessage(entry.getKey(), entry.getValue().getFirst(),
-            String.format(SHOULD_MATCH_MESSAGE, entry.getValue().getSecond()), true);
+      if (!entry.getValue().getKey().matches(entry.getValue().getValue())) {
+        invalidArgumentsStringBuilder.appendMessage(entry.getKey(), entry.getValue().getKey(),
+            String.format(SHOULD_MATCH_MESSAGE, entry.getValue().getValue()), true);
         valid = false;
       }
     }
@@ -302,7 +302,7 @@ public abstract class Validator<T, S> {
    * @param identificationNumber the identification number
    */
   public void validate(String identificationNumber) {
-    validateNotNull(Map.of(IDENTIFICATION_NUMBER_NAME, identificationNumber));
+   validateNotNull(List.of(Pair.of(IDENTIFICATION_NUMBER_NAME, identificationNumber)));
     validateMatchesRegex(Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(identificationNumber,
         getValidateRegex())));
     validateExists(identificationNumber, IDENTIFICATION_NUMBER_NAME);

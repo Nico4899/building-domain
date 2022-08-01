@@ -8,16 +8,18 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.not
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.room.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.Validator;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 
 /**
  * This class is a child implementation of the {@link Validator}, it focuses on validating
  * {@link Component} requests. It calls parent methods to validate certain attributes.
  */
 @org.springframework.stereotype.Component
-public class ComponentValidator extends Validator<ServerUpdateComponentRequest, ServerCreateComponentRequest> {
+public class ComponentValidator extends
+    Validator<ServerUpdateComponentRequest, ServerCreateComponentRequest> {
 
   @Autowired
   protected ComponentValidator(
@@ -35,21 +37,24 @@ public class ComponentValidator extends Validator<ServerUpdateComponentRequest, 
 
   @Override
   public void validateCreate(ServerCreateComponentRequest serverCreateComponentRequest) {
-    validateNotNull(Map.of(COMPONENT_REQUEST, serverCreateComponentRequest));
+    validateNotNull(List.of(Pair.of(COMPONENT_REQUEST, serverCreateComponentRequest)));
 
-    validateNotNull(
-        Map.of(
-            COMPONENT_DESCRIPTION_NAME, serverCreateComponentRequest.getDescription(),
-            PARENT_IDENTIFICATION_NUMBER_NAME, serverCreateComponentRequest.getParentIdentificationNumber(),
-            COMPONENT_TYPE_NAME, serverCreateComponentRequest.getType(),
-            GEOGRAPHICAL_LOCATION_NAME, serverCreateComponentRequest.getGeographicalLocation()));
+    validateNotNull(List.of(
+        Pair.of(COMPONENT_DESCRIPTION_NAME, serverCreateComponentRequest.getDescription()),
+        Pair.of(PARENT_IDENTIFICATION_NUMBER_NAME,
+            serverCreateComponentRequest.getParentIdentificationNumber()),
+        Pair.of(COMPONENT_TYPE_NAME, serverCreateComponentRequest.getType()),
+        Pair.of(GEOGRAPHICAL_LOCATION_NAME,
+            serverCreateComponentRequest.getGeographicalLocation())));
 
-    validateNotEmpty(Map.of(COMPONENT_DESCRIPTION_NAME, serverCreateComponentRequest.getDescription()));
+    validateNotEmpty(
+        Map.of(COMPONENT_DESCRIPTION_NAME, serverCreateComponentRequest.getDescription()));
 
     validateMatchesRegex(
         Map.of(
             PARENT_IDENTIFICATION_NUMBER_NAME,
-            Pair.of(serverCreateComponentRequest.getParentIdentificationNumber(), BIN_RIN_PATTERN)));
+            Pair.of(serverCreateComponentRequest.getParentIdentificationNumber(),
+                BIN_RIN_PATTERN)));
 
     validateGeographicalLocations(
         Map.of(GEOGRAPHICAL_LOCATION_NAME, serverCreateComponentRequest.getGeographicalLocation()));
@@ -60,19 +65,14 @@ public class ComponentValidator extends Validator<ServerUpdateComponentRequest, 
 
   @Override
   public void validateUpdate(ServerUpdateComponentRequest object) {
-    validateNotNull(Map.of(COMPONENT, object));
+    validateNotNull(List.of(Pair.of(COMPONENT, object)));
 
-    validateNotNull(
-        Map.of(
-            COMPONENT, object,
-            COMPONENT_DESCRIPTION_NAME,
-            object.getDescription(),
-            IDENTIFICATION_NUMBER_NAME,
-            object.getIdentificationNumber(),
-            PARENT_IDENTIFICATION_NUMBER_NAME,
-            object.getParentIdentificationNumber(),
-            COMPONENT_TYPE_NAME,
-            object.getType()));
+    validateNotNull(List.of(
+        Pair.of(COMPONENT, object),
+        Pair.of(COMPONENT_DESCRIPTION_NAME, object.getDescription()),
+        Pair.of(IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber()),
+        Pair.of(PARENT_IDENTIFICATION_NUMBER_NAME, object.getParentIdentificationNumber()),
+        Pair.of(COMPONENT_TYPE_NAME, object.getType())));
 
     validateNotEmpty(Map.of(COMPONENT_DESCRIPTION_NAME, object.getDescription()));
 

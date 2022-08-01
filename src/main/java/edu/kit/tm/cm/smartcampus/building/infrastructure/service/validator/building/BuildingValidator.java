@@ -8,15 +8,15 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.not
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.room.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.Validator;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import java.util.List;
+import java.util.Map;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
 /**
- * This class is a child implementation of the {@link Validator}, it focuses on validating {@link
- * Building} requests. It calls parent methods to validate certain attributes.
+ * This class is a child implementation of the {@link Validator}, it focuses on validating
+ * {@link Building} requests. It calls parent methods to validate certain attributes.
  */
 @Component
 public class BuildingValidator
@@ -38,15 +38,14 @@ public class BuildingValidator
 
   @Override
   public void validateCreate(ServerCreateBuildingRequest serverCreateBuildingRequest) {
-    validateNotNull(Map.of(BUILDING_REQUEST, serverCreateBuildingRequest));
+    validateNotNull(List.of(Pair.of(BUILDING_REQUEST, serverCreateBuildingRequest)));
 
-    validateNotNull(
-        Map.of(
-            BUILDING_NAME, serverCreateBuildingRequest.getName(),
-            BUILDING_NUMBER, serverCreateBuildingRequest.getNumber(),
-            CAMPUS_LOCATION_NAME, serverCreateBuildingRequest.getCampusLocation(),
-            GEOGRAPHICAL_LOCATION_NAME, serverCreateBuildingRequest.getGeographicalLocation(),
-            FLOORS_NAME, serverCreateBuildingRequest.getFloors()));
+    validateNotNull(List.of(
+        Pair.of(BUILDING_NAME, serverCreateBuildingRequest.getName()),
+        Pair.of(BUILDING_NUMBER, serverCreateBuildingRequest.getNumber()),
+        Pair.of(CAMPUS_LOCATION_NAME, serverCreateBuildingRequest.getCampusLocation()),
+        Pair.of(GEOGRAPHICAL_LOCATION_NAME, serverCreateBuildingRequest.getGeographicalLocation()),
+        Pair.of(FLOORS_NAME, serverCreateBuildingRequest.getFloors())));
 
     validateNotEmpty(Map.of(BUILDING_NAME, serverCreateBuildingRequest.getName()));
 
@@ -63,20 +62,14 @@ public class BuildingValidator
 
   @Override
   public void validateUpdate(ServerUpdateBuildingRequest object) {
-    validateNotNull(Map.of(BUILDING, object));
+    validateNotNull(List.of(Pair.of(BUILDING, object)));
 
-    validateNotNull(
-        Map.of(
-            BUILDING_NAME,
-            object.getName(),
-            BUILDING_NUMBER,
-            object.getNumber(),
-            IDENTIFICATION_NUMBER_NAME,
-            object.getIdentificationNumber(),
-            CAMPUS_LOCATION_NAME,
-            object.getCampusLocation(),
-            GEOGRAPHICAL_LOCATION_NAME,
-            object.getGeographicalLocation()));
+    validateNotNull(List.of(
+        Pair.of(BUILDING_NAME, object.getName()),
+        Pair.of(BUILDING_NUMBER, object.getNumber()),
+        Pair.of(IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber()),
+        Pair.of(CAMPUS_LOCATION_NAME, object.getCampusLocation()),
+        Pair.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation())));
 
     validateNotEmpty(Map.of(BUILDING_NAME, object.getName()));
 

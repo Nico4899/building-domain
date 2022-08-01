@@ -13,7 +13,7 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.com
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.notification.NotificationRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.room.RoomRepository;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.Validator;
-import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.building.BuildingRequestValidator;
+import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.building.BuildingValidator;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.component.ComponentValidator;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.notification.NotificationValidator;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.validator.room.RoomValidator;
@@ -22,18 +22,17 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import edu.kit.tm.cm.smartcampus.building.logic.operations.utility.DataTransferUtils;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.CrudRepository;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
  * This class represents the {@link org.springframework.stereotype.Service} of this domain service,
- * it provides all logic and holds {@link Bean} instances of {@link Validator} and {@link
- * CrudRepository}* to manage incoming requests and control sent requests.
+ * it provides all logic and holds {@link Bean} instances of {@link Validator} and
+ * {@link CrudRepository}* to manage incoming requests and control sent requests.
  */
 @org.springframework.stereotype.Service
 public class Service {
@@ -42,7 +41,7 @@ public class Service {
   private final RoomRepository roomRepository;
   private final ComponentRepository componentRepository;
   private final NotificationRepository notificationRepository;
-  private final BuildingRequestValidator buildingRequestValidator;
+  private final BuildingValidator buildingValidator;
   private final RoomValidator roomValidator;
   private final ComponentValidator componentValidator;
   private final NotificationValidator notificationValidator;
@@ -50,21 +49,22 @@ public class Service {
   /**
    * Constructs a new service instance for this domain service.
    *
-   * @param buildingRepository repository in which building entities are stored (constructor
-   *     injected)
-   * @param roomRepository repository in which room entities are stored (constructor injected)
-   * @param componentRepository repository in which component entities are stored (constructor
-   *     injected)
+   * @param buildingRepository     repository in which building entities are stored (constructor
+   *                               injected)
+   * @param roomRepository         repository in which room entities are stored (constructor
+   *                               injected)
+   * @param componentRepository    repository in which component entities are stored (constructor
+   *                               injected)
    * @param notificationRepository repository in which notification entities are stored (constructor
-   *     injected)
-   * @param buildingRequestValidator validator which validates various building related requests
-   *     (constructor injected)
-   * @param roomValidator validator which validates various room related requests (constructor
-   *     injected)
-   * @param componentValidator validator which validates various component related requests
-   *     (constructor injected)
-   * @param notificationValidator validator which validates various notification related requests
-   *     (constructor injected)
+   *                               injected)
+   * @param buildingValidator      validator which validates various building related requests
+   *                               (constructor injected)
+   * @param roomValidator          validator which validates various room related requests
+   *                               (constructor injected)
+   * @param componentValidator     validator which validates various component related requests
+   *                               (constructor injected)
+   * @param notificationValidator  validator which validates various notification related requests
+   *                               (constructor injected)
    */
   @Autowired
   public Service(
@@ -72,7 +72,7 @@ public class Service {
       RoomRepository roomRepository,
       ComponentRepository componentRepository,
       NotificationRepository notificationRepository,
-      BuildingRequestValidator buildingRequestValidator,
+      BuildingValidator buildingValidator,
       RoomValidator roomValidator,
       ComponentValidator componentValidator,
       NotificationValidator notificationValidator) {
@@ -80,7 +80,7 @@ public class Service {
     this.roomRepository = roomRepository;
     this.componentRepository = componentRepository;
     this.notificationRepository = notificationRepository;
-    this.buildingRequestValidator = buildingRequestValidator;
+    this.buildingValidator = buildingValidator;
     this.roomValidator = roomValidator;
     this.componentValidator = componentValidator;
     this.notificationValidator = notificationValidator;
@@ -108,7 +108,7 @@ public class Service {
    * @return the requested building
    */
   public Building getBuilding(String identificationNumber) {
-    this.buildingRequestValidator.validate(identificationNumber);
+    this.buildingValidator.validate(identificationNumber);
     return buildingRepository.findById(identificationNumber).get();
   }
 
@@ -119,7 +119,7 @@ public class Service {
    * @return the created building
    */
   public Building createBuilding(ServerCreateBuildingRequest serverCreateBuildingRequest) {
-    // this.buildingRequestValidator.validateCreate(serverCreateBuildingRequest); TODO kaputt
+    this.buildingValidator.validateCreate(serverCreateBuildingRequest);
     return buildingRepository.save(
         DataTransferUtils.ServerRequestReader.readServerCreateBuildingRequest(
             serverCreateBuildingRequest));
@@ -131,8 +131,8 @@ public class Service {
    * @param identificationNumber the identification number of the building
    */
   public void removeBuilding(String identificationNumber) {
-    // this.buildingRequestValidator.validate(identificationNumber); TODO kaputt
-    // this.cleanUpBuilding(identificationNumber);
+    this.buildingValidator.validate(identificationNumber);
+    this.cleanUpBuilding(identificationNumber);
     buildingRepository.deleteById(identificationNumber);
   }
 
@@ -143,7 +143,7 @@ public class Service {
    * @return the updated building
    */
   public Building updateBuilding(ServerUpdateBuildingRequest serverUpdateBuildingRequest) {
-    // this.buildingRequestValidator.validateUpdate(serverUpdateBuildingRequest); TODO kaputt
+    this.buildingValidator.validateUpdate(serverUpdateBuildingRequest);
     Building building =
         DataTransferUtils.ServerRequestReader.readServerUpdateBuildingRequest(
             serverUpdateBuildingRequest);
@@ -157,7 +157,7 @@ public class Service {
    * @return the requested notifications
    */
   public Collection<Notification> listNotifications(String identificationNumber) {
-    this.buildingRequestValidator.validate(identificationNumber);
+    this.buildingValidator.validate(identificationNumber);
     return notificationRepository.findAllNotifications(identificationNumber);
   }
 
@@ -168,7 +168,7 @@ public class Service {
    * @return the requested rooms
    */
   public Collection<Room> listRooms(String identificationNumber) {
-    this.buildingRequestValidator.validate(identificationNumber);
+    this.buildingValidator.validate(identificationNumber);
     return roomRepository.findAllRooms(identificationNumber);
   }
 
@@ -179,7 +179,7 @@ public class Service {
    * @return the requested components
    */
   public Collection<Component> listComponents(String identificationNumber) {
-    this.buildingRequestValidator.validate(identificationNumber);
+    this.buildingValidator.validate(identificationNumber);
     return componentRepository.findAllComponents(identificationNumber);
   }
 
@@ -297,7 +297,8 @@ public class Service {
    * @param serverUpdateNotificationRequest the notification to be updated
    * @return the updated notification
    */
-  public Notification updateNotification(ServerUpdateNotificationRequest serverUpdateNotificationRequest) {
+  public Notification updateNotification(
+      ServerUpdateNotificationRequest serverUpdateNotificationRequest) {
     this.notificationValidator.validateUpdate(serverUpdateNotificationRequest);
     Notification notification =
         DataTransferUtils.ServerRequestReader.readServerUpdateNotificationRequest(
@@ -310,14 +311,14 @@ public class Service {
    * Create a new {@link Notification} in this domain service.
    *
    * @param serverCreateNotificationRequest the notificationRequest for the notification to be
-   *     created
+   *                                        created
    * @return the created notification
    */
   public Notification createNotification(
       ServerCreateNotificationRequest serverCreateNotificationRequest) {
     this.notificationValidator.validateCreate(serverCreateNotificationRequest);
     Notification notification = DataTransferUtils.ServerRequestReader.readServerCreateNotificationRequest(
-                serverCreateNotificationRequest);
+        serverCreateNotificationRequest);
     notification.setCreationTime(new Timestamp(System.currentTimeMillis()));
     return notificationRepository.save(notification);
   }
@@ -348,7 +349,8 @@ public class Service {
 
   private void cleanUpRoom(String roomIdentificationNumber) {
     //Get all components belonging to room
-    Collection<Component> componentsOfRoom = componentRepository.findAllComponents(roomIdentificationNumber);
+    Collection<Component> componentsOfRoom = componentRepository.findAllComponents(
+        roomIdentificationNumber);
     //Delete components and notifications belonging to components
     for (Component component : componentsOfRoom) {
       cleanUpComponent(component.getIdentificationNumber());
