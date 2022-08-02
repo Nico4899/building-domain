@@ -33,8 +33,12 @@ public class Floors {
   // constants this and other classes use
   public static final String ID_COLUMN = "id";
 
+  // constants this class uses
+  private static final String FLOORS_SEQUENCE_NAME =
+      "floors_sequence";
+
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO, generator = FLOORS_SEQUENCE_NAME)
   @Column(name = ID_COLUMN)
   private Long id;
 

@@ -29,8 +29,12 @@ public class GeographicalLocation {
   // constants this and other classes use
   public static final String ID_COLUMN = "id";
 
+  // constants this class uses
+  private static final String GEOGRAPHICAL_LOCATION_SEQUENCE_NAME =
+      "geographical_location_sequence";
+
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO, generator = GEOGRAPHICAL_LOCATION_SEQUENCE_NAME)
   @Column(name = ID_COLUMN)
   private Long id;
 
