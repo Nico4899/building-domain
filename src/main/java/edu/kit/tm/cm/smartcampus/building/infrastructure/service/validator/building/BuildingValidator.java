@@ -69,7 +69,8 @@ public class BuildingValidator
         Pair.of(BUILDING_NUMBER, object.getNumber()),
         Pair.of(IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber()),
         Pair.of(CAMPUS_LOCATION_NAME, object.getCampusLocation()),
-        Pair.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation())));
+        Pair.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()),
+        Pair.of(FLOORS_NAME, object.getFloors())));
 
     validateNotEmpty(Map.of(BUILDING_NAME, object.getName()));
 

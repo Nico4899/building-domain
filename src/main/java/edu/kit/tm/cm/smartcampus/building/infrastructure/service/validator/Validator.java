@@ -9,14 +9,13 @@ import edu.kit.tm.cm.smartcampus.building.infrastructure.database.repository.roo
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.error.exceptions.InvalidArgumentsException;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.error.exceptions.ResourceNotFoundException;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * This class represents a parent class validator for any given attribute constraints. In case of
@@ -124,12 +123,12 @@ public abstract class Validator<T, S> {
    *
    * @param objects List of objects to be checked and their names (key=name, value=object)
    */
-  protected void validateNotNull(List<Pair<String,Object>> objects) {
+  protected void validateNotNull(List<Pair<String, Object>> objects) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
         new InvalidArgumentsStringBuilder();
     boolean valid = true;
 
-    for (Pair<String,Object> pair : objects) {
+    for (Pair<String, Object> pair : objects) {
       if (pair.getValue() == null) {
         invalidArgumentsStringBuilder.appendMessage(pair.getKey(), NULL,
             SHOULD_NOT_BE_NULL_MESSAGE, true);
@@ -139,7 +138,7 @@ public abstract class Validator<T, S> {
 
     if (!valid) {
       throw new InvalidArgumentsException(invalidArgumentsStringBuilder.build());
-    } 
+    }
   }
 
   /**
@@ -193,7 +192,7 @@ public abstract class Validator<T, S> {
    * Validates weather geographical locations have valid latitude and longitude values or not.
    *
    * @param locations Map of geographical locations to be checked and their names (key = name,
-   *     value=location)
+   *                  value=location)
    */
   protected void validateGeographicalLocations(Map<String, GeographicalLocationDTO> locations) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
@@ -202,7 +201,8 @@ public abstract class Validator<T, S> {
 
     for (Map.Entry<String, GeographicalLocationDTO> entry : locations.entrySet()) {
       if (entry.getValue().getLatitude() > MAX_LATITUDE_VALUE
-          || entry.getValue().getLatitude() < MIN_LATITUDE_VALUE) {
+          || entry.getValue().getLatitude() < MIN_LATITUDE_VALUE
+          || Double.isNaN(entry.getValue().getLatitude())) {
         invalidArgumentsStringBuilder.appendMessage(entry.getKey() + SPACE + LATITUDE_NAME,
             Double.toString(entry.getValue().getLatitude()),
             String.format(SHOULD_BE_BETWEEN_MESSAGE, MIN_LATITUDE_VALUE, MAX_LATITUDE_VALUE),
@@ -210,7 +210,8 @@ public abstract class Validator<T, S> {
         valid = false;
       }
       if (entry.getValue().getLongitude() > MAX_LONGITUDE_VALUE
-          || entry.getValue().getLongitude() < MIN_LONGITUDE_VALUE) {
+          || entry.getValue().getLongitude() < MIN_LONGITUDE_VALUE || Double.isNaN(
+          entry.getValue().getLongitude())) {
         invalidArgumentsStringBuilder.appendMessage(entry.getKey() + SPACE + LONGITUDE_NAME,
             Double.toString(entry.getValue().getLongitude()),
             String.format(SHOULD_BE_BETWEEN_MESSAGE, MIN_LONGITUDE_VALUE,
@@ -228,7 +229,7 @@ public abstract class Validator<T, S> {
    * Validates weather floors objects have valid attributes or not.
    *
    * @param floors Map of floors objects to be checked and their names (key = name, value=floors
-   *     objects)
+   *               objects)
    */
   protected void validateFloors(Map<String, FloorsDTO> floors) {
     InvalidArgumentsStringBuilder invalidArgumentsStringBuilder =
@@ -302,7 +303,7 @@ public abstract class Validator<T, S> {
    * @param identificationNumber the identification number
    */
   public void validate(String identificationNumber) {
-   validateNotNull(List.of(Pair.of(IDENTIFICATION_NUMBER_NAME, identificationNumber)));
+    validateNotNull(List.of(Pair.of(IDENTIFICATION_NUMBER_NAME, identificationNumber)));
     validateMatchesRegex(Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(identificationNumber,
         getValidateRegex())));
     validateExists(identificationNumber, IDENTIFICATION_NUMBER_NAME);
