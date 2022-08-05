@@ -84,6 +84,7 @@ public class RoomValidatorTest {
     Mockito.when(ROOM_REPOSITORY.existsById(ROOM_IDENTIFICATION_NUMBER)).thenReturn(true);
     Mockito.when(ROOM_REPOSITORY.existsById(NOT_EXISTING_ROOM_IDENTIFICATION_NUMBER))
         .thenReturn(false);
+    Mockito.when(BUILDING_REPOSITORY.existsById(PARENT_BUILDING_IDENTIFICATION_NUMBER)).thenReturn(true);
     Mockito.when(BUILDING_REPOSITORY.existsById(NOT_EXISTING_PARENT_BUILDING_IDENTIFICATION_NUMBER))
         .thenReturn(false);
 
@@ -108,7 +109,7 @@ public class RoomValidatorTest {
 
   @Test
   void getValidateRegex_ShouldReturnBINPattern() {
-    Assertions.assertEquals(Validator.BIN_PATTERN, ROOM_VALIDATOR.getValidateRegex());
+    Assertions.assertEquals(Validator.RIN_PATTERN, ROOM_VALIDATOR.getValidateRegex());
   }
 
   @ParameterizedTest
@@ -163,8 +164,7 @@ public class RoomValidatorTest {
     return Stream.of(
         Arguments.of(
             new ServerCreateRoomRequest(PARENT_BUILDING_IDENTIFICATION_NUMBER, ROOM_NAME,
-                ROOM_NUMBER,
-                ROOM_FLOOR, ROOM_TYPE, ROOM_GEOGRAPHICAL_LOCATION))
+                ROOM_NUMBER, ROOM_FLOOR, ROOM_TYPE, ROOM_GEOGRAPHICAL_LOCATION))
     );
   }
 
@@ -196,8 +196,10 @@ public class RoomValidatorTest {
         //invalid because of empty
         Arguments.of(
             new ServerCreateRoomRequest(PARENT_BUILDING_IDENTIFICATION_NUMBER, EMPTY_STRING,
-                ROOM_NUMBER,
-                ROOM_FLOOR, ROOM_TYPE, ROOM_GEOGRAPHICAL_LOCATION)),
+                ROOM_NUMBER, ROOM_FLOOR, ROOM_TYPE, ROOM_GEOGRAPHICAL_LOCATION)),
+        Arguments.of(
+            new ServerCreateRoomRequest(PARENT_BUILDING_IDENTIFICATION_NUMBER, ROOM_NAME,
+                EMPTY_STRING, ROOM_FLOOR, ROOM_TYPE, ROOM_GEOGRAPHICAL_LOCATION)),
         //invalid because of regex
         Arguments.of(
             new ServerCreateRoomRequest(INVALID_PARENT_BUILDING_IDENTIFICATION_NUMBER, ROOM_NAME,
@@ -293,6 +295,10 @@ public class RoomValidatorTest {
             new ServerUpdateRoomRequest(PARENT_BUILDING_IDENTIFICATION_NUMBER, EMPTY_STRING,
                 ROOM_NUMBER, ROOM_FLOOR, ROOM_TYPE, ROOM_GEOGRAPHICAL_LOCATION,
                 ROOM_IDENTIFICATION_NUMBER)),
+        Arguments.of(
+            new ServerUpdateRoomRequest(PARENT_BUILDING_IDENTIFICATION_NUMBER, ROOM_NAME,
+                EMPTY_STRING, ROOM_FLOOR, ROOM_TYPE, ROOM_GEOGRAPHICAL_LOCATION,
+                ROOM_IDENTIFICATION_NUMBER)),
         //invalid because of regex
         Arguments.of(
             new ServerUpdateRoomRequest(INVALID_PARENT_BUILDING_IDENTIFICATION_NUMBER, ROOM_NAME,
@@ -343,8 +349,7 @@ public class RoomValidatorTest {
     return Stream.of(
         Arguments.of(
             new ServerUpdateRoomRequest(NOT_EXISTING_PARENT_BUILDING_IDENTIFICATION_NUMBER,
-                ROOM_NAME,
-                ROOM_NUMBER, ROOM_FLOOR, ROOM_TYPE, ROOM_GEOGRAPHICAL_LOCATION,
+                ROOM_NAME, ROOM_NUMBER, ROOM_FLOOR, ROOM_TYPE, ROOM_GEOGRAPHICAL_LOCATION,
                 ROOM_IDENTIFICATION_NUMBER)),
         Arguments.of(
             new ServerUpdateRoomRequest(PARENT_BUILDING_IDENTIFICATION_NUMBER, ROOM_NAME,
