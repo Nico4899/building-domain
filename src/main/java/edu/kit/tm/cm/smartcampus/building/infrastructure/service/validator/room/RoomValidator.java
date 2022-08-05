@@ -41,7 +41,8 @@ public class RoomValidator extends Validator<ServerUpdateRoomRequest, ServerCrea
         Pair.of(ROOM_NUMBER, requestObject.getNumber()),
         Pair.of(PARENT_IDENTIFICATION_NUMBER_NAME, requestObject.getParentIdentificationNumber()),
         Pair.of(FLOOR_NAME, requestObject.getFloor()),
-        Pair.of(ROOM_TYPE_NAME, requestObject.getType())));
+        Pair.of(ROOM_TYPE_NAME, requestObject.getType()),
+        Pair.of(GEOGRAPHICAL_LOCATION_NAME, requestObject.getGeographicalLocation())));
 
     validateNotEmpty(
         Map.of(ROOM_NAME, requestObject.getName(), ROOM_NUMBER, requestObject.getNumber()));
@@ -68,6 +69,7 @@ public class RoomValidator extends Validator<ServerUpdateRoomRequest, ServerCrea
         Pair.of(IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber()),
         Pair.of(PARENT_NAME, object.getParentIdentificationNumber()),
         Pair.of(FLOOR_NAME, object.getFloor()),
+        Pair.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()),
         Pair.of(ROOM_TYPE_NAME, object.getType())));
 
     validateNotEmpty(Map.of(ROOM_NAME, object.getName(), ROOM_NUMBER, object.getNumber()));
@@ -82,7 +84,7 @@ public class RoomValidator extends Validator<ServerUpdateRoomRequest, ServerCrea
     validateGeographicalLocations(
         Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
 
-    validateExists(object.getIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
+    validateExists(object.getParentIdentificationNumber(), PARENT_IDENTIFICATION_NUMBER_NAME);
 
     validateRoomFloor(object.getFloor(), object.getParentIdentificationNumber());
 
