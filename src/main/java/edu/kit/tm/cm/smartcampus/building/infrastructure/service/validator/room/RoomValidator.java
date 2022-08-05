@@ -73,8 +73,11 @@ public class RoomValidator extends Validator<ServerUpdateRoomRequest, ServerCrea
     validateNotEmpty(Map.of(ROOM_NAME, object.getName(), ROOM_NUMBER, object.getNumber()));
 
     validateMatchesRegex(
-        Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(object.getIdentificationNumber(), RIN_PATTERN)
-        ));
+        Map.of(
+            IDENTIFICATION_NUMBER_NAME,
+            Pair.of(object.getIdentificationNumber(), RIN_PATTERN),
+            PARENT_IDENTIFICATION_NUMBER_NAME,
+            Pair.of(object.getParentIdentificationNumber(), BIN_PATTERN)));
 
     validateGeographicalLocations(
         Map.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()));
