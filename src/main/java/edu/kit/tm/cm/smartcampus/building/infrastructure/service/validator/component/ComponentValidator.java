@@ -72,6 +72,7 @@ public class ComponentValidator extends
         Pair.of(COMPONENT_DESCRIPTION_NAME, object.getDescription()),
         Pair.of(IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber()),
         Pair.of(PARENT_IDENTIFICATION_NUMBER_NAME, object.getParentIdentificationNumber()),
+        Pair.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()),
         Pair.of(COMPONENT_TYPE_NAME, object.getType())));
 
     validateNotEmpty(Map.of(COMPONENT_DESCRIPTION_NAME, object.getDescription()));
