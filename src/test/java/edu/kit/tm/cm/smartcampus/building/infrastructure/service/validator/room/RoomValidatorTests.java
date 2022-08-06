@@ -28,8 +28,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 
-public class RoomValidatorTest {
+public class RoomValidatorTests {
 
+  //Attributes
   private static final String ROOM_IDENTIFICATION_NUMBER = "r-1";
   private static final String INVALID_ROOM_IDENTIFICATION_NUMBER = "r1";
   private static final String NOT_EXISTING_ROOM_IDENTIFICATION_NUMBER = "r-42";
@@ -68,8 +69,7 @@ public class RoomValidatorTest {
   private static final int PARENT_BUILDING_FLOORS_HIGHEST_FLOOR = 12;
   private static final int PARENT_BUILDING_FLOORS_LOWEST_FLOOR = -1;
   private static final String EMPTY_STRING = "";
-
-
+  //Mocks
   private static final BuildingRepository BUILDING_REPOSITORY = mock(BuildingRepository.class);
   private static final RoomRepository ROOM_REPOSITORY = mock(RoomRepository.class);
   private static final ComponentRepository COMPONENT_REPOSITORY = mock(ComponentRepository.class);
@@ -84,7 +84,8 @@ public class RoomValidatorTest {
     Mockito.when(ROOM_REPOSITORY.existsById(ROOM_IDENTIFICATION_NUMBER)).thenReturn(true);
     Mockito.when(ROOM_REPOSITORY.existsById(NOT_EXISTING_ROOM_IDENTIFICATION_NUMBER))
         .thenReturn(false);
-    Mockito.when(BUILDING_REPOSITORY.existsById(PARENT_BUILDING_IDENTIFICATION_NUMBER)).thenReturn(true);
+    Mockito.when(BUILDING_REPOSITORY.existsById(PARENT_BUILDING_IDENTIFICATION_NUMBER))
+        .thenReturn(true);
     Mockito.when(BUILDING_REPOSITORY.existsById(NOT_EXISTING_PARENT_BUILDING_IDENTIFICATION_NUMBER))
         .thenReturn(false);
 

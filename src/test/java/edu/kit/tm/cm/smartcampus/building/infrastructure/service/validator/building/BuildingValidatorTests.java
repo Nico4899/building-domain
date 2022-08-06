@@ -23,8 +23,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 
-public class BuildingValidatorTest {
+public class BuildingValidatorTests {
 
+  //Attributes
   private static final String BUILDING_IDENTIFICATION_NUMBER = "b-1";
   private static final String BUILDING_NAME = "Testgebäude";
   private static final String BUILDING_NUMBER_1 = "12.12";
@@ -52,7 +53,7 @@ public class BuildingValidatorTest {
   private static final FloorsDTO INVALID_BUILDING_FLOORS = new FloorsDTO(1, 2);
   private static final String INVALID_BUILDING_IDENTIFICATION_NUMBER = "b1";
   private static final String NOT_EXISTING_BUILDING_IDENTIFICATION_NUMBER = "b-42";
-
+  //Mocks
   private static final BuildingRepository BUILDING_REPOSITORY = mock(BuildingRepository.class);
   private static final RoomRepository ROOM_REPOSITORY = mock(RoomRepository.class);
   private static final ComponentRepository COMPONENT_REPOSITORY = mock(ComponentRepository.class);

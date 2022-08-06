@@ -11,7 +11,7 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Building.CampusLocation;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class BuildingControllerTest {
+public class BuildingControllerTests {
 
   //Mocks
   private static final Service SERVICE = mock(Service.class);

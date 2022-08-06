@@ -20,8 +20,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 
-public class NotificationValidatorTest {
+public class NotificationValidatorTests {
 
+  //Attributes
   private static final String NOTIFICATION_IDENTIFICATION_NUMBER = "n-1";
   private static final String INVALID_NOTIFICATION_IDENTIFICATION_NUMBER = "n1";
   private static final String NOT_EXISTING_NOTIFICATION_IDENTIFICATION_NUMBER = "n-42";
@@ -40,7 +41,7 @@ public class NotificationValidatorTest {
   private static final String NOTIFICATION_DESCRIPTION = "Eine test Beschreibung, die sehr "
       + "aussagekräftig ist 0_0.";
   private static final String EMPTY_STRING = "";
-
+  //Mocks
   private static final BuildingRepository BUILDING_REPOSITORY = mock(BuildingRepository.class);
   private static final RoomRepository ROOM_REPOSITORY = mock(RoomRepository.class);
   private static final ComponentRepository COMPONENT_REPOSITORY = mock(ComponentRepository.class);

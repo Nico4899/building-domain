@@ -22,8 +22,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 
-public class ComponentValidatorTest {
+public class ComponentValidatorTests {
 
+  //Attributes
   private static final String COMPONENT_IDENTIFICATION_NUMBER = "c-1";
   private static final String INVALID_COMPONENT_IDENTIFICATION_NUMBER = "c1";
   private static final String NOT_EXISTING_COMPONENT_IDENTIFICATION_NUMBER = "c-42";
@@ -52,7 +53,7 @@ public class ComponentValidatorTest {
   private static final String NOT_EXISTING_COMPONENT_PARENT_BUILDING_IDENTIFICATION_NUMBER = "b-42";
   private static final String NOT_EXISTING_COMPONENT_PARENT_ROOM_IDENTIFICATION_NUMBER = "r-42";
   private static final String EMPTY_STRING = "";
-
+  //Mocks
   private static final BuildingRepository BUILDING_REPOSITORY = mock(BuildingRepository.class);
   private static final RoomRepository ROOM_REPOSITORY = mock(RoomRepository.class);
   private static final ComponentRepository COMPONENT_REPOSITORY = mock(ComponentRepository.class);
