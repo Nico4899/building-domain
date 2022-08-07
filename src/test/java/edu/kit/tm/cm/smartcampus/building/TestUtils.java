@@ -107,8 +107,8 @@ public final class TestUtils {
   }
 
   /**
-   * Checks whether two notifications are equal (except for their identification number,
-   * creation- and modification time!) or not.
+   * Checks whether two notifications are equal (except for their identification number, creation-
+   * and modification time!) or not.
    *
    * @param notification1 the first notification to be checked
    * @param notification2 the second notification to be checked

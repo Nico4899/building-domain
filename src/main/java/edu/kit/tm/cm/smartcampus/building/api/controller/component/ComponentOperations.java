@@ -3,7 +3,6 @@ package edu.kit.tm.cm.smartcampus.building.api.controller.component;
 import edu.kit.tm.cm.smartcampus.building.api.controller.component.dto.ServerCreateComponentRequest;
 import edu.kit.tm.cm.smartcampus.building.api.controller.component.dto.ServerUpdateComponentRequest;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
-import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
 import java.util.Collection;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,8 @@ public interface ComponentOperations {
   /**
    * Create a new {@link Component} on "/components" url in this domain service.
    *
-   * @param serverCreateComponentRequest the request for the component to be created in this service
+   * @param serverCreateComponentRequest the request for the component to be created in this
+   *                                     service
    * @return the created component
    */
   @PostMapping("/components")

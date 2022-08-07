@@ -6,10 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This class represents a server update request for a room.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 public class ServerUpdateRoomRequest {
+
   private String parentIdentificationNumber;
   private String name;
   private String number;

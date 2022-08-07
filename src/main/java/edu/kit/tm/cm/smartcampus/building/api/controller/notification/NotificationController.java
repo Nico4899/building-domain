@@ -5,12 +5,10 @@ import edu.kit.tm.cm.smartcampus.building.api.controller.notification.dto.Server
 import edu.kit.tm.cm.smartcampus.building.api.controller.notification.dto.ServerUpdateNotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.Service;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
-import edu.kit.tm.cm.smartcampus.building.logic.operations.utility.DataTransferUtils;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Collection;
 
 /**
  * This class represents the notification controller for this domain service. It holds a Spring
@@ -41,7 +39,8 @@ public class NotificationController implements NotificationOperations {
   }
 
   @Override
-  public Notification updateNotification(ServerUpdateNotificationRequest serverUpdateNotificationRequest) {
+  public Notification updateNotification(
+      ServerUpdateNotificationRequest serverUpdateNotificationRequest) {
     return service.updateNotification(serverUpdateNotificationRequest);
   }
 
@@ -56,7 +55,8 @@ public class NotificationController implements NotificationOperations {
   }
 
   @Override
-  public Notification createNotification(ServerCreateNotificationRequest serverCreateNotificationRequest) {
+  public Notification createNotification(
+      ServerCreateNotificationRequest serverCreateNotificationRequest) {
     return service.createNotification(serverCreateNotificationRequest);
   }
 

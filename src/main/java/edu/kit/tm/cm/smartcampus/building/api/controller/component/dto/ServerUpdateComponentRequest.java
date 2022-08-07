@@ -6,10 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This class represents a server update request for a component.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 public class ServerUpdateComponentRequest {
+
   private String parentIdentificationNumber;
   private Component.Type type;
   private String description;

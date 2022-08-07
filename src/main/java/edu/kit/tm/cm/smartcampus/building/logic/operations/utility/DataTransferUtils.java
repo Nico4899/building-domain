@@ -19,22 +19,24 @@ import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * This Class provides utils for data transfer objects.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DataTransferUtils {
 
+  /**
+   * This class represents a server request reader.
+   */
   @NoArgsConstructor(access = AccessLevel.PRIVATE)
   public static class ServerRequestReader {
 
-    public static Notification readServerCreateNotificationRequest(
-        ServerCreateNotificationRequest serverCreateNotificationRequest) {
-      Notification notification = new Notification();
-      notification.setDescription(serverCreateNotificationRequest.getDescription());
-      notification.setParentIdentificationNumber(
-          serverCreateNotificationRequest.getParentIdentificationNumber());
-      notification.setTitle(serverCreateNotificationRequest.getTitle());
-      return notification;
-    }
-
+    /**
+     * Reads a server create request for a building and converts it to a building.
+     *
+     * @param serverCreateBuildingRequest the server create request
+     * @return the building
+     */
     public static Building readServerCreateBuildingRequest(
         ServerCreateBuildingRequest serverCreateBuildingRequest) {
       Building building = new Building();
@@ -47,18 +49,12 @@ public final class DataTransferUtils {
       return building;
     }
 
-    public static Component readServerCreateComponentRequest(
-        ServerCreateComponentRequest serverCreateComponentRequest) {
-      Component component = new Component();
-      component.setDescription(serverCreateComponentRequest.getDescription());
-      component.setType(serverCreateComponentRequest.getType());
-      component.setGeographicalLocation(
-          parse(serverCreateComponentRequest.getGeographicalLocation()));
-      component.setParentIdentificationNumber(
-          serverCreateComponentRequest.getParentIdentificationNumber());
-      return component;
-    }
-
+    /**
+     * Reads a server create request for a room and converts it to a room.
+     *
+     * @param serverCreateRoomRequest the server create request
+     * @return the room
+     */
     public static Room readServerCreateRoomRequest(
         ServerCreateRoomRequest serverCreateRoomRequest) {
       Room room = new Room();
@@ -71,18 +67,46 @@ public final class DataTransferUtils {
       return room;
     }
 
-    public static Notification readServerUpdateNotificationRequest(
-        ServerUpdateNotificationRequest serverUpdateNotificationRequest) {
+    /**
+     * Reads a server create request for a component and converts it to a component.
+     *
+     * @param serverCreateComponentRequest the server create request
+     * @return the component
+     */
+    public static Component readServerCreateComponentRequest(
+        ServerCreateComponentRequest serverCreateComponentRequest) {
+      Component component = new Component();
+      component.setDescription(serverCreateComponentRequest.getDescription());
+      component.setType(serverCreateComponentRequest.getType());
+      component.setGeographicalLocation(
+          parse(serverCreateComponentRequest.getGeographicalLocation()));
+      component.setParentIdentificationNumber(
+          serverCreateComponentRequest.getParentIdentificationNumber());
+      return component;
+    }
+
+    /**
+     * Reads a server create request for a notification and converts it to a notification.
+     *
+     * @param serverCreateNotificationRequest the server create request
+     * @return the notification
+     */
+    public static Notification readServerCreateNotificationRequest(
+        ServerCreateNotificationRequest serverCreateNotificationRequest) {
       Notification notification = new Notification();
-      notification.setDescription(serverUpdateNotificationRequest.getDescription());
+      notification.setDescription(serverCreateNotificationRequest.getDescription());
       notification.setParentIdentificationNumber(
-          serverUpdateNotificationRequest.getParentIdentificationNumber());
-      notification.setTitle(serverUpdateNotificationRequest.getTitle());
-      notification.setIdentificationNumber(
-          serverUpdateNotificationRequest.getIdentificationNumber());
+          serverCreateNotificationRequest.getParentIdentificationNumber());
+      notification.setTitle(serverCreateNotificationRequest.getTitle());
       return notification;
     }
 
+    /**
+     * Reads a server update request for a building and converts it to a building.
+     *
+     * @param serverUpdateBuildingRequest the server update request
+     * @return the building
+     */
     public static Building readServerUpdateBuildingRequest(
         ServerUpdateBuildingRequest serverUpdateBuildingRequest) {
       Building building = new Building();
@@ -96,6 +120,31 @@ public final class DataTransferUtils {
       return building;
     }
 
+    /**
+     * Reads a server create request for a room and converts it to a room.
+     *
+     * @param serverUpdateRoomRequest the server create request
+     * @return the room
+     */
+    public static Room readServerUpdateRoomRequest(
+        ServerUpdateRoomRequest serverUpdateRoomRequest) {
+      Room room = new Room();
+      room.setFloor(serverUpdateRoomRequest.getFloor());
+      room.setName(serverUpdateRoomRequest.getName());
+      room.setNumber(serverUpdateRoomRequest.getNumber());
+      room.setGeographicalLocation(parse(serverUpdateRoomRequest.getGeographicalLocation()));
+      room.setParentIdentificationNumber(serverUpdateRoomRequest.getParentIdentificationNumber());
+      room.setIdentificationNumber(serverUpdateRoomRequest.getIdentificationNumber());
+      room.setType(serverUpdateRoomRequest.getType());
+      return room;
+    }
+
+    /**
+     * Reads a server update request for a component and converts it to a component.
+     *
+     * @param serverUpdateComponentRequest the server create request
+     * @return the component
+     */
     public static Component readServerUpdateComponentRequest(
         ServerUpdateComponentRequest serverUpdateComponentRequest) {
       Component component = new Component();
@@ -109,17 +158,22 @@ public final class DataTransferUtils {
       return component;
     }
 
-    public static Room readServerUpdateRoomRequest(
-        ServerUpdateRoomRequest serverUpdateRoomRequest) {
-      Room room = new Room();
-      room.setFloor(serverUpdateRoomRequest.getFloor());
-      room.setName(serverUpdateRoomRequest.getName());
-      room.setNumber(serverUpdateRoomRequest.getNumber());
-      room.setGeographicalLocation(parse(serverUpdateRoomRequest.getGeographicalLocation()));
-      room.setParentIdentificationNumber(serverUpdateRoomRequest.getParentIdentificationNumber());
-      room.setIdentificationNumber(serverUpdateRoomRequest.getIdentificationNumber());
-      room.setType(serverUpdateRoomRequest.getType());
-      return room;
+    /**
+     * Reads a server update request for a notification and converts it to a notification.
+     *
+     * @param serverUpdateNotificationRequest the server update request
+     * @return the notification
+     */
+    public static Notification readServerUpdateNotificationRequest(
+        ServerUpdateNotificationRequest serverUpdateNotificationRequest) {
+      Notification notification = new Notification();
+      notification.setDescription(serverUpdateNotificationRequest.getDescription());
+      notification.setParentIdentificationNumber(
+          serverUpdateNotificationRequest.getParentIdentificationNumber());
+      notification.setTitle(serverUpdateNotificationRequest.getTitle());
+      notification.setIdentificationNumber(
+          serverUpdateNotificationRequest.getIdentificationNumber());
+      return notification;
     }
 
     private static Floors parse(FloorsDTO floorsDTO) {

@@ -6,8 +6,6 @@ import edu.kit.tm.cm.smartcampus.building.api.controller.room.dto.ServerUpdateRo
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.Service;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import java.util.Collection;
-
-import edu.kit.tm.cm.smartcampus.building.logic.operations.utility.DataTransferUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;

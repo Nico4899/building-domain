@@ -319,8 +319,8 @@ public class Service {
   public Notification createNotification(
       ServerCreateNotificationRequest serverCreateNotificationRequest) {
     this.notificationValidator.validateCreate(serverCreateNotificationRequest);
-    Notification notification = DataTransferUtils.ServerRequestReader.readServerCreateNotificationRequest(
-        serverCreateNotificationRequest);
+    Notification notification = DataTransferUtils.ServerRequestReader
+        .readServerCreateNotificationRequest(serverCreateNotificationRequest);
     notification.setCreationTime(new Timestamp(System.currentTimeMillis()));
     notification.setLastModifiedTime(new Timestamp(System.currentTimeMillis()));
     return notificationRepository.save(notification);
@@ -338,7 +338,8 @@ public class Service {
 
   private void cleanUpBuilding(String buildingIdentificationNumber) {
     //Get all rooms belonging to building
-    Collection<Room> roomsOfBuilding = roomRepository.findAllRoomsByParentId(buildingIdentificationNumber);
+    Collection<Room> roomsOfBuilding = roomRepository.findAllRoomsByParentId(
+        buildingIdentificationNumber);
     //Delete rooms and everything attached
     for (Room room : roomsOfBuilding) {
       cleanUpRoom(room.getIdentificationNumber());

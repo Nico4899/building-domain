@@ -6,11 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-/** This class represents a request for a Room. */
+/**
+ * This class represents a request for a Room.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 public class ServerCreateRoomRequest {
+
   private String parentIdentificationNumber;
   private String name;
   private String number;

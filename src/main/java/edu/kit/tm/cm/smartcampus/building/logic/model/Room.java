@@ -1,26 +1,35 @@
 package edu.kit.tm.cm.smartcampus.building.logic.model;
 
+import static edu.kit.tm.cm.smartcampus.building.logic.model.Room.ROOM_TABLE_NAME;
+
 import edu.kit.tm.cm.smartcampus.building.infrastructure.database.generator.PrefixSequenceGenerator;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Parameter;
 
-import javax.persistence.*;
-
-import static edu.kit.tm.cm.smartcampus.building.logic.model.Room.ROOM_TABLE_NAME;
-
-/** This class represents a domain entity room. */
+/**
+ * This class represents a domain entity room.
+ */
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity(name = ROOM_TABLE_NAME)
 public class Room {
 
-  /** The constant ROOM_TABLE_NAME. */
+  /**
+   * The constant ROOM_TABLE_NAME.
+   */
   // table name (must be public, else annotation can't find it)
   public static final String ROOM_TABLE_NAME = "room";
 
@@ -43,9 +52,9 @@ public class Room {
       name = ROOM_SEQUENCE_NAME,
       strategy = GENERATOR_PATH,
       parameters = {
-        @Parameter(
-            name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER,
-            value = ROOM_IDENTIFICATION_NUMBER_PREFIX)
+          @Parameter(
+              name = PrefixSequenceGenerator.VALUE_PREFIX_PARAMETER,
+              value = ROOM_IDENTIFICATION_NUMBER_PREFIX)
       })
   @Column(name = IDENTIFICATION_NUMBER_COLUMN)
   private String identificationNumber;
@@ -64,23 +73,41 @@ public class Room {
       referencedColumnName = GeographicalLocation.ID_COLUMN)
   private GeographicalLocation geographicalLocation;
 
-  /** This enum represents the possible room types. */
+  /**
+   * This enum represents the possible room types.
+   */
   public enum Type {
-    /** Cafeteria. */
+    /**
+     * Cafeteria.
+     */
     CAFETERIA,
-    /** Restroom. */
+    /**
+     * Restroom.
+     */
     RESTROOM,
-    /** Restroom for Handicapped people. */
+    /**
+     * Restroom for Handicapped people.
+     */
     RESTROOM_HANDICAPPED,
-    /** Office. */
+    /**
+     * Office.
+     */
     OFFICE,
-    /** Library. */
+    /**
+     * Library.
+     */
     LIBRARY,
-    /** Seminar room. */
+    /**
+     * Seminar room.
+     */
     SEMINAR_ROOM,
-    /** Lecture Room. */
+    /**
+     * Lecture Room.
+     */
     LECTURE_ROOM,
-    /** Sports. */
+    /**
+     * Sports.
+     */
     SPORTS
   }
 }

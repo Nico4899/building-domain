@@ -7,10 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This class represents a server update request for a building.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 public class ServerUpdateBuildingRequest {
+
   private String name;
   private String number;
   private Building.CampusLocation campusLocation;

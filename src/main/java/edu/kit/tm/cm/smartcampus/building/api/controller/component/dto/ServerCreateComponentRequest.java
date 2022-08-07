@@ -6,11 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-/** This class represents a request for a Component. */
+/**
+ * This class represents a request for a Component.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 public class ServerCreateComponentRequest {
+
   private String parentIdentificationNumber;
   private Component.Type type;
   private String description;

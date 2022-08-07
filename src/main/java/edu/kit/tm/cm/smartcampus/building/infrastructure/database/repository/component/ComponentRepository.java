@@ -19,10 +19,12 @@ public interface ComponentRepository extends CrudRepository<Component, String> {
 
   @Query("SELECT component From component component Where component.parentIdentificationNumber = "
       + "?1")
-  Collection<Component> findAllComponentsByParentId(@Param("bin") String parentIdentificationNumber);
+  Collection<Component> findAllComponentsByParentId(
+      @Param("bin") String parentIdentificationNumber);
 
   /**
    * Deletes all components that have the given parentIdentificationNumber.
+   *
    * @param parentIdentificationNumber the parentIdentificationNumber
    */
   @Transactional
