@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface RoomRepository extends CrudRepository<Room, String> {
 
   @Query("SELECT room From room room Where room.parentIdentificationNumber = ?1")
-  Collection<Room> findAllRooms(@Param("bin") String parentIdentificationNumber);
+  Collection<Room> findAllRoomsByParentId(@Param("bin") String parentIdentificationNumber);
 
   @Transactional
   @Modifying

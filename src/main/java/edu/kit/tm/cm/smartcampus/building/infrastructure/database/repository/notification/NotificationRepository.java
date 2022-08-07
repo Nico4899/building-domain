@@ -19,7 +19,7 @@ public interface NotificationRepository extends CrudRepository<Notification, Str
 
   @Query("SELECT notification From notification notification Where notification"
       + ".parentIdentificationNumber = ?1")
-  Collection<Notification> findAllNotifications(
+  Collection<Notification> findAllNotificationsByParentId(
       @Param("bin") String parentIdentificationNumber);
 
   @Transactional
