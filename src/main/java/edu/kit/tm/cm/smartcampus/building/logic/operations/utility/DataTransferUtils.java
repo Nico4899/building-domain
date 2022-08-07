@@ -21,6 +21,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * This Class provides utils for data transfer objects.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DataTransferUtils {

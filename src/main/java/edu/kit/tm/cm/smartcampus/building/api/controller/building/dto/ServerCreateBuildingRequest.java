@@ -9,6 +9,8 @@ import lombok.Setter;
 
 /**
  * This class represents a request for a Building.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Setter
 @Getter

@@ -6,6 +6,8 @@ import lombok.Setter;
 
 /**
  * This class represents a data transfer object for a geographical location.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Getter
 @Setter

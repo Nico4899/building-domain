@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
  * This repository uses the standard implementation of {@link CrudRepository} and contains
  * {@link Building} entities. Primary keys are here of type {@link String} and have format:
  * 'b-(positive int)'
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Repository
 public interface BuildingRepository extends CrudRepository<Building, String> {

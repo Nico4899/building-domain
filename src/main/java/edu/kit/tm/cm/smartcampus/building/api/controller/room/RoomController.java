@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
  * sends REST-Server responses in JSON format via the Spring internal {@link RestController}
  * annotation. In case of errors the {@link ServerExceptionInterceptor} returns given information as
  * REST error response.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @RestController
 public class RoomController implements RoomOperations {

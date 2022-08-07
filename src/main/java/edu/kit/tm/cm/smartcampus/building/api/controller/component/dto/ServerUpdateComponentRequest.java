@@ -8,6 +8,8 @@ import lombok.Setter;
 
 /**
  * This class represents a server update request for a component.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Setter
 @Getter

@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
  * This repository uses the standard implementation of {@link CrudRepository} and contains
  * {@link Room} entities. Primary keys are here of type {@link String} and have format: 'r-(positive
  * int)'
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Repository
 public interface RoomRepository extends CrudRepository<Room, String> {

@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * This class represents a geographical location.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Setter
 @Getter

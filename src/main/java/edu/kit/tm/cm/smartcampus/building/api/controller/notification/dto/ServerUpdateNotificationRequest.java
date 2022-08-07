@@ -6,6 +6,8 @@ import lombok.Setter;
 
 /**
  * This class represents a server update request for a notification.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Setter
 @Getter

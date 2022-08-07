@@ -24,6 +24,7 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @param <T> the type of which this validator validates update request objects
  * @param <S> the other type of which the validator validates create request objects
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 public abstract class Validator<T, S> {
 

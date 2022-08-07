@@ -8,7 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * This class represents a server update request for a building.
+ * This class represents a server update request for a building.#
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Setter
 @Getter

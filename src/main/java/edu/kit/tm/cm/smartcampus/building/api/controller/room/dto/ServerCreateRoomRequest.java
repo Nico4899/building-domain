@@ -8,6 +8,8 @@ import lombok.Setter;
 
 /**
  * This class represents a request for a Room.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Setter
 @Getter

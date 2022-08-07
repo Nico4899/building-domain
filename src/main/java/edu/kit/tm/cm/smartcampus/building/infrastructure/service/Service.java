@@ -33,6 +33,8 @@ import org.springframework.data.repository.CrudRepository;
  * This class represents the {@link org.springframework.stereotype.Service} of this domain service,
  * it provides all logic and holds {@link Bean} instances of {@link Validator} and
  * {@link CrudRepository}* to manage incoming requests and control sent requests.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @org.springframework.stereotype.Service
 public class Service {

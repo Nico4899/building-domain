@@ -20,6 +20,8 @@ import org.hibernate.annotations.Parameter;
 
 /**
  * This class represents a domain entity component.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Setter
 @Getter

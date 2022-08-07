@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
  * This repository uses the standard implementation of {@link CrudRepository} and contains
  * {@link Component} entities. Primary keys are here of type {@link String} and have format:
  * 'c-(positive int)'
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Repository
 public interface ComponentRepository extends CrudRepository<Component, String> {

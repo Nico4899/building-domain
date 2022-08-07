@@ -6,6 +6,8 @@ import lombok.Setter;
 
 /**
  * This class represents a data transfer object for the floors class.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Getter
 @Setter

@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
  * This repository uses the standard implementation of {@link CrudRepository} and contains
  * {@link Notification} entities. Primary keys are here of type {@link String} and have format: 'n-
  * (positive int)'
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Repository
 public interface NotificationRepository extends CrudRepository<Notification, String> {

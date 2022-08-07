@@ -3,6 +3,8 @@ package edu.kit.tm.cm.smartcampus.building.infrastructure.service.error.exceptio
 /**
  * This exception is thrown whenever a requested resource doesn't exist, it provides a proper error
  * message.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 public class ResourceNotFoundException extends RuntimeException {
 

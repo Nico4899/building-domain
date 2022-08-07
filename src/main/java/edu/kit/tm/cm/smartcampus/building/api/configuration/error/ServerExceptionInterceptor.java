@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  * {@link ExceptionHandler} with proper {@link HttpStatus} and the exception message. The
  * {@link ControllerAdvice} annotation makes this interceptor global this removes the need of other
  * exception handling.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @ControllerAdvice
 public class ServerExceptionInterceptor extends ResponseEntityExceptionHandler {

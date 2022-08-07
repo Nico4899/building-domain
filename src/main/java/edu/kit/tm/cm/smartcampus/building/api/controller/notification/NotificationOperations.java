@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * This interface provides all rest server operations connected "/notifications" requests.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @RequestMapping
 public interface NotificationOperations {

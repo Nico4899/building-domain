@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * This class represents floors of a building. The ground-floor hast the value 0 by convention.
+ *
+ * @author Jonathan Kramer, Johannes von Geisau
  */
 @Setter
 @Getter
