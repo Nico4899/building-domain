@@ -36,10 +36,11 @@ public final class TestUtils {
     if (!building1.getNumber().equals(building2.getNumber())) {
       return false;
     }
-    if (!building1.getGeographicalLocation().equals(building2.getGeographicalLocation())) {
+    if (!geographicalLocationsAreEqual(building1.getGeographicalLocation(),
+        building2.getGeographicalLocation())) {
       return false;
     }
-    return building1.getFloors().equals(building2.getFloors());
+    return floorsAreEqual(building1.getFloors(), building2.getFloors());
   }
 
   /**
@@ -72,7 +73,8 @@ public final class TestUtils {
     if (room1.getType() != room2.getType()) {
       return false;
     }
-    return room1.getGeographicalLocation().equals(room2.getGeographicalLocation());
+    return geographicalLocationsAreEqual(room1.getGeographicalLocation(),
+        room2.getGeographicalLocation());
   }
 
   /**
@@ -100,11 +102,13 @@ public final class TestUtils {
     if (!component1.getDescription().equals(component2.getDescription())) {
       return false;
     }
-    return component1.getGeographicalLocation().equals(component2.getGeographicalLocation());
+    return geographicalLocationsAreEqual(component1.getGeographicalLocation(),
+        component2.getGeographicalLocation());
   }
 
   /**
-   * Checks whether two notifications are equal (except for their identification number) or not.
+   * Checks whether two notifications are equal (except for their identification number,
+   * creation- and modification time!) or not.
    *
    * @param notification1 the first notification to be checked
    * @param notification2 the second notification to be checked
@@ -121,12 +125,6 @@ public final class TestUtils {
 
     if (!notification1.getParentIdentificationNumber()
         .equals(notification2.getParentIdentificationNumber())) {
-      return false;
-    }
-    if (!notification1.getCreationTime().equals(notification2.getCreationTime())) {
-      return false;
-    }
-    if (!notification1.getLastModifiedTime().equals(notification2.getLastModifiedTime())) {
       return false;
     }
     if (!notification1.getTitle().equals(notification2.getTitle())) {
