@@ -158,7 +158,7 @@ public class Service {
    */
   public Collection<Notification> listNotifications(String identificationNumber) {
     this.buildingValidator.validate(identificationNumber);
-    return notificationRepository.findAllNotifications(identificationNumber);
+    return notificationRepository.findAllNotificationsByParentId(identificationNumber);
   }
 
   /**
@@ -169,7 +169,7 @@ public class Service {
    */
   public Collection<Room> listRooms(String identificationNumber) {
     this.buildingValidator.validate(identificationNumber);
-    return roomRepository.findAllRooms(identificationNumber);
+    return roomRepository.findAllRoomsByParentId(identificationNumber);
   }
 
   /**
@@ -180,7 +180,7 @@ public class Service {
    */
   public Collection<Component> listComponents(String identificationNumber) {
     this.buildingValidator.validate(identificationNumber);
-    return componentRepository.findAllComponents(identificationNumber);
+    return componentRepository.findAllComponentsByParentId(identificationNumber);
   }
 
   /**
@@ -338,7 +338,7 @@ public class Service {
 
   private void cleanUpBuilding(String buildingIdentificationNumber) {
     //Get all rooms belonging to building
-    Collection<Room> roomsOfBuilding = roomRepository.findAllRooms(buildingIdentificationNumber);
+    Collection<Room> roomsOfBuilding = roomRepository.findAllRoomsByParentId(buildingIdentificationNumber);
     //Delete rooms and everything attached
     for (Room room : roomsOfBuilding) {
       cleanUpRoom(room.getIdentificationNumber());
@@ -352,7 +352,7 @@ public class Service {
 
   private void cleanUpRoom(String roomIdentificationNumber) {
     //Get all components belonging to room
-    Collection<Component> componentsOfRoom = componentRepository.findAllComponents(
+    Collection<Component> componentsOfRoom = componentRepository.findAllComponentsByParentId(
         roomIdentificationNumber);
     //Delete components and notifications belonging to components
     for (Component component : componentsOfRoom) {

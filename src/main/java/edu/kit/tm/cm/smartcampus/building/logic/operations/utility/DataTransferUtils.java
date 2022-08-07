@@ -10,7 +10,12 @@ import edu.kit.tm.cm.smartcampus.building.api.controller.notification.dto.Server
 import edu.kit.tm.cm.smartcampus.building.api.controller.notification.dto.ServerUpdateNotificationRequest;
 import edu.kit.tm.cm.smartcampus.building.api.controller.room.dto.ServerCreateRoomRequest;
 import edu.kit.tm.cm.smartcampus.building.api.controller.room.dto.ServerUpdateRoomRequest;
-import edu.kit.tm.cm.smartcampus.building.logic.model.*;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Component;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Floors;
+import edu.kit.tm.cm.smartcampus.building.logic.model.GeographicalLocation;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Notification;
+import edu.kit.tm.cm.smartcampus.building.logic.model.Room;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +25,8 @@ public final class DataTransferUtils {
   @NoArgsConstructor(access = AccessLevel.PRIVATE)
   public static class ServerRequestReader {
 
-    public static Notification readServerCreateNotificationRequest(ServerCreateNotificationRequest serverCreateNotificationRequest) {
+    public static Notification readServerCreateNotificationRequest(
+        ServerCreateNotificationRequest serverCreateNotificationRequest) {
       Notification notification = new Notification();
       notification.setDescription(serverCreateNotificationRequest.getDescription());
       notification.setParentIdentificationNumber(
@@ -29,7 +35,8 @@ public final class DataTransferUtils {
       return notification;
     }
 
-    public static Building readServerCreateBuildingRequest(ServerCreateBuildingRequest serverCreateBuildingRequest) {
+    public static Building readServerCreateBuildingRequest(
+        ServerCreateBuildingRequest serverCreateBuildingRequest) {
       Building building = new Building();
       building.setName(serverCreateBuildingRequest.getName());
       building.setNumber(serverCreateBuildingRequest.getNumber());
@@ -40,17 +47,20 @@ public final class DataTransferUtils {
       return building;
     }
 
-    public static Component readServerCreateComponentRequest(ServerCreateComponentRequest serverCreateComponentRequest) {
+    public static Component readServerCreateComponentRequest(
+        ServerCreateComponentRequest serverCreateComponentRequest) {
       Component component = new Component();
       component.setDescription(serverCreateComponentRequest.getDescription());
       component.setType(serverCreateComponentRequest.getType());
       component.setGeographicalLocation(
           parse(serverCreateComponentRequest.getGeographicalLocation()));
-      component.setParentIdentificationNumber(serverCreateComponentRequest.getParentIdentificationNumber());
+      component.setParentIdentificationNumber(
+          serverCreateComponentRequest.getParentIdentificationNumber());
       return component;
     }
 
-    public static Room readServerCreateRoomRequest(ServerCreateRoomRequest serverCreateRoomRequest) {
+    public static Room readServerCreateRoomRequest(
+        ServerCreateRoomRequest serverCreateRoomRequest) {
       Room room = new Room();
       room.setFloor(serverCreateRoomRequest.getFloor());
       room.setName(serverCreateRoomRequest.getName());
@@ -61,17 +71,20 @@ public final class DataTransferUtils {
       return room;
     }
 
-    public static Notification readServerUpdateNotificationRequest(ServerUpdateNotificationRequest serverUpdateNotificationRequest) {
+    public static Notification readServerUpdateNotificationRequest(
+        ServerUpdateNotificationRequest serverUpdateNotificationRequest) {
       Notification notification = new Notification();
       notification.setDescription(serverUpdateNotificationRequest.getDescription());
       notification.setParentIdentificationNumber(
-        serverUpdateNotificationRequest.getParentIdentificationNumber());
+          serverUpdateNotificationRequest.getParentIdentificationNumber());
       notification.setTitle(serverUpdateNotificationRequest.getTitle());
-      notification.setIdentificationNumber(serverUpdateNotificationRequest.getIdentificationNumber());
+      notification.setIdentificationNumber(
+          serverUpdateNotificationRequest.getIdentificationNumber());
       return notification;
     }
 
-    public static Building readServerUpdateBuildingRequest(ServerUpdateBuildingRequest serverUpdateBuildingRequest) {
+    public static Building readServerUpdateBuildingRequest(
+        ServerUpdateBuildingRequest serverUpdateBuildingRequest) {
       Building building = new Building();
       building.setName(serverUpdateBuildingRequest.getName());
       building.setNumber(serverUpdateBuildingRequest.getNumber());
@@ -83,18 +96,21 @@ public final class DataTransferUtils {
       return building;
     }
 
-    public static Component readServerUpdateComponentRequest(ServerUpdateComponentRequest serverUpdateComponentRequest) {
+    public static Component readServerUpdateComponentRequest(
+        ServerUpdateComponentRequest serverUpdateComponentRequest) {
       Component component = new Component();
       component.setDescription(serverUpdateComponentRequest.getDescription());
       component.setType(serverUpdateComponentRequest.getType());
       component.setGeographicalLocation(
           parse(serverUpdateComponentRequest.getGeographicalLocation()));
-      component.setParentIdentificationNumber(serverUpdateComponentRequest.getParentIdentificationNumber());
+      component.setParentIdentificationNumber(
+          serverUpdateComponentRequest.getParentIdentificationNumber());
       component.setIdentificationNumber(serverUpdateComponentRequest.getIdentificationNumber());
       return component;
     }
 
-    public static Room readServerUpdateRoomRequest(ServerUpdateRoomRequest serverUpdateRoomRequest) {
+    public static Room readServerUpdateRoomRequest(
+        ServerUpdateRoomRequest serverUpdateRoomRequest) {
       Room room = new Room();
       room.setFloor(serverUpdateRoomRequest.getFloor());
       room.setName(serverUpdateRoomRequest.getName());
@@ -102,6 +118,7 @@ public final class DataTransferUtils {
       room.setGeographicalLocation(parse(serverUpdateRoomRequest.getGeographicalLocation()));
       room.setParentIdentificationNumber(serverUpdateRoomRequest.getParentIdentificationNumber());
       room.setIdentificationNumber(serverUpdateRoomRequest.getIdentificationNumber());
+      room.setType(serverUpdateRoomRequest.getType());
       return room;
     }
 
