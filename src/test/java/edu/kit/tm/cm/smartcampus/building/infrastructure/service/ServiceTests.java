@@ -446,7 +446,8 @@ public class ServiceTests {
   @Test
   void updateNotification_ShouldUpdateNotification() {
     Timestamp creationTimeMock = new Timestamp(System.currentTimeMillis());
-    //originalNotification is only used for the original creation time
+    //originalNotification is only used for the original creation time (see SERVICE
+    // .updateNotification(...))
     Notification originalNotification = new Notification();
     originalNotification.setCreationTime(creationTimeMock);
     Mockito.when(NOTIFICATION_REPOSITORY.save(any())).thenAnswer(i -> i.getArguments()[0]);
