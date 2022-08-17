@@ -288,7 +288,7 @@ public class ServiceTests {
   void getBuilding_ShouldGetBuilding() {
     Mockito.when(BUILDING_REPOSITORY.findById(BUILDING_IDENTIFICATION_NUMBER))
         .thenReturn(Optional.of(BUILDING));
-    Assertions.assertEquals(SERVICE.getBuilding(BUILDING_IDENTIFICATION_NUMBER), BUILDING);
+    Assertions.assertEquals(BUILDING, SERVICE.getBuilding(BUILDING_IDENTIFICATION_NUMBER));
   }
 
   @Test
