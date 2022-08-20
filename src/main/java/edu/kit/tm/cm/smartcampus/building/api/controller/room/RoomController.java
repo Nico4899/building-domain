@@ -56,8 +56,8 @@ public class RoomController implements RoomOperations {
   }
 
   @Override
-  public Collection<Room> listRooms(String in) {
-    return service.listRooms(in);
+  public Collection<Room> listRooms(String bin) {
+    return service.listRooms(bin);
   }
 
 }
