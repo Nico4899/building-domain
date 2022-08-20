@@ -12,8 +12,6 @@ import static org.mockito.Mockito.mock;
 
 public class RoomControllerTests {
 
-  //TODO (@Jonathan) "copy paste vom Building controller test" und das für diese klasse und für
-  // component und notification
   private static final Service SERVICE = mock(Service.class);
   private static final RoomController ROOM_CONTROLLER = new RoomController(SERVICE);
   //Attributes
