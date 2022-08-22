@@ -34,7 +34,7 @@ base-chart:
     # Allows the Ingress to be accessible from the outside, enable only if required since DNS could take more then 2h
     publicAccess: false
     annotations: {}
-      # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     hosts:
       - host: $INGRESS_HOSTNAME #override with default via pipeline
@@ -121,7 +121,7 @@ base-chart:
     #   drop:
     #   - ALL
     # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
+  # runAsNonRoot: true
   # runAsUser: 1000
 
   service:
