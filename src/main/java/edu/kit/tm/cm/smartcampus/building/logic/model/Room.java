@@ -110,6 +110,10 @@ public class Room {
     /**
      * Sports.
      */
-    SPORTS
+    SPORTS,
+    /**
+     * Library.
+     */
+    LIBRARY
   }
 }
