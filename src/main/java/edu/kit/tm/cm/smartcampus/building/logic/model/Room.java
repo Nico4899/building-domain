@@ -96,9 +96,9 @@ public class Room {
      */
     OFFICE,
     /**
-     * Library.
+     * Laboratory.
      */
-    LIBRARY,
+    LABORATORY,
     /**
      * Seminar room.
      */
