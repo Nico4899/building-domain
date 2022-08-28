@@ -15,7 +15,6 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public class ServerCreateComponentRequest {
-
   private String parentIdentificationNumber;
   private Component.Type type;
   private String description;

@@ -181,7 +181,7 @@ public class Service {
    * @return the requested components
    */
   public Collection<Component> listComponents(String identificationNumber) {
-    this.buildingValidator.validate(identificationNumber);
+    //this.componentValidator.validate(identificationNumber);
     return componentRepository.findAllComponentsByParentId(identificationNumber);
   }
 

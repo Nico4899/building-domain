@@ -15,6 +15,7 @@ import javax.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -25,6 +26,7 @@ import org.hibernate.annotations.Parameter;
  */
 @Setter
 @Getter
+@ToString
 @NoArgsConstructor
 @Entity(name = BUILDING_TABLE_NAME)
 public class Building {

@@ -5,6 +5,8 @@ import edu.kit.tm.cm.smartcampus.building.api.controller.building.dto.ServerCrea
 import edu.kit.tm.cm.smartcampus.building.api.controller.building.dto.ServerUpdateBuildingRequest;
 import edu.kit.tm.cm.smartcampus.building.infrastructure.service.Service;
 import edu.kit.tm.cm.smartcampus.building.logic.model.Building;
+
+import java.util.Arrays;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

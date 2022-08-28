@@ -16,7 +16,6 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public class ServerCreateBuildingRequest {
-
   private String name;
   private String number;
   private Building.CampusLocation campusLocation;

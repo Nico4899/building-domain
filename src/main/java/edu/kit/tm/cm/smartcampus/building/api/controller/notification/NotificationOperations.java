@@ -65,6 +65,6 @@ public interface NotificationOperations {
    * @return a collection of all {@link Notification} this domain service manages that belong to the
    *     building
    */
-  @GetMapping("{in}/notifications")
+  @GetMapping("/{in}/notifications")
   Collection<Notification> listNotifications(@PathVariable String in);
 }
