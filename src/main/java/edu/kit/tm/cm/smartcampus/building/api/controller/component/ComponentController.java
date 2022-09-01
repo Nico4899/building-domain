@@ -35,7 +35,6 @@ public class ComponentController implements ComponentOperations {
     this.service = service;
   }
 
-
   @Override
   public Component createComponent(ServerCreateComponentRequest serverCreateComponentRequest) {
     return service.createComponent(serverCreateComponentRequest);

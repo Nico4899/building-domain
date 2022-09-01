@@ -159,7 +159,7 @@ public class Service {
    * @return the requested notifications
    */
   public Collection<Notification> listNotifications(String identificationNumber) {
-    this.buildingValidator.validate(identificationNumber);
+    this.buildingValidator.validate(identificationNumber); //TODO Johannes: Validierung für alle möglichen parentIDs
     return notificationRepository.findAllNotificationsByParentId(identificationNumber);
   }
 
@@ -181,7 +181,7 @@ public class Service {
    * @return the requested components
    */
   public Collection<Component> listComponents(String identificationNumber) {
-    this.buildingValidator.validate(identificationNumber);
+    //this.componentValidator.validate(identificationNumber); //TODO Johannes: Validierung für alle möglichen parentIDs
     return componentRepository.findAllComponentsByParentId(identificationNumber);
   }
 

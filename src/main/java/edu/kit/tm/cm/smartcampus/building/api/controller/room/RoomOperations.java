@@ -62,6 +62,6 @@ public interface RoomOperations {
    * @return a collection of all {@link Room} this domain service manages that belong to the
    *     building
    */
-  @GetMapping("{in}/rooms")
+  @GetMapping("/{in}/rooms")
   Collection<Room> listRooms(@PathVariable String in);
 }
