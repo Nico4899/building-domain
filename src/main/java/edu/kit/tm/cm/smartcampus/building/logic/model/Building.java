@@ -65,6 +65,7 @@ public class Building {
 
   private String name;
   private String number;
+  private String address;
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = GEOGRAPHICAL_LOCATION_ID_COLUMN, referencedColumnName =

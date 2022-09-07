@@ -19,6 +19,7 @@ public class BuildingControllerTests {
   //Attributes
   private static final String BUILDING_IDENTIFICATION_NUMBER = "b-1";
   private static final String BUILDING_NAME = "Testgebäude";
+  private static final String BUILDING_ADDRESS = "Teststraße 33";
   private static final String BUILDING_NUMBER = "12.12";
   private static final CampusLocation BUILDING_CAMPUS_LOCATION = CampusLocation.SOUTH_CAMPUS;
   private static final GeographicalLocationDTO BUILDING_GEOGRAPHICAL_LOCATION =
@@ -26,10 +27,10 @@ public class BuildingControllerTests {
   private static final FloorsDTO BUILDING_FLOORS = new FloorsDTO(5, -1);
   //Requests
   private static final ServerCreateBuildingRequest SERVER_CREATE_BUILDING_REQUEST =
-      new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER,
+      new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER, BUILDING_ADDRESS,
           BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS);
   private static final ServerUpdateBuildingRequest SERVER_UPDATE_BUILDING_REQUEST =
-      new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER,
+      new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER, BUILDING_ADDRESS,
           BUILDING_CAMPUS_LOCATION,
           BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
           BUILDING_IDENTIFICATION_NUMBER);

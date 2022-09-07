@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * This class represents a server update request for a building.#
+ * This class represents a server update request for a building.
  *
  * @author Jonathan Kramer, Johannes von Geisau
  */
@@ -16,9 +16,9 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public class ServerUpdateBuildingRequest {
-
   private String name;
   private String number;
+  private String address;
   private Building.CampusLocation campusLocation;
   private GeographicalLocationDTO geographicalLocation;
   private FloorsDTO floors;

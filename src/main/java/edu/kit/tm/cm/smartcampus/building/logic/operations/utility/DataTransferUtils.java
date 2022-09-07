@@ -43,6 +43,7 @@ public final class DataTransferUtils {
         ServerCreateBuildingRequest serverCreateBuildingRequest) {
       Building building = new Building();
       building.setName(serverCreateBuildingRequest.getName());
+      building.setAddress(serverCreateBuildingRequest.getAddress());
       building.setNumber(serverCreateBuildingRequest.getNumber());
       building.setFloors(parse(serverCreateBuildingRequest.getFloors()));
       building.setCampusLocation(serverCreateBuildingRequest.getCampusLocation());
@@ -113,6 +114,7 @@ public final class DataTransferUtils {
         ServerUpdateBuildingRequest serverUpdateBuildingRequest) {
       Building building = new Building();
       building.setName(serverUpdateBuildingRequest.getName());
+      building.setAddress(serverUpdateBuildingRequest.getAddress());
       building.setNumber(serverUpdateBuildingRequest.getNumber());
       building.setFloors(parse(serverUpdateBuildingRequest.getFloors()));
       building.setCampusLocation(serverUpdateBuildingRequest.getCampusLocation());

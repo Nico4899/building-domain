@@ -45,11 +45,14 @@ public class BuildingValidator
     validateNotNull(List.of(
         Pair.of(BUILDING_NAME, serverCreateBuildingRequest.getName()),
         Pair.of(BUILDING_NUMBER, serverCreateBuildingRequest.getNumber()),
+        Pair.of(BUILDING_ADDRESS, serverCreateBuildingRequest.getAddress()),
         Pair.of(CAMPUS_LOCATION_NAME, serverCreateBuildingRequest.getCampusLocation()),
         Pair.of(GEOGRAPHICAL_LOCATION_NAME, serverCreateBuildingRequest.getGeographicalLocation()),
         Pair.of(FLOORS_NAME, serverCreateBuildingRequest.getFloors())));
 
-    validateNotEmpty(Map.of(BUILDING_NAME, serverCreateBuildingRequest.getName()));
+    validateNotEmpty(Map.of(
+        BUILDING_NAME, serverCreateBuildingRequest.getName(),
+        BUILDING_ADDRESS, serverCreateBuildingRequest.getAddress()));
 
     validateMatchesRegex(
         Map.of(
@@ -69,12 +72,15 @@ public class BuildingValidator
     validateNotNull(List.of(
         Pair.of(BUILDING_NAME, object.getName()),
         Pair.of(BUILDING_NUMBER, object.getNumber()),
+        Pair.of(BUILDING_ADDRESS, object.getAddress()),
         Pair.of(IDENTIFICATION_NUMBER_NAME, object.getIdentificationNumber()),
         Pair.of(CAMPUS_LOCATION_NAME, object.getCampusLocation()),
         Pair.of(GEOGRAPHICAL_LOCATION_NAME, object.getGeographicalLocation()),
         Pair.of(FLOORS_NAME, object.getFloors())));
 
-    validateNotEmpty(Map.of(BUILDING_NAME, object.getName()));
+    validateNotEmpty(Map.of(
+        BUILDING_NAME, object.getName(),
+        BUILDING_ADDRESS, object.getAddress()));
 
     validateMatchesRegex(
         Map.of(

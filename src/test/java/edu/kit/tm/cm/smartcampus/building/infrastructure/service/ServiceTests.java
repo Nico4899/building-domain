@@ -46,6 +46,7 @@ public class ServiceTests {
   //-building
   private static final String BUILDING_IDENTIFICATION_NUMBER = "b-1";
   private static final String BUILDING_NAME = "Testgebäude";
+  private static final String BUILDING_ADDRESS = "Teststraße 332a";
   private static final String BUILDING_NUMBER = "12.12";
   private static final CampusLocation BUILDING_CAMPUS_LOCATION = CampusLocation.SOUTH_CAMPUS;
   private static final GeographicalLocation BUILDING_GEOGRAPHICAL_LOCATION =
@@ -61,6 +62,7 @@ public class ServiceTests {
   private static final FloorsDTO BUILDING_FLOORS_DTO = new FloorsDTO(BUILDING_FLOORS_HIGHEST_FLOOR,
       BUILDING_FLOORS_LOWEST_FLOOR);
   private static final String UPDATED_BUILDING_NAME = "Testgebäude v2";
+  private static final String UPDATED_BUILDING_ADDRESS = "Teststraßev2 332a";
   private static final String UPDATED_BUILDING_NUMBER = "12.55";
   private static final CampusLocation UPDATED_BUILDING_CAMPUS_LOCATION = CampusLocation.WEST_CAMPUS;
   private static final GeographicalLocation UPDATED_BUILDING_GEOGRAPHICAL_LOCATION =
@@ -152,7 +154,8 @@ public class ServiceTests {
       COMPONENT_VALIDATOR, NOTIFICATION_VALIDATOR);
   //Requests
   private static final ServerCreateBuildingRequest SERVER_CREATE_BUILDING_REQUEST =
-      new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER, BUILDING_CAMPUS_LOCATION,
+      new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER, BUILDING_ADDRESS,
+          BUILDING_CAMPUS_LOCATION,
           BUILDING_GEOGRAPHICAL_LOCATION_DTO, BUILDING_FLOORS_DTO);
   private static final ServerCreateRoomRequest SERVER_CREATE_ROOM_REQUEST =
       new ServerCreateRoomRequest(ROOM_PARENT_BUILDING_IDENTIFICATION_NUMBER, ROOM_NAME,
@@ -165,6 +168,7 @@ public class ServiceTests {
           NOTIFICATION_TITLE, NOTIFICATION_DESCRIPTION);
   private static final ServerUpdateBuildingRequest SERVER_UPDATE_BUILDING_REQUEST =
       new ServerUpdateBuildingRequest(UPDATED_BUILDING_NAME, UPDATED_BUILDING_NUMBER,
+          UPDATED_BUILDING_ADDRESS,
           UPDATED_BUILDING_CAMPUS_LOCATION, UPDATED_BUILDING_GEOGRAPHICAL_LOCATION_DTO,
           UPDATED_BUILDING_FLOORS_DTO, BUILDING_IDENTIFICATION_NUMBER);
   private static final ServerUpdateRoomRequest SERVER_UPDATE_ROOM_REQUEST =
@@ -199,6 +203,7 @@ public class ServiceTests {
 
     BUILDING.setIdentificationNumber(BUILDING_IDENTIFICATION_NUMBER);
     BUILDING.setName(BUILDING_NAME);
+    BUILDING.setAddress(BUILDING_ADDRESS);
     BUILDING.setNumber(BUILDING_NUMBER);
     BUILDING.setFloors(BUILDING_FLOORS);
     BUILDING.setGeographicalLocation(BUILDING_GEOGRAPHICAL_LOCATION);
@@ -213,6 +218,7 @@ public class ServiceTests {
 
     UPDATED_BUILDING.setIdentificationNumber(BUILDING_IDENTIFICATION_NUMBER);
     UPDATED_BUILDING.setName(UPDATED_BUILDING_NAME);
+    UPDATED_BUILDING.setAddress(UPDATED_BUILDING_ADDRESS);
     UPDATED_BUILDING.setNumber(UPDATED_BUILDING_NUMBER);
     UPDATED_BUILDING.setFloors(UPDATED_BUILDING_FLOORS);
     UPDATED_BUILDING.setGeographicalLocation(UPDATED_BUILDING_GEOGRAPHICAL_LOCATION);

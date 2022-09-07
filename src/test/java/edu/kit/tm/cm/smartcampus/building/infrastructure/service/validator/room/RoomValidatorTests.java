@@ -59,6 +59,7 @@ public class RoomValidatorTests {
   private static final String NOT_EXISTING_PARENT_BUILDING_IDENTIFICATION_NUMBER = "b-42";
   private static final int INVALID_ROOM_FLOOR = -33;
   private static final String PARENT_BUILDING_NAME = "Testgebäude";
+  private static final String PARENT_BUILDING_ADDRESS = "Teststraße 33";
   private static final String PARENT_BUILDING_NUMBER = "12.12";
   private static final CampusLocation PARENT_BUILDING_CAMPUS_LOCATION = CampusLocation.SOUTH_CAMPUS;
   private static final GeographicalLocation PARENT_BUILDING_GEOGRAPHICAL_LOCATION =
@@ -93,6 +94,7 @@ public class RoomValidatorTests {
     Building parent = new Building();
     parent.setIdentificationNumber(PARENT_BUILDING_IDENTIFICATION_NUMBER);
     parent.setName(PARENT_BUILDING_NAME);
+    parent.setAddress(PARENT_BUILDING_ADDRESS);
     parent.setNumber(PARENT_BUILDING_NUMBER);
     parent.setCampusLocation(PARENT_BUILDING_CAMPUS_LOCATION);
     PARENT_BUILDING_GEOGRAPHICAL_LOCATION.setLongitude(

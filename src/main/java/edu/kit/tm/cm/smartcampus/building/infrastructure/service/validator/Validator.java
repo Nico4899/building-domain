@@ -45,6 +45,7 @@ public abstract class Validator<T, S> {
   public static final String ROOM_NUMBER = "room_number";
   public static final String BUILDING_NAME = "building_name";
   public static final String BUILDING_NUMBER = "building_number";
+  public static final String BUILDING_ADDRESS = "building_address";
   public static final String ROOM_TYPE_NAME = "room_type";
   public static final String CAMPUS_LOCATION_NAME = "campus_location";
   public static final String GEOGRAPHICAL_LOCATION_NAME = "geographical_location";

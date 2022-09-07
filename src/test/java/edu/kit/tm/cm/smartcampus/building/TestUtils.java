@@ -33,6 +33,9 @@ public final class TestUtils {
     if (!building1.getName().equals(building2.getName())) {
       return false;
     }
+    if (!building1.getAddress().equals(building2.getAddress())) {
+      return false;
+    }
     if (!building1.getNumber().equals(building2.getNumber())) {
       return false;
     }

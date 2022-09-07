@@ -28,6 +28,7 @@ public class BuildingValidatorTests {
   //Attributes
   private static final String BUILDING_IDENTIFICATION_NUMBER = "b-1";
   private static final String BUILDING_NAME = "Testgebäude";
+  private static final String BUILDING_ADDRESS = "Teststraße 33";
   private static final String BUILDING_NUMBER_1 = "12.12";
   private static final String BUILDING_NUMBER_2 = "123/4";
   private static final CampusLocation BUILDING_CAMPUS_LOCATION = CampusLocation.SOUTH_CAMPUS;
@@ -118,10 +119,10 @@ public class BuildingValidatorTests {
   private static Stream<Arguments> provideValidServerCreateBuildingRequests() {
     return Stream.of(
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_2,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_2, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS))
     );
   }
@@ -132,63 +133,66 @@ public class BuildingValidatorTests {
         Arguments.of(
             (ServerCreateBuildingRequest) null),
         Arguments.of(
-            new ServerCreateBuildingRequest(null, null,
+            new ServerCreateBuildingRequest(null, null, null,
                 null, null, null)),
         Arguments.of(
-            new ServerCreateBuildingRequest(null, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(null, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, null,
+            new ServerCreateBuildingRequest(BUILDING_NAME, null, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, null,
+                BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS)),
+        Arguments.of(
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 null, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, null, BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, null)),
         //invalid because of empty
         Arguments.of(
-            new ServerCreateBuildingRequest(EMPTY_STRING, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(EMPTY_STRING, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS)),
         //invalid because of regex
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, INVALID_BUILDING_NUMBER,
+            new ServerCreateBuildingRequest(BUILDING_NAME, INVALID_BUILDING_NUMBER, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS)),
         //invalid because of invalid geographical location
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, INVALID_BUILDING_GEOGRAPHICAL_LOCATION_1,
                 BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, INVALID_BUILDING_GEOGRAPHICAL_LOCATION_2,
                 BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, INVALID_BUILDING_GEOGRAPHICAL_LOCATION_3,
                 BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, INVALID_BUILDING_GEOGRAPHICAL_LOCATION_4,
                 BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, INVALID_BUILDING_GEOGRAPHICAL_LOCATION_5,
                 BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, INVALID_BUILDING_GEOGRAPHICAL_LOCATION_6,
                 BUILDING_FLOORS)),
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, INVALID_BUILDING_GEOGRAPHICAL_LOCATION_7,
                 BUILDING_FLOORS)),
         //invalid because of invalid floors
         Arguments.of(
-            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerCreateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, INVALID_BUILDING_FLOORS))
     );
   }
@@ -196,12 +200,12 @@ public class BuildingValidatorTests {
   private static Stream<Arguments> provideValidServerUpdateBuildingRequests() {
     return Stream.of(
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_2,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_2, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER))
@@ -214,91 +218,96 @@ public class BuildingValidatorTests {
         Arguments.of(
             (ServerUpdateBuildingRequest) null),
         Arguments.of(
-            new ServerUpdateBuildingRequest(null, null,
+            new ServerUpdateBuildingRequest(null, null, null,
                 null, null, null, null)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(null, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(null, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, null,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, null, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, null,
+                BUILDING_CAMPUS_LOCATION,
+                BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
+                BUILDING_IDENTIFICATION_NUMBER)),
+        Arguments.of(
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 null,
                 BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 null, BUILDING_FLOORS, BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, null, BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS, null)),
         //invalid because of empty
         Arguments.of(
-            new ServerUpdateBuildingRequest(EMPTY_STRING, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(EMPTY_STRING, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         //invalid because of regex
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, INVALID_BUILDING_NUMBER,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, INVALID_BUILDING_NUMBER, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
                 INVALID_BUILDING_IDENTIFICATION_NUMBER)),
         //invalid because of invalid geographical location
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 INVALID_BUILDING_GEOGRAPHICAL_LOCATION_1, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 INVALID_BUILDING_GEOGRAPHICAL_LOCATION_2, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 INVALID_BUILDING_GEOGRAPHICAL_LOCATION_3, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 INVALID_BUILDING_GEOGRAPHICAL_LOCATION_4, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 INVALID_BUILDING_GEOGRAPHICAL_LOCATION_5, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 INVALID_BUILDING_GEOGRAPHICAL_LOCATION_6, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 INVALID_BUILDING_GEOGRAPHICAL_LOCATION_7, BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER)),
         //invalid because of invalid floors
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION,
                 BUILDING_GEOGRAPHICAL_LOCATION, INVALID_BUILDING_FLOORS,
                 BUILDING_IDENTIFICATION_NUMBER))
@@ -308,7 +317,7 @@ public class BuildingValidatorTests {
   private static Stream<Arguments> provideInvalidResourceServerUpdateBuildingRequests() {
     return Stream.of(
         Arguments.of(
-            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1,
+            new ServerUpdateBuildingRequest(BUILDING_NAME, BUILDING_NUMBER_1, BUILDING_ADDRESS,
                 BUILDING_CAMPUS_LOCATION, BUILDING_GEOGRAPHICAL_LOCATION, BUILDING_FLOORS,
                 NOT_EXISTING_BUILDING_IDENTIFICATION_NUMBER))
     );
