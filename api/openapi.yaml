@@ -509,6 +509,9 @@ components:
         building_number:
           type: string
           example: "30.95"
+        building_address:
+          type: string
+          example: "Augartenstraße 4"
         num_floors:
           type: integer
           minimum: 1
