@@ -8,6 +8,7 @@ self.northFour.matches(^[0-9]{3}[\/][0-9]{1}?$)
 self.northFive.matches(^[0-9]{3}[a-z]{1}?$)
 
 self.buildingName -> notEmpty()
+self.address -> notEmpty()
 
 self.buildingNumber.matches(regular) |self.buildingNumber.matches(east) 
                 | self.buildingNumber.matches(northOne) | self.buildingNumber.matches(northTwo) 
