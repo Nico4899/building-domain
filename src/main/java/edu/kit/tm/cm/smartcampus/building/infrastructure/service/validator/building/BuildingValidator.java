@@ -34,8 +34,13 @@ public class BuildingValidator
   }
 
   @Override
-  protected String getValidateRegex() {
+  protected String getValidateIdentificationNumberRegex() {
     return BIN_PATTERN;
+  }
+
+  @Override
+  protected String getValidateParentIdentificationNumberRegex() {
+    return null; //buildings do not have parents
   }
 
   @Override

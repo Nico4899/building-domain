@@ -78,7 +78,7 @@ public class NotificationValidatorTests {
 
   @Test
   void getValidateRegex_ShouldReturnBINPattern() {
-    Assertions.assertEquals(Validator.NIN_PATTERN, NOTIFICATION_VALIDATOR.getValidateRegex());
+    Assertions.assertEquals(Validator.NIN_PATTERN, NOTIFICATION_VALIDATOR.getValidateIdentificationNumberRegex());
   }
 
   @ParameterizedTest

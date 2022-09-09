@@ -33,8 +33,13 @@ public class ComponentValidator extends
   }
 
   @Override
-  protected String getValidateRegex() {
+  protected String getValidateIdentificationNumberRegex() {
     return CIN_PATTERN;
+  }
+
+  @Override
+  protected String getValidateParentIdentificationNumberRegex() {
+    return BIN_RIN_PATTERN;
   }
 
   @Override

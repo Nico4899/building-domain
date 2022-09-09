@@ -34,8 +34,13 @@ public class NotificationValidator extends
   }
 
   @Override
-  protected String getValidateRegex() {
+  protected String getValidateIdentificationNumberRegex() {
     return NIN_PATTERN;
+  }
+
+  @Override
+  protected String getValidateParentIdentificationNumberRegex() {
+    return BIN_RIN_CIN_PATTERN;
   }
 
   @Override

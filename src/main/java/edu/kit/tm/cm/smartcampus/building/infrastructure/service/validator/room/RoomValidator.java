@@ -30,8 +30,13 @@ public class RoomValidator extends Validator<ServerUpdateRoomRequest, ServerCrea
   }
 
   @Override
-  protected String getValidateRegex() {
+  protected String getValidateIdentificationNumberRegex() {
     return RIN_PATTERN;
+  }
+
+  @Override
+  protected String getValidateParentIdentificationNumberRegex() {
+    return BIN_PATTERN;
   }
 
   @Override

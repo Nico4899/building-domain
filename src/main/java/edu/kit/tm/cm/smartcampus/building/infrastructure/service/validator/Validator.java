@@ -300,23 +300,45 @@ public abstract class Validator<T, S> {
   }
 
   /**
-   * Validate a given identification number for requests containing only the identification number.
+   * Validate a given identification number.
    *
    * @param identificationNumber the identification number
    */
-  public void validate(String identificationNumber) {
+  public void validateIdentificationNumber(String identificationNumber) {
     validateNotNull(List.of(Pair.of(IDENTIFICATION_NUMBER_NAME, identificationNumber)));
     validateMatchesRegex(Map.of(IDENTIFICATION_NUMBER_NAME, Pair.of(identificationNumber,
-        getValidateRegex())));
+        getValidateIdentificationNumberRegex())));
     validateExists(identificationNumber, IDENTIFICATION_NUMBER_NAME);
   }
 
   /**
-   * Gets validate regex for the {@link Validator#validate(String)} method.
+   * Validate a given parent identification number.
+   *
+   * @param parentIdentificationNumber the parent identification number
+   */
+  public void validateParentIdentificationNumber(String parentIdentificationNumber) {
+    validateNotNull(
+        List.of(Pair.of(PARENT_IDENTIFICATION_NUMBER_NAME, parentIdentificationNumber)));
+    validateMatchesRegex(
+        Map.of(PARENT_IDENTIFICATION_NUMBER_NAME, Pair.of(parentIdentificationNumber,
+            getValidateParentIdentificationNumberRegex())));
+    validateExists(parentIdentificationNumber, PARENT_IDENTIFICATION_NUMBER_NAME);
+  }
+
+  /**
+   * Gets validate regex for the {@link Validator#validateIdentificationNumber(String)} method.
    *
    * @return the validate regex
    */
-  protected abstract String getValidateRegex();
+  protected abstract String getValidateIdentificationNumberRegex();
+
+  /**
+   * Gets validate regex for the {@link Validator#validateParentIdentificationNumber(String)}
+   * method.
+   *
+   * @return the validate regex
+   */
+  protected abstract String getValidateParentIdentificationNumberRegex();
 
   /**
    * Validate create operation.

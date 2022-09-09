@@ -112,7 +112,7 @@ public class RoomValidatorTests {
 
   @Test
   void getValidateRegex_ShouldReturnBINPattern() {
-    Assertions.assertEquals(Validator.RIN_PATTERN, ROOM_VALIDATOR.getValidateRegex());
+    Assertions.assertEquals(Validator.RIN_PATTERN, ROOM_VALIDATOR.getValidateIdentificationNumberRegex());
   }
 
   @ParameterizedTest

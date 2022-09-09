@@ -73,7 +73,7 @@ public class BuildingValidatorTests {
 
   @Test
   void getValidateRegex_ShouldReturnBINPattern() {
-    Assertions.assertEquals(Validator.BIN_PATTERN, BUILDING_VALIDATOR.getValidateRegex());
+    Assertions.assertEquals(Validator.BIN_PATTERN, BUILDING_VALIDATOR.getValidateIdentificationNumberRegex());
   }
 
   @ParameterizedTest

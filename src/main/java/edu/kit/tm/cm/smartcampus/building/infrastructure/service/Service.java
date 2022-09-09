@@ -110,7 +110,7 @@ public class Service {
    * @return the requested building
    */
   public Building getBuilding(String identificationNumber) {
-    this.buildingValidator.validate(identificationNumber);
+    this.buildingValidator.validateIdentificationNumber(identificationNumber);
     return buildingRepository.findById(identificationNumber).get();
   }
 
@@ -133,7 +133,7 @@ public class Service {
    * @param identificationNumber the identification number of the building
    */
   public void removeBuilding(String identificationNumber) {
-    this.buildingValidator.validate(identificationNumber);
+    this.buildingValidator.validateIdentificationNumber(identificationNumber);
     this.cleanUpBuilding(identificationNumber);
     buildingRepository.deleteById(identificationNumber);
   }
@@ -153,36 +153,36 @@ public class Service {
   }
 
   /**
-   * List all {@link Notification} that belong to a certain building.
+   * List all {@link Notification} that belong to a certain building, room or component.
    *
-   * @param identificationNumber the identification number of the building
+   * @param parentIdentificationNumber the identification number of the building, room or component
    * @return the requested notifications
    */
-  public Collection<Notification> listNotifications(String identificationNumber) {
-    this.buildingValidator.validate(identificationNumber); //TODO Johannes: Validierung für alle möglichen parentIDs
-    return notificationRepository.findAllNotificationsByParentId(identificationNumber);
+  public Collection<Notification> listNotifications(String parentIdentificationNumber) {
+    this.notificationValidator.validateParentIdentificationNumber(parentIdentificationNumber);
+    return notificationRepository.findAllNotificationsByParentId(parentIdentificationNumber);
   }
 
   /**
    * List all {@link Room} that belong to a certain building.
    *
-   * @param identificationNumber the identification number of the building
+   * @param parentIdentificationNumber the identification number of the building
    * @return the requested rooms
    */
-  public Collection<Room> listRooms(String identificationNumber) {
-    this.buildingValidator.validate(identificationNumber);
-    return roomRepository.findAllRoomsByParentId(identificationNumber);
+  public Collection<Room> listRooms(String parentIdentificationNumber) {
+    this.roomValidator.validateParentIdentificationNumber(parentIdentificationNumber);
+    return roomRepository.findAllRoomsByParentId(parentIdentificationNumber);
   }
 
   /**
-   * List all {@link Component} that belong to a certain building.
+   * List all {@link Component} that belong to a certain building or room.
    *
-   * @param identificationNumber the identification number of the building
+   * @param parentIdentificationNumber the identification number of the building or room
    * @return the requested components
    */
-  public Collection<Component> listComponents(String identificationNumber) {
-    //this.componentValidator.validate(identificationNumber); //TODO Johannes: Validierung für alle möglichen parentIDs
-    return componentRepository.findAllComponentsByParentId(identificationNumber);
+  public Collection<Component> listComponents(String parentIdentificationNumber) {
+    this.componentValidator.validateParentIdentificationNumber(parentIdentificationNumber);
+    return componentRepository.findAllComponentsByParentId(parentIdentificationNumber);
   }
 
   /**
@@ -192,7 +192,7 @@ public class Service {
    * @return the requested room
    */
   public Room getRoom(String identificationNumber) {
-    this.roomValidator.validate(identificationNumber);
+    this.roomValidator.validateIdentificationNumber(identificationNumber);
     return this.roomRepository.findById(identificationNumber).get();
   }
 
@@ -228,7 +228,7 @@ public class Service {
    * @param identificationNumber the identification number of the room
    */
   public void removeRoom(String identificationNumber) {
-    this.roomValidator.validate(identificationNumber);
+    this.roomValidator.validateIdentificationNumber(identificationNumber);
     this.cleanUpRoom(identificationNumber);
     roomRepository.deleteById(identificationNumber);
   }
@@ -253,7 +253,7 @@ public class Service {
    * @return the requested component
    */
   public Component getComponent(String identificationNumber) {
-    this.componentValidator.validate(identificationNumber);
+    this.componentValidator.validateIdentificationNumber(identificationNumber);
     return componentRepository.findById(identificationNumber).get();
   }
 
@@ -277,7 +277,7 @@ public class Service {
    * @param identificationNumber the identification number of the component
    */
   public void removeComponent(String identificationNumber) {
-    this.componentValidator.validate(identificationNumber);
+    this.componentValidator.validateIdentificationNumber(identificationNumber);
     this.cleanUpComponent(identificationNumber);
     componentRepository.deleteById(identificationNumber);
   }
@@ -289,7 +289,7 @@ public class Service {
    * @return the requested notification
    */
   public Notification getNotification(String identificationNumber) {
-    this.notificationValidator.validate(identificationNumber);
+    this.notificationValidator.validateIdentificationNumber(identificationNumber);
     return notificationRepository.findById(identificationNumber).get();
   }
 
@@ -334,7 +334,7 @@ public class Service {
    * @param identificationNumber the identification number of the notification
    */
   public void removeNotification(String identificationNumber) {
-    this.notificationValidator.validate(identificationNumber);
+    this.notificationValidator.validateIdentificationNumber(identificationNumber);
     notificationRepository.deleteById(identificationNumber);
   }
 

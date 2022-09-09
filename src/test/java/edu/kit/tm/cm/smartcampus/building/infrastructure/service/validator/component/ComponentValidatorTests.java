@@ -76,7 +76,7 @@ public class ComponentValidatorTests {
 
   @Test
   void getValidateRegex_ShouldReturnBINPattern() {
-    Assertions.assertEquals(Validator.CIN_PATTERN, COMPONENT_VALIDATOR.getValidateRegex());
+    Assertions.assertEquals(Validator.CIN_PATTERN, COMPONENT_VALIDATOR.getValidateIdentificationNumberRegex());
   }
 
   @ParameterizedTest
