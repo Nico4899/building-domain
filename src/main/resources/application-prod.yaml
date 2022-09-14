@@ -8,7 +8,7 @@ spring:
     # database properties
 
   datasource:
-    url: jdbc:postgresql://${POSTGRESQL_DATABASE_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRESQL_DATABASE_NAME:BuildingManagementDB}
+    url: jdbc:postgresql://${POSTGRESQL_DATABASE_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRESQL_DATABASE_NAME:BuildingDB}
     username: postgres
     password: postgres
   jpa:
