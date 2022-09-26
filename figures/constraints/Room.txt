@@ -1,12 +1,12 @@
 context Room inv:
 
-self.roomName -> notEmpty()
+self.name -> notEmpty()
 
-self.roomNumber -> notEmpty()
+self.number -> notEmpty()
 
-self.rin.matches(^r-\d+$)
+self.identifiactionNumber.matches(^r-\d+$)
 
-self.parentIn.matches(^b-\d+$)
+self.parentIdentificationNumber.matches(^b-\d+$)
 
 building.findById(self.parentIn)->exists()
 
