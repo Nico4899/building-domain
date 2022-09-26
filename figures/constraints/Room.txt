@@ -8,9 +8,11 @@ self.identifiactionNumber.matches(^r-\d+$)
 
 self.parentIdentificationNumber.matches(^b-\d+$)
 
-building.findById(self.parentIn)->exists()
+building.findById(self.parentIdentificationNumber)->exists()
 
-self.floor < building.findById(self.parentIn).floors
+self.floor < building.findById(self.parentIdentificationNumber).floors.highestFloor
+
+self.floor > building.findById(self.parentIdentificationNumber).floors.lowestFloor
 
 self.roomType -> notEmpty()
 
