@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>200</y>
+      <w>310</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Building
+--
+- identificationNumber: String
+- buildingName: String
+- buildingNumber: String
+- address: String
+- campusLocation: CampusLocation
+- geographicalLocation: GeographicalLocation
+- floors: Floors
+--
+...
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>20</y>
+      <w>310</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Room
+--
+- identificationNumber: String
+- floor: int
+- name: String
+- number: String
+- parentIdentificationNumber: String
+- geographicalLocation: GeographicalLocation
+- roomType: RoomType
+--
+...
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>20</y>
+      <w>310</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Component
+--
+- identificationNumber: String
+- description: String
+- name: String
+- parentIdentificationNumber: String
+- geographicalLocation: GeographicalLocation
+- componentType: ComponentType
+--
+...
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>380</y>
+      <w>310</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Notification
+--
+- identificationNumber: String
+- title: String
+- description: String
+- creationTime: Date
+- lastModifiedTime: Date
+- parentIdentificationNumber: String
+--
+...
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>830</x>
+      <y>310</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+CampusLocation
+--
+NORTH_CAMPUS
+SOUTH_CAMPUS
+EAST_CAMPUS
+WEST_CAMPUS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>170</y>
+      <w>210</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+RoomType
+--
+LECTURE_ROOM
+SEMINAR_ROOM
+RESTROOM
+RESTROOM_HANDICAPPED
+OFFICE
+SPORTS
+CAFETERIA
+LIBRARY</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>830</x>
+      <y>190</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>GeographicalLocation
+--
+- id: String
+- longitude: double
+- latutude: double
+--
+...
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>20</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+ComponentType
+--
+ELEVATOR
+STAIRS
+DOOR
+WINDOW
+...
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>100</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>100</y>
+      <w>80</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=0..*</panel_attributes>
+    <additional_attributes>10.0;170.0;60.0;170.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>270</y>
+      <w>90</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=0..*</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0;10.0;180.0;70.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>120</y>
+      <w>90</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1= 0..*</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>160</y>
+      <w>160</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=0..1</panel_attributes>
+    <additional_attributes>120.0;10.0;120.0;280.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>370</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Floors
+--
+- id: String
+- highestFloor: int
+- lowestFloor: int
+--
+...
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
