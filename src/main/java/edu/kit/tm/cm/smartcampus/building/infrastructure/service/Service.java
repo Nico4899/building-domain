@@ -346,6 +346,13 @@ public class Service {
     for (Room room : roomsOfBuilding) {
       cleanUpRoom(room.getIdentificationNumber());
     }
+    //Get all components belonging to building
+    Collection<Component> componentsOfBuilding = componentRepository.findAllComponentsByParentId(
+        buildingIdentificationNumber);
+    //Delete components and everything attached
+    for (Component component : componentsOfBuilding) {
+      cleanUpComponent(component.getIdentificationNumber());
+    }
     roomRepository.deleteByParentId(buildingIdentificationNumber);
     //Delete components of Building and attached notifications
     componentRepository.deleteByParentId(buildingIdentificationNumber);
