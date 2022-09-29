@@ -59,5 +59,4 @@ public class RoomController implements RoomOperations {
   public Collection<Room> listRooms(String in) {
     return service.listRooms(in);
   }
-
 }
