@@ -76,6 +76,54 @@ public class Component {
     /**
      * Stairs.
      */
-    STAIRS
+    STAIRS,
+    /**
+     * Door.
+     */
+    DOOR,
+    /**
+     * Ramp.
+     */
+    RAMP,
+    /**
+     * Chair.
+     */
+    CHAIR,
+    /**
+     * Table.
+     */
+    TABLE,
+    /**
+     * Lamp.
+     */
+    LAMP,
+    /**
+     * Window.
+     */
+    WINDOW,
+    /**
+     * Canvas.
+     */
+    CANVAS,
+    /**
+     * Whiteboard.
+     */
+    WHITEBOARD,
+    /**
+     * Beamer.
+     */
+    BEAMER,
+    /**
+     * Power outlet.
+     */
+    POWER_OUTLET,
+    /**
+     * Sink.
+     */
+    SINK,
+    /**
+     * Heater.
+     */
+    HEATER
   }
 }
