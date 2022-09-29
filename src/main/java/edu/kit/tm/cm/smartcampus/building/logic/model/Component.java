@@ -90,10 +90,6 @@ public class Component {
      */
     CHAIR,
     /**
-     * Table.
-     */
-    TABLE,
-    /**
      * Lamp.
      */
     LAMP,
