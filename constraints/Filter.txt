@@ -1,0 +1,8 @@
+context Filter<S, T> inv:
+
+context Filter<S, T>::filter(filterValues:Collection<S>, collection: Collection<T>):
+pre: collection contains getBuildings()
+post: collection contains getBuildings() contains filterValues
+
+context Filter<S, T>::getKeyword():
+body: self.keyword

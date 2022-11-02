@@ -1,0 +1,4 @@
+context BuildingManager inv:
+
+context BuildingManager::chooseController(context:string):
+body: self.APIController<T>
