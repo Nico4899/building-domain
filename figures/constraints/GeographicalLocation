@@ -1,0 +1,6 @@
+context GeographicalLocation inv:
+self.latitude <= 90.0
+self.latitudde >= -90.0
+
+self.longitude <= 180.0
+self.latitudde >= -180.0

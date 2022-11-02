@@ -1,16 +1,17 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
-  version: '1'
-  title: API for Building
-  description: REST API provided by Domain Microservice Building.
-servers:
+  title: SmartCampus-Building Domain
+  description: SmartCampus-Building Domain specified as REST-API
+  version: 1.2.1
 
 paths:
+
   /buildings:
     get:
+      summary: List all buildings
+      description: Lists all buildings located on KIT-Campus which are embedded in the domain database.
       tags:
         - Buildings
-      summary: Get information about all buildings
       responses:
         200:
           $ref: '#/components/responses/building'
@@ -19,9 +20,10 @@ paths:
         404:
           description: Requested data doesn't exist.
     post:
+      summary: Create a building
+      description: Creates a new building on KIT-Campus and adds it to the domain database.
       tags:
         - Buildings
-      summary: Add a new building
       requestBody:
         $ref: '#/components/requestBodies/building'
       responses:
@@ -33,14 +35,31 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
-  
+    put:
+      summary: Update a building
+      description: Updates a specific building in the domain database.
+      tags:
+        - Buildings
+      requestBody:
+        $ref: '#/components/requestBodies/building'
+      responses:
+        200:
+          $ref: '#/components/responses/building'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
+
   /buildings/{bin}:
     parameters:
       - $ref: '#/components/parameters/bin'
     get:
+      summary: Get a building
+      description: Gets a specific building from the domain database.
       tags:
         - Buildings
-      summary: Get all information about a specific building
       responses:
         200:
           $ref: '#/components/responses/building'
@@ -48,25 +67,12 @@ paths:
           description: invalid request message framing.
         404:
           description: Requested data doesn't exist.
-    put:
-      tags:
-        - Buildings
-      summary: Change information about a specific building.
-      requestBody:
-        $ref: '#/components/requestBodies/building'
-      responses:
-        200:
-          $ref: '#/components/responses/building'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
+
     delete:
+      summary: Remove a building
+      description: Removes a specific building from the domain database.
       tags:
         - Buildings
-      summary: Delete a building.
       responses:
         200:
           description: Successfully deleted.
@@ -76,46 +82,66 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
-    
+
   /buildings/{bin}/rooms:
     parameters:
       - $ref: '#/components/parameters/bin'
     get:
+      summary: List rooms
+      description: Lists a building's rooms.
       tags:
         - Rooms
-      summary: Get information about the rooms of a building
-      operationId: getRooms
       responses:
         200:
           $ref: '#/components/responses/room'
         400:
           description: invalid request message framing.
         404:
-          description: Requested data doesn't exist.  
+          description: Requested data doesn't exist.
+
+  /rooms:
     post:
+      summary: Create a room
+      description: Creates a new room and adds it to domain database.
       tags:
         - Rooms
-      summary: Add a new room to a specified building
       requestBody:
         $ref: '#/components/requestBodies/room'
       responses:
         200:
-          $ref: '#/components/responses/building'
+          $ref: '#/components/responses/room'
         400:
           description: invalid request message framing.
         401:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
-          
-  /building/{bin}/rooms/{rin}:
+
+    put:
+      summary: Update a room
+      description: Updates a specific room in the domain database.
+      tags:
+        - Rooms
+      requestBody:
+        $ref: '#/components/requestBodies/room'
+      responses:
+        200:
+          $ref: '#/components/responses/room'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
+
+  /rooms/{rin}:
     parameters:
-      - $ref: '#/components/parameters/bin'
       - $ref: '#/components/parameters/rin'
     get:
+      summary: Get a room
+      description: Gets a specific room from the domain database.
       tags:
         - Rooms
-      summary: Get information about a specified room
       responses:
         200:
           $ref: '#/components/responses/room'
@@ -123,25 +149,12 @@ paths:
           description: invalid request message framing.
         404:
           description: Requested data doesn't exist.
-    put:
-      tags:
-        - Rooms
-      summary: Change information about a specific room.
-      requestBody:
-        $ref: '#/components/requestBodies/room'
-      responses:
-        200:
-          $ref: '#/components/responses/room'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
+
     delete:
+      summary: Remove a room
+      description: Removes a specific room from the domain database.
       tags:
         - Rooms
-      summary: Delete a room.
       responses:
         200:
           description: Successfully deleted.
@@ -151,14 +164,50 @@ paths:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
-          
+
+  /components:
+    post:
+      summary: Create a component
+      description: Creates a new component and adds it to domain database.
+      tags:
+        - Components
+      requestBody:
+        $ref: '#/components/requestBodies/component'
+      responses:
+        200:
+          $ref: '#/components/responses/component'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
+
+    put:
+      summary: Update a component
+      description: Updates a specific component in the domain database.
+      tags:
+        - Components
+      requestBody:
+        $ref: '#/components/requestBodies/component'
+      responses:
+        200:
+          $ref: '#/components/responses/component'
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
+
   /buildings/{bin}/components:
     parameters:
       - $ref: '#/components/parameters/bin'
     get:
+      summary: List components
+      description: Lists a building's components.
       tags:
         - Components
-      summary: Get information about all components of a specific building.
       responses:
         200:
           $ref: '#/components/responses/component'
@@ -166,30 +215,16 @@ paths:
           description: invalid request message framing.
         404:
           description: Requested data doesn't exist.
-    post:
-      tags: 
-        - Components
-      summary: Add a new component to a specific building.
-      requestBody:
-        $ref: '#/components/requestBodies/component'
-      responses:
-        200:
-          $ref: '#/components/responses/building'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-  
-  /buildings/{bin}/rooms/{rin}/components:
+
+
+  /rooms/{rin}/components:
     parameters:
-      - $ref: '#/components/parameters/bin'
       - $ref: '#/components/parameters/rin'
     get:
+      summary: List components
+      description: Lists a room's components.
       tags:
         - Components
-      summary: Get information about all components of a specific room.
       responses:
         200:
           $ref: '#/components/responses/component'
@@ -197,142 +232,142 @@ paths:
           description: invalid request message framing.
         404:
           description: Requested data doesn't exist.
+
+  /components/{cin}:
+    parameters:
+      - $ref: '#/components/parameters/cin'
+    get:
+      summary: Get a component
+      description: Gets a specific component from the domain database.
+      tags:
+        - Components
+      responses:
+        200:
+          $ref: '#/components/responses/component'
+        400:
+          description: invalid request message framing.
+        404:
+          description: Requested data doesn't exist.
+
+    delete:
+      summary: Remove a component
+      description: Removes a specific component from the domain database.
+      tags:
+        - Components
+      responses:
+        200:
+          description: Successfully deleted.
+        400:
+          description: invalid request message framing.
+        401:
+          description: unauthorized access.
+        404:
+          description: Requested data doesn't exist.
+
+  /notifications:
     post:
-      tags: 
-        - Components
-      summary: Add a new component to a specific room.
+      summary: Create a notification
+      description: Creates a new notifications and adds it to domain database.
+      tags:
+        - Notifications
       requestBody:
-        $ref: '#/components/requestBodies/component'
+        $ref: '#/components/requestBodies/notification'
       responses:
         200:
-          $ref: '#/components/responses/building'
+          $ref: '#/components/responses/notification'
         400:
           description: invalid request message framing.
         401:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
-  
-  /buildings/{bin}/components/{cin}:
-    parameters:
-      - $ref: '#/components/parameters/bin'
-      - $ref: '#/components/parameters/cin'
+
     put:
+      summary: Update a notification
+      description: Updates a specific notification in the domain database.
       tags:
-        - Components
-      summary: Change information about a specific Building Component.
+        - Notifications
       requestBody:
-        $ref: '#/components/requestBodies/component'
+        $ref: '#/components/requestBodies/notification'
       responses:
         200:
-          $ref: '#/components/responses/component'
+          $ref: '#/components/responses/notification'
         400:
           description: invalid request message framing.
         401:
           description: unauthorized access.
         404:
           description: Requested data doesn't exist.
-    delete:
-      tags:
-        - Components
-      summary: Delete a building component.
-      responses:
-        200:
-          description: Successfully deleted.
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-          
-  /buildings/{bin}/rooms/{rin}/components/{cin}:
-    parameters:
-      - $ref: '#/components/parameters/bin'
-      - $ref: '#/components/parameters/rin'
-      - $ref: '#/components/parameters/cin'
-    put:
-      tags:
-        - Components
-      summary: Change information about a specific Room Component.
-      requestBody:
-        $ref: '#/components/requestBodies/component'
-      responses:
-        200:
-          $ref: '#/components/responses/component'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-    delete:
-      tags:
-        - Components
-      summary: Delete a room component.
-      responses:
-        200:
-          description: Successfully deleted.
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-  
+
   /buildings/{bin}/notifications:
     parameters:
-    - $ref: '#/components/parameters/bin'
-    post:
-        tags: 
-          - Notifications
-        summary: Add a new notification to a specific building.
-        requestBody:
-          $ref: '#/components/requestBodies/notification'
-        responses:
-          200:
-            $ref: '#/components/responses/building'
-          400:
-            description: invalid request message framing.
-          401:
-            description: unauthorized access.
-          404:
-            description: Requested data doesn't exist.
-  
-  /buildings/{bin}/notifications/{nin}:
-    parameters:
       - $ref: '#/components/parameters/bin'
-      - $ref: '#/components/parameters/nin'
-    put:
+    get:
+      summary: List notifications
+      description: Lists a building's notifications.
       tags:
         - Notifications
-      summary: Change information about a specific building notification.
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
       responses:
         200:
           $ref: '#/components/responses/notification'
         400:
           description: invalid request message framing.
-        401:
-          description: unauthorized access.
         404:
           description: Requested data doesn't exist.
+
+  /rooms/{rin}/notifications:
+    parameters:
+      - $ref: '#/components/parameters/rin'
     get:
+      summary: List notifications
+      description: Lists a room's notifications.
       tags:
         - Notifications
-      summary: Get information about a specific notification of a building.
       responses:
         200:
-            $ref: '#/components/responses/notification'
+          $ref: '#/components/responses/notification'
         400:
           description: invalid request message framing.
         404:
           description: Requested data doesn't exist.
-    delete:
+
+  /components/{cin}/notifications:
+    parameters:
+      - $ref: '#/components/parameters/cin'
+    get:
+      summary: List notifications
+      description: Lists a component's notifications.
       tags:
         - Notifications
-      summary: Delete a building notification.
+      responses:
+        200:
+          $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
+        404:
+          description: Requested data doesn't exist.
+
+  /notifications/{nin}:
+    parameters:
+      - $ref: '#/components/parameters/nin'
+    get:
+      summary: Get a notification
+      description: Gets a specific notification from the domain database.
+      tags:
+        - Notifications
+      responses:
+        200:
+          $ref: '#/components/responses/notification'
+        400:
+          description: invalid request message framing.
+        404:
+          description: Requested data doesn't exist.
+
+    delete:
+      summary: Remove a notification
+      description: Removes a specific notification from the domain database.
+      tags:
+        - Notifications
       responses:
         200:
           description: Successfully deleted.
@@ -343,276 +378,66 @@ paths:
         404:
           description: Requested data doesn't exist.
 
-  /buildings/{bin}/components/{cin}/notifications:
-    
-    parameters:
-      - $ref: '#/components/parameters/bin'
-      - $ref: '#/components/parameters/cin'
-    
-    post:
-      tags: 
-        - Notifications
-      summary: Add a new notification to a specific building component.
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        200:
-          $ref: '#/components/responses/room'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-          
-  /buildings/{bin}/components/{cin}/notifications/{nin}:
-
-    parameters:
-      - $ref: '#/components/parameters/bin'
-      - $ref: '#/components/parameters/cin'
-      - $ref: '#/components/parameters/nin'
-
-    put:
-      tags:
-        - Notifications
-      summary: Change information about a building component notification.
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        200:
-          $ref: '#/components/responses/notification'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-
-    delete:
-      tags:
-        - Notifications
-      summary: Delete a building component notification.
-      responses:
-        200:
-          description: Successfully deleted.
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-
-    get:
-      tags:
-        - Notifications
-      summary: Get information about a specific notification of a building component.
-      responses:
-        200:
-            $ref: '#/components/responses/notification'
-        400:
-          description: invalid request message framing.
-        404:
-          description: Requested data doesn't exist.
-
-  /buildings/{bin}/rooms/{rin}/notifications:
-
-    parameters:
-      - $ref: '#/components/parameters/bin'
-      - $ref: '#/components/parameters/rin'
-
-    post:
-      tags: 
-        - Notifications
-      summary: Add a new notification to a specific room.
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        200:
-          $ref: '#/components/responses/room'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-          
-  /buildings/{bin}/rooms/{rin}/notifications/{nin}:
-
-    parameters:
-      - $ref: '#/components/parameters/bin'
-      - $ref: '#/components/parameters/rin'
-      - $ref: '#/components/parameters/nin'
-
-    put:
-      tags:
-        - Notifications
-      summary: Change information about a specific room notification.
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        200:
-          $ref: '#/components/responses/notification'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-
-    get:
-      tags:
-        - Notifications
-      summary: Get information about a specific notification of a room.
-      responses:
-        200:
-            $ref: '#/components/responses/notification'
-        400:
-          description: invalid request message framing.
-        404:
-          description: Requested data doesn't exist.
-
-    delete:
-      tags:
-        - Notifications
-      summary: Delete a room notification.
-      responses:
-        200:
-          description: Successfully deleted.
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-
-  /buildings/{bin}/rooms/{rin}/components/{cin}/notifications:
-
-    parameters:
-      - $ref: '#/components/parameters/bin'
-      - $ref: '#/components/parameters/rin'
-      - $ref: '#/components/parameters/cin'
-
-    post:
-      tags: 
-        - Notifications
-      summary: Add a new notification to a specific room component.
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        200:
-          $ref: '#/components/responses/room'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-          
-  /buildings/{bin}/rooms/{rin}/components/{cin}/notifications/{nin}:
-    parameters:
-      - $ref: '#/components/parameters/bin'
-      - $ref: '#/components/parameters/rin'
-      - $ref: '#/components/parameters/cin'
-      - $ref: '#/components/parameters/nin'
-
-    delete:
-      tags:
-        - Notifications
-      summary: Delete a room component notification.
-      responses:
-        200:
-          description: Successfully deleted.
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-
-    put:
-      tags:
-        - Notifications
-      summary: Change information about a specific room component notification.
-      requestBody:
-        $ref: '#/components/requestBodies/notification'
-      responses:
-        200:
-          $ref: '#/components/responses/notification'
-        400:
-          description: invalid request message framing.
-        401:
-          description: unauthorized access.
-        404:
-          description: Requested data doesn't exist.
-
-    get:
-      tags:
-        - Notifications
-      summary: Get information about a specific notification of a room component.
-      responses:
-        200:
-            $ref: '#/components/responses/notification'
-        400:
-          description: invalid request message framing.
-        404:
-          description: Requested data doesn't exist.
-        
 components:
+
   requestBodies:
+
     notification:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/notification'
-            
+
     building:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/building'
-            
+
     room:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/room'
-            
+
     component:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/component'
-            
+
   responses:
+
     building:
       description: Successful operation
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/building'
-     
-    room:
-      description: Successful operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/room'
-            
-    component:
-      description: Successful operation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/component'
-            
+
     notification:
       description: Successful operation
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/notification'
-            
+
+    component:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/component'
+
+    room:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/room'
+
   parameters:
+
     bin:
       in: path
       name: bin
@@ -621,7 +446,7 @@ components:
       style: simple
       schema:
         $ref: '#/components/schemas/bin'
-        
+
     rin:
       in: path
       name: rin
@@ -630,7 +455,7 @@ components:
       style: simple
       schema:
         $ref: '#/components/schemas/rin'
-        
+
     cin:
       in: path
       name: cin
@@ -639,7 +464,7 @@ components:
       style: simple
       schema:
         $ref: '#/components/schemas/cin'
-        
+
     nin:
       in: path
       name: nin
@@ -648,90 +473,74 @@ components:
       style: simple
       schema:
         $ref: '#/components/schemas/nin'
-        
+
   schemas:
-  # single values
-    in:
-      type: string
-      minimum: 1
-  
+
+    # single value schemas
+
     bin:
       type: string
-      example: b-432
+      example: "b-432"
       minimum: 1
-      
+
     cin:
       type: string
-      example: c-41
+      example: "c-41"
       minimum: 1
-      
+
     rin:
       type: string
-      example: r-516
+      example: "r-516"
       minimum: 1
-      
+
     nin:
       type: string
-      example: n-7
+      example: "n-7"
       minimum: 1
-      
-    aoNumber:
-      type: string
-      
-    components:
-      type: array
-      items:
-        $ref: '#/components/schemas/component'
-          
-    notifications:
-      type: array
-      items:
-        $ref: '#/components/schemas/notification'
-        
-  # multiple values
+
+    # multi value schemas
+
     building:
       type: object
       properties:
-        name:
+        building_name:
           type: string
           example: "Audimax"
-        aoNumber:
-          $ref: '#/components/schemas/aoNumber'
-        numFloors:
+        building_number:
+          type: string
+          example: "30.95"
+        building_address:
+          type: string
+          example: "Augartenstraße 4"
+        num_floors:
           type: integer
           minimum: 1
           example: 3
-        position:
-          $ref: '#/components/schemas/position'
-        campusLocation:
+        geographical_location:
+          $ref: '#/components/schemas/geographical_location'
+        campus_location:
           type: string
           enum:
             - south_campus
             - north_campus
             - east_campus
             - west_campus
-        components:
-          $ref: '#/components/schemas/components' 
-        notifications:
-          $ref: '#/components/schemas/notifications'
-        rooms:
-          type: array
-          items:
-            $ref: '#/components/schemas/room'
-        in:
-          $ref: '#/components/schemas/in'
-            
+        identification_number:
+          $ref: '#/components/schemas/bin'
+
     room:
       type: object
       properties:
-        name:
+        room_name:
           type: string
-          example: "Fritz-Haller-Hörsaal"
-        aoNumber:
-          $ref: '#/components/schemas/aoNumber'
+          example: "Fritz-Haller-Hörsaal (HS 37)"
+        room_number:
+          type: string
+          example: "001"
         floor:
           type: integer
-        category:
+          example: 0
+        room_category:
           type: string
           enum:
             - sports
@@ -742,46 +551,13 @@ components:
             - lecture_room
             - seminar_room
             - library
-        components:
-          $ref: '#/components/schemas/components'
-        notifications:
-          $ref: '#/components/schemas/notifications'
-        in:
-          $ref: '#/components/schemas/in'
-        parent:
-          $ref: '#/components/schemas/in'
-          
-    position:
-      type: object
-      properties:
-        lat:
-          type: number
-          minimum: -90
-          maximum: 90
-          example: -33.222042
-        lon:
-          type: number
-          minimum: -180
-          maximum: 180
-          example: 38.432693
-        
-    notification:
-      type: object
-      properties:
-        title:
-          type: string
-          example: "Aufzug kaputt"
-        description:
-          type: string
-          example: "Aufzug fährt nur bis zum 3. Stock."
-        date:
-          type: string
-          format: date
-        in:
-          $ref: '#/components/schemas/in'
-        parent:
-          $ref: '#/components/schemas/in'
-    
+        identification_number:
+          $ref: '#/components/schemas/rin'
+        parent_identification_number:
+          $ref: '#/components/schemas/bin'
+        geographical_location:
+          $ref: '#/components/schemas/geographical_location'
+
     component:
       type: object
       properties:
@@ -791,14 +567,48 @@ components:
             - elevator
             - ramp
           example: elevator
-        description:
+        component_description:
           type: string
-          example: "Uhr mit 4 Zeigern."
-        in:
-          $ref: '#/components/schemas/in'
-        parent:
-          $ref: '#/components/schemas/in'
-        notification:
-          $ref: '#/components/schemas/notification'
-        position:
-          $ref: '#/components/schemas/position'
+          example: "Clock without pointer."
+        identification_number:
+          $ref: '#/components/schemas/nin'
+        parent_identification_number:
+          oneOf:
+            - $ref: '#/components/schemas/rin'
+            - $ref: '#/components/schemas/bin'
+        geographical_location:
+          $ref: '#/components/schemas/geographical_location'
+
+    notification:
+      type: object
+      properties:
+        notification_title:
+          type: string
+          example: "Elevator stuck"
+        notification_description:
+          type: string
+          example: "Elevator is stuck in 3rd floor."
+        creation_date:
+          type: string
+          format: date
+        identification_number:
+          $ref: '#/components/schemas/nin'
+        parent_identification_number:
+          oneOf:
+            - $ref: '#/components/schemas/bin'
+            - $ref: '#/components/schemas/rin'
+            - $ref: '#/components/schemas/cin'
+
+    geographical_location:
+      type: object
+      properties:
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+          example: -33.222042
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+          example: 38.432693

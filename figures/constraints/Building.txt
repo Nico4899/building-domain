@@ -1,0 +1,37 @@
+context Building inv:
+self.regular.matches(^[0-9]{2}[.][0-9]{2}?$)
+self.east.matches(^[0-9]{2}[.][0-9]{2}[A-Z]?$)
+self.northOne.matches(^[0-9]{3,4}?$)
+self.northTwo.matches(^[0-9]{4}[.][0-9]{1,2}?$)
+self.northThree.matches(^[0-9]{1}[.][0-9]{3}[.][0-9]{1,2}?$)
+self.northFour.matches(^[0-9]{3}[\/][0-9]{1}?$)
+self.northFive.matches(^[0-9]{3}[a-z]{1}?$)
+
+self.name -> notEmpty()
+self.address -> notEmpty()
+
+self.buildingNumber.matches(regular) |self.buildingNumber.matches(east) 
+                | self.buildingNumber.matches(northOne) | self.buildingNumber.matches(northTwo) 
+                | self.buildingNumber.matches(northThree) | self.buildingNumber.matches(northFour) 
+                | self.buildingNumber.matches(northFive)
+
+self.identificationNumber.matches(^b-\d+$)
+
+self.floors -> notEmpty()
+
+self.campusLocation -> notEmpty()
+
+self.geographicalLocation -> notEmpty()
+
+
+
+
+
+
+
+
+
+
+
+
+
